@@ -1,0 +1,64 @@
+version: "3.8"
+
+services:
+  frontend:
+    container_name: catfood-front
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+    command: yarn dev
+    depends_on:
+      - backend
+
+  backend:
+    container_name: catfood-api
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    env_file:
+      - ./.env
+    environment:
+      - RAILS_ENV=development
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec pumactl start"
+    ports:
+      - "3010:3010"
+    volumes:
+      - ./backend:/app
+      #webサーバー側からpuma.sockを見れるように永続化
+      - ./backend/tmp/sockets:/app/tmp/sockets
+    #標準入出力デバイスを設定
+    tty: true
+    stdin_open: true
+    depends_on:
+      - db
+
+  db:
+    #23/5/16時点での最新バージョンのalpine版
+    image: postgres:15.3-alpine3.18
+    container_name: catfood-db
+    env_file:
+      - ./.env
+    volumes:
+      - ./db/data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  web:
+    container_name: catfood-web
+    build:
+      context: ./backend/nginx
+      dockerfile: Dockerfile
+    volumes:
+      #ログ出力を永続化
+      - ./backend/nginx/log:/var/log/nginx
+      #appのtmpとpublicを永続化
+      - ./backend/tmp:/app/tmp
+      - ./backend/public:/app/public
+    ports:
+      - 80:80
+    depends_on:
+      - backend
