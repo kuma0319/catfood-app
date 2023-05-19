@@ -31,3 +31,6 @@
 #nginxのlogを除外
 /nginx/log/*
 !/nginx/log/.keep
+
+#ワークスペースは管理から除外
+catfood-app_backend.code-workspace
