@@ -6,6 +6,8 @@ require:
 
 AllCops:
   SuggestExtensions: false
+  #Rubyバージョンを固定
+  TargetRubyVersion: 3.2.2
   # 最新のルールを適用する
   NewCops: enable
   # 何のルールに引っかかったか表示する
