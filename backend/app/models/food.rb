@@ -7,5 +7,5 @@ class Food < ApplicationRecord
   has_many :amounts, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 50 }
-  validates :calorie, numericality: {greater_than: 0}
+  validates :calorie, numericality: { greater_than: 0 }
 end
