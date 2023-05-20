@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_20_163235) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_19_191136) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -27,12 +27,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_20_163235) do
     t.string "brand", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["brand"], name: "index_brands_on_brand", unique: true
   end
 
   create_table "food_types", force: :cascade do |t|
     t.string "food_type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["food_type"], name: "index_food_types_on_food_type", unique: true
   end
 
   create_table "foods", force: :cascade do |t|
@@ -64,12 +66,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_20_163235) do
     t.string "nutrient", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["nutrient"], name: "index_nutrients_on_nutrient", unique: true
   end
 
   create_table "production_areas", force: :cascade do |t|
     t.string "production_area", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["production_area"], name: "index_production_areas_on_production_area", unique: true
   end
 
   add_foreign_key "amounts", "foods"
