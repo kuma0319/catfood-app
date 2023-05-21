@@ -3,3 +3,6 @@
 
 #rootのdbディレクトリは除外
 /db
+
+#ワークスペースは除外
+catfood-app.code-workspace

@@ -39,7 +39,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_19_191136) do
 
   create_table "foods", force: :cascade do |t|
     t.string "name", null: false
-    t.string "image"
     t.text "ingredients"
     t.bigint "brand_id", null: false
     t.bigint "production_area_id", null: false

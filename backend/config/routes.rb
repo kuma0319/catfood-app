@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
-  # テスト用のルーティングを追加
-  scope "api" do
-    scope "v1" do
-      get "/test", to: "application#test"
+  namespace "api" do
+    namespace "v1" do
+      resources :foods
     end
   end
 end
