@@ -2,24 +2,10 @@
 
 // 必要なコンポーネントをインポート
 import type { NextPage } from "next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-// バックエンドのAPIからJSON形式のデータを取得する関数を追加
-interface JsonData {
-  id: number;
-  title: string;
-  text: string;
-}
+import FetchTestApi from "@/apis/test";
 
-type JsonDataResponse = JsonData[];
-
-const FetchTestApi = async (): Promise<JsonDataResponse> => {
-  // バックエンドのAPI「http://localhost/api/v1/test」からデータを取得
-  const res = await fetch("http://localhost/api/v1/foods");
-  // 取得したデータをJSON形式に変換
-  const result = (await res.json()) as JsonDataResponse;
-  return result;
-};
 // メイン処理
 const Test: NextPage = () => {
   // useStateで初期値をdisplayDataに設定
@@ -34,7 +20,9 @@ const Test: NextPage = () => {
   };
 
   // 関数「getTestApi」を実行
-  getTestApi();
+  useEffect(() => {
+    getTestApi();
+  }, []);
   // 画面にdisplayDataの値を表示
   return <div>{displayData}</div>;
 };
