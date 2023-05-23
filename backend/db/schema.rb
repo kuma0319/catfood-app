@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_19_191136) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_23_201123) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "amounts", force: :cascade do |t|
-    t.integer "amount"
+    t.float "amount"
     t.integer "price"
     t.bigint "food_id", null: false
     t.datetime "created_at", null: false
@@ -24,17 +24,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_19_191136) do
   end
 
   create_table "brands", force: :cascade do |t|
-    t.string "brand", null: false
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["brand"], name: "index_brands_on_brand", unique: true
+    t.index ["name"], name: "index_brands_on_name", unique: true
   end
 
   create_table "food_types", force: :cascade do |t|
-    t.string "food_type", null: false
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["food_type"], name: "index_food_types_on_food_type", unique: true
+    t.index ["name"], name: "index_food_types_on_name", unique: true
   end
 
   create_table "foods", force: :cascade do |t|
@@ -52,7 +52,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_19_191136) do
   end
 
   create_table "nutrient_contents", force: :cascade do |t|
-    t.integer "nutrient_content"
+    t.float "content"
     t.bigint "food_id", null: false
     t.bigint "nutrient_id", null: false
     t.datetime "created_at", null: false
@@ -62,17 +62,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_19_191136) do
   end
 
   create_table "nutrients", force: :cascade do |t|
-    t.string "nutrient", null: false
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["nutrient"], name: "index_nutrients_on_nutrient", unique: true
+    t.index ["name"], name: "index_nutrients_on_name", unique: true
   end
 
   create_table "production_areas", force: :cascade do |t|
-    t.string "production_area", null: false
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["production_area"], name: "index_production_areas_on_production_area", unique: true
+    t.index ["name"], name: "index_production_areas_on_name", unique: true
   end
 
   add_foreign_key "amounts", "foods"
