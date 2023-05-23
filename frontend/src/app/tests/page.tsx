@@ -4,7 +4,7 @@
 import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 
-import FetchTestApi from "@/apis/test";
+import FetchTestApi from "@/api/test";
 
 // メイン処理
 const Test: NextPage = () => {

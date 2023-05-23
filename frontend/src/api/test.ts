@@ -13,7 +13,7 @@ const FetchTestApi = async (): Promise<JsonDataResponse> => {
   // バックエンドのAPI「http://localhost/api/v1/foods/foods」からデータを取得
   const res = await fetch(foodsIndex);
   // 取得したデータをJSON形式に変換
-  const result = (await res.json()) as JsonDataResponse;
+  const result = (await res.json().foods) as JsonDataResponse;
   return result;
 };
 
