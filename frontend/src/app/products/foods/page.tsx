@@ -19,11 +19,11 @@ const FoodsIndex = () => {
       {foods.map((food) => (
         <div key={food.id}>
           <h2>{food.name}</h2>
+          <p>原材料: {food.ingredients}</p>
           <p>カロリー: {food.calorie}</p>
-          <p>成分: {food.ingredients}</p>
-          <p>ブランドID: {food.brand_id}</p>
-          <p>食品タイプID: {food.food_type_id}</p>
-          <p>生産地域ID: {food.production_area_id}</p>
+          <p>ブランド: {food.brand.name}</p>
+          <p>食品タイプ: {food.food_type.name}</p>
+          <p>生産地域: {food.production_area.name}</p>
         </div>
       ))}
     </div>

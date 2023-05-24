@@ -2,11 +2,9 @@ class Api::V1::Foods::AmountsController < ApplicationController
   before_action :set_amount, only: [:show, :update, :destroy]
 
   def index
-    amounts = Amount.all
+    @amounts = Amount.includes(:food).all
 
-    render json: {
-      amounts:
-    }, status: :ok
+    render status: :ok
   end
 
   def show

@@ -2,11 +2,9 @@ class Api::V1::Foods::FoodsController < ApplicationController
   before_action :set_food, only: [:show, :update, :destroy]
 
   def index
-    foods=Food.all
+    @foods = Food.includes(:brand, :production_area, :food_type, :nutrients, :nutrient_contents, :amounts)
 
-    render json: {
-      foods:}
-    # @foods = Food.includes(:brand, :production_area, :food_type).all
+    render status: :ok
   end
   
 
