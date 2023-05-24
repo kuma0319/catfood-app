@@ -37,4 +37,7 @@ json.array! @foods do |food|
       json.price amount.price
     end
   end
+
+  #イメージのurlを返す
+  json.image_urls food.image_urls
 end

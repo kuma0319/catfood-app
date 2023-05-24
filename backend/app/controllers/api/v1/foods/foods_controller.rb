@@ -2,7 +2,7 @@ class Api::V1::Foods::FoodsController < ApplicationController
   before_action :set_food, only: [:show, :update, :destroy]
 
   def index
-    @foods = Food.includes(:brand, :production_area, :food_type, :nutrients, :nutrient_contents, :amounts)
+    @foods = Food.includes(:brand, :production_area, :food_type, :nutrients, :nutrient_contents, :amounts).all
 
     render status: :ok
   end
@@ -53,6 +53,6 @@ class Api::V1::Foods::FoodsController < ApplicationController
 
   def food_params
     params.require(:food).permit(:name, :ingredients, :brand_id,
-                                 :production_area_id, :food_type_id, :calorie)
+                                 :production_area_id, :food_type_id, :calorie, :images)
   end
 end
