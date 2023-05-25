@@ -4,6 +4,7 @@ module.exports = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./node_modules/preline/dist/*.js",
   ],
   plugins: [
     ///デザインユーティリティの提供
@@ -12,6 +13,8 @@ module.exports = {
     require("@tailwindcss/forms"),
     //テキストの省略表示
     require("@tailwindcss/line-clamp"),
+    //Prelineのプラグイン用
+    require("preline/plugin"),
   ],
   theme: {
     extend: {
