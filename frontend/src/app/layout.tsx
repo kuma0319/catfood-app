@@ -3,7 +3,7 @@ import "../app/globals.css";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 
-// import("preline");
+import("preline");
 
 export const metadata = {
   title: "Create Next App",

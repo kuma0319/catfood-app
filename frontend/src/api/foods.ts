@@ -2,8 +2,11 @@ import { foodsIndex } from "@/urls";
 
 //配列の中身のプロパティの型定義
 interface Nutrient {
-  id: number;
-  name: string;
+  content: number;
+  nutrient: {
+    id: number;
+    name: string;
+  };
 }
 
 interface Amounts {
@@ -12,7 +15,7 @@ interface Amounts {
   price: number;
 }
 
-interface Food {
+export interface Food {
   id: number;
   name: string;
   amounts: Amounts[];
