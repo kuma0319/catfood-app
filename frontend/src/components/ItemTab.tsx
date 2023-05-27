@@ -1,0 +1,121 @@
+import { Amounts, Nutrient } from "@/api/foods";
+
+import("preline");
+
+interface ItemTabList {
+  id: number;
+  amounts: Amounts[];
+  brand: {
+    id: number;
+    name: string;
+  };
+  calorie: number;
+  food_type: {
+    id: number;
+    name: string;
+  };
+  ingredients: string;
+  nutrient_contents: Nutrient[];
+  production_area: {
+    id: number;
+    name: string;
+  };
+}
+
+interface ItemTab {
+  item: ItemTabList;
+}
+
+export default function ItemTab({ item }: ItemTab) {
+  return (
+    <>
+      {/* Tab start */}
+      <div className="border-b border-gray-200 dark:border-gray-700">
+        <nav className="flex space-x-2" aria-label="Tabs" role="tablist">
+          <button
+            type="button"
+            className="active -mb-px inline-flex items-center gap-2 rounded-t-lg border bg-gray-50 px-4 py-3 text-center text-sm font-medium text-gray-500 hover:text-gray-700 hs-tab-active:border-b-transparent hs-tab-active:bg-white hs-tab-active:text-blue-600 dark:border-gray-700 dark:bg-gray-700 dark:text-gray-400 dark:hs-tab-active:border-b-gray-800 dark:hs-tab-active:bg-gray-800 dark:hs-tab-active:text-white"
+            id={`card-type-tab-item-1-${item.id}`}
+            data-hs-tab={`#card-type-tab-1-${item.id}`}
+            aria-controls={`card-type-tab-1-${item.id}`}
+            role="tab"
+          >
+            成分
+          </button>
+          <button
+            type="button"
+            className="-mb-px inline-flex items-center gap-2 rounded-t-lg border bg-gray-50 px-4 py-3 text-center text-sm font-medium text-gray-500 hover:text-gray-700 hs-tab-active:border-b-transparent hs-tab-active:bg-white hs-tab-active:text-blue-600 dark:border-gray-700 dark:bg-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hs-tab-active:border-b-gray-800 dark:hs-tab-active:bg-gray-800 dark:hs-tab-active:text-white"
+            id={`card-type-tab-item-2-${item.id}`}
+            data-hs-tab={`#card-type-tab-2-${item.id}`}
+            aria-controls={`card-type-tab-2-${item.id}`}
+            role="tab"
+          >
+            原材料
+          </button>
+          <button
+            type="button"
+            className="-mb-px inline-flex items-center gap-2 rounded-t-lg border bg-gray-50 px-4 py-3 text-center text-sm font-medium text-gray-500 hover:text-gray-700 hs-tab-active:border-b-transparent hs-tab-active:bg-white hs-tab-active:text-blue-600 dark:border-gray-700 dark:bg-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hs-tab-active:border-b-gray-800 dark:hs-tab-active:bg-gray-800 dark:hs-tab-active:text-white"
+            id={`card-type-tab-item-3-${item.id}`}
+            data-hs-tab={`#card-type-tab-3-${item.id}`}
+            aria-controls={`card-type-tab-3-${item.id}`}
+            role="tab"
+          >
+            その他
+          </button>
+        </nav>
+      </div>
+      {/* Tab end */}
+
+      {/* Contents start */}
+      <div className="mt-3">
+        <div
+          id={`card-type-tab-1-${item.id}`}
+          role="tabpanel"
+          aria-labelledby={`card-type-tab-item-1-${item.id}`}
+        >
+          <div className="text-gray-500 dark:text-gray-400">
+            {item.nutrient_contents.map((nutrient_content, index) => (
+              <div key={index}>
+                {nutrient_content.nutrient.name}：{nutrient_content.content}g
+              </div>
+            ))}
+          </div>
+        </div>
+        <div
+          id={`card-type-tab-2-${item.id}`}
+          className="hidden"
+          role="tabpanel"
+          aria-labelledby={`card-type-tab-item-2-${item.id}`}
+        >
+          <div className="text-gray-500 dark:text-gray-400">
+            <p>原材料</p>
+            {item.ingredients}
+          </div>
+        </div>
+        <div
+          id={`card-type-tab-3-${item.id}`}
+          className="hidden"
+          role="tabpanel"
+          aria-labelledby={`card-type-tab-item-3-${item.id}`}
+        >
+          <div className="text-gray-500 dark:text-gray-400">
+            <p>ブランド：{item.brand.name}</p>
+            <p>タイプ：{item.food_type.name}</p>
+            <p>産地：{item.production_area.name}</p>
+            <p>カロリー：{item.calorie}</p>
+            <div>
+              <p>内容量と金額一覧</p>
+              {item.amounts.map((amount, index) => (
+                <div key={index}>
+                  <p>内容量：{amount.amount}kg</p>
+                  <p>金額：{amount.price}円</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* Contents end */}
+    </>
+  );
+}

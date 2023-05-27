@@ -1,3 +1,55 @@
 {
-  "extends": "next/core-web-vitals"
+  "plugins": [
+    //オブジェクトやTSの型のキーを自動でソートするプラグイン
+    "sort-keys-custom-order",
+    //import/export文を自動でソートするプラグイン
+    "simple-import-sort",
+    //simple-import-sortの機能拡張用のプラグイン
+    "import",
+    //未使用のimportを検出するプラグイン
+    "unused-imports",
+    //TailwindCSSのlint用プラグイン
+    "tailwindcss"
+  ],
+  "extends": [
+    //Web Vitalsに関連したESLint設定
+    "next/core-web-vitals",
+    //pretttierの有効化
+    "prettier",
+    //TailwindCSSの推奨設定の有効化
+    "plugin:tailwindcss/recommended"
+  ],
+
+  "rules": {
+    // オブジェクトソート用ルール
+    "sort-keys-custom-order/object-keys": [
+      "error",
+      { "orderedKeys": ["id", "name", "title"] }
+    ],
+    // TSの型のキーソート用ルール
+    "sort-keys-custom-order/type-keys": [
+      "error",
+      { "orderedKeys": ["id", "name", "title"] }
+    ],
+    //import/exportのソート用
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
+
+    //import用
+    "import/first": "error",
+    "import/newline-after-import": "error",
+    "import/no-duplicates": "error",
+
+    //unused-imports用
+    "unused-imports/no-unused-imports": "error"
+  },
+  "settings": {
+    //TailwindCSSの設定
+    "tailwindcss": {
+      //レスポンシブスタイルのグループ化
+      "groupByResponsive": true,
+      //例外を設定する項目
+      "whitelist": []
+    }
+  }
 }
