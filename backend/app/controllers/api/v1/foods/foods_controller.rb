@@ -6,7 +6,6 @@ class Api::V1::Foods::FoodsController < ApplicationController
 
     render status: :ok
   end
-  
 
   def create
     food = Food.new(food_params)
