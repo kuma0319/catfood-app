@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { Food } from "@/api/foods";
+import { Food } from "@/app/api/foods";
 
 import ItemTab from "./ItemTab";
 
@@ -8,7 +8,7 @@ interface FoodProps {
   food: Food;
 }
 
-export default function FoodItem({ food }: FoodProps) {
+const FoodItem = ({ food }: FoodProps) => {
   function imageUrl() {
     if (food.image_urls) {
       return food.image_urls[0];
@@ -34,4 +34,6 @@ export default function FoodItem({ food }: FoodProps) {
       </div>
     </div>
   );
-}
+};
+
+export default FoodItem;

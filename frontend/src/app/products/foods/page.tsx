@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 
-import fetchFoods, { FoodData } from "@/api/foods";
-import FoodItem from "@/components/FoodItem";
+import fetchFoods, { FoodData } from "@/app/api/foods";
+import FoodItem from "@/app/components/FoodItem";
 
 const FoodsIndex = () => {
   const [foods, setFoods] = useState<FoodData>([]);
