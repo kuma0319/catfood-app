@@ -11,7 +11,7 @@ const Footer = () => {
             href="#"
             aria-label="Brand"
           >
-            Brand
+            Cat food App
           </a>
         </div>
         {/* <!-- End Col --> */}

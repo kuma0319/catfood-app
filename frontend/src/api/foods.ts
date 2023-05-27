@@ -1,7 +1,7 @@
 import { foodsIndex } from "@/urls";
 
 //配列の中身のプロパティの型定義
-interface Nutrient {
+export interface Nutrient {
   content: number;
   nutrient: {
     id: number;
@@ -9,7 +9,7 @@ interface Nutrient {
   };
 }
 
-interface Amounts {
+export interface Amounts {
   id: number;
   amount: number;
   price: number;
@@ -28,6 +28,7 @@ export interface Food {
     id: number;
     name: string;
   };
+  image_urls: string[];
   ingredients: string;
   nutrient_contents: Nutrient[];
   production_area: {

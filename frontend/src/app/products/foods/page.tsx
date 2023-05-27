@@ -15,11 +15,13 @@ const FoodsIndex = () => {
   }, []);
 
   return (
-    <div>
-      <h1>商品一覧</h1>
-      {foods.map((food) => (
-        <FoodItem key={food.id} food={food} />
-      ))}
+    <div className="px-4 py-6">
+      <h1 className="mb-4 text-2xl font-bold">商品一覧</h1>
+      <div className="mb-4 rounded border p-4 shadow-md">
+        {foods.map((food) => (
+          <FoodItem key={food.id} food={food} />
+        ))}
+      </div>
     </div>
   );
 };

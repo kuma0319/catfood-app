@@ -17,11 +17,11 @@ export default function RootLayout({
 }) {
   return (
     <html>
-      <body>
+      <body className="container mx-auto">
         <header>
           <Header />
         </header>
-        {children}
+        <main className="mx-auto max-w-screen-lg bg-gray-100">{children}</main>
         <footer>
           <Footer />
         </footer>
