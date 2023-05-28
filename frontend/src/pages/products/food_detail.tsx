@@ -52,7 +52,7 @@
 
 import { useEffect, useState } from "react";
 
-import { Food } from "@/app/api/foods";
+import { Food } from "@/apis/foods";
 import { foodDetailTest } from "@/urls";
 
 const fetchFoodDetail = async (): Promise<Food> => {

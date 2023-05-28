@@ -1,4 +1,4 @@
-import { Amounts, Nutrient } from "@/app/api/foods";
+import { Amounts, Nutrient } from "@/apis/foods";
 
 import("preline");
 

@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { Food } from "@/app/api/foods";
+import { Food } from "@/apis/foods";
 
 import ItemTab from "./ItemTab";
 
