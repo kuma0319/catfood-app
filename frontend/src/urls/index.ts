@@ -1,9 +1,9 @@
-const DEFAULT_API_LOCALHOST = "http://localhost:3010/api/v1/foods";
+export const CSR_BASE_URL = "http://localhost:3010/api/v1";
+export const SSR_BASE_URL = "http://backend:3010/api/v1";
 
-export const foodsIndex = `${DEFAULT_API_LOCALHOST}/foods.json`;
+//Foodモデル用
+export const foodsIndex = `/foods/foods.json`;
 
 export const foodDetail = (foodId: number): string => {
-  return `${DEFAULT_API_LOCALHOST}/foods/${foodId}.json`;
+  return `/foods/foods/${foodId}.json`;
 };
-
-export const foodDetailTest = `${DEFAULT_API_LOCALHOST}/foods/1.json`;

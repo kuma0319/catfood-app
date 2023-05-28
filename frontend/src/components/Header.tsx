@@ -1,5 +1,3 @@
-import("preline");
-
 const Header = () => {
   return (
     <header className="z-50 flex w-full flex-wrap border-b border-gray-200 bg-white py-3 text-sm dark:border-gray-700 dark:bg-gray-800 sm:flex-nowrap sm:justify-start sm:py-0">

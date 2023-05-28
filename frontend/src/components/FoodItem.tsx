@@ -1,7 +1,6 @@
 import Image from "next/image";
 
-import { Food } from "@/apis/foods";
-
+import { Food } from "../../types/foods";
 import ItemTab from "./ItemTab";
 
 interface FoodProps {
@@ -29,7 +28,7 @@ const FoodItem = ({ food }: FoodProps) => {
           width={150}
           height={150}
           alt="商品画像"
-          unoptimized
+          unoptimized //※※本番環境では使用しない※※
         />
       </div>
     </div>

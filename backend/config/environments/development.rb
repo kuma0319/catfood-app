@@ -68,4 +68,7 @@ Rails.application.configure do
     host: 'localhost',
     port: 3010
   }
+
+  #[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked host: backendエラーの対処
+  config.hosts << 'backend'
 end

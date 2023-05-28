@@ -1,8 +1,6 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 
-import("preline");
-
 export default function RootLayout({
   children,
 }: {
