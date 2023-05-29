@@ -36,3 +36,5 @@ next-env.d.ts
 
 #ワークスペースは管理から除外
 catfood-app_frontend.code-workspace
+
+.vscode

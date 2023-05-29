@@ -1,6 +1,4 @@
-import { Amounts, Nutrient } from "@/api/foods";
-
-import("preline");
+import { Amounts, Nutrient } from "../../types/foods";
 
 interface ItemTabList {
   id: number;
@@ -26,7 +24,7 @@ interface ItemTab {
   item: ItemTabList;
 }
 
-export default function ItemTab({ item }: ItemTab) {
+const ItemTab = ({ item }: ItemTab) => {
   return (
     <>
       {/* Tab start */}
@@ -118,4 +116,6 @@ export default function ItemTab({ item }: ItemTab) {
       {/* Contents end */}
     </>
   );
-}
+};
+
+export default ItemTab;

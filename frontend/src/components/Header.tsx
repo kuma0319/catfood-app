@@ -1,4 +1,4 @@
-import("preline");
+import Link from "next/link";
 
 const Header = () => {
   return (
@@ -8,13 +8,13 @@ const Header = () => {
         aria-label="Global"
       >
         <div className="flex items-center justify-between">
-          <a
+          <Link
+            href="/"
             className="flex-none text-xl font-semibold dark:text-white"
-            href="#"
             aria-label="Brand"
           >
             CatFood App
-          </a>
+          </Link>
           <div className="sm:hidden">
             <button
               type="button"
@@ -52,31 +52,31 @@ const Header = () => {
           className="hs-collapse hidden grow basis-full overflow-hidden transition-all duration-300 sm:block"
         >
           <div className="mt-5 flex flex-col gap-x-0 gap-y-4 sm:mt-0 sm:flex-row sm:items-center sm:gap-x-7 sm:gap-y-0 sm:pl-7">
-            <a
+            <Link
+              href="/"
               className="font-medium text-blue-600 dark:text-blue-500 sm:py-6"
-              href="#"
               aria-current="page"
             >
-              Landing
-            </a>
-            <a
+              ホーム
+            </Link>
+            <Link
+              href="/products"
               className="font-medium text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 sm:py-6"
-              href="#"
             >
-              Account
-            </a>
-            <a
+              フード一覧
+            </Link>
+            <Link
+              href="#"
               className="font-medium text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 sm:py-6"
-              href="#"
             >
-              Work
-            </a>
-            <a
+              気になるリスト
+            </Link>
+            <Link
+              href="#"
               className="font-medium text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 sm:py-6"
-              href="#"
             >
-              Blog
-            </a>
+              相談所
+            </Link>
 
             <div className="hs-dropdown [--adaptive:none] [--strategy:static] sm:py-4 sm:[--strategy:fixed] sm:[--trigger:hover]">
               <button

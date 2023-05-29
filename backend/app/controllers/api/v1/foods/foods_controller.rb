@@ -1,9 +1,15 @@
 class Api::V1::Foods::FoodsController < ApplicationController
-  before_action :set_food, only: [:show, :update, :destroy]
+  before_action :set_food, only: [:update, :destroy]
 
   def index
     @foods = Food.includes(:brand, :production_area, :food_type, :nutrients, :nutrient_contents, :amounts).all
 
+    render status: :ok
+  end
+
+  def show
+    @food = Food.includes(:brand, :production_area, :food_type, :nutrients, :nutrient_contents, :amounts).find(params[:id])
+    
     render status: :ok
   end
 

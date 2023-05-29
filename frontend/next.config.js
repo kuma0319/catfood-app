@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  reactStrictMode: true,
+};
 
 module.exports = {
   //外部から画像取得用
@@ -14,5 +16,4 @@ module.exports = {
     // ],
     domains: ["localhost"],
   },
-  nextConfig,
 };

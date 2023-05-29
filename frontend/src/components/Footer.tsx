@@ -1,5 +1,3 @@
-import("preline");
-
 const Footer = () => {
   return (
     <footer className="mx-auto mt-auto w-full max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8">
@@ -18,7 +16,7 @@ const Footer = () => {
 
         <div className="mt-3">
           <p className="text-gray-500">
-            We're part of the{" "}
+            We are part of the{" "}
             <a
               className="font-semibold text-blue-600 hover:text-blue-700 dark:text-blue-500 dark:hover:text-blue-400"
               href="#"
