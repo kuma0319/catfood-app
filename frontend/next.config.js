@@ -16,5 +16,4 @@ module.exports = {
     // ],
     domains: ["localhost"],
   },
-  nextConfig,
 };

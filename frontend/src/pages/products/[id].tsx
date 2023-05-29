@@ -1,14 +1,15 @@
 import axios from "axios";
 import { GetStaticPaths, GetStaticProps } from "next";
 
+import FoodDetail from "@/components/FoodDetail";
 import RootLayout from "@/components/Layout";
-import { foodDetail, foodsIndex, SSR_BASE_URL } from "@/urls";
+import { foodDetailUrl, foodsIndexUrl, SSR_BASE_URL } from "@/urls";
 
 import { Food } from "../../../types/foods";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   //商品一覧のデータを取得
-  const res = await axios.get(`${SSR_BASE_URL}${foodsIndex}`);
+  const res = await axios.get(`${SSR_BASE_URL}${foodsIndexUrl}`);
   const data = res.data;
 
   //一覧データからidを配列として取り出す
@@ -30,7 +31,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     };
   } else {
     //params.idからデータフェッチ
-    const response = await axios.get(`${SSR_BASE_URL}${foodDetail(id)}`);
+    const response = await axios.get(`${SSR_BASE_URL}${foodDetailUrl(id)}`);
     return {
       props: {
         food: response.data,
@@ -43,18 +44,17 @@ interface FoodProps {
   food: Food;
 }
 
-const FoodDetail = ({ food }: FoodProps) => {
+const foodDetail = ({ food }: FoodProps) => {
   return (
     <RootLayout>
       <div className="px-4 py-6">
-        <h1 className="mb-4 text-2xl font-bold">商品一覧</h1>
+        <h1 className="mb-4 text-2xl font-bold">商品詳細</h1>
         <div className="mb-4 rounded border p-4 shadow-md">
-          <h1>{food.name}</h1>
-          {/* <FoodItem key={data.id} food={data} /> */}
+          <FoodDetail key={food.id} food={food} />
         </div>
       </div>
     </RootLayout>
   );
 };
 
-export default FoodDetail;
+export default foodDetail;

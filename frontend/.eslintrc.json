@@ -42,6 +42,9 @@
 
     //unused-imports用
     "unused-imports/no-unused-imports": "error"
+
+    //preline用にtailwindcssのカスタムクラスを許容
+    // "tailwindcss/no-custom-classname": "off"
   },
   "settings": {
     //TailwindCSSの設定

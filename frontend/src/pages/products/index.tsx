@@ -3,12 +3,12 @@ import { GetStaticProps } from "next";
 
 import FoodItem from "@/components/FoodItem";
 import RootLayout from "@/components/Layout";
-import { foodsIndex, SSR_BASE_URL } from "@/urls";
+import { foodsIndexUrl, SSR_BASE_URL } from "@/urls";
 
 import { FoodData } from "../../../types/foods";
 
 export const getStaticProps: GetStaticProps = async () => {
-  const response = await axios.get(`${SSR_BASE_URL}${foodsIndex}`);
+  const response = await axios.get(`${SSR_BASE_URL}${foodsIndexUrl}`);
 
   return {
     props: {

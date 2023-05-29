@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { Food } from "../../types/foods";
 import ItemTab from "./ItemTab";
@@ -23,13 +24,15 @@ const FoodItem = ({ food }: FoodProps) => {
         <ItemTab item={food} />
       </div>
       <div className="col-span-1 row-span-3">
-        <Image
-          src={imageUrl()}
-          width={150}
-          height={150}
-          alt="商品画像"
-          unoptimized //※※本番環境では使用しない※※
-        />
+        <Link href="/products/[id]" as={`/products/${food.id}`}>
+          <Image
+            src={imageUrl()}
+            width={150}
+            height={150}
+            alt="商品画像"
+            unoptimized //※※本番環境では使用しない※※
+          />
+        </Link>
       </div>
     </div>
   );

@@ -1,7 +1,5 @@
 import { Amounts, Nutrient } from "../../types/foods";
 
-import("preline");
-
 interface ItemTabList {
   id: number;
   amounts: Amounts[];
