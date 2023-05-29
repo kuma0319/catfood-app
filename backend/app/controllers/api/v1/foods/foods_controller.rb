@@ -50,6 +50,18 @@ class Api::V1::Foods::FoodsController < ApplicationController
     end
   end
 
+  def search
+    @foods = Food.by_brand(params[:brand_id])
+    .by_food_type(params[:food_type_id])
+    .by_production_area(params[:production_area_id])
+    .by_calorie(params[:min_calorie], params[:max_calorie])
+    .by_nutrient_content(params[:nutrient_id], params[:min_nutrient_content], params[:max_nutrient_content])
+    .by_amount(params[:min_amount], params[:max_amount])
+    .by_price(params[:min_price], params[:max_price])
+
+    render status: :ok
+  end
+
   private
 
   def set_food
