@@ -2,13 +2,18 @@ class Api::V1::Foods::FoodsController < ApplicationController
   before_action :set_food, only: [:update, :destroy]
 
   def index
-    @foods = Food.includes(:brand, :production_area, :food_type, :nutrients, :nutrient_contents, :amounts).all
+    @foods = Food.includes(:brand, :production_area, :food_type, :nutrients, :nutrient_contents, :amounts)
+    #N+1問題対策用にattachしたimageも取り込む
+    .with_attached_images
+    .all
 
     render status: :ok
   end
 
   def show
-    @food = Food.includes(:brand, :production_area, :food_type, :nutrients, :nutrient_contents, :amounts).find(params[:id])
+    @food = Food.includes(:brand, :production_area, :food_type, :nutrients, :nutrient_contents, :amounts)
+    .with_attached_images
+    .find(params[:id])
     
     render status: :ok
   end
@@ -51,7 +56,9 @@ class Api::V1::Foods::FoodsController < ApplicationController
   end
 
   def search
-    @foods = Food.by_brand(params[:brand_id])
+    @foods = Food.includes(:brand, :production_area, :food_type, :nutrients, :nutrient_contents, :amounts)
+    .with_attached_images
+    .by_brand(params[:brand_id])
     .by_food_type(params[:food_type_id])
     .by_production_area(params[:production_area_id])
     .by_calorie(params[:min_calorie], params[:max_calorie])
