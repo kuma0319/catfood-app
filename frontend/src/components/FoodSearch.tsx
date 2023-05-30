@@ -1,9 +1,7 @@
-import axios from "axios";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { ChangeEvent, useState } from "react";
 
 import { BRAND, PRODUCTION_AREA } from "@/constant";
-
-import { FoodData } from "../../types/foods";
 
 const FoodSearch = () => {
   //Railsに渡すパラメータ用のstate管理
@@ -12,11 +10,7 @@ const FoodSearch = () => {
     production_area_id: "",
   });
 
-  //GETレスポンスの検索結果用のstate管理
-  const [searchResults, setSearchResults] = useState<FoodData>([]);
-
-  //検索ボタン用のstate管理
-  const [clicked, setClicked] = useState(false);
+  const router = useRouter();
 
   //タブ選択時のイベント
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -28,21 +22,13 @@ const FoodSearch = () => {
   };
 
   //検索ボタン押下時のイベント
-  useEffect(() => {
-    const fetchSearch = async () => {
-      const response = await axios.get(
-        "http://localhost:3010/api/v1/foods/search.json",
-        { params: selectParams }
-      );
-      setSearchResults(response.data);
-    };
-
-    console.log({ params: selectParams });
-
-    if (clicked) {
-      fetchSearch();
-    }
-  }, [clicked]);
+  const handleClick = () => {
+    router.push({
+      pathname: "/products/search_results",
+      query: selectParams,
+    });
+    console.log(router.query);
+  };
 
   return (
     <div>
@@ -68,7 +54,7 @@ const FoodSearch = () => {
           </option>
         ))}
       </select>
-      <button onClick={() => setClicked(true)}>検索</button>
+      <button onClick={handleClick}>検索</button>
     </div>
   );
 };
