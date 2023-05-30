@@ -35,3 +35,15 @@ export const NUTRIENT = [
   { id: 4, name: "灰分" },
   { id: 5, name: "水分" },
 ];
+
+//カロリー
+export const CALORIE = [300, 350, 400, 450, 500];
+
+//金額
+export const PRICE = [1000, 2000, 3000, 4000, 5000];
+
+//内容量
+export const AMOUNT = [1, 2, 3, 4, 5];
+
+//成分含有量
+export const NUTRIENT_CONTENT = [5, 10, 20, 30, 40];

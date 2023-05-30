@@ -3,7 +3,7 @@ import { GetServerSideProps } from "next";
 
 import RootLayout from "@/components/commons/Layout";
 import FoodItem from "@/components/FoodItem";
-import FoodSearch from "@/components/FoodSearch";
+import FoodSearch from "@/components/search_form/FoodSearch";
 
 import { FoodData } from "../../../types/foods";
 
