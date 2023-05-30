@@ -1,8 +1,8 @@
 import axios from "axios";
 import { GetStaticPaths, GetStaticProps } from "next";
 
+import RootLayout from "@/components/commons/Layout";
 import FoodDetail from "@/components/FoodDetail";
-import RootLayout from "@/components/Layout";
 import { foodDetailUrl, foodsIndexUrl, SSR_BASE_URL } from "@/urls";
 
 import { Food } from "../../../types/foods";
