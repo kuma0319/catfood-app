@@ -75,92 +75,21 @@ class Food < ApplicationRecord
     end
   }
 
-  # 各種成分含有量の範囲検索
-  nutrients = [
-    { id: 1, name: 'protein' },
-    { id: 2, name: 'fat' },
-    { id: 3, name: 'fibre' },
-    { id: 4, name: 'ash' },
-    { id: 5, name: 'moisture' }
-  ]
-
-  scope :by_protein_content, lambda { |min_protein_content, max_protein_content|
-    if min_protein_content.present? && max_protein_content.present?
-      joins(:nutrient_contents)
-        .where(nutrient_contents: { nutrient_id: nutrients[0][:id], content: min_protein_content..max_protein_content })
-        .distinct
-    elsif min_protein_content.present?
-      joins(:nutrient_contents)
-        .where(nutrient_contents: { nutrient_id: nutrients[0][:id], content: min_protein_content.. })
-        .distinct
-    elsif max_protein_content.present?
-      joins(:nutrient_contents)
-        .where(nutrient_contents: { nutrient_id: nutrients[0][:id], content: ..max_protein_content })
-        .distinct
-    end
-  }
-
-  scope :by_fat_content, lambda { |min_fat_content, max_fat_content|
-    if min_fat_content.present? && max_fat_content.present?
-      joins(:nutrient_contents)
-        .where(nutrient_contents: { nutrient_id: nutrients[1][:id], content: min_fat_content..max_fat_content })
-        .distinct
-    elsif min_fat_content.present?
-      joins(:nutrient_contents)
-        .where(nutrient_contents: { nutrient_id: nutrients[1][:id], content: min_fat_content.. })
-        .distinct
-    elsif max_fat_content.present?
-      joins(:nutrient_contents)
-        .where(nutrient_contents: { nutrient_id: nutrients[1][:id], content: ..max_fat_content })
-        .distinct
-    end
-  }
-
-  scope :by_fibre_content, lambda { |min_fibre_content, max_fibre_content|
-    if min_fibre_content.present? && max_fibre_content.present?
-      joins(:nutrient_contents)
-        .where(nutrient_contents: { nutrient_id: nutrients[2][:id], content: min_fibre_content..max_fibre_content })
-        .distinct
-    elsif min_fibre_content.present?
-      joins(:nutrient_contents)
-        .where(nutrient_contents: { nutrient_id: nutrients[2][:id], content: min_fibre_content.. })
-        .distinct
-    elsif max_fibre_content.present?
-      joins(:nutrient_contents)
-        .where(nutrient_contents: { nutrient_id: nutrients[2][:id], content: ..max_fibre_content })
-        .distinct
-    end
-  }
-
-  scope :by_ash_content, lambda { |min_ash_content, max_ash_content|
-    if min_ash_content.present? && max_ash_content.present?
-      joins(:nutrient_contents)
-        .where(nutrient_contents: { nutrient_id: nutrients[3][:id], content: min_ash_content..max_ash_content })
-        .distinct
-    elsif min_ash_content.present?
-      joins(:nutrient_contents)
-        .where(nutrient_contents: { nutrient_id: nutrients[3][:id], content: min_ash_content.. })
-        .distinct
-    elsif max_ash_content.present?
-      joins(:nutrient_contents)
-        .where(nutrient_contents: { nutrient_id: nutrients[3][:id], content: ..max_ash_content })
-        .distinct
-    end
-  }
-
-  scope :by_moisture_content, lambda { |min_moisture_content, max_moisture_content|
-    if min_moisture_content.present? && max_moisture_content.present?
-      joins(:nutrient_contents)
-        .where(nutrient_contents: { nutrient_id: nutrients[4][:id], content: min_moisture_content..max_moisture_content })
-        .distinct
-    elsif min_moisture_content.present?
-      joins(:nutrient_contents)
-        .where(nutrient_contents: { nutrient_id: nutrients[4][:id], content: min_moisture_content.. })
-        .distinct
-    elsif max_moisture_content.present?
-      joins(:nutrient_contents)
-        .where(nutrient_contents: { nutrient_id: nutrients[4][:id], content: ..max_moisture_content })
-        .distinct
+  # 成分含有量の範囲検索
+  # 同一テーブルに対して複数回joinするためにSQLのASを使用して"nutrient_id"を含ませたエイリアスを作成
+  scope :by_nutrient_content, lambda { |nutrient_id, min_nutrient_content, max_nutrient_content|
+    if min_nutrient_content.present? && max_nutrient_content.present?
+      joins("INNER JOIN nutrient_contents AS nutrient_content_#{nutrient_id} ON foods.id = nutrient_content_#{nutrient_id}.food_id")
+      .where("nutrient_content_#{nutrient_id}": { nutrient_id: nutrient_id, content: min_nutrient_content..max_nutrient_content })
+      .distinct
+    elsif min_nutrient_content.present?
+      joins("INNER JOIN nutrient_contents AS nutrient_content_#{nutrient_id} ON foods.id = nutrient_content_#{nutrient_id}.food_id")
+      .where("nutrient_content_#{nutrient_id}": { nutrient_id: nutrient_id, content: min_nutrient_content.. })
+      .distinct
+    elsif max_nutrient_content.present?
+      joins("INNER JOIN nutrient_contents AS nutrient_content_#{nutrient_id} ON foods.id = nutrient_content_#{nutrient_id}.food_id")
+      .where("nutrient_content_#{nutrient_id}": { nutrient_id: nutrient_id, content: ..max_nutrient_content })
+      .distinct
     end
   }
 end
