@@ -1,3 +1,4 @@
+//indexページをSSGで表示する場合の設計
 import axios from "axios";
 import { GetStaticProps } from "next";
 
@@ -25,13 +26,16 @@ interface Props {
 const FoodsIndex = ({ data }: Props) => {
   return (
     <RootLayout>
-      <div className="px-4 py-6">
-        <FoodSearch />
-        <h1 className="mb-4 text-2xl font-bold">商品一覧</h1>
-        <div className="mb-4 rounded border p-4 shadow-md">
-          {data.map((food) => (
-            <FoodItem key={food.id} food={food} />
-          ))}
+      <div className="flex px-4 py-6">
+        <div style={{ flex: 1 }}>
+          <FoodSearch />
+        </div>
+        <div style={{ flex: 4 }}>
+          <div className="mb-4 rounded border p-4 shadow-md">
+            {data.map((food) => (
+              <FoodItem key={food.id} food={food} />
+            ))}
+          </div>
         </div>
       </div>
     </RootLayout>

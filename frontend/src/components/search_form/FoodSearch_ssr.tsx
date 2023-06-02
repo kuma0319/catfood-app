@@ -1,4 +1,4 @@
-//indexページがSSG設計の場合の商品検索
+//indexページがSSR設計の場合の商品検索
 import { useRouter } from "next/router";
 import { ParsedUrlQueryInput } from "querystring";
 import { ChangeEvent, useState } from "react";
@@ -37,7 +37,7 @@ interface Params {
   production_area_id: string[];
 }
 
-const FoodSearch = () => {
+const FoodSearch_SSR = () => {
   //Railsに渡すパラメータ用のstate管理
   const [selectParams, setSelectParams] = useState<Params>({
     brand_id: [],
@@ -102,7 +102,7 @@ const FoodSearch = () => {
   //検索ボタン押下時のイベント
   const handleClick = () => {
     router.push({
-      pathname: "/products/search_results",
+      pathname: "/products/index_ssr",
       // "query"のTSの型定義だと型Paramsが弾かれる。（∵配列は受け入れない）
       // ※実際にはrails側の動作はparamsとして配列を許容するため、型アサーションで型を上書き。
       query: selectParams as unknown as ParsedUrlQueryInput,
@@ -198,4 +198,4 @@ const FoodSearch = () => {
   );
 };
 
-export default FoodSearch;
+export default FoodSearch_SSR;
