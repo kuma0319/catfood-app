@@ -1,6 +1,6 @@
 interface ButtonProps {
   name: string;
-  handleClick?: () => void;
+  handleClick?: (event: any) => void;
 }
 
 const Button = ({ name, handleClick }: ButtonProps) => {

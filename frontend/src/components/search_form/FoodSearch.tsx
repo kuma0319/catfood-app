@@ -1,8 +1,12 @@
 //indexページがSSG設計の場合の商品検索
 import { useRouter } from "next/router";
 import { ParsedUrlQueryInput } from "querystring";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
+import Button from "@/components/search_form/Button";
+import FoodSearchInput from "@/components/search_form/FoodSearchInput";
+import MultipleOption from "@/components/search_form/MultipleOption";
+import RangeOption from "@/components/search_form/RangeOption";
 import {
   AMOUNT,
   BRAND,
@@ -12,12 +16,10 @@ import {
   PRODUCTION_AREA,
 } from "@/constant";
 
-import Button from "../commons/Button";
-import MultipleOption from "./MultipleOption";
-import RangeOption from "./RangeOption";
-
 interface Params {
   brand_id: string[];
+  food_name: string[];
+  ingredients: string[];
   max_amount: string;
   max_ash_content: string;
   max_calorie: string;
@@ -34,6 +36,8 @@ interface Params {
   min_moisture_content: string;
   min_price: string;
   min_protein_content: string;
+  not_food_name: string[];
+  not_ingredients: string[];
   production_area_id: string[];
 }
 
@@ -41,6 +45,8 @@ const FoodSearch = () => {
   //Railsに渡すパラメータ用のstate管理
   const [selectParams, setSelectParams] = useState<Params>({
     brand_id: [],
+    food_name: [],
+    ingredients: [],
     max_amount: "",
     max_ash_content: "",
     max_calorie: "",
@@ -57,8 +63,21 @@ const FoodSearch = () => {
     min_moisture_content: "",
     min_price: "",
     min_protein_content: "",
+    not_food_name: [],
+    not_ingredients: [],
     production_area_id: [],
   });
+
+  //キーワード入力用にキーワードとターゲットの名前管理
+  const [keyWords, setKeyWords] = useState({
+    food_name: "",
+    ingredients: "",
+    not_food_name: "",
+    not_ingredients: "",
+  });
+
+  //検索ボタン用の状態管理
+  const [searchButtonPressed, setSearchButtonPressed] = useState(false);
 
   const router = useRouter();
 
@@ -92,24 +111,45 @@ const FoodSearch = () => {
 
   //タブ選択時のイベント
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    //スプレッド演算子でparamsに更新された値をオブジェクトに追加
     setSelectParams({
       ...selectParams,
       [event.target.name]: event.target.value,
     });
   };
 
-  //検索ボタン押下時のイベント
-  const handleClick = () => {
-    router.push({
-      pathname: "/products/search_results",
-      // "query"のTSの型定義だと型Paramsが弾かれる。（∵配列は受け入れない）
-      // ※実際にはrails側の動作はparamsとして配列を許容するため、型アサーションで型を上書き。
-      query: selectParams as unknown as ParsedUrlQueryInput,
+  //キーワード入力時のイベント
+  const handleWordChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setKeyWords({
+      ...keyWords,
+      [event.target.name]: event.target.value,
     });
   };
 
-  console.log(selectParams);
+  //検索ボタン押下時のイベント
+  const handleClick = () => {
+    setSelectParams({
+      ...selectParams,
+      food_name: keyWords.food_name.split(/\s+|　+/), // スペース区切り（半角、全角含む）でkeyWordsを配列に格納
+      ingredients: keyWords.ingredients.split(/\s+|　+/),
+      not_food_name: keyWords.not_food_name.split(/\s+|　+/),
+      not_ingredients: keyWords.not_ingredients.split(/\s+|　+/),
+    });
+
+    setSearchButtonPressed(true);
+  };
+
+  useEffect(() => {
+    if (searchButtonPressed) {
+      router.push({
+        pathname: "/products/search_results",
+        // "query"のTSの型定義だと型Paramsが弾かれる。（∵配列は受け入れない）
+        // ※実際にはrails側の動作はparamsとして配列を許容するため、型アサーションで型を上書き。
+        query: selectParams as unknown as ParsedUrlQueryInput,
+      });
+    }
+    //ボタン押下後は、状態を再びfalseに戻しておく
+    setSearchButtonPressed(false);
+  }, [searchButtonPressed]);
 
   return (
     <div>
@@ -190,6 +230,35 @@ const FoodSearch = () => {
         range={NUTRIENT_CONTENT}
         unit="%"
         handleChange={handleSelectChange}
+      />
+      キーワード検索
+      <FoodSearchInput
+        name="food_name"
+        handleChange={handleWordChange}
+        label="このキーワードを「名前」に含める"
+        placeholder="名前1 名前2..."
+        value={keyWords.food_name}
+      />
+      <FoodSearchInput
+        name="not_food_name"
+        handleChange={handleWordChange}
+        label={'このキーワードを「名前」に"含めない"'}
+        placeholder="名前1 名前2..."
+        value={keyWords.not_food_name}
+      />
+      <FoodSearchInput
+        name="ingredients"
+        handleChange={handleWordChange}
+        label="このキーワードを「原材料」に含める"
+        placeholder="原材料1 原材料2..."
+        value={keyWords.ingredients}
+      />
+      <FoodSearchInput
+        name="not_ingredients"
+        handleChange={handleWordChange}
+        label={'このキーワードを「原材料」に"含めない"'}
+        placeholder="原材料1 原材料2..."
+        value={keyWords.not_ingredients}
       />
       <div className="m-8 text-center">
         <Button name="検索" handleClick={handleClick} />
