@@ -39,3 +39,29 @@ export interface Food {
 
 //商品の配列(index)用
 export type FoodData = Food[];
+
+//商品検索用のparams
+export interface FoodSearchParams {
+  brand_id: string[];
+  food_name: string[];
+  ingredients: string[];
+  max_amount: string;
+  max_ash_content: string;
+  max_calorie: string;
+  max_fat_content: string;
+  max_fibre_content: string;
+  max_moisture_content: string;
+  max_price: string;
+  max_protein_content: string;
+  min_amount: string;
+  min_ash_content: string;
+  min_calorie: string;
+  min_fat_content: string;
+  min_fibre_content: string;
+  min_moisture_content: string;
+  min_price: string;
+  min_protein_content: string;
+  not_food_name: string[];
+  not_ingredients: string[];
+  production_area_id: string[];
+}

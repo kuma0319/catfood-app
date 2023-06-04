@@ -27,8 +27,8 @@ const FoodItem = ({ food }: FoodProps) => {
         <Link href="/products/[id]" as={`/products/${food.id}`}>
           <Image
             src={imageUrl()}
-            width={150}
-            height={150}
+            width={100}
+            height={100}
             alt="商品画像"
             unoptimized //※※本番環境では使用しない※※
           />

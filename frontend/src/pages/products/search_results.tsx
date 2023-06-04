@@ -1,16 +1,18 @@
-//indexページをSSGで表示する場合の設計
+//indexページがSSG設計の場合の商品検索結果の表示ページ
 import axios from "axios";
-import { GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 
 import RootLayout from "@/components/commons/Layout";
 import FoodItem from "@/components/FoodItem";
 import FoodSearch from "@/components/search_form/FoodSearch";
-import { foodsIndexUrl, SSR_BASE_URL } from "@/urls";
+import { foodSearchUrl, SSR_BASE_URL } from "@/urls";
 
 import { FoodData } from "../../../types/foods";
 
-export const getStaticProps: GetStaticProps = async () => {
-  const response = await axios.get(`${SSR_BASE_URL}${foodsIndexUrl}`);
+export const getServerSideProps: GetServerSideProps = async (router) => {
+  const response = await axios.get(`${SSR_BASE_URL}${foodSearchUrl}`, {
+    params: router.query,
+  });
 
   return {
     props: {
@@ -23,7 +25,7 @@ interface Props {
   data: FoodData;
 }
 
-const FoodsIndex = ({ data }: Props) => {
+const SearchResults = ({ data }: Props) => {
   return (
     <RootLayout>
       <div className="flex px-4 py-6">
@@ -42,4 +44,4 @@ const FoodsIndex = ({ data }: Props) => {
   );
 };
 
-export default FoodsIndex;
+export default SearchResults;
