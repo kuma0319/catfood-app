@@ -98,11 +98,11 @@ class Food < ApplicationRecord
     if food_names.present?
       # Next.js側で単一の情報だと文字列として渡され、reduce部分でエラー発生するためこの処理が必要
       if food_names.is_a?(String)
-        where("name LIKE ?", "%#{food_names}%")
+        where("foods.name LIKE ?", "%#{food_names}%")
       else
         # reduceで初期値self(Foodクラスそのもの)をセットし、where句を連結させる
         # 最終的にFood.where("name LIKE ?", "%#{food_name}%.where~~~というscopeが得られる
-        food_names.reduce(self) { |accumulator, food_name| accumulator.where("name LIKE ?", "%#{food_name}%") }
+        food_names.reduce(self) { |accumulator, food_name| accumulator.where("foods.name LIKE ?", "%#{food_name}%") }
       end
     end
   }
@@ -110,9 +110,9 @@ class Food < ApplicationRecord
   scope :by_not_food_name, lambda { |not_food_names|
     if not_food_names.present?
       if not_food_names.is_a?(String)
-        where("name NOT LIKE?", "%#{not_food_names}%")
+        where("foods.name NOT LIKE?", "%#{not_food_names}%")
       else
-        not_food_names.reduce(self) { |accumulator, not_food_name| accumulator.where("name NOT LIKE ?", "%#{not_food_name}%") }
+        not_food_names.reduce(self) { |accumulator, not_food_name| accumulator.where("foods.name NOT LIKE ?", "%#{not_food_name}%") }
       end
     end
   }
@@ -121,9 +121,9 @@ class Food < ApplicationRecord
   scope :by_ingredients, lambda { |ingredients|
     if ingredients.present?
       if ingredients.is_a?(String)
-        where("ingredients LIKE?", "%#{ingredients}%")
+        where("foods.ingredients LIKE?", "%#{ingredients}%")
       else
-        ingredients.reduce(self) { |accumulator, ingredient| accumulator.where("ingredients LIKE ?", "%#{ingredient}%") }
+        ingredients.reduce(self) { |accumulator, ingredient| accumulator.where("foods.ingredients LIKE ?", "%#{ingredient}%") }
       end
     end
   }
@@ -131,9 +131,9 @@ class Food < ApplicationRecord
   scope :by_not_ingredients, lambda { |not_ingredients|
     if not_ingredients.present?
       if not_ingredients.is_a?(String)
-        where("ingredients NOT LIKE?", "%#{not_ingredients}%")
+        where("foods.ingredients NOT LIKE?", "%#{not_ingredients}%")
       else
-        not_ingredients.reduce(self) { |accumulator, not_ingredient| accumulator.where("ingredients NOT LIKE ?", "%#{not_ingredient}%") }
+        not_ingredients.reduce(self) { |accumulator, not_ingredient| accumulator.where("foods.ingredients NOT LIKE ?", "%#{not_ingredient}%") }
       end
     end
   }
