@@ -7,3 +7,5 @@ export const foodsIndexUrl = `/foods/foods.json`;
 export const foodDetailUrl = (foodId: number): string => {
   return `/foods/foods/${foodId}.json`;
 };
+
+export const foodSearchUrl = `/foods/search.json`;
