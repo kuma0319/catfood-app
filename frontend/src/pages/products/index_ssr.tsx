@@ -10,8 +10,8 @@ import { foodSearchUrl, foodsIndexUrl, SSR_BASE_URL } from "@/urls";
 import { FoodData } from "../../../types/foods";
 
 export const getServerSideProps: GetServerSideProps = async (router) => {
-  //stateでrouter.query(railsに割らすselectParams)がtrueならsearchアクションからフェッチ
-  if (router.query) {
+  //stateでrouter.query(railsに渡すselectParams)が空のオブジェクトでないならsearchアクションからフェッチ
+  if (Object.keys(router.query).length !== 0) {
     const response = await axios.get(`${SSR_BASE_URL}${foodSearchUrl}`, {
       params: router.query,
     });
@@ -22,7 +22,7 @@ export const getServerSideProps: GetServerSideProps = async (router) => {
       },
     };
   }
-  //stateでrouter.query(railsに割らすselectParams)がfalseならindexアクションからフェッチ
+  //stateでrouter.query(railsに渡すselectParams)がfalseならindexアクションからフェッチ
   else {
     const response = await axios.get(`${SSR_BASE_URL}${foodsIndexUrl}`);
 
