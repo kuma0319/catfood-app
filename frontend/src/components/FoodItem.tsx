@@ -3,12 +3,14 @@ import Link from "next/link";
 
 import { Food } from "../../types/foods";
 import ItemTab from "./ItemTab";
+import WatchListButton from "./WatchListButton";
 
 interface FoodProps {
   food: Food;
+  handleWatchList: (id: number, isWatched: boolean) => void;
 }
 
-const FoodItem = ({ food }: FoodProps) => {
+const FoodItem = ({ food, handleWatchList }: FoodProps) => {
   function imageUrl() {
     if (food.image_urls) {
       return food.image_urls[0];
@@ -18,12 +20,12 @@ const FoodItem = ({ food }: FoodProps) => {
   }
 
   return (
-    <div className="grid grid-cols-3 gap-4 rounded border border-gray-300 p-4 shadow-md">
-      <h1 className="col-span-1 text-xl font-semibold">{food.name}</h1>
-      <div className="col-span-2 row-span-4">
-        <ItemTab item={food} />
-      </div>
-      <div className="col-span-1 row-span-3">
+    <div className="grid grid-cols-4 gap-4 rounded border border-gray-300 p-4 shadow-md">
+      <h1 className="col-span-2 self-start text-left text-xl font-semibold">
+        {food.name}
+      </h1>
+      <WatchListButton id={food.id} handleWatchList={handleWatchList} />
+      <div className="col-span-1 row-span-2 flex items-center justify-center">
         <Link href="/products/[id]" as={`/products/${food.id}`}>
           <Image
             src={imageUrl()}
@@ -33,6 +35,9 @@ const FoodItem = ({ food }: FoodProps) => {
             unoptimized //※※本番環境では使用しない※※
           />
         </Link>
+      </div>
+      <div className="col-span-3 row-span-2">
+        <ItemTab item={food} />
       </div>
     </div>
   );
