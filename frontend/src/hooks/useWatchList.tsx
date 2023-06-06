@@ -23,7 +23,7 @@ export const useWatchList = () => {
   };
 
   useEffect(() => {
-    console.log(watchListFoodId);
+    localStorage.setItem("food_id", JSON.stringify(watchListFoodId));
   }, [watchListFoodId]);
 
   return { handleWatchList, watchListFoodId };
