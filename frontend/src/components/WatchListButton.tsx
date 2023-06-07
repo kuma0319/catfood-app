@@ -8,7 +8,7 @@ interface WatchListProps {
 const WatchListButton = ({ id, handleWatchList }: WatchListProps) => {
   //各商品のウォッチリスト用のボタンの状態管理
   const [watch, setWatch] = useState(false);
-  //マウントされたかどうかの状態管理
+  //マウントされたかどうかの状態ingify管理
   const [mounted, setMounted] = useState(false);
 
   // マウント時、localStorageが存在するならlocalStorageの値でwatchを初期化

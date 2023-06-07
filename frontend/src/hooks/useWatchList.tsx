@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-type FoodIdArray = { id: number }[];
+export type FoodIdArray = number[];
 
 export const useWatchList = () => {
   //ウォッチリスト用の状態管理
@@ -11,12 +11,12 @@ export const useWatchList = () => {
     setWatchListFoodId((prevWatchListFoodId) => {
       //ボタンがtrue時にそのidをウォッチリスト用の配列に格納
       if (isWatched) {
-        return [...prevWatchListFoodId, { id }];
+        return [...prevWatchListFoodId, id];
       }
       //ボタンがfalse時にそのidをウォッチリスト用の配列から削除
       else {
         return prevWatchListFoodId.filter((watchListFoodId) => {
-          return watchListFoodId.id !== id;
+          return watchListFoodId !== id;
         });
       }
     });
@@ -24,7 +24,8 @@ export const useWatchList = () => {
 
   useEffect(() => {
     localStorage.setItem("food_id", JSON.stringify(watchListFoodId));
+    console.log(watchListFoodId);
   }, [watchListFoodId]);
 
-  return { handleWatchList, watchListFoodId };
+  return { handleWatchList, setWatchListFoodId, watchListFoodId };
 };
