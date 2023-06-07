@@ -1,16 +1,22 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import RootLayout from "@/components/commons/Layout";
 import FoodItem from "@/components/FoodItem";
-import { useWatchList } from "@/hooks/useWatchList";
+import { WatchListContext } from "@/context/WatchListContext";
 
 import { FoodData } from "../../types/foods";
 
 const GetWatchList = () => {
-  //ウォッチリスト用のカスタムフック
-  const { handleWatchList, setWatchListFoodId, watchListFoodId } =
-    useWatchList();
+  const context = useContext(WatchListContext);
+
+  // WatchListContextはundefinedを戻り値として含むため、それの対策
+  if (context === undefined) {
+    throw new Error("useWatchList must be used within a WatchListProvider");
+  }
+
+  //ウォッチリスト用のコンテキスト
+  const { handleWatchList, setWatchListFoodId, watchListFoodId } = context;
 
   // APIから取得したデータを保存するステート
   const [foodData, setFoodData] = useState<FoodData>([]);

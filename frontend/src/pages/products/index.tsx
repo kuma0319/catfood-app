@@ -1,11 +1,12 @@
 //indexページをSSGで表示する場合の設計
 import axios from "axios";
 import { GetStaticProps } from "next";
+import { useContext } from "react";
 
 import RootLayout from "@/components/commons/Layout";
 import FoodItem from "@/components/FoodItem";
 import FoodSearch from "@/components/search_form/FoodSearch";
-import { useWatchList } from "@/hooks/useWatchList";
+import { WatchListContext } from "@/context/WatchListContext";
 import { foodsIndexUrl, SSR_BASE_URL } from "@/urls";
 
 import { FoodData } from "../../../types/foods";
@@ -26,8 +27,15 @@ interface Props {
 }
 
 const FoodsIndex = ({ data }: Props) => {
-  //ウォッチリスト用のカスタムフック
-  const { handleWatchList, watchListFoodId } = useWatchList();
+  const context = useContext(WatchListContext);
+
+  // WatchListContextはundefinedを戻り値として含むため、それの対策
+  if (context === undefined) {
+    throw new Error("useWatchList must be used within a WatchListProvider");
+  }
+
+  //ウォッチリスト用のコンテキスト
+  const { handleWatchList, setWatchListFoodId, watchListFoodId } = context;
 
   return (
     <RootLayout>
