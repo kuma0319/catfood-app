@@ -24,7 +24,11 @@ const FoodItem = ({ food, handleWatchList }: FoodProps) => {
       <h1 className="col-span-2 self-start text-left text-xl font-semibold">
         {food.name}
       </h1>
-      <WatchListButton id={food.id} handleWatchList={handleWatchList} />
+      <WatchListButton
+        id={food.id}
+        handleWatchList={handleWatchList}
+        trueWatchButtonName="追加済み"
+      />
       <div className="col-span-1 row-span-2 flex items-center justify-center">
         <Link href="/products/[id]" as={`/products/${food.id}`}>
           <Image

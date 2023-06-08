@@ -1,10 +1,17 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { FoodData } from "../../types/foods";
+import WatchListButton from "./WatchListButton";
 
-const WatchListTable = ({ foodData }: { foodData: FoodData }) => {
+interface WatchListTableProps {
+  foodData: FoodData;
+  handleWatchList: (id: number, isWatched: boolean) => void;
+}
+
+const WatchListTable = ({ foodData, handleWatchList }: WatchListTableProps) => {
   return (
-    <div className="flex flex-col">
+    <div className="mx-auto flex flex-col">
       <div className="-m-1.5 overflow-auto">
         <div className="inline-block min-w-full p-1.5 align-middle">
           <div className="overflow-hidden">
@@ -14,56 +21,58 @@ const WatchListTable = ({ foodData }: { foodData: FoodData }) => {
                   <th
                     rowSpan={2}
                     scope="col"
-                    className="whitespace-nowrap border px-4 py-1 text-center text-lg font-medium uppercase text-gray-500"
+                    className="whitespace-nowrap border px-4 py-1 text-center text-lg font-medium text-gray-500"
                   >
                     イメージ
                   </th>
                   <th
                     rowSpan={2}
                     scope="col"
-                    className="whitespace-nowrap border px-4 py-1 text-center text-lg font-medium uppercase text-gray-500"
+                    className="w-40 whitespace-normal border px-4 py-1 text-center text-lg font-medium text-gray-500"
                   >
-                    名称
+                    フード名
                   </th>
                   <th
                     colSpan={5}
                     scope="col"
-                    className="whitespace-nowrap px-4 py-1 text-center text-lg font-medium uppercase text-gray-500"
+                    className="whitespace-nowrap px-4 py-1 text-center text-lg font-medium text-gray-500"
                   >
-                    成分量
+                    成分量 (%)
                   </th>
                   <th
                     rowSpan={2}
                     scope="col"
-                    className="whitespace-nowrap border px-4 py-1 text-center text-lg font-medium uppercase text-gray-500"
+                    className="whitespace-nowrap border px-4 py-1 text-center text-lg font-medium text-gray-500"
                   >
-                    原材料
+                    第1主原料
                   </th>
                   <th
                     rowSpan={2}
                     scope="col"
-                    className="whitespace-nowrap border px-4 py-1 text-center text-lg font-medium uppercase text-gray-500"
+                    className="whitespace-nowrap border px-4 py-1 text-center text-lg font-medium text-gray-500"
                   >
                     カロリー
+                    <br />
+                    (kcal/100g)
                   </th>
                   <th
                     rowSpan={2}
                     scope="col"
-                    className="whitespace-nowrap border px-4 py-1 text-center text-lg font-medium uppercase text-gray-500"
+                    className="whitespace-nowrap border px-4 py-1 text-center text-lg font-medium text-gray-500"
                   >
                     金額
                   </th>
                   <th
                     rowSpan={2}
                     scope="col"
-                    className="whitespace-nowrap border px-4 py-1 text-center text-lg font-medium uppercase text-gray-500"
+                    className="whitespace-nowrap border px-4 py-1 text-center text-lg font-medium text-gray-500"
                   >
                     ブランド
                   </th>
                   <th
                     rowSpan={2}
                     scope="col"
-                    className="whitespace-nowrap border px-4 py-1 text-center text-lg font-medium uppercase text-gray-500"
+                    className="whitespace-nowrap border px-4 py-1 text-center text-lg font-medium text-gray-500"
                   >
                     産地
                   </th>
@@ -71,31 +80,31 @@ const WatchListTable = ({ foodData }: { foodData: FoodData }) => {
                 <tr>
                   <th
                     scope="col"
-                    className="whitespace-nowrap border px-4 py-1 text-center text-lg font-medium uppercase text-gray-500"
+                    className="whitespace-nowrap border px-4 py-1 text-center text-lg font-medium text-gray-500"
                   >
                     タンパク質
                   </th>
                   <th
                     scope="col"
-                    className="whitespace-nowrap border px-4 py-1 text-center text-lg font-medium uppercase text-gray-500"
+                    className="whitespace-nowrap border px-4 py-1 text-center text-lg font-medium text-gray-500"
                   >
                     脂質
                   </th>
                   <th
                     scope="col"
-                    className="whitespace-nowrap border px-4 py-1 text-center text-lg font-medium uppercase text-gray-500"
+                    className="whitespace-nowrap border px-4 py-1 text-center text-lg font-medium text-gray-500"
                   >
                     粗繊維
                   </th>
                   <th
                     scope="col"
-                    className="whitespace-nowrap border px-4 py-1 text-center text-lg font-medium uppercase text-gray-500"
+                    className="whitespace-nowrap border px-4 py-1 text-center text-lg font-medium text-gray-500"
                   >
                     灰分
                   </th>
                   <th
                     scope="col"
-                    className="whitespace-nowrap border px-4 py-1 text-center text-lg font-medium uppercase text-gray-500"
+                    className="whitespace-nowrap border px-4 py-1 text-center text-lg font-medium text-gray-500"
                   >
                     水分量
                   </th>
@@ -108,13 +117,15 @@ const WatchListTable = ({ foodData }: { foodData: FoodData }) => {
                     className="hover:bg-gray-100 dark:hover:bg-gray-700"
                   >
                     <td className="whitespace-nowrap px-6 py-4 text-lg font-medium text-gray-800 dark:text-gray-200">
-                      <Image
-                        src={food.image_urls[0]}
-                        alt={food.name}
-                        width={50}
-                        height={50}
-                        unoptimized //※※本番環境では使用しない※※
-                      />
+                      <Link href="/products/[id]" as={`/products/${food.id}`}>
+                        <Image
+                          src={food.image_urls[0]}
+                          alt={food.name}
+                          width={50}
+                          height={50}
+                          unoptimized //※※本番環境では使用しない※※
+                        />
+                      </Link>
                     </td>
                     <td className="whitespace-nowrap px-6 py-4 text-lg text-gray-800 dark:text-gray-200">
                       {food.name}
@@ -131,7 +142,7 @@ const WatchListTable = ({ foodData }: { foodData: FoodData }) => {
                         </td>
                       ))}
                     <td className="whitespace-nowrap px-6 py-4 text-lg text-gray-800 dark:text-gray-200">
-                      原材料
+                      {food.ingredients.split("、", 1)[0]}
                     </td>
                     <td className="whitespace-nowrap px-6 py-4 text-lg text-gray-800 dark:text-gray-200">
                       {food.calorie}
@@ -146,9 +157,11 @@ const WatchListTable = ({ foodData }: { foodData: FoodData }) => {
                       {food.production_area.name}
                     </td>
                     <td className="whitespace-nowrap px-6 py-4 text-right text-lg font-medium">
-                      <a className="text-blue-500 hover:text-blue-700" href="#">
-                        Delete
-                      </a>
+                      <WatchListButton
+                        id={food.id}
+                        handleWatchList={handleWatchList}
+                        trueWatchButtonName="リストから削除"
+                      />
                     </td>
                   </tr>
                 ))}

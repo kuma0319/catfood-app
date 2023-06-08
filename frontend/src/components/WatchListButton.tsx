@@ -3,9 +3,14 @@ import { useEffect, useState } from "react";
 interface WatchListProps {
   id: number;
   handleWatchList: (id: number, isWatched: boolean) => void;
+  trueWatchButtonName: string;
 }
 
-const WatchListButton = ({ id, handleWatchList }: WatchListProps) => {
+const WatchListButton = ({
+  id,
+  handleWatchList,
+  trueWatchButtonName,
+}: WatchListProps) => {
   //各商品のウォッチリスト用のボタンの状態管理
   const [watch, setWatch] = useState(false);
   //マウントされたかどうかの状態ingify管理
@@ -37,7 +42,6 @@ const WatchListButton = ({ id, handleWatchList }: WatchListProps) => {
   const trueWatchButtonClass =
     "inline-flex items-center justify-center gap-2 rounded-md border-2 border-gray-400 px-4 py-2 text-sm font-semibold text-white transition-all hover: border-blue-500 bg-blue-500 hover:bg-white hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:border-gray-700 dark:hover:border-blue-500";
   const falseWatchButtonName = "ウォッチリストに追加";
-  const trueWatchButtonName = "追加済み";
   return (
     <div className="col-span-2 flex items-center justify-end gap-4">
       {/* コンポーネントがマウントされた時点でのみボタンを表示する */}
@@ -49,9 +53,6 @@ const WatchListButton = ({ id, handleWatchList }: WatchListProps) => {
           {watch ? trueWatchButtonName : falseWatchButtonName}
         </button>
       )}
-      <button className="inline-flex items-center justify-center gap-2 rounded-md border-2 border-gray-400 px-4 py-2 text-sm font-semibold text-red-500 transition-all hover:border-red-500 hover:bg-red-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:border-gray-700 dark:hover:border-red-500">
-        お気に入りに追加
-      </button>
     </div>
   );
 };

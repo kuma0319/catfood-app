@@ -52,13 +52,11 @@ const GetWatchList = () => {
   }, [watchListFoodId]);
 
   return (
-    <div className="container mx-auto">
+    <div>
       <header>
         <Header />
       </header>
-      <main className="mx-auto max-w-screen-lg">
-        <WatchListTable foodData={foodData} />
-      </main>
+      <WatchListTable foodData={foodData} handleWatchList={handleWatchList} />
       <footer>
         <Footer />
       </footer>
