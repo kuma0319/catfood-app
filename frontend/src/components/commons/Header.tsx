@@ -66,10 +66,10 @@ const Header = () => {
               フード一覧
             </Link>
             <Link
-              href="#"
+              href="/watch_list"
               className="font-medium text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 sm:py-6"
             >
-              気になるリスト
+              ウォッチリスト
             </Link>
             <Link
               href="#"
