@@ -72,11 +72,14 @@ const ItemTab = ({ item }: ItemTab) => {
           aria-labelledby={`card-type-tab-item-1-${item.id}`}
         >
           <div className="text-gray-500 dark:text-gray-400">
-            {item.nutrient_contents.map((nutrient_content, index) => (
-              <div key={index}>
-                {nutrient_content.nutrient.name}：{nutrient_content.content}g
-              </div>
-            ))}
+            {item.nutrient_contents
+              // 期待通りの並びになるようにid順にソート
+              .sort((a, b) => a.nutrient.id - b.nutrient.id)
+              .map((nutrient_content, index) => (
+                <div key={index}>
+                  {nutrient_content.nutrient.name}：{nutrient_content.content}g
+                </div>
+              ))}
           </div>
         </div>
         <div

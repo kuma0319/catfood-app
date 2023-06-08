@@ -5,6 +5,7 @@ import { GetServerSideProps } from "next";
 import RootLayout from "@/components/commons/Layout";
 import FoodItem from "@/components/FoodItem";
 import FoodSearch_SSR from "@/components/search_form/FoodSearch_ssr";
+import { useWatchList } from "@/hooks/useWatchList";
 import { foodSearchUrl, foodsIndexUrl, SSR_BASE_URL } from "@/urls";
 
 import { FoodData } from "../../../types/foods";
@@ -39,6 +40,9 @@ interface Props {
 }
 
 const FoodsIndex_SSR = ({ data }: Props) => {
+  //ウォッチリスト用のカスタムフック
+  const { handleWatchList, watchListFoodId } = useWatchList();
+
   return (
     <RootLayout>
       <div className="flex px-4 py-6">
@@ -48,7 +52,11 @@ const FoodsIndex_SSR = ({ data }: Props) => {
         <div style={{ flex: 4 }}>
           <div className="mb-4 rounded border p-4 shadow-md">
             {data.map((food) => (
-              <FoodItem key={food.id} food={food} />
+              <FoodItem
+                key={food.id}
+                food={food}
+                handleWatchList={handleWatchList}
+              />
             ))}
           </div>
         </div>
