@@ -5,7 +5,7 @@ import { Food } from "../../types/foods";
 import ItemTab from "./ItemTab";
 import WatchListButton from "./WatchListButton";
 
-interface FoodProps {
+export interface FoodProps {
   food: Food;
   handleWatchList: (id: number, isWatched: boolean) => void;
 }

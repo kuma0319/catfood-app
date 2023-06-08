@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 
-import RootLayout from "@/components/commons/Layout";
-import FoodItem from "@/components/FoodItem";
+import Footer from "@/components/commons/Footer";
+import Header from "@/components/commons/Header";
+import WatchListTable from "@/components/WatchListTable";
 import { WatchListContext } from "@/context/WatchListContext";
 
 import { FoodData } from "../../types/foods";
@@ -51,22 +52,17 @@ const GetWatchList = () => {
   }, [watchListFoodId]);
 
   return (
-    <RootLayout>
-      <div className="flex px-4 py-6">
-        <div style={{ flex: 4 }}>
-          <div className="mb-4 rounded border p-4 shadow-md">
-            {foodData.map((food) => (
-              <FoodItem
-                key={food.id}
-                food={food}
-                handleWatchList={handleWatchList}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-    </RootLayout>
+    <div className="container mx-auto">
+      <header>
+        <Header />
+      </header>
+      <main className="mx-auto max-w-screen-lg">
+        <WatchListTable foodData={foodData} />
+      </main>
+      <footer>
+        <Footer />
+      </footer>
+    </div>
   );
 };
-
 export default GetWatchList;
