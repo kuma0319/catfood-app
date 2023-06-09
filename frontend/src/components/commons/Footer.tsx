@@ -1,6 +1,8 @@
+import Link from "next/link";
+
 const Footer = () => {
   return (
-    <footer className="mx-auto mt-auto w-full max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8">
+    <footer className="mx-auto mt-auto flex w-full max-w-[85rem] flex-col justify-between px-4 py-10 sm:px-6 lg:px-8">
       {/* <!-- Grid --> */}
       <div className="text-center">
         <div>
@@ -14,20 +16,16 @@ const Footer = () => {
         </div>
         {/* <!-- End Col --> */}
 
-        <div className="mt-3">
-          <p className="text-gray-500">
-            We are part of the{" "}
-            <a
-              className="font-semibold text-blue-600 hover:text-blue-700 dark:text-blue-500 dark:hover:text-blue-400"
-              href="#"
-            >
-              Htmlstream
-            </a>{" "}
-            family.
-          </p>
-          <p className="text-gray-500">
-            © Preline. 2022 Htmlstream. All rights reserved.
-          </p>
+        <div className="my-4 flex justify-center space-x-6 sm:mb-0">
+          <Link className="text-gray-500 hover:text-blue-600" href="#">CatFood App(仮)とは</Link>
+          <p className="text-gray-500">|</p>
+          <Link className="text-gray-500 hover:text-blue-600" href="#">ご意見・ご要望</Link>
+          <p className="text-gray-500">|</p>
+          <Link className="text-gray-500 hover:text-blue-600" href="#">プライバシーポリシー</Link>
+          <p className="text-gray-500">|</p>
+          <Link className="text-gray-500 hover:text-blue-600" href="#">利用規約</Link>
+          <p className="text-gray-500">|</p>
+          <Link className="text-gray-500 hover:text-blue-600" href="#">製作者</Link>
         </div>
 
         {/* <!-- Social Brands --> */}
@@ -96,6 +94,13 @@ const Footer = () => {
         {/* <!-- End Social Brands --> */}
       </div>
       {/* <!-- End Grid --> */}
+
+      {/* <!-- Footer Bottom --> */}
+      <div className="mt-2 text-center">
+        <p className="text-gray-500">
+          © All rights reserved.
+        </p>
+      </div>
     </footer>
   );
 };
