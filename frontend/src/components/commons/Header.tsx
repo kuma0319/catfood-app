@@ -66,19 +66,27 @@ const Header = () => {
               フード一覧
             </Link>
             <Link
+              href="/#"
+              className="font-medium text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 sm:py-6"
+            >
+              相談所<br />
+              (製作中)
+            </Link>
+            <Link
+              href="/#"
+              className="font-medium text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 sm:py-6"
+            >
+              使い方<br />
+              (製作中)
+            </Link>
+            <Link
               href="/watch_list"
               className="font-medium text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 sm:py-6"
             >
               ウォッチリスト
             </Link>
-            <Link
-              href="#"
-              className="font-medium text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 sm:py-6"
-            >
-              相談所
-            </Link>
 
-            <div className="hs-dropdown [--adaptive:none] [--strategy:static] sm:py-4 sm:[--strategy:fixed] sm:[--trigger:hover]">
+            {/* <div className="hs-dropdown [--adaptive:none] [--strategy:static] sm:py-4 sm:[--strategy:fixed] sm:[--trigger:hover]">
               <button
                 type="button"
                 className="flex w-full items-center font-medium text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 "
@@ -166,7 +174,7 @@ const Header = () => {
                   Team Account
                 </a>
               </div>
-            </div>
+            </div> */}
 
             <div className="flex items-center gap-x-2 sm:ml-auto">
               <a
@@ -183,7 +191,8 @@ const Header = () => {
                 >
                   <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
                 </svg>
-                Log in
+                ログイン<br />
+                (製作中)
               </a>
             </div>
           </div>
