@@ -1,8 +1,7 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 
-import Footer from "@/components/commons/Footer";
-import Header from "@/components/commons/Header";
+import RootLayout from "@/components/commons/Layout";
 import WatchListTable from "@/components/WatchListTable";
 import { WatchListContext } from "@/context/WatchListContext";
 
@@ -52,15 +51,9 @@ const GetWatchList = () => {
   }, [watchListFoodId]);
 
   return (
-    <div>
-      <header>
-        <Header />
-      </header>
+    <RootLayout>
       <WatchListTable foodData={foodData} handleWatchList={handleWatchList} />
-      <footer>
-        <Footer />
-      </footer>
-    </div>
+    </RootLayout>
   );
 };
 export default GetWatchList;
