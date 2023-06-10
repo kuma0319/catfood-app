@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :brand do
-    brand { "MyString" }
+    sequence(:name) { |n| "テストブランド#{n}" }
   end
 end

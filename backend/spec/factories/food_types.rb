@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :food_type do
-    food_type { "MyString" }
+    name { "ドライ" }
   end
 end

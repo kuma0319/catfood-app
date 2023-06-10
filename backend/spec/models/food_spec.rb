@@ -1,5 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe Food, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  #バリデーションテスト
+  describe "validations" do
+    let(:food) {FactoryBot.create(:food)}
+
+    context "正しい条件でインスタンスを作成した時" do
+      it "有効となること" do
+        expect(food).to be_valid
+      end
+    end
+  end
 end

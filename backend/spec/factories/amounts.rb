@@ -1,7 +1,6 @@
 FactoryBot.define do
   factory :amount do
-    amount { 1 }
-    price { 1 }
-    food { nil }
+    amount { 1.5 }
+    price { 3000 }
   end
 end
