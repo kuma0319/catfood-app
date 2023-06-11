@@ -57,4 +57,10 @@ Rails.application.configure do
 
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
+
+  #URLのホスト名の設定
+  Rails.application.routes.default_url_options = {
+    host: 'localhost',
+    port: 3010
+  }
 end

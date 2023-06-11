@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :food_type do
-    name { "ドライ" }
+    sequence(:name) { |n| "テストフードタイプ#{n}" }
   end
 end

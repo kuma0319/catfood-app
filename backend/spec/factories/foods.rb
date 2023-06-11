@@ -9,7 +9,7 @@ FactoryBot.define do
   end
 
   #成分含有量をtraitで関連付け
-  trait :with_nuteient_content do
+  trait :with_nutrient_contents do
     after(:create) do |food|
       create(:protein_content, food: food)
       create(:fat_content, food: food)
@@ -20,7 +20,7 @@ FactoryBot.define do
   end
 
   #内容量、金額をtraitで関連付け
-  trait :with_amount do
+  trait :with_amounts do
     after(:create) do |food|
       create(:amount, food: food)
     end
