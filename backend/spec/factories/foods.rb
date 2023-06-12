@@ -11,26 +11,25 @@ FactoryBot.define do
   # 成分含有量を追加する際のtrait
   trait :with_nutrient_contents do
     after(:create) do |food|
-      create(:nutrient_content, food: food)
+      create(:nutrient_content, food:)
     end
   end
 
   # 5つの成分含有量を追加する際のtrait
   trait :with_all_nutrient_contents do
     after(:create) do |food|
-      create(:protein_content, food: food)
-      create(:fat_content, food: food)
-      create(:fibre_content, food: food)
-      create(:ash_content, food: food)
-      create(:moisture_content, food: food)
+      create(:protein_content, food:)
+      create(:fat_content, food:)
+      create(:fibre_content, food:)
+      create(:ash_content, food:)
+      create(:moisture_content, food:)
     end
   end
 
   # 内容量、金額をtraitで関連付け
   trait :with_amounts do
     after(:create) do |food|
-      create(:amount, food: food)
+      create(:amount, food:)
     end
   end
-
 end

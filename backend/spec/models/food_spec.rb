@@ -1,8 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Food, type: :model do
-
-  #アソシエーションテスト
+  # アソシエーションテスト
   describe "association" do
     context "アソシエーションが正しいこと" do
       it { should belong_to(:brand) }
@@ -15,9 +14,9 @@ RSpec.describe Food, type: :model do
     end
   end
 
-  #バリデーションテスト
+  # バリデーションテスト
   describe "validations" do
-    subject(:food) { create(:food, :with_all_nutrient_contents, :with_amounts)}
+    subject(:food) { create(:food, :with_all_nutrient_contents, :with_amounts) }
     context "正しい条件でインスタンスを作成した時" do
       it "バリエーションエラーとならないこと" do
         expect(food).to be_valid
@@ -84,17 +83,17 @@ RSpec.describe Food, type: :model do
         end
       end
     end
-    
+
     describe "#by_calorie" do
       let!(:food1) { create(:food, calorie: 200) }
       let!(:food2) { create(:food, calorie: 250) }
       let!(:food3) { create(:food, calorie: 300) }
       context "カロリーの範囲を指定したとき" do
         it "指定のカロリー範囲のフードを返すこと" do
-        expect(Food.by_calorie("", 199)).to match_array([])
-        expect(Food.by_calorie(200, 249)).to match_array([food1])
-        expect(Food.by_calorie(250, 300)).to match_array([food2, food3])
-        expect(Food.by_calorie(301, "")).to match_array([])
+          expect(Food.by_calorie("", 199)).to match_array([])
+          expect(Food.by_calorie(200, 249)).to match_array([food1])
+          expect(Food.by_calorie(250, 300)).to match_array([food2, food3])
+          expect(Food.by_calorie(301, "")).to match_array([])
         end
       end
     end
@@ -103,7 +102,7 @@ RSpec.describe Food, type: :model do
       let!(:food1) { create(:food) }
       let!(:food2) { create(:food) }
       let!(:food3) { create(:food) }
-    
+
       let!(:amount1) { create(:amount, amount: 1.0, food: food1) }
       let!(:amount2) { create(:amount, amount: 1.5, food: food2) }
       let!(:amount3) { create(:amount, amount: 2.0, food: food3) }
@@ -121,7 +120,7 @@ RSpec.describe Food, type: :model do
       let!(:food1) { create(:food) }
       let!(:food2) { create(:food) }
       let!(:food3) { create(:food) }
-    
+
       let!(:price1) { create(:amount, price: 1000, food: food1) }
       let!(:price2) { create(:amount, price: 2000, food: food2) }
       let!(:price3) { create(:amount, price: 3000, food: food3) }
@@ -142,9 +141,9 @@ RSpec.describe Food, type: :model do
 
       let!(:protein) { create(:protein, name: "タンパク質") }
 
-      let!(:protein_content1) { create(:protein_content, nutrient: protein, content: 10 , food: food1) }
-      let!(:protein_content2) { create(:protein_content, nutrient: protein, content: 20 , food: food2) }
-      let!(:protein_content3) { create(:protein_content, nutrient: protein, content: 30 , food: food3) }
+      let!(:protein_content1) { create(:protein_content, nutrient: protein, content: 10, food: food1) }
+      let!(:protein_content2) { create(:protein_content, nutrient: protein, content: 20, food: food2) }
+      let!(:protein_content3) { create(:protein_content, nutrient: protein, content: 30, food: food3) }
       context "成分（ここではタンパク質）の含有量の範囲を指定したとき" do
         it "指定の成分含有量範囲のフードを返すこと" do
           expect(Food.by_nutrient_content(protein.id, "", 9)).to match_array([])
@@ -208,10 +207,10 @@ RSpec.describe Food, type: :model do
         end
       end
     end
-    
+
     # モデルのインスタンスメソッドのテスト
     describe "#image_urls" do
-      subject(:food) {create(:food)}
+      subject(:food) { create(:food) }
       image_path = Rails.root.join("app/assets/images/1.jpg")
       before do
         food.images.attach(io: File.open(image_path), filename: "sample1.jpg", content_type: 'image/jpeg')
@@ -220,7 +219,5 @@ RSpec.describe Food, type: :model do
         expect(food.image_urls.first).to include("http://localhost:3010/rails/active_storage/blobs")
       end
     end
-
   end
-
 end

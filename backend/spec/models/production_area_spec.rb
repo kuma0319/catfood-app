@@ -1,16 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe ProductionArea, type: :model do
-  subject(:production_area) {create(:production_area)}
+  subject(:production_area) { create(:production_area) }
 
-  #アソシエーションテスト
+  # アソシエーションテスト
   describe "association" do
     context "アソシエーションが正しいこと" do
       it { should have_many(:foods) }
     end
   end
 
-  #バリデーションテスト
+  # バリデーションテスト
   describe "validations" do
     context "正しい条件でインスタンスを作成した時" do
       it "バリエーションエラーとならないこと" do

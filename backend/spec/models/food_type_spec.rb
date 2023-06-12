@@ -1,16 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe FoodType, type: :model do
-  subject(:food_type) {create(:food_type)}
+  subject(:food_type) { create(:food_type) }
 
-  #アソシエーションテスト
+  # アソシエーションテスト
   describe "association" do
     context "アソシエーションが正しいこと" do
       it { should have_many(:foods) }
     end
   end
 
-  #バリデーションテスト
+  # バリデーションテスト
   describe "validations" do
     context "正しい条件でインスタンスを作成した時" do
       it "バリエーションエラーとならないこと" do

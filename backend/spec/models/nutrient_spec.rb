@@ -1,16 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe Nutrient, type: :model do
-  subject(:nutrient) {create(:nutrient)}
+  subject(:nutrient) { create(:nutrient) }
 
-  #アソシエーションテスト
+  # アソシエーションテスト
   describe "association" do
     context "アソシエーションが正しいこと" do
       it { should have_many(:nutrient_contents) }
     end
   end
 
-  #バリデーションテスト
+  # バリデーションテスト
   describe "validations" do
     context "正しい条件でインスタンスを作成した時" do
       it "バリエーションエラーとならないこと" do

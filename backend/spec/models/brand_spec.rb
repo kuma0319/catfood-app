@@ -1,16 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe Brand, type: :model do
-  subject(:brand) {create(:brand)}
+  subject(:brand) { create(:brand) }
 
-  #アソシエーションテスト
+  # アソシエーションテスト
   describe "association" do
     context "アソシエーションが正しいこと" do
       it { should have_many(:foods) }
     end
   end
 
-  #バリデーションテスト
+  # バリデーションテスト
   describe "validations" do
     context "正しい条件でインスタンスを作成した時" do
       it "バリエーションエラーとならないこと" do

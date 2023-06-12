@@ -12,11 +12,11 @@ RSpec.describe "Api::V1::Foods::Foods", type: :request do
   let!(:food5) { create(:food, :with_amounts, :with_nutrient_contents, name: "foodsコントローラname4", brand: brand3) }
 
   # JSONデータの中身を確認するためのkeyの配列
-  let(:keys) {["name", "calorie", "ingredients", "brand", "production_area", "food_type", "nutrient_contents", "amounts", "image_urls"]}
+  let(:keys) { ["name", "calorie", "ingredients", "brand", "production_area", "food_type", "nutrient_contents", "amounts", "image_urls"] }
 
   ## indexアクション
   describe "GET /index" do
-    before {get "/api/v1/foods/foods.json"}
+    before { get "/api/v1/foods/foods.json" }
     it "ステータスコード200が返ってくること" do
       expect(response).to have_http_status(200)
     end
@@ -76,20 +76,20 @@ RSpec.describe "Api::V1::Foods::Foods", type: :request do
   describe "GET /search" do
     # 検索条件のscopeはモデルスペックで検証済みのため、ここではブランド指定についてのみ検証
     context "検索条件(ここではブランド1)を指定したとき" do
-      before {get "/api/v1/foods/search.json?brand_id=#{brand1.id}"}
+      before { get "/api/v1/foods/search.json?brand_id=#{brand1.id}" }
       it "ステータスコード200が返ってくること" do
         expect(response).to have_http_status(200)
       end
-  
+
       it "ブランド1に所属するフード情報のみが表示され、配列の長さが一致すること" do
         expect(JSON.parse(response.body).length).to eq(2)
       end
-  
+
       it "表示されたフード情報の並び順がブランド名の昇順+名前の昇順であること" do
         expect(JSON.parse(response.body).first["id"]).to eq(food2.id)
         expect(JSON.parse(response.body).last["id"]).to eq(food3.id)
       end
-  
+
       it "期待されるデータが含まれていること" do
         JSON.parse(response.body).each do |food|
           keys.each do |key|
@@ -100,15 +100,15 @@ RSpec.describe "Api::V1::Foods::Foods", type: :request do
     end
 
     context "検索条件を指定しなかったとき" do
-      before {get "/api/v1/foods/search.json"}
+      before { get "/api/v1/foods/search.json" }
       it "ステータスコード200が返ってくること" do
         expect(response).to have_http_status(200)
       end
-  
+
       it "全てのフード情報が表示され、配列の長さが一致すること" do
         expect(JSON.parse(response.body).length).to eq(5)
       end
-  
+
       it "表示されたフード情報の並び順がブランド名の昇順+名前の昇順であること" do
         expect(JSON.parse(response.body).first["id"]).to eq(food2.id)
         expect(JSON.parse(response.body).second["id"]).to eq(food3.id)
@@ -116,7 +116,7 @@ RSpec.describe "Api::V1::Foods::Foods", type: :request do
         expect(JSON.parse(response.body).fourth["id"]).to eq(food5.id)
         expect(JSON.parse(response.body).last["id"]).to eq(food4.id)
       end
-  
+
       it "期待されるデータが含まれていること" do
         JSON.parse(response.body).each do |food|
           keys.each do |key|

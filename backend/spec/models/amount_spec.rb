@@ -1,17 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe Amount, type: :model do
-  let!(:food) {create(:food)}
-  subject(:amount) {create(:amount, food: food)}
+  let!(:food) { create(:food) }
+  subject(:amount) { create(:amount, food:) }
 
-  #アソシエーションテスト
+  # アソシエーションテスト
   describe "association" do
     context "アソシエーションが正しいこと" do
       it { should belong_to(:food) }
     end
   end
 
-  #バリデーションテスト
+  # バリデーションテスト
   describe "validations" do
     context "正しい条件でインスタンスを作成した時" do
       it "バリエーションエラーとならないこと" do
