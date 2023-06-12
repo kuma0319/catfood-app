@@ -7,16 +7,12 @@ class Api::V1::Foods::FoodsController < ApplicationController
       .with_attached_images
       .order("brands.name", "foods.name")
       .all
-
-    render status: :ok
   end
 
   def show
     @food = Food.includes(:brand, :production_area, :food_type, :nutrients, :nutrient_contents, :amounts)
       .with_attached_images
       .find(params[:id])
-
-    render status: :ok
   end
 
   def create
@@ -75,8 +71,6 @@ class Api::V1::Foods::FoodsController < ApplicationController
       .by_not_food_name(params[:not_food_name])
       .by_ingredients(params[:ingredients])
       .by_not_ingredients(params[:not_ingredients])
-
-    render status: :ok
   end
 
   private

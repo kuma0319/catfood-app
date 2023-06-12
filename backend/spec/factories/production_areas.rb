@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :production_area do
-    production_area { "MyString" }
+    sequence(:name) { |n| "テスト産地#{n}" }
   end
 end
