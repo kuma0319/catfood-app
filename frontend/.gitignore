@@ -38,3 +38,6 @@ next-env.d.ts
 catfood-app_frontend.code-workspace
 
 .vscode
+
+# jestによって自動生成されるディレクトリ
+.swc
