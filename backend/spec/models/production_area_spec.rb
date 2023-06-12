@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ProductionArea, type: :model do
-  subject(:production_area) {FactoryBot.create(:production_area)}
+  subject(:production_area) {create(:production_area)}
 
   #アソシエーションテスト
   describe "association" do

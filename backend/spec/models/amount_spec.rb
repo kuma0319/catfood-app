@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Amount, type: :model do
-  let!(:food) {FactoryBot.create(:food)}
-  subject(:amount) {FactoryBot.create(:amount, food: food)}
+  let!(:food) {create(:food)}
+  subject(:amount) {create(:amount, food: food)}
 
   #アソシエーションテスト
   describe "association" do

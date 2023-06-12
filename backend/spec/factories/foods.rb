@@ -8,8 +8,15 @@ FactoryBot.define do
     calorie { rand(200..500) }
   end
 
-  #成分含有量をtraitで関連付け
+  # 成分含有量を追加する際のtrait
   trait :with_nutrient_contents do
+    after(:create) do |food|
+      create(:nutrient_content, food: food)
+    end
+  end
+
+  # 5つの成分含有量を追加する際のtrait
+  trait :with_all_nutrient_contents do
     after(:create) do |food|
       create(:protein_content, food: food)
       create(:fat_content, food: food)
@@ -19,7 +26,7 @@ FactoryBot.define do
     end
   end
 
-  #内容量、金額をtraitで関連付け
+  # 内容量、金額をtraitで関連付け
   trait :with_amounts do
     after(:create) do |food|
       create(:amount, food: food)

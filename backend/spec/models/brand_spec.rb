@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Brand, type: :model do
-  subject(:brand) {FactoryBot.create(:brand)}
+  subject(:brand) {create(:brand)}
 
   #アソシエーションテスト
   describe "association" do

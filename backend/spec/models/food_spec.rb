@@ -17,7 +17,7 @@ RSpec.describe Food, type: :model do
 
   #バリデーションテスト
   describe "validations" do
-    subject(:food) {FactoryBot.create(:food, :with_nutrient_contents, :with_amounts)}
+    subject(:food) { create(:food, :with_all_nutrient_contents, :with_amounts)}
     context "正しい条件でインスタンスを作成した時" do
       it "バリエーションエラーとならないこと" do
         expect(food).to be_valid
@@ -38,13 +38,13 @@ RSpec.describe Food, type: :model do
   # モデルのスコープのテスト
   describe "scope" do
     describe "#by_brand" do
-      let!(:brand1) { FactoryBot.create(:brand, name: "テストブランド1") }
-      let!(:brand2) { FactoryBot.create(:brand, name: "テストブランド2") }
-      let!(:brand3) { FactoryBot.create(:brand, name: "テストブランド3") }
-      let!(:food1) { FactoryBot.create(:food, brand: brand1) }
-      let!(:food2) { FactoryBot.create(:food, brand: brand1) }
-      let!(:food3) { FactoryBot.create(:food, brand: brand2) }
-      let!(:food4) { FactoryBot.create(:food, brand: brand3) }
+      let!(:brand1) { create(:brand, name: "テストブランド1") }
+      let!(:brand2) { create(:brand, name: "テストブランド2") }
+      let!(:brand3) { create(:brand, name: "テストブランド3") }
+      let!(:food1) { create(:food, brand: brand1) }
+      let!(:food2) { create(:food, brand: brand1) }
+      let!(:food3) { create(:food, brand: brand2) }
+      let!(:food4) { create(:food, brand: brand3) }
       context "ブランドid、もしくはブランドidの配列で指定した時" do
         it "指定のブランドidに対応するブランドを含むフードを返すこと" do
           expect(Food.by_brand(brand1.id)).to match_array([food1, food2])
@@ -54,13 +54,13 @@ RSpec.describe Food, type: :model do
     end
 
     describe "#by_food_type" do
-      let!(:food_type1) { FactoryBot.create(:food_type, name: "テストフードタイプ1") }
-      let!(:food_type2) { FactoryBot.create(:food_type, name: "テストフードタイプ2") }
-      let!(:food_type3) { FactoryBot.create(:food_type, name: "テストフードタイプ3") }
-      let!(:food1) { FactoryBot.create(:food, food_type: food_type1) }
-      let!(:food2) { FactoryBot.create(:food, food_type: food_type1) }
-      let!(:food3) { FactoryBot.create(:food, food_type: food_type2) }
-      let!(:food4) { FactoryBot.create(:food, food_type: food_type3) }
+      let!(:food_type1) { create(:food_type, name: "テストフードタイプ1") }
+      let!(:food_type2) { create(:food_type, name: "テストフードタイプ2") }
+      let!(:food_type3) { create(:food_type, name: "テストフードタイプ3") }
+      let!(:food1) { create(:food, food_type: food_type1) }
+      let!(:food2) { create(:food, food_type: food_type1) }
+      let!(:food3) { create(:food, food_type: food_type2) }
+      let!(:food4) { create(:food, food_type: food_type3) }
       context "フードタイプid、もしくはフードタイプidの配列で指定した時" do
         it "指定のフードタイプidに対応するフードタイプを含むフードを返すこと" do
           expect(Food.by_food_type(food_type1.id)).to match_array([food1, food2])
@@ -70,13 +70,13 @@ RSpec.describe Food, type: :model do
     end
 
     describe "#by_production_area" do
-      let!(:production_area1) { FactoryBot.create(:production_area, name: "テスト産地1") }
-      let!(:production_area2) { FactoryBot.create(:production_area, name: "テスト産地2") }
-      let!(:production_area3) { FactoryBot.create(:production_area, name: "テスト産地3") }
-      let!(:food1) { FactoryBot.create(:food, production_area: production_area1) }
-      let!(:food2) { FactoryBot.create(:food, production_area: production_area1) }
-      let!(:food3) { FactoryBot.create(:food, production_area: production_area2) }
-      let!(:food4) { FactoryBot.create(:food, production_area: production_area3) }
+      let!(:production_area1) { create(:production_area, name: "テスト産地1") }
+      let!(:production_area2) { create(:production_area, name: "テスト産地2") }
+      let!(:production_area3) { create(:production_area, name: "テスト産地3") }
+      let!(:food1) { create(:food, production_area: production_area1) }
+      let!(:food2) { create(:food, production_area: production_area1) }
+      let!(:food3) { create(:food, production_area: production_area2) }
+      let!(:food4) { create(:food, production_area: production_area3) }
       context "産地id、もしくは産地idの配列で指定した時" do
         it "指定の産地idに対応する産地を含むフードを返すこと" do
           expect(Food.by_production_area(production_area1.id)).to match_array([food1, food2])
@@ -86,9 +86,9 @@ RSpec.describe Food, type: :model do
     end
     
     describe "#by_calorie" do
-      let!(:food1) { FactoryBot.create(:food, calorie: 200) }
-      let!(:food2) { FactoryBot.create(:food, calorie: 250) }
-      let!(:food3) { FactoryBot.create(:food, calorie: 300) }
+      let!(:food1) { create(:food, calorie: 200) }
+      let!(:food2) { create(:food, calorie: 250) }
+      let!(:food3) { create(:food, calorie: 300) }
       context "カロリーの範囲を指定したとき" do
         it "指定のカロリー範囲のフードを返すこと" do
         expect(Food.by_calorie("", 199)).to match_array([])
@@ -100,13 +100,13 @@ RSpec.describe Food, type: :model do
     end
 
     describe "#by_amount" do
-      let!(:food1) { FactoryBot.create(:food) }
-      let!(:food2) { FactoryBot.create(:food) }
-      let!(:food3) { FactoryBot.create(:food) }
+      let!(:food1) { create(:food) }
+      let!(:food2) { create(:food) }
+      let!(:food3) { create(:food) }
     
-      let!(:amount1) { FactoryBot.create(:amount, amount: 1.0, food: food1) }
-      let!(:amount2) { FactoryBot.create(:amount, amount: 1.5, food: food2) }
-      let!(:amount3) { FactoryBot.create(:amount, amount: 2.0, food: food3) }
+      let!(:amount1) { create(:amount, amount: 1.0, food: food1) }
+      let!(:amount2) { create(:amount, amount: 1.5, food: food2) }
+      let!(:amount3) { create(:amount, amount: 2.0, food: food3) }
       context "内容量の範囲を指定したとき" do
         it "指定の内容量範囲のフードを返すこと" do
           expect(Food.by_amount("", 0.9)).to match_array([])
@@ -118,13 +118,13 @@ RSpec.describe Food, type: :model do
     end
 
     describe "#by_price" do
-      let!(:food1) { FactoryBot.create(:food) }
-      let!(:food2) { FactoryBot.create(:food) }
-      let!(:food3) { FactoryBot.create(:food) }
+      let!(:food1) { create(:food) }
+      let!(:food2) { create(:food) }
+      let!(:food3) { create(:food) }
     
-      let!(:price1) { FactoryBot.create(:amount, price: 1000, food: food1) }
-      let!(:price2) { FactoryBot.create(:amount, price: 2000, food: food2) }
-      let!(:price3) { FactoryBot.create(:amount, price: 3000, food: food3) }
+      let!(:price1) { create(:amount, price: 1000, food: food1) }
+      let!(:price2) { create(:amount, price: 2000, food: food2) }
+      let!(:price3) { create(:amount, price: 3000, food: food3) }
       context "金額の範囲を指定したとき" do
         it "指定の金額範囲のフードを返すこと" do
           expect(Food.by_price("", 999)).to match_array([])
@@ -136,15 +136,15 @@ RSpec.describe Food, type: :model do
     end
 
     describe "#by_nutrient_content" do
-      let!(:food1) { FactoryBot.create(:food) }
-      let!(:food2) { FactoryBot.create(:food) }
-      let!(:food3) { FactoryBot.create(:food) }
+      let!(:food1) { create(:food) }
+      let!(:food2) { create(:food) }
+      let!(:food3) { create(:food) }
 
-      let!(:protein) { FactoryBot.create(:protein, name: "タンパク質") }
+      let!(:protein) { create(:protein, name: "タンパク質") }
 
-      let!(:protein_content1) { FactoryBot.create(:protein_content, nutrient: protein, content: 10 , food: food1) }
-      let!(:protein_content2) { FactoryBot.create(:protein_content, nutrient: protein, content: 20 , food: food2) }
-      let!(:protein_content3) { FactoryBot.create(:protein_content, nutrient: protein, content: 30 , food: food3) }
+      let!(:protein_content1) { create(:protein_content, nutrient: protein, content: 10 , food: food1) }
+      let!(:protein_content2) { create(:protein_content, nutrient: protein, content: 20 , food: food2) }
+      let!(:protein_content3) { create(:protein_content, nutrient: protein, content: 30 , food: food3) }
       context "成分（ここではタンパク質）の含有量の範囲を指定したとき" do
         it "指定の成分含有量範囲のフードを返すこと" do
           expect(Food.by_nutrient_content(protein.id, "", 9)).to match_array([])
@@ -156,8 +156,8 @@ RSpec.describe Food, type: :model do
     end
 
     describe "#by_food_name" do
-      let!(:food1) { FactoryBot.create(:food, name: "名前検索") }
-      let!(:food2) { FactoryBot.create(:food, name: "search food") }
+      let!(:food1) { create(:food, name: "名前検索") }
+      let!(:food2) { create(:food, name: "search food") }
       context "名前のキーワードを文字列、もしくは文字列の配列で指定したとき" do
         it "指定のキーワードを名前に「含む」フードを返すこと" do
           expect(Food.by_food_name("名前検索")).to match_array([food1])
@@ -170,8 +170,8 @@ RSpec.describe Food, type: :model do
     end
 
     describe "#by_not_food_name" do
-      let!(:food1) { FactoryBot.create(:food, name: "名前検索") }
-      let!(:food2) { FactoryBot.create(:food, name: "search food") }
+      let!(:food1) { create(:food, name: "名前検索") }
+      let!(:food2) { create(:food, name: "search food") }
       context "名前のキーワードを文字列、もしくは文字列の配列で指定したとき" do
         it "指定のキーワードを名前に「含まない」フードを返すこと" do
           expect(Food.by_not_food_name("名前検索")).to match_array([food2])
@@ -184,8 +184,8 @@ RSpec.describe Food, type: :model do
     end
 
     describe "#by_ingredients" do
-      let!(:food1) { FactoryBot.create(:food, ingredients: "チキン、トウモロコシ、香料") }
-      let!(:food2) { FactoryBot.create(:food, ingredients: "白身魚、小麦、着色料") }
+      let!(:food1) { create(:food, ingredients: "チキン、トウモロコシ、香料") }
+      let!(:food2) { create(:food, ingredients: "白身魚、小麦、着色料") }
       context "原材料のキーワードを文字列、もしくは文字列の配列で指定したとき" do
         it "指定のキーワードを原材料に「含む」フードを返すこと" do
           expect(Food.by_ingredients("チキン")).to match_array([food1])
@@ -197,8 +197,8 @@ RSpec.describe Food, type: :model do
     end
 
     describe "#by_not_ingredients" do
-      let!(:food1) { FactoryBot.create(:food, ingredients: "チキン、トウモロコシ、香料") }
-      let!(:food2) { FactoryBot.create(:food, ingredients: "白身魚、小麦、着色料") }
+      let!(:food1) { create(:food, ingredients: "チキン、トウモロコシ、香料") }
+      let!(:food2) { create(:food, ingredients: "白身魚、小麦、着色料") }
       context "原材料のキーワードを文字列、もしくは文字列の配列で指定したとき" do
         it "指定のキーワードを原材料に「含まない」フードを返すこと" do
           expect(Food.by_not_ingredients("チキン")).to match_array([food2])
@@ -211,7 +211,7 @@ RSpec.describe Food, type: :model do
     
     # モデルのインスタンスメソッドのテスト
     describe "#image_urls" do
-      subject(:food) {FactoryBot.create(:food)}
+      subject(:food) {create(:food)}
       image_path = Rails.root.join("app/assets/images/1.jpg")
       before do
         food.images.attach(io: File.open(image_path), filename: "sample1.jpg", content_type: 'image/jpeg')

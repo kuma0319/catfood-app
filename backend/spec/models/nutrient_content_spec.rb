@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe NutrientContent, type: :model do
-  let!(:food) {FactoryBot.create(:food)}
-  let!(:nutrient) {FactoryBot.create(:nutrient)}
-  subject(:nutrient_content) {FactoryBot.create(:nutrient_content, food: food, nutrient: nutrient)}
+  let!(:food) {create(:food)}
+  let!(:nutrient) {create(:nutrient)}
+  subject(:nutrient_content) {create(:nutrient_content, food: food, nutrient: nutrient)}
 
   #アソシエーションテスト
   describe "association" do

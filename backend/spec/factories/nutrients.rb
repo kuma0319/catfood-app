@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :nutrient do
-    name { "テスト成分" }
+    sequence(:name) { |n| "テスト成分#{n}" }
   end
   factory :protein, class: Nutrient do
     id {1}

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe FoodType, type: :model do
-  subject(:food_type) {FactoryBot.create(:food_type)}
+  subject(:food_type) {create(:food_type)}
 
   #アソシエーションテスト
   describe "association" do
