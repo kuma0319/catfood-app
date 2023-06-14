@@ -9,7 +9,7 @@ import FoodSearch from "@/components/search_form/FoodSearch";
 import { WatchListContext } from "@/context/WatchListContext";
 import { foodsIndexUrl, SSR_BASE_URL } from "@/urls";
 
-import { FoodData } from "../../../types/foods";
+import { FoodData } from "../../types/foods";
 
 //indexページをSSGでフェッチ
 export const getStaticProps: GetStaticProps = async () => {
