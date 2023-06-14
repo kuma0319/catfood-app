@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { FoodData } from "../../types/foods";
+import { FoodData } from "../types/foods";
 import WatchListButton from "./WatchListButton";
 
 interface WatchListTableProps {

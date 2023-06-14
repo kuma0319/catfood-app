@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { Food } from "../../types/foods";
+import { Food } from "../types/foods";
 import ItemTab from "./ItemTab";
 import WatchListButton from "./WatchListButton";
 
