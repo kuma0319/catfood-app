@@ -90,6 +90,10 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.5.0)
+    dotenv (2.8.1)
+    dotenv-rails (2.8.1)
+      dotenv (= 2.8.1)
+      railties (>= 3.2)
     erubi (1.12.0)
     factory_bot (6.2.1)
       activesupport (>= 5.0.0)
@@ -175,6 +179,8 @@ GEM
       zeitwerk (~> 2.5)
     rainbow (3.1.1)
     rake (13.0.6)
+    rakuten_web_service (1.13.2)
+      json (~> 2.3)
     regexp_parser (2.8.0)
     reline (0.3.3)
       io-console (~> 0.5)
@@ -242,6 +248,7 @@ DEPENDENCIES
   database_cleaner
   debug
   devise
+  dotenv-rails
   factory_bot_rails
   faker
   jbuilder
@@ -249,6 +256,7 @@ DEPENDENCIES
   puma (~> 5.0)
   rack-cors
   rails (~> 7.0.4, >= 7.0.4.3)
+  rakuten_web_service
   rspec-rails
   rubocop
   rubocop-performance
