@@ -41,5 +41,5 @@ catfood-app_backend.code-workspace
 # 環境変数用ファイルは除外
 .env
 
-# 楽天APIからフェッチした生データは除外するためカレントディレクトリの.csvファイルを指定
-/*.csv
+# 楽天APIからフェッチした生データは除外
+/cat_food_csv
