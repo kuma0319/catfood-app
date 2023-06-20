@@ -1,6 +1,6 @@
 require "csv"
 
-CSV.foreach("db/seeds/csv/nutrient_sample.csv", headers: true) do |row|
+CSV.foreach("db/seeds/csv/nutrient.csv", headers: true) do |row|
   Nutrient.create(
     id: row[0],
     name: row[1]

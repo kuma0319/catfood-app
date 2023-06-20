@@ -34,10 +34,12 @@ const RangeOption = ({
             onChange={handleChange}
             name={min_name}
           >
-            <option defaultValue={""}>未選択</option>
+            <option defaultValue={""} value={""}>
+              未選択
+            </option>
             {/* constant.tsで定義した数値範囲ごとにoptionを生成 */}
             {range.map((value, index) => (
-              <option key={index}>
+              <option key={index} value={value}>
                 {value} {unit}
               </option>
             ))}
@@ -51,10 +53,12 @@ const RangeOption = ({
             onChange={handleChange}
             name={max_name}
           >
-            <option defaultValue={""}>未選択</option>
+            <option defaultValue={""} value={""}>
+              未選択
+            </option>
             {/* constant.tsで定義した数値範囲ごとにoptionを生成 */}
             {range.map((value, index) => (
-              <option key={index}>
+              <option key={index} value={value}>
                 {value} {unit}
               </option>
             ))}

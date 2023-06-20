@@ -4,7 +4,7 @@ class Api::V1::Foods::FoodsController < ApplicationController
   def index
     @foods = Food.includes(:brand, :production_area, :food_type, { nutrient_contents: :nutrient }, :amounts)
       .order("brands.name", "foods.name")
-      .page(params[:page]).per(30)
+      .all
   end
 
   def show
@@ -67,7 +67,7 @@ class Api::V1::Foods::FoodsController < ApplicationController
       .by_not_food_name(params[:not_food_name])
       .by_ingredients(params[:ingredients])
       .by_not_ingredients(params[:not_ingredients])
-      .page(params[:page]).per(30)
+      .all
   end
 
   private
