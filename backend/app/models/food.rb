@@ -8,16 +8,15 @@ class Food < ApplicationRecord
   has_many :nutrient_contents, dependent: :destroy
   has_many :nutrients, through: :nutrient_contents
   has_many :amounts, dependent: :destroy
-  has_many_attached :images
 
   # name属性は同一商品の重複を排除するため、大文字小文字を区別せずに一意性制約を付す
   validates :name, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 50 }
   validates :calorie, numericality: { greater_than: 0 }
 
-  # imageのURLを返すメソッド
-  def image_urls
-    images.attached? ? images.map { |image| url_for(image) } : []
-  end
+  # # imageのURLを返すメソッド
+  # def image_urls
+  #   images.attached? ? images.map { |image| url_for(image) } : []
+  # end
 
   # #フード検索用のscope一覧
   # 一致検索（ブランド、産地、フードタイプ）
@@ -62,17 +61,11 @@ class Food < ApplicationRecord
 
   scope :by_price, lambda { |min_price, max_price|
     if min_price.present? && max_price.present?
-      joins(:amounts)
-        .where(amounts: { price: min_price..max_price })
-        .distinct
-    elsif min_price.present?
-      joins(:amounts)
-        .where(amounts: { price: min_price.. })
-        .distinct
-    elsif max_price.present?
-      joins(:amounts)
-        .where(amounts: { price: ..max_price })
-        .distinct
+      where(min_price: min_price..max_price)
+    elsif min_calorie.present?
+      where(min_price: min_price..)
+    elsif max_calorie.present?
+      where(min_price: ..max_price)
     end
   }
 
