@@ -6,6 +6,8 @@ FactoryBot.define do
     association :production_area
     association :food_type
     calorie { rand(200..500) }
+    sequence(:rakuten_name) { |n| "楽天テスト#{n}" }
+    min_price { rand(100..1000) }
   end
 
   # 成分含有量を追加する際のtrait
@@ -26,7 +28,7 @@ FactoryBot.define do
     end
   end
 
-  # 内容量、金額をtraitで関連付け
+  # 内容量をtraitで関連付け
   trait :with_amounts do
     after(:create) do |food|
       create(:amount, food:)

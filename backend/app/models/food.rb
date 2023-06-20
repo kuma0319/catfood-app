@@ -62,9 +62,9 @@ class Food < ApplicationRecord
   scope :by_price, lambda { |min_price, max_price|
     if min_price.present? && max_price.present?
       where(min_price: min_price..max_price)
-    elsif min_calorie.present?
+    elsif min_price.present?
       where(min_price: min_price..)
-    elsif max_calorie.present?
+    elsif max_price.present?
       where(min_price: ..max_price)
     end
   }

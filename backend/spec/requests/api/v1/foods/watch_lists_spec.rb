@@ -12,7 +12,7 @@ RSpec.describe "Api::V1::Foods::WatchLists", type: :request do
   let!(:food5) { create(:food, :with_amounts, :with_nutrient_contents, name: "foodsコントローラname4", brand: brand3) }
 
   # JSONデータの中身を確認するためのkeyの配列
-  let(:keys) { ["name", "calorie", "ingredients", "brand", "production_area", "food_type", "nutrient_contents", "amounts", "image_urls"] }
+  let(:keys) { ["name", "calorie", "ingredients", "brand", "production_area", "food_type", "nutrient_contents", "amounts"] }
 
   ## indexアクション
   describe "GET /index" do

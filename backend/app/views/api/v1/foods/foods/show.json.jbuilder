@@ -32,9 +32,5 @@ json.amounts do
   json.array! @food.amounts do |amount|
     json.id amount.id
     json.amount amount.amount
-    json.price amount.price
   end
 end
-
-# イメージのurlを返す
-json.image_urls @food.image_urls
