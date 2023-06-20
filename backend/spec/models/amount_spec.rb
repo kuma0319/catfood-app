@@ -21,7 +21,6 @@ RSpec.describe Amount, type: :model do
 
     context "amountカラムとpriceカラムが数値であり0以上であること" do
       it { is_expected.to validate_numericality_of(:amount).is_greater_than(0) }
-      it { is_expected.to validate_numericality_of(:price).is_greater_than(0) }
     end
   end
 end

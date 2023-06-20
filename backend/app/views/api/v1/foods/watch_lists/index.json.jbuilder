@@ -1,7 +1,7 @@
 # json.arrayで@foodsインスタンスの中身を配列で返す
 json.array! @foods do |food|
   # 他のモデルと紐づいていない要素を一括で指定
-  json.extract! food, :id, :name, :calorie, :ingredients
+  json.extract! food, :id, :name, :calorie, :ingredients, :rakuten_name, :medium_image_url, :min_price
 
   # belongs_toで関連付けられているモデル(brand,production_area,food_type)の要素を指定
   json.brand do
@@ -34,10 +34,6 @@ json.array! @foods do |food|
     json.array! food.amounts do |amount|
       json.id amount.id
       json.amount amount.amount
-      json.price amount.price
     end
   end
-
-  # イメージのurlを返す
-  json.image_urls food.image_urls
 end

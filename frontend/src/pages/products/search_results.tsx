@@ -9,7 +9,7 @@ import FoodSearch from "@/components/search_form/FoodSearch";
 import { WatchListContext } from "@/context/WatchListContext";
 import { foodSearchUrl, SSR_BASE_URL } from "@/urls";
 
-import { FoodData } from "../../../types/foods";
+import { FoodData } from "../../types/foods";
 
 export const getServerSideProps: GetServerSideProps = async (router) => {
   const response = await axios.get(`${SSR_BASE_URL}${foodSearchUrl}`, {

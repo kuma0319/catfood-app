@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { ParsedUrlQueryInput } from "querystring";
 import { ChangeEvent, useEffect, useState } from "react";
 
-import { FoodSearchParams } from "../../types/foods";
+import { FoodSearchParams } from "../types/foods";
 
 const useFoodSearch_SSR = () => {
   //Railsに渡すパラメータ用のstate管理

@@ -37,3 +37,12 @@ catfood-app_backend.code-workspace
 
 #vendor/bundle以下に取得したRubyのライブラリを除外
 /vender/bundle
+
+# 環境変数用ファイルは除外
+.env
+
+# 楽天APIからフェッチした生データは除外
+/cat_food_csv
+
+# 商品データ用csvは除外
+db/seeds/csv

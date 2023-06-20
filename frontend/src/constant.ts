@@ -1,13 +1,15 @@
 ///フード検索用の定数一覧
 //ブランド
 export const BRAND = [
-  { id: 1, name: "レティシアン" },
-  { id: 2, name: "ロイヤルカナン" },
-  { id: 3, name: "ミオ" },
-  { id: 4, name: "HAPPY CAT" },
-  { id: 5, name: "ユニ・チャーム" },
-  { id: 6, name: "ネスレ" },
-  { id: 7, name: "ヒルズ" },
+  { id: 1, name: "ネスレ" },
+  { id: 2, name: "ヒルズ" },
+  { id: 3, name: "ペットライン" },
+  { id: 4, name: "マース" },
+  { id: 5, name: "サンライズ" },
+  { id: 6, name: "ロイヤルカナン" },
+  { id: 7, name: "日本ペットフード" },
+  { id: 8, name: "いなばペットフード" },
+  { id: 9, name: "ユニ・チャーム" },
 ];
 
 //フードのタイプ
@@ -20,11 +22,13 @@ export const FOOD_TYPE = [
 //産地
 export const PRODUCTION_AREA = [
   { id: 1, name: "日本" },
-  { id: 2, name: "イギリス" },
-  { id: 3, name: "フランス" },
-  { id: 4, name: "ドイツ" },
-  { id: 5, name: "アメリカ" },
-  { id: 6, name: "オランダ" },
+  { id: 2, name: "オーストラリア" },
+  { id: 3, name: "アメリカ" },
+  { id: 4, name: "チェコ" },
+  { id: 5, name: "オランダ" },
+  { id: 6, name: "タイ" },
+  { id: 7, name: "フランス" },
+  { id: 8, name: "韓国" },
 ];
 
 //成分
@@ -40,13 +44,13 @@ export const NUTRIENT = [
 export const CALORIE_RANGE = [300, 350, 400, 450, 500];
 
 //金額
-export const PRICE_RANGE = [1000, 2000, 3000, 4000, 5000];
+export const PRICE_RANGE = [500, 1000, 2000, 3000, 4000, 5000];
 
 //内容量
 export const AMOUNT_RANGE = [1, 2, 3, 4, 5];
 
 //成分含有量
-export const NUTRIENT_CONTENT_RANGE = [5, 10, 20, 30, 40];
+export const NUTRIENT_CONTENT_RANGE = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50];
 
 //範囲検索用のパラメータ定数
 export const RANGE_OPTION_PARAMS = [

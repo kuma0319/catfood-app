@@ -5,7 +5,7 @@ import RootLayout from "@/components/commons/Layout";
 import WatchListTable from "@/components/WatchListTable";
 import { WatchListContext } from "@/context/WatchListContext";
 
-import { FoodData } from "../../types/foods";
+import { FoodData } from "../types/foods";
 
 const GetWatchList = () => {
   const context = useContext(WatchListContext);

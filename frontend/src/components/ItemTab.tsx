@@ -1,4 +1,4 @@
-import { Amounts, Nutrient } from "../../types/foods";
+import { Amounts, Nutrient } from "../types/foods";
 
 interface ItemTabList {
   id: number;
@@ -13,6 +13,7 @@ interface ItemTabList {
     name: string;
   };
   ingredients: string;
+  min_price: number;
   nutrient_contents: Nutrient[];
   production_area: {
     id: number;
@@ -105,14 +106,14 @@ const ItemTab = ({ item }: ItemTab) => {
             <p>産地：{item.production_area.name}</p>
             <p>カロリー：{item.calorie}</p>
             <div>
-              <p>内容量と金額一覧</p>
+              <p>内容量</p>
               {item.amounts.map((amount, index) => (
                 <div key={index}>
                   <p>内容量：{amount.amount}kg</p>
-                  <p>金額：{amount.price}円</p>
                 </div>
               ))}
             </div>
+            <p>楽天市場最安値：{item.min_price}～</p>
           </div>
         </div>
       </div>
