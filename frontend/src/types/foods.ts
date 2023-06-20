@@ -11,7 +11,6 @@ export interface Nutrient {
 export interface Amounts {
   id: number;
   amount: number;
-  price: number;
 }
 
 //商品そのものの型定義
@@ -28,13 +27,15 @@ export interface Food {
     id: number;
     name: string;
   };
-  image_urls: string[];
   ingredients: string;
+  medium_image_url: string;
+  min_price: number;
   nutrient_contents: Nutrient[];
   production_area: {
     id: number;
     name: string;
   };
+  rakuten_name: string;
 }
 
 //商品の配列(index)用

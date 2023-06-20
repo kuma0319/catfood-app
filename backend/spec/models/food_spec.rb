@@ -10,7 +10,6 @@ RSpec.describe Food, type: :model do
       it { should have_many(:nutrient_contents) }
       it { should have_many(:nutrients).through(:nutrient_contents) }
       it { should have_many(:amounts) }
-      it { should have_many_attached(:images) }
     end
   end
 
@@ -117,13 +116,10 @@ RSpec.describe Food, type: :model do
     end
 
     describe "#by_price" do
-      let!(:food1) { create(:food) }
-      let!(:food2) { create(:food) }
-      let!(:food3) { create(:food) }
+      let!(:food1) { create(:food, min_price: 1000) }
+      let!(:food2) { create(:food, min_price: 2000) }
+      let!(:food3) { create(:food, min_price: 3000) }
 
-      let!(:price1) { create(:amount, price: 1000, food: food1) }
-      let!(:price2) { create(:amount, price: 2000, food: food2) }
-      let!(:price3) { create(:amount, price: 3000, food: food3) }
       context "金額の範囲を指定したとき" do
         it "指定の金額範囲のフードを返すこと" do
           expect(Food.by_price("", 999)).to match_array([])
@@ -205,18 +201,6 @@ RSpec.describe Food, type: :model do
           expect(Food.by_not_ingredients(["チキン", "トウモロコシ"])).to match_array([food2])
           expect(Food.by_not_ingredients(["チキン", "白身魚"])).to match_array([])
         end
-      end
-    end
-
-    # モデルのインスタンスメソッドのテスト
-    describe "#image_urls" do
-      subject(:food) { create(:food) }
-      image_path = Rails.root.join("app/assets/images/1.jpg")
-      before do
-        food.images.attach(io: File.open(image_path), filename: "sample1.jpg", content_type: 'image/jpeg')
-      end
-      it "割り当てているイメージのurlの配列を返すこと" do
-        expect(food.image_urls.first).to include("http://localhost:3010/rails/active_storage/blobs")
       end
     end
   end

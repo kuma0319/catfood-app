@@ -119,7 +119,7 @@ const WatchListTable = ({ foodData, handleWatchList }: WatchListTableProps) => {
                     <td className="whitespace-nowrap px-6 py-4 text-lg font-medium text-gray-800 dark:text-gray-200">
                       <Link href="/products/[id]" as={`/products/${food.id}`}>
                         <Image
-                          src={food.image_urls[0]}
+                          src={food.medium_image_url}
                           alt={food.name}
                           width={50}
                           height={50}
