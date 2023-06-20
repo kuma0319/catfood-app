@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { Food } from "../../types/foods";
+import { Food } from "../types/foods";
 import ItemTab from "./ItemTab";
 
 interface FoodProps {

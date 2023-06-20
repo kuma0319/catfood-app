@@ -5,7 +5,7 @@ import RootLayout from "@/components/commons/Layout";
 import FoodDetail from "@/components/FoodDetail";
 import { foodDetailUrl, foodsIndexUrl, SSR_BASE_URL } from "@/urls";
 
-import { Food } from "../../../types/foods";
+import { Food } from "../../types/foods";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   //商品一覧のデータを取得

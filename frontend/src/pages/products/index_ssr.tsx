@@ -8,7 +8,7 @@ import FoodSearch_SSR from "@/components/search_form/FoodSearch_ssr";
 import { useWatchList } from "@/hooks/useWatchList";
 import { foodSearchUrl, foodsIndexUrl, SSR_BASE_URL } from "@/urls";
 
-import { FoodData } from "../../../types/foods";
+import { FoodData } from "../../types/foods";
 
 export const getServerSideProps: GetServerSideProps = async (router) => {
   //stateでrouter.query(railsに渡すselectParams)が空のオブジェクトでないならsearchアクションからフェッチ
