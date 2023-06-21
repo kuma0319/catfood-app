@@ -1,6 +1,6 @@
 require "csv"
 
-CSV.foreach("db/seeds/csv/food.csv", headers: true) do |row|
+CSV.foreach(ENV['FOOD_CSV_PATH'], headers: true) do |row|
   Food.create(
     id: row[0],
     name: row[1],
