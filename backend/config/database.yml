@@ -92,6 +92,8 @@ test:
 #
 production:
   <<: *default
-  database: app_production
-  username: <%= ENV["POSTGRES_USER"] %>
-  password: <%= ENV["APP_DATABASE_PASSWORD"] %>
+  # Render.comの環境変数を参照して内部データベースURLを読み込む
+  url: <%= ENV["DATABASE_URL"] %>
+  # database: app_production
+  # username: <%= ENV["POSTGRES_USER"] %>
+  # password: <%= ENV["APP_DATABASE_PASSWORD"] %>
