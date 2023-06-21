@@ -93,5 +93,5 @@ test:
 production:
   <<: *default
   database: app_production
-  username: app
+  username: <%= ENV["POSTGRES_USER"] %>
   password: <%= ENV["APP_DATABASE_PASSWORD"] %>
