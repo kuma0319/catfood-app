@@ -7,7 +7,8 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins "http://localhost:3000"
+    # 開発環境と本番環境用に環境変数で設定したアドレスを適用
+    origins ENV['ALLOWED_ORIGINS'].split(',')
 
     resource "*",
              headers: :any,
