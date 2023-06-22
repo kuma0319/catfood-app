@@ -7,13 +7,14 @@ import RootLayout from "@/components/commons/Layout";
 import FoodItem from "@/components/FoodItem";
 import FoodSearch from "@/components/search_form/FoodSearch";
 import { WatchListContext } from "@/context/WatchListContext";
-import { foodsIndexUrl, SSR_BASE_URL } from "@/urls";
+import { foodsIndexUrl } from "@/urls";
 
 import { FoodData } from "../../types/foods";
 
 //indexページをSSGでフェッチ
 export const getStaticProps: GetStaticProps = async () => {
-  const response = await axios.get(`${SSR_BASE_URL}${foodsIndexUrl}`);
+  // 環境に応じてリクエスト先を変えられるように、環境変数からリクエストパスを読み込み
+  const response = await axios.get(`${process.env.BACKEND_URL}${foodsIndexUrl}`);
 
   return {
     props: {
