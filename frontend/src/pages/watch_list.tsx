@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import RootLayout from "@/components/commons/Layout";
 import WatchListTable from "@/components/WatchListTable";
 import { WatchListContext } from "@/context/WatchListContext";
+import { watchListUrl } from "@/urls";
 
 import { FoodData } from "../types/foods";
 
@@ -34,7 +35,8 @@ const GetWatchList = () => {
       if (watchListFoodId.length !== 0) {
         try {
           const response = await axios.get(
-            `http://localhost:3010/api/v1/foods/watch_lists.json`,
+            // 環境に応じてリクエスト先を変えられるように、環境変数からリクエストパスを読み込み
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}${watchListUrl}`,
             {
               params: { ids: watchListFoodId },
             }

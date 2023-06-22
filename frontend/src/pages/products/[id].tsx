@@ -3,13 +3,14 @@ import { GetStaticPaths, GetStaticProps } from "next";
 
 import RootLayout from "@/components/commons/Layout";
 import FoodDetail from "@/components/FoodDetail";
-import { foodDetailUrl, foodsIndexUrl, SSR_BASE_URL } from "@/urls";
+import { foodDetailUrl, foodsIndexUrl} from "@/urls";
 
 import { Food } from "../../types/foods";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   //商品一覧のデータを取得
-  const res = await axios.get(`${SSR_BASE_URL}${foodsIndexUrl}`);
+  // 環境に応じてリクエスト先を変えられるように、環境変数からリクエストパスを読み込み
+  const res = await axios.get(`${process.env.BACKEND_URL}${foodsIndexUrl}`);
   const data = res.data;
 
   //一覧データからidを配列として取り出す
@@ -31,7 +32,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     };
   } else {
     //params.idからデータフェッチ
-    const response = await axios.get(`${SSR_BASE_URL}${foodDetailUrl(id)}`);
+    // 環境に応じてリクエスト先を変えられるように、環境変数からリクエストパスを読み込み
+    const response = await axios.get(`${process.env.BACKEND_URL}${foodDetailUrl(id)}`);
     return {
       props: {
         food: response.data,

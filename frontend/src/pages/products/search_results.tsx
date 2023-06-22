@@ -7,12 +7,13 @@ import RootLayout from "@/components/commons/Layout";
 import FoodItem from "@/components/FoodItem";
 import FoodSearch from "@/components/search_form/FoodSearch";
 import { WatchListContext } from "@/context/WatchListContext";
-import { foodSearchUrl, SSR_BASE_URL } from "@/urls";
+import { foodSearchUrl } from "@/urls";
 
 import { FoodData } from "../../types/foods";
 
 export const getServerSideProps: GetServerSideProps = async (router) => {
-  const response = await axios.get(`${SSR_BASE_URL}${foodSearchUrl}`, {
+  // 環境に応じてリクエスト先を変えられるように、環境変数からリクエストパスを読み込み
+  const response = await axios.get(`${process.env.BACKEND_URL}${foodSearchUrl}`, {
     params: router.query,
   });
 
