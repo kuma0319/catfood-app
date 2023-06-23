@@ -1,6 +1,10 @@
 import Link from "next/link";
 
-const SignUpForm = () => {
+interface SignUpProps {
+  handleLogin: (event: any) => Promise<void>;
+}
+
+const SignUpForm = ({ handleLogin }) => {
   return (
     <div>
       <div className="h-full">
@@ -25,7 +29,7 @@ const SignUpForm = () => {
 
                 <div className="mt-5">
                   {/* <!-- Form --> */}
-                  <form>
+                  <form onSubmit={handleLogin}>
                     <div className="grid gap-y-4">
                       {/* <!-- Form Group --> */}
                       <div>
@@ -44,7 +48,7 @@ const SignUpForm = () => {
                             required
                             aria-describedby="email-error"
                           />
-                          <div className="pointer-events-none absolute inset-y-0 right-0 hidden items-center pr-3">
+                          <div className="pointer-events-none absolute inset-y-0 right-0 flex hidden items-center pr-3">
                             <svg
                               className="h-5 w-5 text-red-500"
                               width="16"
@@ -84,7 +88,7 @@ const SignUpForm = () => {
                             required
                             aria-describedby="password-error"
                           />
-                          <div className="pointer-events-none absolute inset-y-0 right-0 hidden items-center pr-3">
+                          <div className="pointer-events-none absolute inset-y-0 right-0 flex hidden items-center pr-3">
                             <svg
                               className="h-5 w-5 text-red-500"
                               width="16"
@@ -123,7 +127,7 @@ const SignUpForm = () => {
                             required
                             aria-describedby="confirm-password-error"
                           />
-                          <div className="pointer-events-none absolute inset-y-0 right-0 hidden items-center pr-3">
+                          <div className="pointer-events-none absolute inset-y-0 right-0 flex hidden items-center pr-3">
                             <svg
                               className="h-5 w-5 text-red-500"
                               width="16"
