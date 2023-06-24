@@ -12,9 +12,4 @@ class ApplicationController < ActionController::API
     # JSON形式で出力
     render json: test_json_obj
   end
-
-  # deviseのメッセージの日本語化
-  before_action do
-    I18n.locale = :ja
-  end
 end
