@@ -43,6 +43,7 @@ gem 'dotenv-rails'
 # 認証用のdevise関連gem
 gem 'devise'
 gem 'devise_token_auth'
+gem 'rails-i18n'
 
 # ページネーション用gem
 gem 'kaminari'

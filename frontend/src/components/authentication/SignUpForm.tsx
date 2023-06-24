@@ -2,10 +2,11 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 
 interface SignUpProps {
+  errorMessage: string;
   onSignUp: (event: any) => Promise<void>;
 }
 
-const SignUpForm = ({ onSignUp }: SignUpProps) => {
+const SignUpForm = ({ errorMessage, onSignUp }: SignUpProps) => {
   // React Hook Formライブラリを使用
   const {
     formState: { errors },
@@ -20,6 +21,8 @@ const SignUpForm = ({ onSignUp }: SignUpProps) => {
     <div className="h-full">
       <div className="flex h-full items-center bg-gray-100 py-16 dark:bg-slate-900">
         <div className="mx-auto w-full max-w-md p-6">
+          {/* 登録エラーの場合にエラーメッセージを表示する */}
+          <div className="text-center text-lg text-red-600">{errorMessage}</div>
           <div className="mt-7 rounded-xl border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800">
             <div className="p-4 sm:p-7">
               <div className="text-center">
