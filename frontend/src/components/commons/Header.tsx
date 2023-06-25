@@ -1,6 +1,44 @@
+import axios from "axios";
 import Link from "next/link";
+import router from "next/router";
+import { destroyCookie, parseCookies } from "nookies";
+import { useEffect, useState } from "react";
+
+import { authSignOutUrl } from "@/urls";
 
 const Header = () => {
+  const [mounted, setMounted] = useState(false);
+  const cookies = parseCookies();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const handleSignOut = async () => {
+    try {
+      const response = await axios.delete(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}${authSignOutUrl}`,
+        {
+          headers: {
+            "access-token": cookies["access-token"],
+            client: cookies["client"],
+            uid: cookies["uid"],
+          },
+        }
+      );
+      if (response.status === 200) {
+        // ログアウト成功時に該当するクッキーを削除しリダイレクト
+        destroyCookie(null, "uid", cookies["uid"]);
+        destroyCookie(null, "client", cookies["client"]);
+        destroyCookie(null, "access-token", cookies["access-token"]);
+        router.push("/");
+      }
+    } catch (error: any) {
+      // setErrorMessage(error.response.data.errors);
+      console.log(error.response);
+    }
+  };
+
   return (
     <header className="z-50 flex w-full flex-wrap border-b border-gray-200 bg-white py-3 text-sm dark:border-gray-700 dark:bg-gray-800 sm:flex-nowrap sm:justify-start sm:py-0">
       <nav
@@ -178,24 +216,53 @@ const Header = () => {
               </div>
             </div> */}
 
-            <div className="flex items-center gap-x-2 sm:ml-auto">
-              <a
-                className="flex items-center gap-x-2 font-medium text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-500"
-                href="sign_in"
-              >
-                <svg
-                  className="h-4 w-4"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  viewBox="0 0 16 16"
+            {/* ログイン・ログアウト */}
+            {!mounted ? (
+              // コンポーネントが未マウント状態の時はログイン/ログアウトの表示なし
+              <></>
+            ) : cookies["access-token"] ? (
+              // コンポーネントがマウントされ、更に特定のcookieが存在するなら「ログイン状態」扱い
+              <div className="flex items-center gap-x-2 sm:ml-auto">
+                {/* ログイン状態の場合はログアウト用のボタンを配置 */}
+                <button
+                  className="flex items-center gap-x-2 font-medium text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-500"
+                  onClick={handleSignOut}
                 >
-                  <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
-                </svg>
-                ログイン
-              </a>
-            </div>
+                  <svg
+                    className="h-4 w-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+                  </svg>
+                  ログアウト
+                </button>
+              </div>
+            ) : (
+              // コンポーネントがマウントされたが特定のcookieが存在しないなら「ログアウト状態」扱い
+              <div className="flex items-center gap-x-2 sm:ml-auto">
+                {/* ログアウト状態の場合はログイン用のリンクを配置 */}
+                <Link
+                  className="flex items-center gap-x-2 font-medium text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-500"
+                  href="sign_in"
+                >
+                  <svg
+                    className="h-4 w-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+                  </svg>
+                  ログイン
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </nav>
