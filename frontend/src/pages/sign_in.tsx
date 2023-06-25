@@ -25,11 +25,14 @@ const SignIn = () => {
         { headers: { "Content-Type": "application/json" } }
       );
       if (response.status === 200) {
+        // 認証成功時にクッキーへトークンを保存しホームページへリダイレクト
         setCookie(null, "uid", response.headers["uid"]);
         setCookie(null, "client", response.headers["client"]);
         setCookie(null, "access-token", response.headers["access-token"]);
-        // 認証成功時にホームページへリダイレクト
-        router.push("/");
+        router.push({
+          pathname: "/",
+          query: { flashMessage: "ログインしました" },
+        });
       }
     } catch (error: any) {
       // エラー発生時はエラーメッセージをセット
