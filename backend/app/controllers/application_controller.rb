@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::API
+        include DeviseTokenAuth::Concerns::SetUserByToken
+        include DeviseHackFakeSession # ActionDispatch::Request::Session::DisabledSessionErrorの対策
   # テスト用のAPIを追加
   def test
     # テスト用のJSON形式のオブジェクト
