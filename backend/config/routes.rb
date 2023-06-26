@@ -6,7 +6,10 @@ Rails.application.routes.draw do
         get 'search', to: 'foods#search'
         get 'watch_lists', to: 'watch_lists#index'
       end
-      mount_devise_token_auth_for 'User', at: 'auth'
+      # devise_token_authのregistrationsコントローラはオーバーライド
+      mount_devise_token_auth_for 'User', at: 'auth', controllers: {
+        registrations: "api/v1/auth/registrations"
+      }
     end
   end
 end
