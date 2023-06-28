@@ -1,6 +1,11 @@
 import Profile from "./Profile";
 
-const MyPageTabs = () => {
+interface ProfileProps {
+  email: string;
+  nickname: string;
+}
+
+const MyPageTabs = ({ email, nickname }: ProfileProps) => {
   return (
     <div>
       <nav
@@ -46,7 +51,7 @@ const MyPageTabs = () => {
           role="tabpanel"
           aria-labelledby="bar-with-underline-item-1"
         >
-          <Profile />
+          <Profile email={email} nickname={nickname} />
         </div>
         <div
           id="bar-with-underline-2"
