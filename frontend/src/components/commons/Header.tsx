@@ -43,7 +43,10 @@ const Header = () => {
         destroyCookie(null, "uid", cookies["uid"]);
         destroyCookie(null, "client", cookies["client"]);
         destroyCookie(null, "access-token", cookies["access-token"]);
-        setFlashMessage("ログアウトしました");
+        router.push({
+          pathname: "/",
+          query: { flashMessage: "ログアウトしました" },
+        });
       }
     } catch (error: any) {
       setFlashMessage(error.response);

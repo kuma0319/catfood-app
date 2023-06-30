@@ -5,7 +5,7 @@ import MyPageTabs from "@/components/my_page/MyPageTabs";
 import withAuthServerSideProps from "@/lib/auth";
 import { userUrl } from "@/urls";
 
-interface UserProps {
+export interface UserProps {
   user: {
     id: number;
     email: string;
@@ -20,7 +20,7 @@ export const getServerSideProps: GetServerSideProps = withAuthServerSideProps(
 const MyPage = (props: UserProps) => {
   return (
     <RootLayout>
-      <MyPageTabs email={props.user.email} nickname={props.user.nickname} />
+      <MyPageTabs props={props} />
     </RootLayout>
   );
 };
