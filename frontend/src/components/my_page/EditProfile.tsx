@@ -1,10 +1,72 @@
+import axios from "axios";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import { parseCookies, setCookie } from "nookies";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+
+import { UserProps } from "@/pages/my_page";
+import { authUrl } from "@/urls";
 
 const EditProfile = ({
   handleEditButton,
+  props,
 }: {
   handleEditButton: (boolState: boolean) => void;
+  props: UserProps;
 }) => {
+  const {
+    formState: { errors },
+    handleSubmit,
+    register,
+  } = useForm({
+    criteriaMode: "all",
+  });
+
+  const [errorMessage, setErrorMessage] = useState("");
+  const router = useRouter();
+
+  const onProfileEdit = async (data) => {
+    const nickname = data.nickname;
+    const email = data.email;
+    const password = data.password;
+    const cookies = parseCookies();
+
+    console.log(nickname);
+    console.log(email);
+
+    const requestBody = {
+      ...(email && { email }),
+      ...(nickname && { nickname }),
+    };
+
+    try {
+      const response = await axios.patch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}${authUrl}`,
+        requestBody,
+        {
+          headers: {
+            Accept: "application/json",
+            "access-token": cookies["access-token"],
+            client: cookies["client"],
+            "Content-Type": "application/json",
+            uid: cookies["uid"],
+          },
+        }
+      );
+      if (response.status === 200) {
+        setCookie(null, "uid", response.headers["uid"]);
+        setCookie(null, "client", response.headers["client"]);
+        setCookie(null, "access-token", response.headers["access-token"]);
+        window.location.reload();
+      }
+    } catch (error: any) {
+      // エラー発生時はエラーメッセージをセット
+      console.log(error.response);
+      setErrorMessage(error.response.data.error);
+    }
+  };
+
   return (
     <div>
       <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
@@ -14,8 +76,10 @@ const EditProfile = ({
               プロフィール編集ページ
             </h2>
           </div>
+          {/* 登録エラーの場合にエラーメッセージを表示する */}
+          <div className="text-center text-lg text-red-600">{errorMessage}</div>
 
-          <form>
+          <form onSubmit={handleSubmit(onProfileEdit)}>
             <div className="grid gap-2 sm:grid-cols-12 sm:gap-6">
               <div className="sm:col-span-3">
                 <label className="mt-2.5 inline-block text-sm text-gray-800 dark:text-gray-200">
@@ -71,7 +135,8 @@ const EditProfile = ({
                     id="af-account-full-name"
                     type="text"
                     className="relative -ml-px -mt-px block w-full border-gray-200 px-3 py-2 pr-11 text-sm shadow-sm first:rounded-t-lg last:rounded-b-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 sm:mt-0 sm:first:ml-0 sm:first:rounded-l-lg sm:first:rounded-tr-none sm:last:rounded-r-lg sm:last:rounded-bl-none"
-                    placeholder="Maria"
+                    placeholder={props.user.nickname}
+                    {...register("nickname")}
                   />
                 </div>
               </div>
@@ -89,9 +154,26 @@ const EditProfile = ({
                 <input
                   id="af-account-email"
                   type="email"
-                  className="block w-full rounded-lg border-gray-200 px-3 py-2 pr-11 text-sm shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400"
-                  placeholder="maria@site.com"
+                  placeholder={props.user.email}
+                  className={`block w-full rounded-md px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 ${
+                    errors.email
+                      ? "border-red-500" //エラー発生時は枠線を赤くハイライト
+                      : "border-gray-200"
+                  }`}
+                  {...register("email", {
+                    pattern: {
+                      message: "メールアドレスの形式を確認してください",
+                      value:
+                        /^[a-zA-Z0-9_+-]+(\.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/,
+                    },
+                  })}
                 />
+                {/* エラーが存在する場合にメッセージを下段に表示 */}
+                {errors.email && (
+                  <div className="mt-2 text-xs text-red-600">
+                    {String(errors.email.message)}
+                  </div>
+                )}
               </div>
 
               <div className="sm:col-span-3">
@@ -129,7 +211,7 @@ const EditProfile = ({
                 キャンセル
               </button>
               <button
-                type="button"
+                type="submit"
                 className="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-blue-500 px-3 py-2 text-sm font-semibold text-white transition-all hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
               >
                 登録

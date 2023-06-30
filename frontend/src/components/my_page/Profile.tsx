@@ -17,7 +17,7 @@ const Profile = ({ props }: { props: UserProps }) => {
     <div>
       {/* {isEditの状態で編集ページとビューページを切り替え} */}
       {isEditing ? (
-        <EditProfile handleEditButton={handleEditButton} />
+        <EditProfile props={props} handleEditButton={handleEditButton} />
       ) : (
         <ViewProfile props={props} handleEditButton={handleEditButton} />
       )}
