@@ -8,6 +8,11 @@ import { useForm } from "react-hook-form";
 import { UserProps } from "@/pages/my_page";
 import { authUrl } from "@/urls";
 
+interface EditInput {
+  email: string;
+  nickname: string;
+}
+
 const EditProfile = ({
   handleEditButton,
   props,
@@ -15,26 +20,25 @@ const EditProfile = ({
   handleEditButton: (boolState: boolean) => void;
   props: UserProps;
 }) => {
+  // React Hook Formを使用
   const {
     formState: { errors },
     handleSubmit,
     register,
-  } = useForm({
+  } = useForm<EditInput>({
     criteriaMode: "all",
   });
 
   const [errorMessage, setErrorMessage] = useState("");
+  const [image, setImage] = useState(null);
   const router = useRouter();
 
-  const onProfileEdit = async (data) => {
+  const onProfileEdit = async (data: EditInput) => {
     const nickname = data.nickname;
     const email = data.email;
-    const password = data.password;
     const cookies = parseCookies();
 
-    console.log(nickname);
-    console.log(email);
-
+    // emailもしくはnicknameはパラメータとしてある場合のみリクエストに入れる
     const requestBody = {
       ...(email && { email }),
       ...(nickname && { nickname }),
@@ -54,6 +58,7 @@ const EditProfile = ({
           },
         }
       );
+      // 更新成功時はクッキーを再セットしてページリロード
       if (response.status === 200) {
         setCookie(null, "uid", response.headers["uid"]);
         setCookie(null, "client", response.headers["client"]);
@@ -62,8 +67,8 @@ const EditProfile = ({
       }
     } catch (error: any) {
       // エラー発生時はエラーメッセージをセット
-      console.log(error.response);
       setErrorMessage(error.response.data.error);
+      console.log(error.response);
     }
   };
 
@@ -76,7 +81,7 @@ const EditProfile = ({
               プロフィール編集ページ
             </h2>
           </div>
-          {/* 登録エラーの場合にエラーメッセージを表示する */}
+          {/* 更新エラーの場合にエラーメッセージを表示する */}
           <div className="text-center text-lg text-red-600">{errorMessage}</div>
 
           <form onSubmit={handleSubmit(onProfileEdit)}>
@@ -98,23 +103,12 @@ const EditProfile = ({
                   />
                   <div className="flex gap-x-2">
                     <div>
-                      <button
-                        type="button"
+                      <input
+                        type="file"
                         className="inline-flex items-center justify-center gap-2 rounded-md border bg-white px-3 py-2 align-middle text-sm font-medium text-gray-700 shadow-sm transition-all hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 dark:hover:bg-slate-800 dark:hover:text-white dark:focus:ring-offset-gray-800"
-                      >
-                        <svg
-                          className="h-3 w-3"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          fill="currentColor"
-                          viewBox="0 0 16 16"
-                        >
-                          <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-                          <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
-                        </svg>
-                        画像のアップロード
-                      </button>
+                        // ファイルをアップロード時にstateに保存
+                        onChange={(event) => setImage(event.target.files[0])}
+                      />
                     </div>
                   </div>
                 </div>
@@ -174,31 +168,6 @@ const EditProfile = ({
                     {String(errors.email.message)}
                   </div>
                 )}
-              </div>
-
-              <div className="sm:col-span-3">
-                <label
-                  htmlFor="af-account-password"
-                  className="mt-2.5 inline-block text-sm text-gray-800 dark:text-gray-200"
-                >
-                  パスワード
-                </label>
-              </div>
-
-              <div className="sm:col-span-9">
-                <div className="space-y-2">
-                  <input
-                    id="af-account-password"
-                    type="text"
-                    className="block w-full rounded-lg border-gray-200 px-3 py-2 pr-11 text-sm shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400"
-                    placeholder="Enter current password"
-                  />
-                  <input
-                    type="text"
-                    className="block w-full rounded-lg border-gray-200 px-3 py-2 pr-11 text-sm shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400"
-                    placeholder="Enter new password"
-                  />
-                </div>
               </div>
             </div>
 
