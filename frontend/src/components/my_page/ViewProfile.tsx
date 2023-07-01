@@ -1,10 +1,10 @@
 import { UserProps } from "@/pages/my_page";
 
 const ViewProfile = ({
-  handleEditButton,
+  handleEditAccount,
   props,
 }: {
-  handleEditButton: (boolState: boolean) => void;
+  handleEditAccount: (boolState: boolean) => void;
   props: UserProps;
 }) => {
   return (
@@ -71,7 +71,7 @@ const ViewProfile = ({
               <button
                 type="button"
                 className="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-blue-500 px-3 py-2 text-sm font-semibold text-white transition-all hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
-                onClick={() => handleEditButton(true)}
+                onClick={() => handleEditAccount(true)}
               >
                 プロフィールの編集
               </button>

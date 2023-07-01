@@ -1,5 +1,6 @@
 import axios from "axios";
-import { parseCookies, setCookie } from "nookies";
+import router from "next/router";
+import { destroyCookie, parseCookies, setCookie } from "nookies";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -12,10 +13,10 @@ interface EditInput {
 }
 
 const EditProfile = ({
-  handleEditButton,
+  handleEditAccount,
   props,
 }: {
-  handleEditButton: (boolState: boolean) => void;
+  handleEditAccount: (boolState: boolean) => void;
   props: UserProps;
 }) => {
   // React Hook Formを使用
@@ -28,6 +29,7 @@ const EditProfile = ({
   });
 
   const [errorMessage, setErrorMessage] = useState("");
+  const [flashMessage, setFlashMessage] = useState("");
   const [avatar, setAvatar] = useState<File | null>(null);
 
   const onProfileEdit = async (data: EditInput) => {
@@ -64,6 +66,36 @@ const EditProfile = ({
       // エラー発生時はエラーメッセージをセット
       setErrorMessage(error.response.data.error);
       console.log(error.response);
+    }
+  };
+
+  const handleDeleteAccount = async () => {
+    const cookies = parseCookies();
+
+    try {
+      const response = await axios.delete(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}${authUrl}`,
+        {
+          headers: {
+            Accept: "application/json",
+            "access-token": cookies["access-token"],
+            client: cookies["client"],
+            uid: cookies["uid"],
+          },
+        }
+      );
+      if (response.status === 200) {
+        // アカウント削除成功時に該当するクッキーを削除しリダイレクト
+        destroyCookie(null, "uid", cookies["uid"]);
+        destroyCookie(null, "client", cookies["client"]);
+        destroyCookie(null, "access-token", cookies["access-token"]);
+        router.push({
+          pathname: "/",
+          query: { flashMessage: "アカウントを削除しました" },
+        });
+      }
+    } catch (error: any) {
+      setFlashMessage(error.response);
     }
   };
 
@@ -180,20 +212,37 @@ const EditProfile = ({
               </div>
             </div>
 
-            <div className="mt-5 flex justify-end gap-x-2">
+            <div className="mt-5 flex justify-between gap-x-2">
               <button
                 type="button"
-                className="inline-flex items-center justify-center gap-2 rounded-md border bg-white px-3 py-2 align-middle text-sm font-medium text-gray-700 shadow-sm transition-all hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 dark:hover:bg-slate-800 dark:hover:text-white dark:focus:ring-offset-gray-800"
-                onClick={() => handleEditButton(false)}
+                className="inline-flex items-center justify-center gap-2 rounded-md border bg-red-500 px-3 py-2 text-sm font-semibold text-white transition-all hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                onClick={() => {
+                  if (
+                    window.confirm(
+                      `本当にアカウントを削除しますか？\nこの操作は取り消し出来ません。`
+                    )
+                  ) {
+                    handleDeleteAccount();
+                  }
+                }}
               >
-                キャンセル
+                アカウント削除
               </button>
-              <button
-                type="submit"
-                className="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-blue-500 px-3 py-2 text-sm font-semibold text-white transition-all hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
-              >
-                登録
-              </button>
+              <div>
+                <button
+                  type="button"
+                  className="mr-4 inline-flex items-center justify-center gap-2 rounded-md border bg-white px-3 py-2 align-middle text-sm font-medium text-gray-700 shadow-sm transition-all hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 dark:hover:bg-slate-800 dark:hover:text-white dark:focus:ring-offset-gray-800"
+                  onClick={() => handleEditAccount(false)}
+                >
+                  キャンセル
+                </button>
+                <button
+                  type="submit"
+                  className="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-blue-500 px-3 py-2 text-sm font-semibold text-white transition-all hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                >
+                  登録
+                </button>
+              </div>
             </div>
           </form>
         </div>

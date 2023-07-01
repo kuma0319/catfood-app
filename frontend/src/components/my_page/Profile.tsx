@@ -9,7 +9,7 @@ const Profile = ({ props }: { props: UserProps }) => {
   // 編集操作中であるかどうかをisEditingで管理
   const [isEditing, setIsEditing] = useState(false);
 
-  const handleEditButton = (boolState: boolean) => {
+  const handleEditAccount = (boolState: boolean) => {
     setIsEditing(boolState);
   };
 
@@ -17,9 +17,9 @@ const Profile = ({ props }: { props: UserProps }) => {
     <div>
       {/* {isEditの状態で編集ページとビューページを切り替え} */}
       {isEditing ? (
-        <EditProfile props={props} handleEditButton={handleEditButton} />
+        <EditProfile props={props} handleEditAccount={handleEditAccount} />
       ) : (
-        <ViewProfile props={props} handleEditButton={handleEditButton} />
+        <ViewProfile props={props} handleEditAccount={handleEditAccount} />
       )}
     </div>
   );

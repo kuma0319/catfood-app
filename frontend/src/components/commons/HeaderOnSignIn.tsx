@@ -250,7 +250,11 @@ const HeaderOnSignIn = () => {
                 <button
                   // ログイン状態の場合はログアウト用のボタンを配置
                   className="flex items-center gap-x-2 font-medium text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-500"
-                  onClick={handleSignOut}
+                  onClick={() => {
+                    if (window.confirm("ログアウトしますか？")) {
+                      handleSignOut();
+                    }
+                  }}
                 >
                   <svg
                     className="h-4 w-4"
