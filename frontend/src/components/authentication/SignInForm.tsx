@@ -1,12 +1,20 @@
 import Link from "next/link";
+import { Dispatch, SetStateAction } from "react";
 import { useForm } from "react-hook-form";
 
 interface SignInProps {
   errorMessage: string;
   onSignIn: (event: any) => Promise<void>;
+  rememberMe: boolean;
+  setRememberMe: Dispatch<SetStateAction<boolean>>;
 }
 
-const SignInForm = ({ errorMessage, onSignIn }: SignInProps) => {
+const SignInForm = ({
+  errorMessage,
+  onSignIn,
+  rememberMe,
+  setRememberMe,
+}: SignInProps) => {
   // React Hook Formライブラリを使用
   const {
     formState: { errors },
@@ -90,7 +98,11 @@ const SignInForm = ({ errorMessage, onSignIn }: SignInProps) => {
                         <input
                           type="password"
                           id="password"
-                          className="block w-full rounded-md border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
+                          className={`block w-full rounded-md px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 ${
+                            errors.email
+                              ? "border-red-500" //エラー発生時は枠線を赤くハイライト
+                              : "border-gray-200"
+                          }`}
                           aria-describedby="password-error"
                           {...register("password", {
                             minLength: {
@@ -117,7 +129,8 @@ const SignInForm = ({ errorMessage, onSignIn }: SignInProps) => {
                           id="remember-me"
                           name="remember-me"
                           type="checkbox"
-                          className="pointer-events-none mt-0.5 shrink-0 rounded border-gray-200 text-blue-600 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:checked:border-blue-500 dark:checked:bg-blue-500 dark:focus:ring-offset-gray-800"
+                          className="mt-0.5 shrink-0 rounded border-gray-200 text-blue-600 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:checked:border-blue-500 dark:checked:bg-blue-500 dark:focus:ring-offset-gray-800"
+                          onChange={() => setRememberMe(!rememberMe)}
                         />
                       </div>
                       <div className="ml-3">
@@ -125,7 +138,7 @@ const SignInForm = ({ errorMessage, onSignIn }: SignInProps) => {
                           htmlFor="remember-me"
                           className="text-sm dark:text-white"
                         >
-                          Remember me
+                          ログイン状態を保持する
                         </label>
                       </div>
                     </div>

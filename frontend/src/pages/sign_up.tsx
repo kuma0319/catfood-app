@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useRouter } from "next/router";
-import { setCookie } from "nookies";
 import { useState } from "react";
 
 import SignUpForm from "@/components/authentication/SignUpForm";
@@ -22,14 +21,18 @@ const SignUp = () => {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}${authUrl}`,
         { email, password },
-        { headers: { "Content-Type": "application/json" } }
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
       );
       if (response.status === 200) {
-        setCookie(null, "uid", response.headers["uid"]);
-        setCookie(null, "client", response.headers["client"]);
-        setCookie(null, "access-token", response.headers["access-token"]);
-        // 認証成功時にホームページへリダイレクト
-        router.push("/");
+        router.push({
+          pathname: "/",
+          query: { flashMessage: "ユーザー登録しました" },
+        });
       }
     } catch (error: any) {
       // エラー発生時はエラーメッセージをセット
