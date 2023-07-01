@@ -8,6 +8,7 @@ import { userUrl } from "@/urls";
 export interface UserProps {
   user: {
     id: number;
+    avatar_url: string;
     email: string;
     nickname: string;
   };

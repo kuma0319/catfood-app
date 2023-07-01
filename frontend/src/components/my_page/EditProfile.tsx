@@ -1,6 +1,4 @@
 import axios from "axios";
-import Image from "next/image";
-import { useRouter } from "next/router";
 import { parseCookies, setCookie } from "nookies";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -30,30 +28,27 @@ const EditProfile = ({
   });
 
   const [errorMessage, setErrorMessage] = useState("");
-  const [image, setImage] = useState(null);
-  const router = useRouter();
+  const [avatar, setAvatar] = useState<File | null>(null);
 
   const onProfileEdit = async (data: EditInput) => {
     const nickname = data.nickname;
     const email = data.email;
     const cookies = parseCookies();
 
-    // emailもしくはnicknameはパラメータとしてある場合のみリクエストに入れる
-    const requestBody = {
-      ...(email && { email }),
-      ...(nickname && { nickname }),
-    };
+    const formData = new FormData();
+    if (email) formData.append("registration[email]", email);
+    if (nickname) formData.append("registration[nickname]", nickname);
+    if (avatar) formData.append("registration[avatar]", avatar);
 
     try {
       const response = await axios.patch(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}${authUrl}`,
-        requestBody,
+        formData,
         {
           headers: {
             Accept: "application/json",
             "access-token": cookies["access-token"],
             client: cookies["client"],
-            "Content-Type": "application/json",
             uid: cookies["uid"],
           },
         }
@@ -94,9 +89,19 @@ const EditProfile = ({
 
               <div className="sm:col-span-9">
                 <div className="flex items-center gap-5">
-                  <Image
+                  {/* Next/Imageを使用するとエラーとなるため一時的に回避 */}
+                  <img
                     className="inline-block h-16 w-16 rounded-full ring-2 ring-white dark:ring-gray-800"
-                    src="/public/eat-catfood.jpg"
+                    // src={
+                    //   props.user.avatar_url
+                    //     ? props.user.avatar_url
+                    //     : "public/eat-catfood.jpg"
+                    // }
+                    src={
+                      props.user.avatar_url
+                        ? props.user.avatar_url
+                        : "/kkrn_icon_user_1.svg"
+                    }
                     alt="Image Description"
                     width={160}
                     height={160}
@@ -107,7 +112,11 @@ const EditProfile = ({
                         type="file"
                         className="inline-flex items-center justify-center gap-2 rounded-md border bg-white px-3 py-2 align-middle text-sm font-medium text-gray-700 shadow-sm transition-all hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 dark:hover:bg-slate-800 dark:hover:text-white dark:focus:ring-offset-gray-800"
                         // ファイルをアップロード時にstateに保存
-                        onChange={(event) => setImage(event.target.files[0])}
+                        onChange={(event) => {
+                          if (event.target.files) {
+                            setAvatar(event.target.files[0]);
+                          }
+                        }}
                       />
                     </div>
                   </div>

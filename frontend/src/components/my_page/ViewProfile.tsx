@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 import { UserProps } from "@/pages/my_page";
 
 const ViewProfile = ({
@@ -29,9 +27,14 @@ const ViewProfile = ({
 
               <div className="sm:col-span-9">
                 <div className="flex items-center gap-5">
-                  <Image
+                  {/* Next/Imageを使用するとエラーとなるため一時的に回避 */}
+                  <img
                     className="inline-block h-16 w-16 rounded-full ring-2 ring-white dark:ring-gray-800"
-                    src="/public/eat-catfood.jpg"
+                    src={
+                      props.user.avatar_url
+                        ? props.user.avatar_url
+                        : "/kkrn_icon_user_1.svg"
+                    }
                     alt="Image Description"
                     width={160}
                     height={160}
