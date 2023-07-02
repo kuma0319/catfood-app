@@ -65,7 +65,8 @@ const SignIn = () => {
       }
     } catch (error: any) {
       // エラー発生時はエラーメッセージをセット
-      setErrorMessage(error.response.data.errors);
+      // setErrorMessage(error.response.data.errors);
+      console.log(error.response);
     }
   };
 

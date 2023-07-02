@@ -8,7 +8,11 @@ class Api::V1::Auth::RegistrationsController < DeviseTokenAuth::RegistrationsCon
   end
 
   private
-  #ユーザー更新時に使用
+  # devise_token_authの許可パラメータのオーバーライド
+  def sign_up_params
+    params.require(:registration).permit(:email, :password)
+  end
+  
   def account_update_params
       params.require(:registration).permit(:nickname, :email, :avatar)
   end
