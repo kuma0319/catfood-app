@@ -17,7 +17,7 @@ const SignUp = () => {
   const onSignUp = async (data: SignUpInput) => {
     const email = data.email;
     const password = data.password;
-    const confirm_success_url = `${process.env.NEXT_PUBLIC_FRONTEND_URL}/confirm_success`;
+    const confirm_success_url = `${process.env.NEXT_PUBLIC_FRONTEND_URL}/auth/confirm_success`;
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}${authUrl}`,
@@ -35,7 +35,7 @@ const SignUp = () => {
       );
       if (response.status === 200) {
         // メール認証を促すページへpush
-        router.push("/confirm_request");
+        router.push("/auth/confirm_request");
       }
     } catch (error: any) {
       // エラー発生時はエラーメッセージをセット

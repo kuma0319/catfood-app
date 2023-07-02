@@ -33,7 +33,7 @@ const ResetPasswordForm = ({ errorMessage, onResetPassword }: SignUpProps) => {
                   既にアカウントをお持ちですか？
                   <Link
                     className="font-medium text-blue-600 decoration-2 hover:underline"
-                    href="sign_in"
+                    href="/auth/sign_in"
                   >
                     こちらからログイン
                   </Link>

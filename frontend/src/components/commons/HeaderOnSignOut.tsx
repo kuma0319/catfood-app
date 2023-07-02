@@ -209,7 +209,7 @@ const HeaderOnSignOut = () => {
                 {/* ログアウト状態の場合はログイン用のリンクを配置 */}
                 <Link
                   className="flex items-center gap-x-2 font-medium text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-500"
-                  href="sign_in"
+                  href="/auth/sign_in"
                 >
                   <svg
                     className="h-4 w-4"

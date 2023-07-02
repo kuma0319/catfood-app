@@ -11,7 +11,7 @@ const ForgotPassword = () => {
 
   const onForgotPassword = async (data: { email: string }) => {
     const email = data.email;
-    const redirect_url = `${process.env.NEXT_PUBLIC_FRONTEND_URL}/reset_password`;
+    const redirect_url = `${process.env.NEXT_PUBLIC_FRONTEND_URL}/auth/reset_password`;
 
     try {
       const response = await axios.post(
@@ -26,7 +26,7 @@ const ForgotPassword = () => {
       );
       if (response.status === 200) {
         // メール認証を促すページへpush
-        router.push("/confirm_request");
+        router.push("/auth/confirm_request");
       }
     } catch (error: any) {
       // エラー発生時はエラーメッセージをセット

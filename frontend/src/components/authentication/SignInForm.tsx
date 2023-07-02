@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Dispatch, SetStateAction } from "react";
 import { useForm } from "react-hook-form";
 
-import { SignInInput } from "@/pages/sign_in";
+import { SignInInput } from "@/pages/auth/sign_in";
 
 interface SignInProps {
   errorMessage: string;
@@ -42,7 +42,7 @@ const SignInForm = ({
                   まだアカウントをお持ちでないですか？
                   <Link
                     className="font-medium text-blue-600 decoration-2 hover:underline"
-                    href="sign_up"
+                    href="/auth/sign_up"
                   >
                     こちらから新規登録
                   </Link>
@@ -99,7 +99,7 @@ const SignInForm = ({
                         </label>
                         <Link
                           className="text-sm font-medium text-blue-600 decoration-2 hover:underline"
-                          href="/forgot_password"
+                          href="/auth/forgot_password"
                         >
                           パスワードをお忘れですか？
                         </Link>
