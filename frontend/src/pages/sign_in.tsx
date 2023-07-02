@@ -6,7 +6,7 @@ import { useState } from "react";
 import SignInForm from "@/components/authentication/SignInForm";
 import { authSignInUrl } from "@/urls";
 
-interface SignInInput {
+export interface SignInInput {
   email: string;
   password: string;
 }
@@ -65,7 +65,7 @@ const SignIn = () => {
       }
     } catch (error: any) {
       // エラー発生時はエラーメッセージをセット
-      // setErrorMessage(error.response.data.errors);
+      setErrorMessage(error.response.data.errors);
       console.log(error.response);
     }
   };

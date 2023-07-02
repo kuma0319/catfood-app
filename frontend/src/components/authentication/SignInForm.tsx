@@ -2,9 +2,11 @@ import Link from "next/link";
 import { Dispatch, SetStateAction } from "react";
 import { useForm } from "react-hook-form";
 
+import { SignInInput } from "@/pages/sign_in";
+
 interface SignInProps {
   errorMessage: string;
-  onSignIn: (event: any) => Promise<void>;
+  onSignIn: (data: SignInInput) => Promise<void>;
   rememberMe: boolean;
   setRememberMe: Dispatch<SetStateAction<boolean>>;
 }
@@ -20,7 +22,7 @@ const SignInForm = ({
     formState: { errors },
     handleSubmit,
     register,
-  } = useForm({
+  } = useForm<SignInInput>({
     criteriaMode: "all",
   });
 
@@ -55,7 +57,7 @@ const SignInForm = ({
                         htmlFor="email"
                         className="mb-2 block text-sm dark:text-white"
                       >
-                        メールアドレス
+                        Eメールアドレス
                       </label>
                       <div className="relative">
                         <input
@@ -88,12 +90,20 @@ const SignInForm = ({
                     </div>
 
                     <div>
-                      <label
-                        htmlFor="password"
-                        className="mb-2 block text-sm dark:text-white"
-                      >
-                        パスワード
-                      </label>
+                      <div className="flex items-center justify-between">
+                        <label
+                          htmlFor="password"
+                          className="mb-2 block text-sm dark:text-white"
+                        >
+                          パスワード
+                        </label>
+                        <Link
+                          className="text-sm font-medium text-blue-600 decoration-2 hover:underline"
+                          href="/forgot_password"
+                        >
+                          パスワードをお忘れですか？
+                        </Link>
+                      </div>
                       <div className="relative">
                         <input
                           type="password"

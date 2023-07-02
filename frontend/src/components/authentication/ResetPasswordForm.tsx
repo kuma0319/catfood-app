@@ -3,10 +3,10 @@ import { useForm } from "react-hook-form";
 
 interface SignUpProps {
   errorMessage: string;
-  onSignUp: (event: any) => Promise<void>;
+  onResetPassword: (data: any) => Promise<void>;
 }
 
-const SignUpForm = ({ errorMessage, onSignUp }: SignUpProps) => {
+const ResetPasswordForm = ({ errorMessage, onResetPassword }: SignUpProps) => {
   // React Hook Formライブラリを使用
   const {
     formState: { errors },
@@ -41,46 +41,9 @@ const SignUpForm = ({ errorMessage, onSignUp }: SignUpProps) => {
               </div>
 
               <div className="mt-5">
-                <form onSubmit={handleSubmit(onSignUp)}>
+                <form onSubmit={handleSubmit(onResetPassword)}>
                   {/* メールアドレス用フォーム */}
                   <div className="grid gap-y-4">
-                    <div>
-                      <label
-                        htmlFor="email"
-                        className="mb-2 block text-sm dark:text-white"
-                      >
-                        Eメールアドレス
-                      </label>
-                      <div className="relative">
-                        <input
-                          type="email"
-                          id="email"
-                          className={`block w-full rounded-md px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 ${
-                            errors.email
-                              ? "border-red-500" //エラー発生時は枠線を赤くハイライト
-                              : "border-gray-200"
-                          }`}
-                          {...register("email", {
-                            pattern: {
-                              message: "メールアドレスの形式を確認してください",
-                              value:
-                                /^[a-zA-Z0-9_+-]+(\.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/,
-                            },
-                            required: {
-                              message: "入力が必須の項目です",
-                              value: true,
-                            },
-                          })}
-                        />
-                        {/* エラーが存在する場合にメッセージを下段に表示 */}
-                        {errors.email && (
-                          <div className="mt-2 text-xs text-red-600">
-                            {String(errors.email.message)}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-
                     {/* パスワード用フォーム */}
                     <div>
                       <label
@@ -154,7 +117,7 @@ const SignUpForm = ({ errorMessage, onSignUp }: SignUpProps) => {
                       type="submit"
                       className="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-blue-500 px-4 py-3 text-sm font-semibold text-white transition-all hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
                     >
-                      登録
+                      パスワードリセット
                     </button>
                   </div>
                 </form>
@@ -167,4 +130,4 @@ const SignUpForm = ({ errorMessage, onSignUp }: SignUpProps) => {
   );
 };
 
-export default SignUpForm;
+export default ResetPasswordForm;
