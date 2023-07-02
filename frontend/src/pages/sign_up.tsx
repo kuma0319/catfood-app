@@ -17,10 +17,15 @@ const SignUp = () => {
   const onSignUp = async (data: SignUpInput) => {
     const email = data.email;
     const password = data.password;
+    const confirm_success_url = `${process.env.NEXT_PUBLIC_FRONTEND_URL}/confirm_success`;
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}${authUrl}`,
-        { email, password },
+        {
+          confirm_success_url: confirm_success_url,
+          email: email,
+          password: password,
+        },
         {
           headers: {
             Accept: "application/json",
@@ -29,10 +34,8 @@ const SignUp = () => {
         }
       );
       if (response.status === 200) {
-        router.push({
-          pathname: "/",
-          query: { flashMessage: "ユーザー登録しました" },
-        });
+        // メール認証を促すページへpush
+        router.push("/confirm_request");
       }
     } catch (error: any) {
       // エラー発生時はエラーメッセージをセット
@@ -40,11 +43,7 @@ const SignUp = () => {
     }
   };
 
-  return (
-    <>
-      <SignUpForm onSignUp={onSignUp} errorMessage={errorMessage} />
-    </>
-  );
+  return <SignUpForm onSignUp={onSignUp} errorMessage={errorMessage} />;
 };
 
 export default SignUp;

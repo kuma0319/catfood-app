@@ -26,5 +26,8 @@ module App
 
     # devise gemのエラーメッセージ日本語化用 
     config.i18n.default_locale = :ja
+
+    # タイムゾーンの変更
+    config.time_zone = 'Asia/Tokyo'
   end
 end
