@@ -4,18 +4,32 @@ import { useEffect } from "react";
 
 const ConfirmSuccess = () => {
   const router = useRouter();
-  // リダイレクト用の副作用
+  const { confirm_success_flag } = router.query;
+
   useEffect(() => {
+    // routerを待ってからで無いと問答無用でリダイレクトされてしまうため必要
+    if (router.isReady) {
+      // URLパラメータにconfirm_request_flagがない場合はホームにリダイレクト
+      if (!confirm_success_flag) {
+        router.push("/");
+      }
+    }
+  }, [router, confirm_success_flag]);
+
+  useEffect(() => {
+    // URLパラメータにconfirm_request_flagがある場合は認証成功とし、ユーザーにアナウンスを表示しリダイレクト
     const timer = setTimeout(() => {
-      router.push({
+      // ユーザーが戻るボタンで再表示することを回避するためにreplace
+      router.replace({
         pathname: "/",
         query: { flashMessage: "ユーザー登録しました" },
       });
     }, 3000); // 3秒後にリダイレクト
     return () => clearTimeout(timer); // コンポーネントがアンマウントされたときにタイマーをクリア
-  }, []);
+  }, [router]);
 
-  return (
+  // confirm_success_flagがあればコンポーネントを表示
+  return confirm_success_flag === "true" ? (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8 lg:py-16">
       <div className="mx-auto max-w-xl text-center">
         <div className="mb-5">
@@ -31,7 +45,7 @@ const ConfirmSuccess = () => {
         </Link>
       </div>
     </div>
-  );
+  ) : null;
 };
 
 export default ConfirmSuccess;
