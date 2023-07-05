@@ -15,6 +15,10 @@ RSpec.describe 'Api::V1::Auth', type: :request do
     }
   end
 
+  before do
+    @headers = sign_in(user)
+  end
+
   # 無効なヘッダー情報用
   before do
     @error_headers = {
@@ -40,7 +44,7 @@ RSpec.describe 'Api::V1::Auth', type: :request do
         expect(response).to have_http_status(200)
       end
 
-      it '期待された内容のメールが送信されること' do
+      it 'メールアドレス認証のためのメールが送信されること' do
         expect(ActionMailer::Base.deliveries.count).to eq(1)
         mail = ActionMailer::Base.deliveries.last
         expect(mail.to).to include(email_address)
@@ -251,6 +255,47 @@ RSpec.describe 'Api::V1::Auth', type: :request do
       it 'アカウントが削除されていないこと' do
         after_delete_user = User.find_by(email: user.email)
         expect(after_delete_user).to eq(user)
+      end
+    end
+  end
+
+  # パスワードリセットメールの送信
+  describe 'POST /api/v1/auth/password' do
+    let(:password_reset_redirect_url) {"http://localhost:3010"}
+    let(:mail_bodies) { ["redirect_url", "reset_password_token"] }
+    
+    context '正しいメールアドレスでパスワードリセットをリクエストしたとき' do
+      before do
+        post '/api/v1/auth/password', params: { email: user.email, redirect_url: password_reset_redirect_url  }
+      end
+
+      it 'HTTPステータスが200であること' do
+        expect(response).to have_http_status(200)
+      end
+
+      it 'パスワードリセット用のメールが送信されること' do
+        expect(ActionMailer::Base.deliveries.count).to eq(1)
+        mail = ActionMailer::Base.deliveries.last
+        expect(mail.to).to include(user.email)
+        expect(mail['redirect-url'].value).to eq(password_reset_redirect_url)
+        mail_bodies.each do |mail_body|
+          expect(mail.body).to include(mail_body)
+        end
+      end
+    end
+
+    context '無効なメールアドレスでパスワードリセットをリクエストしたとき' do
+      let (:error_email_address) {"error@example.com"}
+      before do
+        post '/api/v1/auth/password', params: { email: error_email_address, redirect_url: password_reset_redirect_url  }
+      end
+
+      it 'HTTPステータスが404であること' do
+        expect(response).to have_http_status(404)
+      end
+
+      it '期待する内容のエラー情報が含まれていること' do
+        expect(JSON.parse(response.body)['errors']).to include("メールアドレス '#{error_email_address}' のユーザーが見つかりません。")
       end
     end
   end
