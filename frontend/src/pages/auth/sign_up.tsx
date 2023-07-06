@@ -20,15 +20,13 @@ const SignUp = () => {
   const onSignUp = async (data: SignUpInput) => {
     const email = data.email;
     const password = data.password;
-    // 認証後のパス（/auth/confirm_success）に対してパラメータを付けておいて外部アクセスを防止する
-    const confirm_success_url = `${process.env.NEXT_PUBLIC_FRONTEND_URL}/auth/confirm_success?confirm_success_flag=true`;
+
     // submit時にローディングをセット
     setIsLoading(true);
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}${authUrl}`,
         {
-          confirm_success_url: confirm_success_url,
           email: email,
           password: password,
         },

@@ -94,7 +94,7 @@ const SignUpForm = ({ errorMessage, onSignUp }: SignUpProps) => {
                           type="password"
                           id="password"
                           className={`block w-full rounded-md px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 ${
-                            errors.email
+                            errors.password
                               ? "border-red-500" //エラー発生時は枠線を赤くハイライト
                               : "border-gray-200"
                           }`}
@@ -121,7 +121,7 @@ const SignUpForm = ({ errorMessage, onSignUp }: SignUpProps) => {
                     {/* パスワード確認用フォーム */}
                     <div>
                       <label
-                        htmlFor="password"
+                        htmlFor="passwordConfirmation"
                         className="mb-2 block text-sm dark:text-white"
                       >
                         パスワード(確認用)
@@ -129,7 +129,7 @@ const SignUpForm = ({ errorMessage, onSignUp }: SignUpProps) => {
                       <div className="relative">
                         <input
                           type="password"
-                          id="password"
+                          id="passwordConfirmation"
                           className="block w-full rounded-md border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
                           aria-describedby="password-error"
                           {...register("passwordConfirmation", {
@@ -142,9 +142,9 @@ const SignUpForm = ({ errorMessage, onSignUp }: SignUpProps) => {
                               "パスワードが一致しません",
                           })}
                         />
-                        {errors.passwordConfirm && (
+                        {errors.passwordConfirmation && (
                           <div className="mt-2 text-xs text-red-600">
-                            {String(errors.passwordConfirm.message)}
+                            {String(errors.passwordConfirmation.message)}
                           </div>
                         )}
                       </div>

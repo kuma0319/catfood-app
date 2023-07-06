@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useForm } from "react-hook-form";
 
 interface SignUpProps {
@@ -27,22 +26,15 @@ const ResetPasswordForm = ({ errorMessage, onResetPassword }: SignUpProps) => {
             <div className="p-4 sm:p-7">
               <div className="text-center">
                 <h1 className="block text-2xl font-bold text-gray-800 dark:text-white">
-                  新規登録
+                  パスワードリセットフォーム
                 </h1>
                 <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                  既にアカウントをお持ちですか？
-                  <Link
-                    className="font-medium text-blue-600 decoration-2 hover:underline"
-                    href="/auth/sign_in"
-                  >
-                    こちらからログイン
-                  </Link>
+                  新しいパスワードを入力してください。
                 </p>
               </div>
 
               <div className="mt-5">
                 <form onSubmit={handleSubmit(onResetPassword)}>
-                  {/* メールアドレス用フォーム */}
                   <div className="grid gap-y-4">
                     {/* パスワード用フォーム */}
                     <div>
@@ -57,7 +49,7 @@ const ResetPasswordForm = ({ errorMessage, onResetPassword }: SignUpProps) => {
                           type="password"
                           id="password"
                           className={`block w-full rounded-md px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 ${
-                            errors.email
+                            errors.password
                               ? "border-red-500" //エラー発生時は枠線を赤くハイライト
                               : "border-gray-200"
                           }`}
@@ -84,7 +76,7 @@ const ResetPasswordForm = ({ errorMessage, onResetPassword }: SignUpProps) => {
                     {/* パスワード確認用フォーム */}
                     <div>
                       <label
-                        htmlFor="password"
+                        htmlFor="passwordConfirmation"
                         className="mb-2 block text-sm dark:text-white"
                       >
                         パスワード(確認用)
@@ -92,8 +84,12 @@ const ResetPasswordForm = ({ errorMessage, onResetPassword }: SignUpProps) => {
                       <div className="relative">
                         <input
                           type="password"
-                          id="password"
-                          className="block w-full rounded-md border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
+                          id="passwordConfirmation"
+                          className={`block w-full rounded-md px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 ${
+                            errors.passwordConfirmation
+                              ? "border-red-500" //エラー発生時は枠線を赤くハイライト
+                              : "border-gray-200"
+                          }`}
                           aria-describedby="password-error"
                           {...register("passwordConfirmation", {
                             required: {
@@ -105,9 +101,9 @@ const ResetPasswordForm = ({ errorMessage, onResetPassword }: SignUpProps) => {
                               "パスワードが一致しません",
                           })}
                         />
-                        {errors.passwordConfirm && (
+                        {errors.passwordConfirmation && (
                           <div className="mt-2 text-xs text-red-600">
-                            {String(errors.passwordConfirm.message)}
+                            {String(errors.passwordConfirmation.message)}
                           </div>
                         )}
                       </div>
