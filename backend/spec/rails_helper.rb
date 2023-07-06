@@ -62,9 +62,13 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
-  RSpec.configure do |config|
-    config.include FactoryBot::Syntax::Methods
-  end
+  # FactoryBot用
+  config.include FactoryBot::Syntax::Methods
+
+  # Devise関連
+  config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :view
 
   # データベースクリーナー用の設定
   config.before(:suite) do

@@ -44,6 +44,8 @@ gem 'dotenv-rails'
 gem 'devise'
 gem 'devise_token_auth'
 gem 'rails-i18n'
+gem 'devise-i18n'
+gem 'devise-i18n-views'
 
 # ページネーション用gem
 gem 'kaminari'

@@ -7,19 +7,19 @@ Dotenv.load
 
 RakutenWebService.configure do |c|
   # 楽天API用のアプリケーションID
-  c.application_id = ENV['RAKUTEN_API_KEY']
+  c.application_id = ENV.fetch('RAKUTEN_API_KEY', nil)
 end
 
-fetch_time = Time.now
+Time.zone.now
 
-base_csv = ENV['RAKUTEN_FOOD_LIST_CSV']
+base_csv = ENV.fetch('RAKUTEN_FOOD_LIST_CSV', nil)
 
 CSV.open("#{base_csv}_add.csv", 'w') do |add_csv|
   CSV.foreach("#{base_csv}.csv", headers: true) do |row|
     begin
       items = RakutenWebService::Ichiba::Item.search(
         keyword: row[0], # csvの商品名のカラムをキーワードとして楽天市場で商品を検索
-        genreId: '507524', # 「猫用品」というジャンルで固定
+        genreId: '507524' # 「猫用品」というジャンルで固定
       )
       # ヒットした最初の商品からデータを引っ張ってくる
       first_item = items.first
@@ -42,8 +42,7 @@ CSV.open("#{base_csv}_add.csv", 'w') do |add_csv|
         row[6] = first_item['tagIds']
       end
       add_csv << row
-
-    rescue => e
+    rescue StandardError => e
       # その他のエラーが発生した場合の処理
       puts "エラー: #{e.message}"
     end
@@ -52,4 +51,3 @@ CSV.open("#{base_csv}_add.csv", 'w') do |add_csv|
     sleep(2)
   end
 end
-
