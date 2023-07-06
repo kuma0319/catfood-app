@@ -21,12 +21,11 @@ RSpec.describe User, type: :model do
         expect(user.avatar_url).to eq(url_for(user.avatar))
       end
     end
-  
+
     context "アバターが添付されていない場合" do
       it "nilを返すこと" do
         expect(user.avatar_url).to be_nil
       end
     end
   end
-  
 end

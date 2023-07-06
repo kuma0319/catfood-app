@@ -7,10 +7,10 @@ Dotenv.load
 
 RakutenWebService.configure do |c|
   # 楽天API用のアプリケーションID
-  c.application_id = ENV['RAKUTEN_API_KEY']
+  c.application_id = ENV.fetch('RAKUTEN_API_KEY', nil)
 end
 
-fetch_time = Time.now
+fetch_time = Time.zone.now
 
 CSV.open("cat_food.csv", "ab") do |csv|
   csv << [
@@ -27,18 +27,18 @@ CSV.open("cat_food.csv", "ab") do |csv|
   ]
 
   # 1円~15000円の価格範囲で100円ずつ刻む
-  (1..15000).step(100) do |price|
+  (1..15_000).step(100) do |price|
     min_price = price
-    max_price = price + 99 > 15000 ? 15000 : price + 99
+    max_price = [price + 99, 15_000].min
 
     page = 1
 
     loop do
       items = RakutenWebService::Ichiba::Item.search(
         genreId: '565724', # 「キャットフード」というジャンルで固定
-        tagId: 1008045, # 「ドライフード」というタグ指定
+        tagId: 1_008_045, # 「ドライフード」というタグ指定
         hits: 30,
-        page: page,
+        page:,
         minPrice: min_price,
         maxPrice: max_price
       )

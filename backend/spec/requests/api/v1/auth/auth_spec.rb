@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe 'Api::V1::Auth', type: :request do
-  let(:user) {create(:user)}
+  let(:user) { create(:user) }
   let(:tokens) { ["uid", "client", "access-token"] }
 
   # サインインメソッド
   def sign_in(user)
     user.confirm # メールアドレス認証を入れているためこれが必要
-    post '/api/v1/auth/sign_in', params: {email: user.email, password: user.password}, headers: { Accept: "application/json" }
+    post '/api/v1/auth/sign_in', params: { email: user.email, password: user.password }, headers: { Accept: "application/json" }
     {
       'uid' => response.header['uid'],
       'client' => response.header['client'],
@@ -24,20 +24,20 @@ RSpec.describe 'Api::V1::Auth', type: :request do
     @error_headers = {
       'uid' => "error@example.com",
       'client' => "error_client",
-      'access-token' => "error_access_token",
+      'access-token' => "error_access_token"
     }
   end
 
   # サインアップ
   describe 'POST /api/v1/auth' do
-    let(:email_address) {"test@example.com"}
-    let(:confirm_success_url) {"http://localhost:3010"}
+    let(:email_address) { "test@example.com" }
+    let(:confirm_success_url) { "http://localhost:3010" }
     let(:mail_bodies) { ["confirmation_token", "redirect_url"] }
 
     context '正しい情報でサインアップしたとき' do
       before do
         # サインアップのパラメータとしてconfirm_success_urlを与えておく
-        post '/api/v1/auth',params: {registration: {email: email_address, password: "password"}, confirm_success_url: confirm_success_url}, headers: { Accept: "application/json" }
+        post '/api/v1/auth', params: { registration: { email: email_address, password: "password" }, confirm_success_url: }, headers: { Accept: "application/json" }
       end
 
       it 'HTTPステータスが200であること' do
@@ -56,9 +56,9 @@ RSpec.describe 'Api::V1::Auth', type: :request do
     end
 
     context '重複したメールアドレスで登録を実行した場合' do
-      let!(:user) {create(:user, email: email_address)}
+      let!(:user) { create(:user, email: email_address) }
       before do
-        post '/api/v1/auth',params: {registration: {email: email_address, password: "password"}, confirm_success_url: confirm_success_url}, headers: { Accept: "application/json" }
+        post '/api/v1/auth', params: { registration: { email: email_address, password: "password" }, confirm_success_url: }, headers: { Accept: "application/json" }
       end
 
       it 'HTTPステータスが422であること' do
@@ -66,7 +66,7 @@ RSpec.describe 'Api::V1::Auth', type: :request do
       end
 
       it '期待する内容のエラー情報が含まれていること' do
-        expect(JSON.parse(response.body)['errors']['full_messages']).to include("メールアドレスは既に使用されています。")
+        expect(response.parsed_body['errors']['full_messages']).to include("メールアドレスは既に使用されています。")
       end
 
       it 'メールが送信されないこと' do
@@ -101,15 +101,15 @@ RSpec.describe 'Api::V1::Auth', type: :request do
     context '誤った情報でサインインしたとき' do
       before do
         user.confirm
-        post '/api/v1/auth/sign_in', params: {email: user.email, password: 'error_password'}, headers: { Accept: "application/json" }
+        post '/api/v1/auth/sign_in', params: { email: user.email, password: 'error_password' }, headers: { Accept: "application/json" }
       end
-      
+
       it 'HTTPステータスが401であること' do
         expect(response).to have_http_status(401)
       end
 
       it 'エラーが返ってきていること' do
-        expect(JSON.parse(response.body)['errors']).to_not be_empty
+        expect(response.parsed_body['errors']).to_not be_empty
       end
 
       it 'レスポンスヘッダーにトークン情報が無いこと' do
@@ -165,14 +165,14 @@ RSpec.describe 'Api::V1::Auth', type: :request do
 
   # 更新
   describe 'PATCH /api/v1/auth' do
-    let(:name) {"テストネーム"}
-    let(:nickname) {"テストニックネーム"}
-    let(:new_email) {"new_test@example.com"}
+    let(:name) { "テストネーム" }
+    let(:nickname) { "テストニックネーム" }
+    let(:new_email) { "new_test@example.com" }
 
     context '許可されているパラメータを更新したとき' do
       before do
         @headers = sign_in(user)
-        patch '/api/v1/auth', params: {registration: {nickname: nickname}}, headers: @headers
+        patch '/api/v1/auth', params: { nickname: }, headers: @headers
       end
 
       it 'HTTPステータスが200であること' do
@@ -188,7 +188,7 @@ RSpec.describe 'Api::V1::Auth', type: :request do
     context '許可されていないパラメータを更新したとき' do
       before do
         @headers = sign_in(user)
-        patch '/api/v1/auth', params: {registration: {name: name}}, headers: @headers
+        patch '/api/v1/auth', params: { name: }, headers: @headers
       end
 
       it 'HTTPステータスが422であること' do
@@ -196,7 +196,7 @@ RSpec.describe 'Api::V1::Auth', type: :request do
       end
 
       it '期待する内容のエラー情報が含まれていること' do
-        expect(JSON.parse(response.body)['errors']).to include("リクエストボディに適切なアカウント更新のデータを送信してください。")
+        expect(response.parsed_body['errors']).to include("リクエストボディに適切なアカウント更新のデータを送信してください。")
       end
 
       it 'ユーザーの情報が更新されていないこと' do
@@ -207,7 +207,7 @@ RSpec.describe 'Api::V1::Auth', type: :request do
 
     context '適切なトークンが含まれないとき' do
       before do
-        patch '/api/v1/auth', params: {registration: {nickname: nickname}}, headers: @error_headers
+        patch '/api/v1/auth', params: { nickname: }, headers: @error_headers
       end
 
       it 'HTTPステータスが404であること' do
@@ -215,7 +215,7 @@ RSpec.describe 'Api::V1::Auth', type: :request do
       end
 
       it '期待する内容のエラー情報が含まれていること' do
-        expect(JSON.parse(response.body)['errors']).to include("ユーザーが見つかりません。")
+        expect(response.parsed_body['errors']).to include("ユーザーが見つかりません。")
       end
 
       it 'ユーザーの情報が更新されていないこと' do
@@ -261,12 +261,12 @@ RSpec.describe 'Api::V1::Auth', type: :request do
 
   # パスワードリセットメールの送信
   describe 'POST /api/v1/auth/password' do
-    let(:password_reset_redirect_url) {"http://localhost:3010"}
+    let(:password_reset_redirect_url) { "http://localhost:3010" }
     let(:mail_bodies) { ["redirect_url", "reset_password_token"] }
-    
+
     context '正しいメールアドレスでパスワードリセットをリクエストしたとき' do
       before do
-        post '/api/v1/auth/password', params: { email: user.email, redirect_url: password_reset_redirect_url  }
+        post '/api/v1/auth/password', params: { email: user.email, redirect_url: password_reset_redirect_url }
       end
 
       it 'HTTPステータスが200であること' do
@@ -285,9 +285,9 @@ RSpec.describe 'Api::V1::Auth', type: :request do
     end
 
     context '無効なメールアドレスでパスワードリセットをリクエストしたとき' do
-      let (:error_email_address) {"error@example.com"}
+      let(:error_email_address) { "error@example.com" }
       before do
-        post '/api/v1/auth/password', params: { email: error_email_address, redirect_url: password_reset_redirect_url  }
+        post '/api/v1/auth/password', params: { email: error_email_address, redirect_url: password_reset_redirect_url }
       end
 
       it 'HTTPステータスが404であること' do
@@ -295,7 +295,7 @@ RSpec.describe 'Api::V1::Auth', type: :request do
       end
 
       it '期待する内容のエラー情報が含まれていること' do
-        expect(JSON.parse(response.body)['errors']).to include("メールアドレス '#{error_email_address}' のユーザーが見つかりません。")
+        expect(response.parsed_body['errors']).to include("メールアドレス '#{error_email_address}' のユーザーが見つかりません。")
       end
     end
   end

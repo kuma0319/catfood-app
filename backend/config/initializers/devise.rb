@@ -25,7 +25,7 @@ Devise.setup do |config|
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
   # 環境変数からアドレスを読み込み
-  config.mailer_sender = ENV['EMAIL_ADDRESS']
+  config.mailer_sender = ENV.fetch('EMAIL_ADDRESS', nil)
 
   # Configure the class responsible to send e-mails.
   config.mailer = 'Devise::Mailer'

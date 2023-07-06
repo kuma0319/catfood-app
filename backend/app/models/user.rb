@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-class User < ActiveRecord::Base
-  #モデルでurl_forメソッドを使用するためのヘルパーをinclude
+class User < ApplicationRecord
+  # モデルでurl_forメソッドを使用するためのヘルパーをinclude
   include Rails.application.routes.url_helpers
 
   # Include default devise modules. Others available are:
