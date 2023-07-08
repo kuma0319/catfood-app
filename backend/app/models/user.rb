@@ -12,6 +12,8 @@ class User < ApplicationRecord
 
   # ActiveStorage用(imageとするとエラーが発生するためavatarとしておく)
   has_one_attached :avatar
+  has_many :favorites, dependent: :destroy
+  has_many :foods, through: :favorites
 
   # avatarのURLを返すメソッド
   def avatar_url
