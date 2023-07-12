@@ -9,7 +9,7 @@ import { authUrl } from "@/urls";
 import Spinners from "../commons/Spinners";
 import ProfileContents from "./ProfileContents";
 
-const Profile = ({ props }: { props: UserProps }) => {
+const Profile = ({ profileProps }: { profileProps: UserProps }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [flashMessage, setFlashMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -87,7 +87,7 @@ const Profile = ({ props }: { props: UserProps }) => {
         errorMessage={errorMessage}
         handleDeleteAccount={handleDeleteAccount}
         onProfileEdit={onProfileEdit}
-        props={props}
+        profileProps={profileProps}
         setAvatar={setAvatar}
       />
     </div>

@@ -8,13 +8,13 @@ const ProfileContents = ({
   errorMessage,
   handleDeleteAccount,
   onProfileEdit,
-  props,
+  profileProps,
   setAvatar,
 }: {
   errorMessage: string;
   handleDeleteAccount: () => Promise<void>;
   onProfileEdit: (data: { nickname: string }) => Promise<void>;
-  props: UserProps;
+  profileProps: UserProps;
   setAvatar: Dispatch<SetStateAction<File | null>>;
 }) => {
   // React Hook Formを使用
@@ -54,8 +54,8 @@ const ProfileContents = ({
                 <img
                   className="inline-block h-16 w-16 rounded-full ring-2 ring-white dark:ring-gray-800"
                   src={
-                    props.user.avatar_url
-                      ? props.user.avatar_url
+                    profileProps.user.avatar_url
+                      ? profileProps.user.avatar_url
                       : "/kkrn_icon_user_1.svg"
                   }
                   alt="Image Description"
@@ -125,13 +125,13 @@ const ProfileContents = ({
                     id="af-account-full-name"
                     type="text"
                     className="relative -ml-px -mt-px block w-full border-gray-200 px-3 py-2 pr-11 text-sm shadow-sm first:rounded-t-lg last:rounded-b-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 sm:mt-0 sm:first:ml-0 sm:first:rounded-l-lg sm:first:rounded-tr-none sm:last:rounded-r-lg sm:last:rounded-bl-none"
-                    placeholder={props.user.nickname}
+                    placeholder={profileProps.user.nickname}
                     {...register("nickname")}
                   />
                 </div>
               ) : (
                 <div className="block w-full px-3 py-2 pr-11 text-base dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400">
-                  {props.user.nickname}
+                  {profileProps.user.nickname}
                 </div>
               )}
             </div>
@@ -177,7 +177,7 @@ const ProfileContents = ({
 
             <div className="sm:col-span-6">
               <div className="block w-full px-3 py-2 pr-11 text-base dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400">
-                {props.user.email}
+                {profileProps.user.email}
               </div>
             </div>
 
