@@ -240,7 +240,7 @@ const HeaderOnSignIn = () => {
                 {/* ログイン状態の場合はマイページ用のリンクを配置 */}
                 <Link
                   className="flex items-center gap-x-2 font-medium text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-500"
-                  href="my_page"
+                  href="/my_page"
                 >
                   マイページ
                 </Link>
