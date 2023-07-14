@@ -1,5 +1,5 @@
 class Api::V1::FavoritesController < ApplicationController
-  before_action :authenticate_api_v1_user!, only: [:show, :create, :destroy]
+  before_action :authenticate_api_v1_user!, only: [:show, :show_food_ids, :create, :destroy]
 
   def show
     # devise_token_authのcurrent_userにおけるidを指定
@@ -41,14 +41,19 @@ class Api::V1::FavoritesController < ApplicationController
     # paramsで送られてきたfood_idに対応するfavoriteを削除する
     favorite = current_api_v1_user.favorites.find_by(food_id: params[:food_id])
 
-    if favorite.destroy
-      render json: {
-        favorite:
-      }, status: :ok
+    # favoriteの存在性確認をおこなうことでお気に入りがなかった場合に404を返す
+    if favorite
+      if favorite.destroy
+        render json: {
+          favorite:
+        }, status: :ok
+      else
+        render json: {
+          errors: favorite.errors
+        }, status: :unprocessable_entity
+      end
     else
-      render json: {
-        errors: favorite.errors
-      }, status: :unprocessable_entity
+      render json: { error: "お気に入りが見つかりません" }, status: :not_found
     end
   end
 
