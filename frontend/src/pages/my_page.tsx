@@ -23,7 +23,7 @@ export interface MyPageProps {
 // withAuthMyPageで引数として渡したエンドポイントへAPIリクエストを送り、propsを受け取る
 export const getServerSideProps: GetServerSideProps = withAuthMyPage([
   `${userUrl}`,
-  `${favoriteFoodUrl}`,
+  `${favoriteFoodUrl}.json`,
 ]);
 
 const MyPage = (props: MyPageProps) => {

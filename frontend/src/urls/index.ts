@@ -17,4 +17,5 @@ export const authSignOutUrl = `/api/v1/auth/sign_out`;
 // ユーザーページ
 export const userUrl = `/api/v1/users/users`;
 // お気に入りフードページ
-export const favoriteFoodUrl = `/api/v1/favorites.json`;
+export const favoriteFoodUrl = `/api/v1/favorites`;
+export const favoriteFoodIdsUrl = `/api/v1/favorite_food_ids`;

@@ -4,11 +4,22 @@ class Api::V1::FavoritesController < ApplicationController
   def show
     # devise_token_authのcurrent_userにおけるidを指定
     favorites = Favorite.where(user_id: current_api_v1_user.id)
-    
-    # 上記の情報からfood_idの配列しこれで@foodsを返す
+
+    # 上記の情報からfood_idの配列にしこれで@foodsを返す
     @foods = Food.includes(:brand, :production_area, :food_type, { nutrient_contents: :nutrient }, :amounts)
       .order("brands.name", "foods.name")
       .where(id: food_ids(favorites))
+  end
+
+  # フードidの配列を渡すエンドポイント
+  def show_food_ids
+    favorites = Favorite.where(user_id: current_api_v1_user.id)
+
+    # 上記の情報からfood_idの配列にしこれを返す
+    food_ids = food_ids(favorites)
+    render json: {
+      food_ids:
+    }, status: :ok
   end
 
   def create
@@ -27,7 +38,8 @@ class Api::V1::FavoritesController < ApplicationController
 
   def destroy
     # current_api_v1_userのfavoriteのみを削除可能(他者からの削除防止)
-    favorite = current_api_v1_user.favorites.find(params[:favorite_id])
+    # paramsで送られてきたfood_idに対応するfavoriteを削除する
+    favorite = current_api_v1_user.favorites.find_by(food_id: params[:food_id])
 
     if favorite.destroy
       render json: {
