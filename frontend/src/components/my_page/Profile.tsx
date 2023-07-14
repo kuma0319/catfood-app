@@ -5,6 +5,7 @@ import { useState } from "react";
 
 import { UserProps } from "@/pages/my_page";
 import { authUrl } from "@/urls";
+import { getAuthHeadersWithCookies } from "@/utils/authApi";
 
 import Spinners from "../commons/Spinners";
 import ProfileContents from "./ProfileContents";
@@ -30,12 +31,7 @@ const Profile = ({ profileProps }: { profileProps: UserProps }) => {
         `${process.env.NEXT_PUBLIC_BACKEND_URL}${authUrl}`,
         formData,
         {
-          headers: {
-            Accept: "application/json",
-            "access-token": cookies["access-token"],
-            client: cookies["client"],
-            uid: cookies["uid"],
-          },
+          headers: getAuthHeadersWithCookies(cookies),
         }
       );
       // 更新成功時はページリロード
@@ -57,12 +53,7 @@ const Profile = ({ profileProps }: { profileProps: UserProps }) => {
       const response = await axios.delete(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}${authUrl}`,
         {
-          headers: {
-            Accept: "application/json",
-            "access-token": cookies["access-token"],
-            client: cookies["client"],
-            uid: cookies["uid"],
-          },
+          headers: getAuthHeadersWithCookies(cookies),
         }
       );
       if (response.status === 200) {

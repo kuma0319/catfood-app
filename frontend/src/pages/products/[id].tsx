@@ -13,6 +13,7 @@ import {
   foodDetailUrl,
   foodsIndexUrl,
 } from "@/urls";
+import { getAuthHeadersWithCookies } from "@/utils/authApi";
 
 import { Food } from "../../types/foods";
 
@@ -58,100 +59,79 @@ const FoodShow = ({ food }: { food: Food }) => {
   const [isFavorited, setIsFavorited] = useState(false);
   const cookies = parseCookies();
 
-  // フードをお気に入りに登録
+  // フードをお気に入りに登録する処理
   const addFavoriteFood = async () => {
     try {
       const authResponse = await axios.get(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}${authValidateTokenUrl}`,
         {
-          headers: {
-            Accept: "application/json",
-            "access-token": cookies["access-token"],
-            client: cookies["client"],
-            "Content-Type": "application/json",
-            uid: cookies["uid"],
-          },
+          headers: getAuthHeadersWithCookies(cookies),
         }
       );
+      // 認証成功(=ログイン済み)であった場合はそのまま、axios.postでお気に入り登録をリクエスト。
       if (authResponse.status === 200) {
         const registrationFavoriteResponse = await axios.post(
           `${process.env.NEXT_PUBLIC_BACKEND_URL}${favoriteFoodUrl}`,
           { food_id: food.id },
           {
-            headers: {
-              Accept: "application/json",
-              "access-token": cookies["access-token"],
-              client: cookies["client"],
-              "Content-Type": "application/json",
-              uid: cookies["uid"],
-            },
+            headers: getAuthHeadersWithCookies(cookies),
           }
         );
+        // お気に入りに追加出来たらお気に入りボタンのstateを更新
         if (registrationFavoriteResponse.status === 201) {
-          // お気に入りに追加出来たらstateを更新
           setIsFavorited(true);
         } else {
-          console.log("お気に入り追加失敗");
-          console.log(registrationFavoriteResponse);
+          setErrorMessage("お気に入りの登録に失敗しました");
         }
       }
     } catch (error: any) {
+      // 認証失敗(=非ログイン)であった場合はサインインページへリダイレクト
       if (error.response.status === 401) {
         await router.push({
           pathname: "/auth/sign_in",
           query: { flashMessage: "この機能の使用にはログインが必要です。" },
         });
       } else {
-        console.log(error.response);
+        setErrorMessage(error.response);
       }
     }
   };
 
-  // フードをお気に入りから削除
+  // フードをお気に入りから削除する処理
   const removeFavoriteFood = async () => {
     const foodId = food.id;
+    // 非ログインユーザーが触れないように削除処理でも認証ステップを入れる
     try {
       const authResponse = await axios.get(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}${authValidateTokenUrl}`,
         {
-          headers: {
-            Accept: "application/json",
-            "access-token": cookies["access-token"],
-            client: cookies["client"],
-            "Content-Type": "application/json",
-            uid: cookies["uid"],
-          },
+          headers: getAuthHeadersWithCookies(cookies),
         }
       );
+      // 認証成功(=ログイン済み)であった場合は、axios.deleteでお気に入り登録をリクエスト。
       if (authResponse.status === 200) {
         const registrationFavoriteResponse = await axios.delete(
           `${process.env.NEXT_PUBLIC_BACKEND_URL}${favoriteFoodUrl}?food_id=${foodId}`,
           {
-            headers: {
-              Accept: "application/json",
-              "access-token": cookies["access-token"],
-              client: cookies["client"],
-              "Content-Type": "application/json",
-              uid: cookies["uid"],
-            },
+            headers: getAuthHeadersWithCookies(cookies),
           }
         );
+        // お気に入りから削除出来たらstateを更新
         if (registrationFavoriteResponse.status === 200) {
-          // お気に入りから削除出来たらstateを更新
           setIsFavorited(false);
         } else {
-          console.log("お気に入り削除失敗");
-          console.log(registrationFavoriteResponse);
+          setErrorMessage("お気に入りの削除に失敗しました");
         }
       }
     } catch (error: any) {
+      // 認証失敗(=非ログイン)であった場合はサインインページへリダイレクト
       if (error.response.status === 401) {
         await router.push({
           pathname: "/auth/sign_in",
           query: { flashMessage: "この機能の使用にはログインが必要です。" },
         });
       } else {
-        console.log(error.response);
+        setErrorMessage(error.response);
       }
     }
   };
@@ -160,28 +140,24 @@ const FoodShow = ({ food }: { food: Food }) => {
   // useEffectで即時関数として定義
   useEffect(() => {
     (async () => {
+      // コンポーネントマウント時にaccess-tokenクッキーがある場合、ログイン状態としてお気に入りフードのid情報をAPIから取得
       if (cookies["access-token"]) {
         const showFavoriteResponse = await axios.get(
           `${process.env.NEXT_PUBLIC_BACKEND_URL}${favoriteFoodIdsUrl}`,
           {
-            headers: {
-              Accept: "application/json",
-              "access-token": cookies["access-token"],
-              client: cookies["client"],
-              "Content-Type": "application/json",
-              uid: cookies["uid"],
-            },
+            headers: getAuthHeadersWithCookies(cookies),
           }
         );
+        // id情報を取得出来たら、mapで現在表示中のフードに一致するものが無いか調べる
         if (showFavoriteResponse.status === 200) {
           showFavoriteResponse.data.food_ids.map((foodId: number) => {
+            // 一致するものが合った場合、trueをstateにセット
             if (foodId === food.id) {
               setIsFavorited(true);
             }
           });
         } else {
-          console.log("失敗");
-          console.log(showFavoriteResponse);
+          setErrorMessage("何らかのエラーが発生しました");
         }
       }
     })();
@@ -190,11 +166,17 @@ const FoodShow = ({ food }: { food: Food }) => {
   return (
     <RootLayout>
       <div className="px-4 py-6 ">
+        {/* エラーの場合にエラーメッセージを表示する */}
+        <div className="text-center text-lg text-red-600">{errorMessage}</div>
         <div className="flex justify-between">
           <h1 className="mb-4 text-2xl font-bold">商品詳細</h1>
           {isFavorited ? (
             <div className="flex items-center">
-              <button className="active:scale-90" onClick={removeFavoriteFood} title="お気に入りリストから削除します。">
+              <button
+                className="active:scale-90"
+                onClick={removeFavoriteFood}
+                title="お気に入りリストから削除します。"
+              >
                 <svg
                   className="h-auto w-6 fill-current text-red-500 hover:text-red-400"
                   xmlns="http://www.w3.org/2000/svg"

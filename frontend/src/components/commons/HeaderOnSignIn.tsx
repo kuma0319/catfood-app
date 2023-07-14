@@ -5,6 +5,7 @@ import { destroyCookie, parseCookies } from "nookies";
 import { useEffect, useState } from "react";
 
 import { authSignOutUrl } from "@/urls";
+import { getAuthHeadersWithCookies } from "@/utils/authApi";
 
 import SuccessToast from "./SuccessToast";
 
@@ -39,11 +40,7 @@ const HeaderOnSignIn = () => {
       const response = await axios.delete(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}${authSignOutUrl}`,
         {
-          headers: {
-            "access-token": cookies["access-token"],
-            client: cookies["client"],
-            uid: cookies["uid"],
-          },
+          headers: getAuthHeadersWithCookies(cookies),
         }
       );
       if (response.status === 200) {

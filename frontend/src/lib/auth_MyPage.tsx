@@ -2,6 +2,8 @@ import axios from "axios";
 import { GetServerSideProps } from "next";
 import nookies from "nookies";
 
+import { getAuthHeadersWithCookies } from "@/utils/authApi";
+
 const withAuthMyPage = (
   // 引数にurlの配列を受け取る
   urls: string[]
@@ -15,12 +17,7 @@ const withAuthMyPage = (
       const responses = await Promise.all(
         urls.map((url) =>
           axios.get(`${process.env.BACKEND_URL}${url}`, {
-            headers: {
-              "access-token": cookies["access-token"],
-              client: cookies["client"],
-              "Content-Type": "application/json",
-              uid: cookies["uid"],
-            },
+            headers: getAuthHeadersWithCookies(cookies),
           })
         )
       );
