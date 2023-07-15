@@ -1,29 +1,24 @@
-import Image from "next/image";
+import { useContext } from "react";
 
-import { Food } from "../types/foods";
-import ItemTab from "./ItemTab";
+import FoodItem from "@/components/FoodItem";
+import { WatchListContext } from "@/context/WatchListContext";
+import { Food } from "@/types/foods";
 
-interface FoodProps {
-  food: Food;
-}
+const FoodDetail = ({ food }: { food: Food }) => {
+  const context = useContext(WatchListContext);
 
-const FoodDetail = ({ food }: FoodProps) => {
+  // WatchListContextはundefinedを戻り値として含むため、それの対策
+  if (context === undefined) {
+    throw new Error(
+      "useWatchListは、WatchListProvider内で使用する必要があります。"
+    );
+  }
+
+  //ウォッチリスト用のコンテキスト
+  const { handleWatchList } = context;
+
   return (
-    <div className="grid grid-cols-3 gap-4 rounded border border-gray-300 p-4 shadow-md">
-      <h1 className="col-span-1 text-xl font-semibold">{food.name}</h1>
-      <div className="col-span-2 row-span-4">
-        <ItemTab item={food} />
-      </div>
-      <div className="col-span-1 row-span-3">
-        <Image
-          src={food.medium_image_url}
-          width={150}
-          height={150}
-          alt="商品画像"
-          unoptimized //※※本番環境では使用しない※※
-        />
-      </div>
-    </div>
+    <FoodItem key={food.id} food={food} handleWatchList={handleWatchList} />
   );
 };
 

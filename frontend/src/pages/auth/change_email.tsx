@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import AuthLayout from "@/components/commons/AuthLayout";
 import Spinners from "@/components/commons/Spinners";
 import { authUrl } from "@/urls";
+import { getAuthHeadersWithCookies } from "@/utils/authApi";
 
 const ChangeEmail = () => {
   // React Hook Formライブラリを使用
@@ -33,13 +34,7 @@ const ChangeEmail = () => {
           email: email,
         },
         {
-          headers: {
-            Accept: "application/json",
-            "access-token": cookies["access-token"],
-            client: cookies["client"],
-            "Content-Type": "application/json",
-            uid: cookies["uid"],
-          },
+          headers: getAuthHeadersWithCookies(cookies),
         }
       );
       // 更新成功時はページリロード

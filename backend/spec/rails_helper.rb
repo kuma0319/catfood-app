@@ -70,6 +70,9 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :view
 
+  # devise_token_authの自作メソッド
+  config.include RequestHelpers, type: :request
+
   # データベースクリーナー用の設定
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction

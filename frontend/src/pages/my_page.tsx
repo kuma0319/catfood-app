@@ -2,8 +2,9 @@ import { GetServerSideProps } from "next";
 
 import RootLayout from "@/components/commons/Layout";
 import MyPageTabs from "@/components/my_page/MyPageTabs";
-import withAuthServerSideProps from "@/lib/auth";
-import { userUrl } from "@/urls";
+import withAuthMyPage from "@/lib/auth_MyPage";
+import { FoodData } from "@/types/foods";
+import { favoriteFoodUrl, userUrl } from "@/urls";
 
 export interface UserProps {
   user: {
@@ -14,11 +15,18 @@ export interface UserProps {
   };
 }
 
-export const getServerSideProps: GetServerSideProps = withAuthServerSideProps(
-  `${userUrl}`
-);
+export interface MyPageProps {
+  foodData: FoodData;
+  userData: UserProps;
+}
 
-const MyPage = (props: UserProps) => {
+// withAuthMyPageで引数として渡したエンドポイントへAPIリクエストを送り、propsを受け取る
+export const getServerSideProps: GetServerSideProps = withAuthMyPage([
+  `${userUrl}`,
+  `${favoriteFoodUrl}.json`,
+]);
+
+const MyPage = (props: MyPageProps) => {
   return (
     <RootLayout>
       <MyPageTabs props={props} />
