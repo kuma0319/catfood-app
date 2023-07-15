@@ -11,7 +11,6 @@ class Food < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :users, through: :favorites
 
-
   # name属性は同一商品の重複を排除するため、大文字小文字を区別せずに一意性制約を付す
   validates :name, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 50 }
   validates :calorie, numericality: { greater_than: 0 }

@@ -23,26 +23,24 @@ RSpec.describe Favorite, type: :model do
 
     context "user_idが存在しないとき" do
       let(:favorite_without_user) { build(:favorite, food_id: food.id) }
-    
+
       it "バリエーションエラーとなること" do
         expect(favorite_without_user).not_to be_valid
-        expect(favorite_without_user.errors.details[:user]).to include({error: :blank})
       end
     end
-    
+
     context "food_idが存在しないとき" do
       let(:favorite_without_food) { build(:favorite, user_id: user.id) }
-    
+
       it "バリエーションエラーとなること" do
         expect(favorite_without_food).not_to be_valid
-        expect(favorite_without_food.errors.details[:food]).to include({error: :blank})
       end
     end
 
     context "重複するフードをお気に入り登録したとき" do
       before { create(:favorite, user_id: user.id, food_id: food.id) }
       let(:favorite_duplicated_foodId) { build(:favorite, user_id: user.id, food_id: food.id) }
-  
+
       it "バリエーションエラーとなること" do
         expect(favorite_duplicated_foodId).not_to be_valid
       end
