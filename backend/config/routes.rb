@@ -9,6 +9,11 @@ Rails.application.routes.draw do
       namespace "users" do
         get "users", to: "users#index"
       end
+
+      # ユーザーが個々のfavoriteにアクセスすることは無いから単数形resource
+      resource :favorites, only: [:show, :create, :destroy]
+      get "favorite_food_ids", to: "favorites#show_food_ids"
+
       # devise_token_authのregistrationsコントローラはオーバーライド
       mount_devise_token_auth_for "User", at: "auth", controllers: {
         registrations: "api/v1/auth/registrations"

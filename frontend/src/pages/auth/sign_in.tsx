@@ -22,9 +22,6 @@ const SignIn = () => {
   const onSignIn = async (data: SignInInput) => {
     const email = data.email;
     const password = data.password;
-    // Remember me機能としてクッキーの有効期限を1週間に設定
-    const expiryDate = new Date();
-    expiryDate.setDate(expiryDate.getDate() + 7);
     // submit時にローディングをセット
     setIsLoading(true);
     try {
@@ -42,6 +39,10 @@ const SignIn = () => {
         // Remember me機能が有効な場合
         // 認証成功時にクッキーへトークンを保存しホームページへリダイレクト、期限設定
         if (rememberMe) {
+          // Remember me機能としてクッキーの有効期限を1週間に設定
+          const expiryDate = new Date();
+          expiryDate.setDate(expiryDate.getDate() + 7);
+
           setCookie(null, "uid", response.headers["uid"], {
             expires: expiryDate,
           });

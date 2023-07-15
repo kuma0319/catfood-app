@@ -1,8 +1,9 @@
-import { UserProps } from "@/pages/my_page";
+import { MyPageProps } from "@/pages/my_page";
 
+import FavoriteFoods from "./FavoriteFoods";
 import Profile from "./Profile";
 
-const MyPageTabs = ({ props }: { props: UserProps }) => {
+const MyPageTabs = ({ props }: { props: MyPageProps }) => {
   return (
     <div>
       <nav
@@ -48,7 +49,7 @@ const MyPageTabs = ({ props }: { props: UserProps }) => {
           role="tabpanel"
           aria-labelledby="bar-with-underline-item-1"
         >
-          <Profile props={props} />
+          <Profile profileProps={props.userData} />
         </div>
         <div
           id="bar-with-underline-2"
@@ -56,13 +57,7 @@ const MyPageTabs = ({ props }: { props: UserProps }) => {
           role="tabpanel"
           aria-labelledby="bar-with-underline-item-2"
         >
-          <p className="text-gray-500 dark:text-gray-400">
-            This is the{" "}
-            <em className="font-semibold text-gray-800 dark:text-gray-200">
-              second
-            </em>{" "}
-            item's tab body.
-          </p>
+          <FavoriteFoods favoriteFoodProps={props.foodData} />
         </div>
         <div
           id="bar-with-underline-3"
@@ -70,13 +65,7 @@ const MyPageTabs = ({ props }: { props: UserProps }) => {
           role="tabpanel"
           aria-labelledby="bar-with-underline-item-3"
         >
-          <p className="text-gray-500 dark:text-gray-400">
-            This is the{" "}
-            <em className="font-semibold text-gray-800 dark:text-gray-200">
-              third
-            </em>{" "}
-            item's tab body.
-          </p>
+          <p className="text-gray-500 dark:text-gray-400">レビュー一覧</p>
         </div>
       </div>
     </div>

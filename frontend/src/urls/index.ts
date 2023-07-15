@@ -10,8 +10,12 @@ export const foodSearchUrl = `/api/v1/foods/search.json`;
 export const watchListUrl = `/api/v1/foods/watch_lists.json`;
 // devise_token_auth用
 export const authUrl = `/api/v1/auth`;
+export const authValidateTokenUrl = `/api/v1/auth/validate_token`;
 export const authPasswordUrl = `/api/v1/auth/password`;
 export const authSignInUrl = `/api/v1/auth/sign_in`;
 export const authSignOutUrl = `/api/v1/auth/sign_out`;
 // ユーザーページ
 export const userUrl = `/api/v1/users/users`;
+// お気に入りフードページ
+export const favoriteFoodUrl = `/api/v1/favorites`;
+export const favoriteFoodIdsUrl = `/api/v1/favorite_food_ids`;

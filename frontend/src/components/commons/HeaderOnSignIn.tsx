@@ -5,6 +5,7 @@ import { destroyCookie, parseCookies } from "nookies";
 import { useEffect, useState } from "react";
 
 import { authSignOutUrl } from "@/urls";
+import { getAuthHeadersWithCookies } from "@/utils/authApi";
 
 import SuccessToast from "./SuccessToast";
 
@@ -39,11 +40,7 @@ const HeaderOnSignIn = () => {
       const response = await axios.delete(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}${authSignOutUrl}`,
         {
-          headers: {
-            "access-token": cookies["access-token"],
-            client: cookies["client"],
-            uid: cookies["uid"],
-          },
+          headers: getAuthHeadersWithCookies(cookies),
         }
       );
       if (response.status === 200) {
@@ -243,7 +240,7 @@ const HeaderOnSignIn = () => {
                 {/* ログイン状態の場合はマイページ用のリンクを配置 */}
                 <Link
                   className="flex items-center gap-x-2 font-medium text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-500"
-                  href="my_page"
+                  href="/my_page"
                 >
                   マイページ
                 </Link>

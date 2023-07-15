@@ -4,17 +4,6 @@ RSpec.describe 'Api::V1::Auth', type: :request do
   let(:user) { create(:user) }
   let(:tokens) { ["uid", "client", "access-token"] }
 
-  # サインインメソッド
-  def sign_in(user)
-    user.confirm # メールアドレス認証を入れているためこれが必要
-    post '/api/v1/auth/sign_in', params: { email: user.email, password: user.password }, headers: { Accept: "application/json" }
-    {
-      'uid' => response.header['uid'],
-      'client' => response.header['client'],
-      'access-token' => response.header['access-token']
-    }
-  end
-
   before do
     @headers = sign_in(user)
   end

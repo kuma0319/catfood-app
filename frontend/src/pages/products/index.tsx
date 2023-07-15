@@ -14,7 +14,9 @@ import { FoodData } from "../../types/foods";
 //indexページをSSGでフェッチ
 export const getStaticProps: GetStaticProps = async () => {
   // 環境に応じてリクエスト先を変えられるように、環境変数からリクエストパスを読み込み
-  const response = await axios.get(`${process.env.BACKEND_URL}${foodsIndexUrl}`);
+  const response = await axios.get(
+    `${process.env.BACKEND_URL}${foodsIndexUrl}`
+  );
 
   return {
     props: {
@@ -32,7 +34,9 @@ const FoodsIndex = ({ data }: Props) => {
 
   // WatchListContextはundefinedを戻り値として含むため、それの対策
   if (context === undefined) {
-    throw new Error("useWatchList must be used within a WatchListProvider");
+    throw new Error(
+      "useWatchListは、WatchListProvider内で使用する必要があります。"
+    );
   }
 
   //ウォッチリスト用のコンテキスト

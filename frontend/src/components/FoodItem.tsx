@@ -7,7 +7,7 @@ import WatchListButton from "./WatchListButton";
 
 export interface FoodProps {
   food: Food;
-  handleWatchList: (id: number, isWatched: boolean) => void;
+  handleWatchList?: (id: number, isWatched: boolean) => void;
 }
 
 const FoodItem = ({ food, handleWatchList }: FoodProps) => {
@@ -16,11 +16,16 @@ const FoodItem = ({ food, handleWatchList }: FoodProps) => {
       <h1 className="col-span-2 self-start text-left text-xl font-semibold">
         {food.name}
       </h1>
-      <WatchListButton
-        id={food.id}
-        handleWatchList={handleWatchList}
-        trueWatchButtonName="追加済み"
-      />
+      {/* ウォッチリストボタンが不要なコンポーネントには非表示 */}
+      <div className="col-span-2 flex items-center justify-end gap-4">
+        {handleWatchList ? (
+          <WatchListButton
+            id={food.id}
+            handleWatchList={handleWatchList}
+            trueWatchButtonName="追加済み"
+          />
+        ) : null}
+      </div>
       <div className="col-span-1 row-span-2 flex items-center justify-center">
         <Link href="/products/[id]" as={`/products/${food.id}`}>
           <Image
