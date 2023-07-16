@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_14_202308) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_15_140729) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -55,6 +55,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_14_202308) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_brands_on_name", unique: true
+  end
+
+  create_table "evaluations", force: :cascade do |t|
+    t.bigint "review_id", null: false
+    t.bigint "review_item_id", null: false
+    t.integer "score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["review_id"], name: "index_evaluations_on_review_id"
+    t.index ["review_item_id"], name: "index_evaluations_on_review_item_id"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -116,6 +126,25 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_14_202308) do
     t.index ["name"], name: "index_production_areas_on_name", unique: true
   end
 
+  create_table "review_items", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_review_items_on_name", unique: true
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "food_id", null: false
+    t.string "title"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["food_id"], name: "index_reviews_on_food_id"
+    t.index ["user_id", "food_id"], name: "index_reviews_on_user_id_and_food_id", unique: true
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
@@ -149,6 +178,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_14_202308) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "amounts", "foods"
+  add_foreign_key "evaluations", "review_items"
+  add_foreign_key "evaluations", "reviews"
   add_foreign_key "favorites", "foods"
   add_foreign_key "favorites", "users"
   add_foreign_key "foods", "brands"
@@ -156,4 +187,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_14_202308) do
   add_foreign_key "foods", "production_areas"
   add_foreign_key "nutrient_contents", "foods"
   add_foreign_key "nutrient_contents", "nutrients"
+  add_foreign_key "reviews", "foods"
+  add_foreign_key "reviews", "users"
 end
