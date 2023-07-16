@@ -15,6 +15,8 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :foods, through: :favorites
 
+  has_many :reviews
+
   # avatarのURLを返すメソッド
   def avatar_url
     avatar.attached? ? url_for(avatar) : nil
