@@ -4,26 +4,16 @@ class Api::V1::ReviewsController < ApplicationController
 
   # 特定のキャットフードに紐づけられているレビューを全て返す
   def index
-    reviews = Review.where(food_id: params[:food_id])
-
-    render json: {
-      reviews:
-    }, status: :ok
+    @reviews = Review.includes(:evaluations, :review_items).where(food_id: params[:food_id])
   end
 
   # 特定のユーザーに紐づけられているレビューを全て返す
   def index_user_reviews
-    reviews = Review.where(user_id: current_api_v1_user.id)
-
-    render json: {
-      reviews:
-    }, status: :ok
+    @reviews = Review.includes(:evaluations, :review_items).where(user_id: current_api_v1_user.id)
   end
 
   def show
-    render json: {
-      review: @review
-    }, status: :ok
+    @review = current_api_v1_user.reviews.includes(:evaluations, :review_items).find(params[:id])
   end
 
   def create
@@ -71,11 +61,13 @@ class Api::V1::ReviewsController < ApplicationController
     @review = current_api_v1_user.reviews.find(params[:id])
   end
 
+  # create時のparameter。モデルでnested_attributesにて関連付けたevaluationsもevaluations_attributesとすることで同時に取り扱う
   def review_params
-    params.require(:review).permit(:food_id, :title, :content)
+    params.require(:review).permit(:food_id, :title, :content, evaluations_attributes: [:review_item_id, :score])
   end
 
+  # update時のparameter。モデルでnested_attributesにて関連付けたevaluationsもevaluations_attributesとすることで同時に取り扱う
   def update_params
-    params.require(:review).permit(:title, :content)
+    params.require(:review).permit(:title, :content, evaluations_attributes: [:id, :score])
   end
 end
