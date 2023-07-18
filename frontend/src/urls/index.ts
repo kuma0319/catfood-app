@@ -19,3 +19,5 @@ export const userUrl = `/api/v1/users/users`;
 // お気に入りフードページ
 export const favoriteFoodUrl = `/api/v1/favorites`;
 export const favoriteFoodIdsUrl = `/api/v1/favorite_food_ids`;
+//商品レビューページ
+export const productReviewsUrl = `/api/v1/reviews`;

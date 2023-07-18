@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 
 import RootLayout from "@/components/commons/Layout";
 import FoodDetail from "@/components/products/FoodDetail";
+import Reviews from "@/components/products/Reviews";
 import {
   authValidateTokenUrl,
   favoriteFoodIdsUrl,
@@ -205,6 +206,7 @@ const FoodShow = ({ food }: { food: Food }) => {
         <div className="mb-4 rounded border p-4 shadow-md">
           <FoodDetail key={food.id} food={food} />
         </div>
+        <Reviews foodId={food.id} />
       </div>
     </RootLayout>
   );
