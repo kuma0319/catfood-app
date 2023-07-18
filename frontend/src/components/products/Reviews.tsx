@@ -1,7 +1,11 @@
 import axios from "axios";
+import moment from "moment";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 import { productReviewsUrl } from "@/urls";
+
+import Score from "../commons/Score";
 
 interface Reviews {
   id: number;
@@ -17,7 +21,11 @@ interface Reviews {
   }[];
   food_id: number;
   updated_at: string;
-  user_id: number;
+  user: {
+    id: number;
+    avatar_url: string;
+    nickname: string;
+  };
 }
 
 const Reviews = ({ foodId }: { foodId: number }) => {
@@ -190,61 +198,41 @@ const Reviews = ({ foodId }: { foodId: number }) => {
                   className="flex flex-col gap-3 py-4 md:py-8"
                   key={review.id}
                 >
-                  <div>
+                  <div className="flex flex-col">
+                    <div className="mb-2 flex items-center space-x-4">
+                      <Image
+                        className="inline-block h-16 w-16 rounded-full ring-2 ring-white dark:ring-gray-800"
+                        src={
+                          review.user.avatar_url
+                            ? review.user.avatar_url
+                            : "/kkrn_icon_user_1.svg"
+                        }
+                        alt="アバター"
+                        width={100}
+                        height={100}
+                      />
+                      <span className="text-sm text-gray-900">
+                        {review.user.nickname}
+                      </span>
+                    </div>
                     <span className="block text-sm font-bold">
                       {review.title}
                     </span>
                     <span className="block text-sm text-gray-500">
-                      {review.updated_at}
+                      {moment(review.updated_at).format(
+                        "Y年M月D日にレビュー済み"
+                      )}
                     </span>
                   </div>
 
-                  <div className="-ml-1 flex gap-0.5">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 text-yellow-400"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 text-yellow-400"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 text-yellow-400"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 text-yellow-400"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 text-yellow-400"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  </div>
+                  {review.evaluations.map((evaluation, index) => (
+                    <div className="flex items-center gap-3" key={index}>
+                      <span className="w-20 whitespace-nowrap text-right text-sm text-gray-600">
+                        {evaluation.review_item.name}
+                      </span>
+                      <Score score={evaluation.score} />
+                    </div>
+                  ))}
 
                   <p className="text-gray-600">{review.content}</p>
                 </div>

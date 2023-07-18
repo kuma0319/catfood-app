@@ -5,7 +5,7 @@ class Evaluation < ApplicationRecord
   # scoreは0~5の整数のみ許容する
   validates :score, presence: true, numericality: {
     only_integer: true,
-    greater_than_or_equal_to: 0,
+    greater_than_or_equal_to: 1,
     less_than_or_equal_to: 5
   }
 
