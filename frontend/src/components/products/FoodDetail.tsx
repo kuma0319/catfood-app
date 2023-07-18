@@ -1,6 +1,6 @@
 import { useContext } from "react";
 
-import FoodItem from "@/components/FoodItem";
+import FoodItem from "@/components/products/FoodItem";
 import { WatchListContext } from "@/context/WatchListContext";
 import { Food } from "@/types/foods";
 

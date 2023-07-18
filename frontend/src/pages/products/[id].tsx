@@ -5,7 +5,7 @@ import { parseCookies } from "nookies";
 import { useEffect, useState } from "react";
 
 import RootLayout from "@/components/commons/Layout";
-import FoodDetail from "@/components/FoodDetail";
+import FoodDetail from "@/components/products/FoodDetail";
 import {
   authValidateTokenUrl,
   favoriteFoodIdsUrl,
