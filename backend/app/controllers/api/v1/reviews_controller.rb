@@ -4,16 +4,16 @@ class Api::V1::ReviewsController < ApplicationController
 
   # 特定のキャットフードに紐づけられているレビューを全て返す
   def index
-    @reviews = Review.includes(:evaluations, :review_items).where(food_id: params[:food_id])
+    @reviews = Review.includes(:evaluations, :review_items, :user).where(food_id: params[:food_id])
   end
 
   # 特定のユーザーに紐づけられているレビューを全て返す
   def index_user_reviews
-    @reviews = Review.includes(:evaluations, :review_items).where(user_id: current_api_v1_user.id)
+    @reviews = Review.includes(:evaluations, :review_items, :user).where(user_id: current_api_v1_user.id)
   end
 
   def show
-    @review = current_api_v1_user.reviews.includes(:evaluations, :review_items).find(params[:id])
+    @review = current_api_v1_user.reviews.includes(:evaluations, :review_items, :user).find(params[:id])
   end
 
   def create
