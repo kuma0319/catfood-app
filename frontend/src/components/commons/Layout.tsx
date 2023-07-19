@@ -11,7 +11,7 @@ export default function RootLayout({
       <header>
         <Header />
       </header>
-      <main className="mx-auto max-w-screen-lg bg-gray-100">{children}</main>
+      <main className="mx-auto max-w-screen-xl bg-gray-100">{children}</main>
       <footer>
         <Footer />
       </footer>

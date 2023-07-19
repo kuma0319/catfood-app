@@ -1,5 +1,5 @@
 // 受け取ったscoreに応じてスターの個数を変えて表示するコンポーネント
-const Score = ({ score }: { score: number }) => {
+const Score = ({ score, size }: { score: number; size: number }) => {
   return (
     <div className="-ml-1 flex gap-0.5">
       {/* Arrayとmapメソッドを組み合わせて、scoreの点数分だけ黄色のStarを繰り返す */}
@@ -9,7 +9,7 @@ const Score = ({ score }: { score: number }) => {
           <svg
             key={i}
             xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 text-yellow-400"
+            className={`h-${size} w-${size} text-yellow-400`}
             viewBox="0 0 20 20"
             fill="currentColor"
           >
@@ -23,7 +23,7 @@ const Score = ({ score }: { score: number }) => {
           <svg
             key={i}
             xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 text-gray-300"
+            className={`h-${size} w-${size} text-gray-300`}
             viewBox="0 0 20 20"
             fill="currentColor"
           >

@@ -172,7 +172,7 @@ const FoodShow = ({ food }: { food: Food }) => {
         <div className="flex justify-between">
           <h1 className="mb-4 text-2xl font-bold">商品詳細</h1>
           {isFavorited ? (
-            <div className="flex items-center">
+            <div className="mr-5 flex items-center">
               <button
                 className="active:scale-90"
                 onClick={removeFavoriteFood}
@@ -189,7 +189,7 @@ const FoodShow = ({ food }: { food: Food }) => {
               <span className="ml-2">お気に入りから削除</span>
             </div>
           ) : (
-            <div className="flex items-center">
+            <div className="mr-5 flex items-center">
               <button className="active:scale-90" onClick={addFavoriteFood}>
                 <svg
                   className="h-auto w-6 fill-current text-red-500 hover:text-red-400"
@@ -203,9 +203,7 @@ const FoodShow = ({ food }: { food: Food }) => {
             </div>
           )}
         </div>
-        <div className="mb-4 rounded border p-4 shadow-md">
-          <FoodDetail key={food.id} food={food} />
-        </div>
+        <FoodDetail key={food.id} food={food} />
         <Reviews foodId={food.id} />
       </div>
     </RootLayout>
