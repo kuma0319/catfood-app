@@ -1,7 +1,8 @@
 import axios from "axios";
 import moment from "moment";
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/router";
+import { parseCookies } from "nookies";
 import { useEffect, useState } from "react";
 
 import { productReviewsUrl } from "@/urls";
@@ -48,6 +49,8 @@ const Reviews = ({ foodId }: { foodId: number }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [reviewData, setReviewData] = useState<ReviewData>();
+  const router = useRouter();
+  const cookies = parseCookies();
 
   // コンポーネントレンダリング時に商品レビューを取得
   // useEffectで即時関数として定義
@@ -71,12 +74,27 @@ const Reviews = ({ foodId }: { foodId: number }) => {
     })();
   }, []);
 
+  const goToReviewPage = () => {
+    if (cookies["access-token"]) {
+      router.push({
+        pathname: "/products/review_form",
+        query: { foodId, review_flag: true },
+      });
+    } else {
+      router.push({
+        pathname: "/auth/sign_in",
+      });
+    }
+  };
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
   return (
     <div className="py-6 sm:py-8 lg:py-12">
+      {/* エラーの場合にエラーメッセージを表示する */}
+      <div className="text-center text-lg text-red-600">{errorMessage}</div>
       <div className="mx-auto max-w-screen-xl px-4 md:px-8">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-12">
           <div>
@@ -108,12 +126,12 @@ const Reviews = ({ foodId }: { foodId: number }) => {
                 ))}
               </div>
 
-              <Link
-                href="#"
+              <button
+                onClick={goToReviewPage}
                 className="block rounded-lg border bg-white px-4 py-2 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-100 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base"
               >
                 レビューを書く
-              </Link>
+              </button>
             </div>
           </div>
 
@@ -163,15 +181,6 @@ const Reviews = ({ foodId }: { foodId: number }) => {
                   <p className="text-gray-600">{review.content}</p>
                 </div>
               ))}
-            </div>
-
-            <div className="border-t pt-6">
-              <a
-                href="#"
-                className="flex items-center gap-0.5 font-semibold text-indigo-400 transition duration-100 hover:text-indigo-500 active:text-indigo-600"
-              >
-                Read all reviews
-              </a>
             </div>
           </div>
         </div>
