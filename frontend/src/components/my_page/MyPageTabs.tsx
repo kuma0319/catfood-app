@@ -5,8 +5,6 @@ import Profile from "./Profile";
 import UserReviews from "./UserReviews";
 
 const MyPageTabs = ({ props }: { props: MyPageProps }) => {
-  console.log(props.reviewData);
-
   return (
     <div>
       <nav
@@ -42,7 +40,7 @@ const MyPageTabs = ({ props }: { props: MyPageProps }) => {
           aria-controls="bar-with-underline-3"
           role="tab"
         >
-          レビュー一覧
+          マイレビュー
         </button>
       </nav>
 

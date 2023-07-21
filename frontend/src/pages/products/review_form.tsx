@@ -4,7 +4,7 @@ import { parseCookies } from "nookies";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
-import AuthLayout from "@/components/commons/AuthLayout";
+import RootLayout from "@/components/commons/Layout";
 import Spinners from "@/components/commons/Spinners";
 import StarRating from "@/components/products/StarRating";
 import {
@@ -94,7 +94,7 @@ const ReviewForm = () => {
   }, [router]);
 
   return (
-    <AuthLayout>
+    <RootLayout>
       {isLoading && <Spinners />}
       <div className="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
         {/* エラーの場合にエラーメッセージを表示する */}
@@ -298,7 +298,7 @@ const ReviewForm = () => {
           </div>
         </div>
       </div>
-    </AuthLayout>
+    </RootLayout>
   );
 };
 

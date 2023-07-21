@@ -2,10 +2,10 @@ import axios from "axios";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import nookies, { parseCookies } from "nookies";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
-import AuthLayout from "@/components/commons/AuthLayout";
+import RootLayout from "@/components/commons/Layout";
 import Spinners from "@/components/commons/Spinners";
 import StarRating from "@/components/products/StarRating";
 import {
@@ -69,7 +69,6 @@ const ReviewEditForm = (props: Review) => {
       // defaultValuesオプションを使用して、propsで受け取ったreviewデータを元に初期値を設定
       title: props.title,
       content: props.content,
-
       rateOfEating: props.evaluations[EatingParamsIndex].score,
       rateOfFur: props.evaluations[FurParamsIndex].score,
       rateOfHealth: props.evaluations[HealthParamsIndex].score,
@@ -82,14 +81,15 @@ const ReviewEditForm = (props: Review) => {
   const router = useRouter();
 
   const onEditReview = async (data: ReviewInput) => {
-    const foodId = router.query.foodId;
     const cookies = parseCookies();
 
     // submit時にローディングをセット
     setIsLoading(true);
     try {
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}${reviewDetailUrl}`,
+      const response = await axios.patch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}${reviewDetailUrl(
+          props.id.toString()
+        )}`,
         {
           title: data.title,
           content: data.content,
@@ -113,38 +113,25 @@ const ReviewEditForm = (props: Review) => {
               score: data.rateOfFur,
             },
           ],
-          food_id: foodId,
         },
         {
           headers: getAuthHeadersWithCookies(cookies),
         }
       );
-      if (response.status === 201) {
-        await router.push(`/products/${foodId}`);
+      if (response.status === 200) {
+        await router.push(`/my_page`);
         setIsLoading(false);
       }
     } catch (error: any) {
       // エラー発生時はエラーメッセージをセット
-      setErrorMessage("投稿エラー");
+      setErrorMessage("更新エラー");
       console.log(error.response);
       setIsLoading(false);
     }
   };
 
-  // このページに直接アクセスした際の対策
-  useEffect(() => {
-    // routerを待ってからで無いと問答無用でリダイレクトされてしまうため必要
-    if (router.isReady) {
-      const review_flag = router.query.review_flag;
-      // URLパラメータに特定のフラグ(review_flag)が無いとホームへリダイレクト
-      if (review_flag !== "true") {
-        router.push("/");
-      }
-    }
-  }, [router]);
-
   return (
-    <AuthLayout>
+    <RootLayout>
       {isLoading && <Spinners />}
       <div className="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
         {/* エラーの場合にエラーメッセージを表示する */}
@@ -347,7 +334,7 @@ const ReviewEditForm = (props: Review) => {
           </div>
         </div>
       </div>
-    </AuthLayout>
+    </RootLayout>
   );
 };
 

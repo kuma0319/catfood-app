@@ -11,7 +11,7 @@ const UserReviews = ({ userReviewProps }: { userReviewProps: Review[] }) => {
   const goToReviewEditPage = (reviewId: number) => {
     router.push({
       pathname: "/products/review_edit_form",
-      query: { review_flag: true, reviewId: reviewId },
+      query: { reviewId: reviewId },
     });
   };
 
