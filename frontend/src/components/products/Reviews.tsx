@@ -1,5 +1,4 @@
 import axios from "axios";
-import moment from "moment";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { parseCookies } from "nookies";
@@ -16,6 +15,9 @@ const Reviews = ({ foodId }: { foodId: number }) => {
   const [reviewData, setReviewData] = useState<ReviewData>();
   const router = useRouter();
   const cookies = parseCookies();
+  // 日付を修正するためのmoment及びmoment-timezoneを読み込み
+  const moment = require("moment");
+  require("moment-timezone");
 
   // コンポーネントレンダリング時に商品レビューを取得(商品ページ自体はSSGのためレビュー部分はuseEffectを使用)
   // useEffectで即時関数として定義
@@ -129,9 +131,9 @@ const Reviews = ({ foodId }: { foodId: number }) => {
                       {review.title}
                     </span>
                     <span className="block text-sm text-gray-500">
-                      {moment(review.updated_at).format(
-                        "Y年M月D日にレビュー済み"
-                      )}
+                      {moment(review.updated_at)
+                        .tz("Asia/Tokyo")
+                        .format("Y年M月D日にレビュー済み")}
                     </span>
                   </div>
 

@@ -1,18 +1,51 @@
-import moment from "moment";
+import axios from "axios";
 import { useRouter } from "next/router";
+import { parseCookies } from "nookies";
+import { useState } from "react";
 
 import { Review } from "@/types/reviews";
+import { reviewDetailUrl } from "@/urls";
+import { getAuthHeadersWithCookies } from "@/utils/authApi";
 
 import Score from "../commons/Score";
 
 const UserReviews = ({ userReviewProps }: { userReviewProps: Review[] }) => {
+  const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
+  // 日付を修正するためのmoment及びmoment-timezoneを読み込み
+  const moment = require("moment");
+  require("moment-timezone");
 
+  // レビュー更新用の関数
   const goToReviewEditPage = (reviewId: number) => {
     router.push({
       pathname: "/products/review_edit_form",
       query: { reviewId: reviewId },
     });
+  };
+
+  // レビュー削除用の関数
+  const deleteReview = async (reviewId: number) => {
+    const cookies = parseCookies();
+
+    try {
+      const response = await axios.delete(
+        // reviewIdを引数として受け取って動的にURLを変えてリクエスト
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}${reviewDetailUrl(
+          reviewId.toString()
+        )}`,
+        {
+          headers: getAuthHeadersWithCookies(cookies),
+        }
+      );
+      if (response.status === 200) {
+        await router.push(`/my_page`);
+      }
+    } catch (error: any) {
+      // エラー発生時はエラーメッセージをセット
+      setErrorMessage("削除エラー");
+      console.log(error.response);
+    }
   };
 
   return (
@@ -27,7 +60,10 @@ const UserReviews = ({ userReviewProps }: { userReviewProps: Review[] }) => {
               <div>
                 <span className="block text-sm font-bold">{review.title}</span>
                 <span className="block text-sm text-gray-500">
-                  {moment(review.updated_at).format("Y年M月D日にレビュー済み")}
+                  {/* momentモジュールを使用してタイムゾーンを東京指定で更新日時を装飾 */}
+                  {moment(review.updated_at)
+                    .tz("Asia/Tokyo")
+                    .format("Y年M月D日にレビュー済み")}
                 </span>
               </div>
               <div className="flex gap-2">
@@ -37,7 +73,16 @@ const UserReviews = ({ userReviewProps }: { userReviewProps: Review[] }) => {
                 >
                   編集
                 </button>
-                <button className="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-red-500 px-3 py-2 text-sm font-semibold text-white transition-all hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800">
+                <button
+                  className="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-red-500 px-3 py-2 text-sm font-semibold text-white transition-all hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                  onClick={() => {
+                    if (
+                      window.confirm("このレビューを削除してもよろしいですか？")
+                    ) {
+                      deleteReview(review.id);
+                    }
+                  }}
+                >
                   削除
                 </button>
               </div>
