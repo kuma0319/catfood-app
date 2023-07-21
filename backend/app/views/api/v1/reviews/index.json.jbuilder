@@ -13,6 +13,7 @@ json.reviews do
     # has_manyで関連付けられているevaluationsを指定
     json.evaluations do
       json.array! review.evaluations do |evaluation|
+        json.id evaluation.id
         json.score evaluation.score
         json.review_item do
           json.extract! evaluation.review_item, :id, :name

@@ -1,6 +1,7 @@
 import axios from "axios";
+import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
-import { parseCookies } from "nookies";
+import nookies, { parseCookies } from "nookies";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
@@ -13,11 +14,49 @@ import {
   HEALTH_PARAMS,
   SCENT_PARAMS,
 } from "@/review_constant";
-import { ReviewInput } from "@/types/reviews";
-import { productReviewsUrl } from "@/urls";
+import { Review, ReviewInput } from "@/types/reviews";
+import { reviewDetailUrl } from "@/urls";
 import { getAuthHeadersWithCookies } from "@/utils/authApi";
 
-const ReviewForm = () => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  // contextによって、reviewIdとクッキー情報を取得
+  const reviewId = context.query.reviewId as string;
+  const cookies = nookies.get(context);
+
+  // 指定のAPIエンドポイントにヘッダーを含めたリクエストを投げる
+  try {
+    const response = await axios.get(
+      // reviewDetailUrlの引数にreviewIdを渡すことで、リクエストURLを動的に変更
+      `${process.env.BACKEND_URL}${reviewDetailUrl(reviewId)}`,
+      {
+        headers: getAuthHeadersWithCookies(cookies),
+      }
+    );
+
+    // エラー無い場合はレスポンスのデータを返す
+    const props = await response.data;
+    return { props };
+  } catch (error: any) {
+    // Rails側で401エラーが発生した場合はリダイレクト
+    if (error.response.status === 401) {
+      return {
+        redirect: {
+          destination: "/auth/sign_in",
+          permanent: false,
+        },
+      };
+    }
+    throw error;
+  }
+};
+
+const ReviewEditForm = (props: Review) => {
+  // レビュー用の定数を元にidから配列(id - 1)を指定
+  const ScentParamsIndex = SCENT_PARAMS.id - 1;
+  const EatingParamsIndex = EATING_PARAMS.id - 1;
+  const HealthParamsIndex = HEALTH_PARAMS.id - 1;
+  const FurParamsIndex = FUR_PARAMS.id - 1;
+
   // React Hook Formライブラリを使用
   const {
     control,
@@ -26,13 +65,23 @@ const ReviewForm = () => {
     register,
   } = useForm<ReviewInput>({
     criteriaMode: "all",
+    defaultValues: {
+      // defaultValuesオプションを使用して、propsで受け取ったreviewデータを元に初期値を設定
+      title: props.title,
+      content: props.content,
+
+      rateOfEating: props.evaluations[EatingParamsIndex].score,
+      rateOfFur: props.evaluations[FurParamsIndex].score,
+      rateOfHealth: props.evaluations[HealthParamsIndex].score,
+      rateOfScent: props.evaluations[ScentParamsIndex].score,
+    },
   });
 
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  const onReview = async (data: ReviewInput) => {
+  const onEditReview = async (data: ReviewInput) => {
     const foodId = router.query.foodId;
     const cookies = parseCookies();
 
@@ -40,26 +89,27 @@ const ReviewForm = () => {
     setIsLoading(true);
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}${productReviewsUrl}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}${reviewDetailUrl}`,
         {
           title: data.title,
           content: data.content,
           // 各評価項目におけるスコアを含める
+          // updateアクションにおいては、評価項目ごとのidを指定してやる必要があるためidを指定
           evaluations_attributes: [
             {
-              review_item_id: SCENT_PARAMS.id,
+              id: props.evaluations[ScentParamsIndex].id,
               score: data.rateOfScent,
             },
             {
-              review_item_id: EATING_PARAMS.id,
+              id: props.evaluations[EatingParamsIndex].id,
               score: data.rateOfEating,
             },
             {
-              review_item_id: HEALTH_PARAMS.id,
+              id: props.evaluations[HealthParamsIndex].id,
               score: data.rateOfHealth,
             },
             {
-              review_item_id: FUR_PARAMS.id,
+              id: props.evaluations[FurParamsIndex].id,
               score: data.rateOfFur,
             },
           ],
@@ -102,12 +152,12 @@ const ReviewForm = () => {
         <div className="mx-auto max-w-2xl">
           <div className="text-center">
             <h2 className="text-xl font-bold text-gray-800 dark:text-white sm:text-3xl">
-              レビューを投稿
+              レビューを編集
             </h2>
           </div>
 
           <div className="relative z-10 mt-5 rounded-xl border bg-white p-4 dark:border-gray-700 dark:bg-gray-800 sm:mt-10 md:p-10">
-            <form onSubmit={handleSubmit(onReview)}>
+            <form onSubmit={handleSubmit(onEditReview)}>
               <div className="my-4 gap-2 border-y border-gray-400 py-5">
                 <h2 className="mb-3 text-lg font-bold dark:text-white lg:text-xl">
                   項目別評価
@@ -125,7 +175,6 @@ const ReviewForm = () => {
                       min: { message: "評価が必須です", value: 1 },
                       required: "評価が必須です",
                     }}
-                    defaultValue={0}
                     render={({ field }) => (
                       <StarRating
                         rating={field.value}
@@ -302,4 +351,4 @@ const ReviewForm = () => {
   );
 };
 
-export default ReviewForm;
+export default ReviewEditForm;

@@ -1,5 +1,5 @@
 class Api::V1::ReviewsController < ApplicationController
-  before_action :set_review, only: [:show, :update, :destroy]
+  before_action :set_review, only: [ :update, :destroy]
   before_action :authenticate_api_v1_user!, only: [:user_reviews, :show, :create, :update, :destroy]
 
   # 特定のキャットフードに紐づけられているレビューを全て返す

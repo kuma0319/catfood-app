@@ -26,6 +26,7 @@ const withAuthMyPage = (
       return {
         props: {
           foodData: await responses[1].data,
+          reviewData: await responses[2].data,
           userData: await responses[0].data,
         },
       };

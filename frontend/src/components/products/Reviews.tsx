@@ -5,45 +5,10 @@ import { useRouter } from "next/router";
 import { parseCookies } from "nookies";
 import { useEffect, useState } from "react";
 
+import { ReviewData } from "@/types/reviews";
 import { productReviewsUrl } from "@/urls";
 
 import Score from "../commons/Score";
-
-interface AverageScore {
-  id: number;
-  name: string;
-  value: number;
-}
-
-interface Evaluation {
-  review_item: {
-    id: number;
-    name: string;
-  };
-  score: number;
-}
-
-interface User {
-  id: number;
-  avatar_url: string;
-  nickname: string;
-}
-
-interface Review {
-  id: number;
-  title: string;
-  content: string;
-  created_at: string;
-  evaluations: Evaluation[];
-  food_id: number;
-  updated_at: string;
-  user: User;
-}
-
-interface ReviewData {
-  average_scores: AverageScore[];
-  reviews: Review[];
-}
 
 const Reviews = ({ foodId }: { foodId: number }) => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -52,12 +17,12 @@ const Reviews = ({ foodId }: { foodId: number }) => {
   const router = useRouter();
   const cookies = parseCookies();
 
-  // コンポーネントレンダリング時に商品レビューを取得
+  // コンポーネントレンダリング時に商品レビューを取得(商品ページ自体はSSGのためレビュー部分はuseEffectを使用)
   // useEffectで即時関数として定義
   useEffect(() => {
     (async () => {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}${productReviewsUrl}.json`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}${productReviewsUrl}`,
         {
           params: {
             food_id: foodId,
@@ -65,7 +30,6 @@ const Reviews = ({ foodId }: { foodId: number }) => {
         }
       );
       if (response.status === 200) {
-        console.log(response.data);
         setReviewData(response.data);
         setIsLoading(false);
       } else {
@@ -126,12 +90,14 @@ const Reviews = ({ foodId }: { foodId: number }) => {
                 ))}
               </div>
 
-              <button
-                onClick={goToReviewPage}
-                className="block rounded-lg border bg-white px-4 py-2 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-100 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base"
-              >
-                レビューを書く
-              </button>
+              <div className="flex justify-center">
+                <button
+                  onClick={goToReviewPage}
+                  className="block rounded-lg border bg-white px-4 py-2 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-100 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base"
+                >
+                  レビューを書く
+                </button>
+              </div>
             </div>
           </div>
 
@@ -139,7 +105,7 @@ const Reviews = ({ foodId }: { foodId: number }) => {
             <div className="divide-y">
               {reviewData?.reviews.map((review) => (
                 <div
-                  className="flex flex-col gap-3 py-4 md:py-8"
+                  className="flex flex-col gap-3 border-b border-gray-400 py-4 md:py-8 "
                   key={review.id}
                 >
                   <div className="flex flex-col">
@@ -174,11 +140,11 @@ const Reviews = ({ foodId }: { foodId: number }) => {
                       <span className="w-20 whitespace-nowrap text-left text-sm text-gray-600">
                         {evaluation.review_item.name}
                       </span>
-                      <Score score={evaluation.score} size={5} />
+                      <Score score={Math.round(evaluation.score)} size={4} />
                     </div>
                   ))}
 
-                  <p className="text-gray-600">{review.content}</p>
+                  <p className="mt-3 text-gray-600">{review.content}</p>
                 </div>
               ))}
             </div>
