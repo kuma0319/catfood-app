@@ -19,9 +19,9 @@ class Evaluation < ApplicationRecord
       # スコアが0の場合は実質的にレビューが存在しないため空配列を返したい
       if average_score > 0
         {
-          "id" => review_item.id,
-          "name" => review_item.name,
-          "value" => average_score
+          id: review_item.id,
+          name: review_item.name,
+          value: average_score
         }
       end
     end.compact # これ(.compact)を入れないと中身が全てnullの配列が返される
