@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :evaluation do
-    review { nil }
-    review_item { nil }
+    review
+    review_item
     score { 1 }
   end
 end

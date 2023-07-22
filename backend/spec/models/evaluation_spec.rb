@@ -4,7 +4,9 @@ RSpec.describe Evaluation, type: :model do
   let(:user) { create(:user) }
   let(:food) { create(:food) }
   let(:review_item) { create(:review_item) }
-  let(:review) { create(:review, user_id: user.id, food_id: food.id) }
+
+  # reviewをevaluations無しで作成するとバリデーションエラーとなるためbuildとする
+  let(:review) { build(:review, user_id: user.id, food_id: food.id) }
 
   # アソシエーションテスト
   describe "association" do
@@ -17,74 +19,85 @@ RSpec.describe Evaluation, type: :model do
   # バリデーションテスト
   describe "validations" do
     context "正しい情報で評価を作成したとき" do
-      let(:evaluation) { create(:evaluation, review_id: review.id, review_item_id: review_item.id) }
+      before do
+        review.evaluations << build(:evaluation, review_id: review.id, review_item_id: review_item.id)
+        review.save!
+      end
 
       it "バリエーションエラーとならないこと" do
         expect(review).to be_valid
       end
     end
 
-    context "scoreが1~5の整数ではないとき" do
-      let(:evaluation_with_score_0) { build(:evaluation, review_id: review.id, review_item_id: review_item.id, score: 0) }
-      let(:evaluation_with_score_1) { build(:evaluation, review_id: review.id, review_item_id: review_item.id, score: 1) }
-      let(:evaluation_with_score_5) { build(:evaluation, review_id: review.id, review_item_id: review_item.id, score: 5) }
-      let(:evaluation_with_score_6) { build(:evaluation, review_id: review.id, review_item_id: review_item.id, score: 6) }
-      let(:evaluation_with_score_float_score) { build(:evaluation, score: 1.0) }
+    context "scoreが1~5の整数であるとき" do
+      valid_scores = [ 1, 2, 3, 4, 5]
+    
+      valid_scores.each do |valid_score|
+        it "バリエーションエラーとならないこと" do
+          review.evaluations << build(:evaluation, review: review, review_item: review_item, score: valid_score)
+          expect(review).to be_valid
+        end
+      end
+    end
 
-      it "バリエーションエラーとなること" do
-        expect(evaluation_with_score_0).not_to be_valid
-        expect(evaluation_with_score_1).to be_valid
-        expect(evaluation_with_score_5).to be_valid
-        expect(evaluation_with_score_6).not_to be_valid
-        expect(evaluation_with_score_float_score).not_to be_valid
+    context "scoreが1~5の整数以外であるとき" do
+      error_scores = [ 0, 6, -1, 0.1, 1.0 ]
+    
+      error_scores.each do |error_score|
+        it "バリエーションエラーとなること" do
+          review.evaluations << build(:evaluation, review: review, review_item: review_item, score: error_score)
+          expect(review).not_to be_valid
+        end
       end
     end
 
     context "scoreが存在しないとき" do
-      let(:evaluation_without_score) { build(:evaluation, score: nil) }
+      before do
+        review.evaluations << build(:evaluation, review_id: review.id, review_item_id: review_item.id, score: nil)
+      end
 
       it "バリエーションエラーとなること" do
-        expect(evaluation_without_score).not_to be_valid
+        expect(review).not_to be_valid
       end
     end
 
     context "同一レビューに重複するreview_item_idが存在するとき" do
-      let!(:evaluation) { create(:evaluation, review_id: review.id, review_item_id: review_item.id) }
-      let(:duplicated_evaluation) { build(:evaluation, review_id: review.id, review_item_id: review_item.id) }
+      before do
+        review.evaluations << build(:evaluation, review_id: review.id, review_item_id: review_item.id)
+        review.save!
+        review.evaluations << build(:evaluation, review_id: review.id, review_item_id: review_item.id)
+      end
 
       it "バリエーションエラーとなること" do
-        expect(duplicated_evaluation).not_to be_valid
+        expect(review).not_to be_valid
       end
     end
   end
 
   describe "self.average_scores(food_id)" do
     let(:other_user) { create(:user) }
-    let(:other_review) { create(:review, user_id: other_user.id, food_id: food.id) }
-    let(:review_item_1) { create(:review_item, name: "評価項目1") }
-    let(:review_item_2) { create(:review_item, name: "評価項目2") }
-    let!(:evaluation_1) { create(:evaluation, review_id: review.id, review_item_id: review_item_1.id, score: 1) }
-    let!(:evaluation_2) { create(:evaluation, review_id: review.id, review_item_id: review_item_2.id, score: 4) }
-    let!(:evaluation_3) { create(:evaluation, review_id: other_review.id, review_item_id: review_item_1.id, score: 3) }
-    let!(:evaluation_4) { create(:evaluation, review_id: other_review.id, review_item_id: review_item_2.id, score: 5) }
+    let(:other_review) { build(:review, user_id: other_user.id, food_id: food.id) }
+    let(:reviews_score) { 1 }
+    let(:other_reviews_score) { 4 }
+    before do
+      review.evaluations << build(:evaluation, review_id: review.id, review_item_id: review_item.id, score: reviews_score)
+      review.save!
+      other_review.evaluations << build(:evaluation, review_id: review.id, review_item_id: review_item.id, score: other_reviews_score)
+      other_review.save!
+    end
 
     context "food_idを引数で受け取ったとき" do
       it "配列の長さが想定したものと一致すること" do
-        expect(Evaluation.average_scores(food.id).length).to eq(2)
+        expect(Evaluation.average_scores(food.id).length).to eq(1)
       end
 
       it "各評価項目についてid, name, value(スコアの平均値)を含んだオブジェクトの配列を返すこと" do
         expected_array = [
           {
-            id: review_item_1.id,
-            name: review_item_1.name,
-            value: (evaluation_1.score + evaluation_3.score) / 2.0
-          },
-          {
-            id: review_item_2.id,
-            name: review_item_2.name,
-            value: (evaluation_2.score + evaluation_4.score) / 2.0
-          },
+            id: review_item.id,
+            name: review_item.name,
+            value: (reviews_score + other_reviews_score) / 2.0
+          }
         ]
         expect(Evaluation.average_scores(food.id)).to match_array(expected_array)
       end
