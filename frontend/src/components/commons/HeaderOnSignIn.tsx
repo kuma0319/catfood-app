@@ -5,7 +5,7 @@ import { destroyCookie, parseCookies } from "nookies";
 import { useEffect, useState } from "react";
 
 import { authSignOutUrl } from "@/urls";
-import { getAuthHeadersWithCookies } from "@/utils/authApi";
+import { getAuthHeadersWithCookies } from "@/utils/ApiHeaders";
 
 import SuccessToast from "./SuccessToast";
 

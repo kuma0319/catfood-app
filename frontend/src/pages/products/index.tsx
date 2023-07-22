@@ -4,7 +4,7 @@ import { GetStaticProps } from "next";
 import { useContext } from "react";
 
 import RootLayout from "@/components/commons/Layout";
-import FoodItem from "@/components/FoodItem";
+import FoodItem from "@/components/products/FoodItem";
 import FoodSearch from "@/components/search_form/FoodSearch";
 import { WatchListContext } from "@/context/WatchListContext";
 import { foodsIndexUrl } from "@/urls";

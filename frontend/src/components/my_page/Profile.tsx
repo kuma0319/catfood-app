@@ -5,7 +5,7 @@ import { useState } from "react";
 
 import { UserProps } from "@/pages/my_page";
 import { authUrl } from "@/urls";
-import { getAuthHeadersWithCookies } from "@/utils/authApi";
+import { getAuthHeadersWithCookies } from "@/utils/ApiHeaders";
 
 import Spinners from "../commons/Spinners";
 import ProfileContents from "./ProfileContents";

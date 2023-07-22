@@ -2,6 +2,8 @@ import axios from "axios";
 import { GetServerSideProps } from "next";
 import nookies from "nookies";
 
+import { getAuthHeadersWithCookies } from "@/utils/ApiHeaders";
+
 const withAuthServerSideProps = (url: string): GetServerSideProps => {
   return async (context) => {
     const cookies = nookies.get(context);
@@ -9,12 +11,7 @@ const withAuthServerSideProps = (url: string): GetServerSideProps => {
     // 指定のAPIエンドポイントにヘッダーを含めたリクエストを投げる
     try {
       const response = await axios.get(`${process.env.BACKEND_URL}${url}`, {
-        headers: {
-          "access-token": cookies["access-token"],
-          client: cookies["client"],
-          "Content-Type": "application/json",
-          uid: cookies["uid"],
-        },
+        headers: getAuthHeadersWithCookies(cookies),
       });
 
       // エラー無い場合はレスポンスのデータを返す

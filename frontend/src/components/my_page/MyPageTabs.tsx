@@ -2,6 +2,7 @@ import { MyPageProps } from "@/pages/my_page";
 
 import FavoriteFoods from "./FavoriteFoods";
 import Profile from "./Profile";
+import UserReviews from "./UserReviews";
 
 const MyPageTabs = ({ props }: { props: MyPageProps }) => {
   return (
@@ -39,7 +40,7 @@ const MyPageTabs = ({ props }: { props: MyPageProps }) => {
           aria-controls="bar-with-underline-3"
           role="tab"
         >
-          レビュー一覧
+          マイレビュー
         </button>
       </nav>
 
@@ -65,7 +66,7 @@ const MyPageTabs = ({ props }: { props: MyPageProps }) => {
           role="tabpanel"
           aria-labelledby="bar-with-underline-item-3"
         >
-          <p className="text-gray-500 dark:text-gray-400">レビュー一覧</p>
+          <UserReviews userReviewProps={props.reviewData} />
         </div>
       </div>
     </div>

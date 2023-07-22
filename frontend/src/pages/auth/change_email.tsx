@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import AuthLayout from "@/components/commons/AuthLayout";
 import Spinners from "@/components/commons/Spinners";
 import { authUrl } from "@/urls";
-import { getAuthHeadersWithCookies } from "@/utils/authApi";
+import { getAuthHeadersWithCookies } from "@/utils/ApiHeaders";
 
 const ChangeEmail = () => {
   // React Hook Formライブラリを使用

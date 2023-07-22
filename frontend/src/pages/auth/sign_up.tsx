@@ -6,6 +6,7 @@ import SignUpForm from "@/components/authentication/SignUpForm";
 import AuthLayout from "@/components/commons/AuthLayout";
 import Spinners from "@/components/commons/Spinners";
 import { authUrl } from "@/urls";
+import { getHeaders } from "@/utils/ApiHeaders";
 
 interface SignUpInput {
   email: string;
@@ -31,10 +32,7 @@ const SignUp = () => {
           password: password,
         },
         {
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
+          headers: getHeaders(),
         }
       );
       if (response.status === 200) {
