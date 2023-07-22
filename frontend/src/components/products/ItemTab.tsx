@@ -1,4 +1,4 @@
-import { Amounts, Nutrient } from "../types/foods";
+import { Amounts, Nutrient } from "../../types/foods";
 
 interface ItemTabList {
   id: number;

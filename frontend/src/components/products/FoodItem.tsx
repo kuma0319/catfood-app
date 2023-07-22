@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { Food } from "../types/foods";
+import { Food } from "../../types/foods";
+import WatchListButton from "../WatchListButton";
 import ItemTab from "./ItemTab";
-import WatchListButton from "./WatchListButton";
 
 export interface FoodProps {
   food: Food;

@@ -3,12 +3,12 @@ import Button from "@/components/search_form/Button";
 import FoodSearchInput from "@/components/search_form/FoodSearchInput";
 import MultipleOption from "@/components/search_form/MultipleOption";
 import RangeOption from "@/components/search_form/RangeOption";
+import useFoodSearch from "@/hooks/useFoodSearch";
 import {
   FOOD_SEARCH_INPUT_PARAMS,
   MULTI_OPTION_PARAMS,
   RANGE_OPTION_PARAMS,
-} from "@/constant";
-import useFoodSearch from "@/hooks/useFoodSearch";
+} from "@/search_constant";
 
 const FoodSearch = () => {
   const {

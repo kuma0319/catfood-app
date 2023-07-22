@@ -5,7 +5,8 @@ import { parseCookies } from "nookies";
 import { useEffect, useState } from "react";
 
 import RootLayout from "@/components/commons/Layout";
-import FoodDetail from "@/components/FoodDetail";
+import FoodDetail from "@/components/products/FoodDetail";
+import Reviews from "@/components/products/Reviews";
 import {
   authValidateTokenUrl,
   favoriteFoodIdsUrl,
@@ -13,7 +14,7 @@ import {
   foodDetailUrl,
   foodsIndexUrl,
 } from "@/urls";
-import { getAuthHeadersWithCookies } from "@/utils/authApi";
+import { getAuthHeadersWithCookies } from "@/utils/ApiHeaders";
 
 import { Food } from "../../types/foods";
 
@@ -111,9 +112,12 @@ const FoodShow = ({ food }: { food: Food }) => {
       // 認証成功(=ログイン済み)であった場合は、axios.deleteでお気に入り登録をリクエスト。
       if (authResponse.status === 200) {
         const registrationFavoriteResponse = await axios.delete(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}${favoriteFoodUrl}?food_id=${foodId}`,
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}${favoriteFoodUrl}`,
           {
             headers: getAuthHeadersWithCookies(cookies),
+            params: {
+              food_id: foodId,
+            },
           }
         );
         // お気に入りから削除出来たらstateを更新
@@ -171,7 +175,7 @@ const FoodShow = ({ food }: { food: Food }) => {
         <div className="flex justify-between">
           <h1 className="mb-4 text-2xl font-bold">商品詳細</h1>
           {isFavorited ? (
-            <div className="flex items-center">
+            <div className="mr-5 flex items-center">
               <button
                 className="active:scale-90"
                 onClick={removeFavoriteFood}
@@ -188,7 +192,7 @@ const FoodShow = ({ food }: { food: Food }) => {
               <span className="ml-2">お気に入りから削除</span>
             </div>
           ) : (
-            <div className="flex items-center">
+            <div className="mr-5 flex items-center">
               <button className="active:scale-90" onClick={addFavoriteFood}>
                 <svg
                   className="h-auto w-6 fill-current text-red-500 hover:text-red-400"
@@ -202,9 +206,8 @@ const FoodShow = ({ food }: { food: Food }) => {
             </div>
           )}
         </div>
-        <div className="mb-4 rounded border p-4 shadow-md">
-          <FoodDetail key={food.id} food={food} />
-        </div>
+        <FoodDetail key={food.id} food={food} />
+        <Reviews foodId={food.id} />
       </div>
     </RootLayout>
   );

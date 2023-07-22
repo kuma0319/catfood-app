@@ -4,7 +4,7 @@ import { GetServerSideProps } from "next";
 import { useContext } from "react";
 
 import RootLayout from "@/components/commons/Layout";
-import FoodItem from "@/components/FoodItem";
+import FoodItem from "@/components/products/FoodItem";
 import FoodSearch from "@/components/search_form/FoodSearch";
 import { WatchListContext } from "@/context/WatchListContext";
 import { foodSearchUrl } from "@/urls";
@@ -13,9 +13,12 @@ import { FoodData } from "../../types/foods";
 
 export const getServerSideProps: GetServerSideProps = async (router) => {
   // 環境に応じてリクエスト先を変えられるように、環境変数からリクエストパスを読み込み
-  const response = await axios.get(`${process.env.BACKEND_URL}${foodSearchUrl}`, {
-    params: router.query,
-  });
+  const response = await axios.get(
+    `${process.env.BACKEND_URL}${foodSearchUrl}`,
+    {
+      params: router.query,
+    }
+  );
 
   return {
     props: {
@@ -49,10 +52,10 @@ const SearchResults = ({ data }: Props) => {
           <div className="mb-4 rounded border p-4 shadow-md">
             {data.map((food) => (
               <FoodItem
-              key={food.id}
-              food={food}
-              handleWatchList={handleWatchList}
-            />
+                key={food.id}
+                food={food}
+                handleWatchList={handleWatchList}
+              />
             ))}
           </div>
         </div>

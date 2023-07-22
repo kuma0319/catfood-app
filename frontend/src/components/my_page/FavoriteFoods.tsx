@@ -1,4 +1,4 @@
-import FoodItem from "@/components/FoodItem";
+import FoodItem from "@/components/products/FoodItem";
 import { FoodData } from "@/types/foods";
 
 const FavoriteFoods = ({

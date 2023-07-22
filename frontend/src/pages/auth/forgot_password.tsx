@@ -6,6 +6,7 @@ import ForgotPasswordForm from "@/components/authentication/ForgotPasswordForm";
 import AuthLayout from "@/components/commons/AuthLayout";
 import Spinners from "@/components/commons/Spinners";
 import { authPasswordUrl } from "@/urls";
+import { getHeaders } from "@/utils/ApiHeaders";
 
 const ForgotPassword = () => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -22,10 +23,7 @@ const ForgotPassword = () => {
         `${process.env.NEXT_PUBLIC_BACKEND_URL}${authPasswordUrl}`,
         { email: email, redirect_url: redirect_url },
         {
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
+          headers: getHeaders(),
         }
       );
       if (response.status === 200) {

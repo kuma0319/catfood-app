@@ -2,7 +2,7 @@ import axios from "axios";
 import { GetServerSideProps } from "next";
 import nookies from "nookies";
 
-import { getAuthHeadersWithCookies } from "@/utils/authApi";
+import { getAuthHeadersWithCookies } from "@/utils/ApiHeaders";
 
 const withAuthMyPage = (
   // 引数にurlの配列を受け取る
@@ -26,6 +26,7 @@ const withAuthMyPage = (
       return {
         props: {
           foodData: await responses[1].data,
+          reviewData: await responses[2].data,
           userData: await responses[0].data,
         },
       };

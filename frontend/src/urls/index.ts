@@ -17,5 +17,11 @@ export const authSignOutUrl = `/api/v1/auth/sign_out`;
 // ユーザーページ
 export const userUrl = `/api/v1/users/users`;
 // お気に入りフードページ
-export const favoriteFoodUrl = `/api/v1/favorites`;
+export const favoriteFoodUrl = `/api/v1/favorites.json`;
 export const favoriteFoodIdsUrl = `/api/v1/favorite_food_ids`;
+//商品レビューページ
+export const productReviewsUrl = `/api/v1/reviews.json`;
+export const userReviewsUrl = `/api/v1/user_reviews.json`;
+export const reviewDetailUrl = (reviewId: string) => {
+  return `/api/v1/reviews/${reviewId}.json`;
+};
