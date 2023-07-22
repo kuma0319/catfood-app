@@ -1,3 +1,10 @@
+export const getHeaders = () => {
+  return {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  };
+};
+
 export const getAuthHeadersWithCookies = (cookies: any) => {
   return {
     Accept: "application/json",

@@ -16,7 +16,7 @@ import {
 } from "@/review_constant";
 import { Review, ReviewInput } from "@/types/reviews";
 import { reviewDetailUrl } from "@/urls";
-import { getAuthHeadersWithCookies } from "@/utils/authApi";
+import { getAuthHeadersWithCookies } from "@/utils/ApiHeaders";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   // contextによって、reviewIdとクッキー情報を取得

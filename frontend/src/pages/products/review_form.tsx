@@ -15,7 +15,7 @@ import {
 } from "@/review_constant";
 import { ReviewInput } from "@/types/reviews";
 import { productReviewsUrl } from "@/urls";
-import { getAuthHeadersWithCookies } from "@/utils/authApi";
+import { getAuthHeadersWithCookies } from "@/utils/ApiHeaders";
 
 const ReviewForm = () => {
   // React Hook Formライブラリを使用

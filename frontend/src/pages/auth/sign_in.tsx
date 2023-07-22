@@ -7,6 +7,7 @@ import SignInForm from "@/components/authentication/SignInForm";
 import AuthLayout from "@/components/commons/AuthLayout";
 import Spinners from "@/components/commons/Spinners";
 import { authSignInUrl } from "@/urls";
+import { getHeaders } from "@/utils/ApiHeaders";
 
 export interface SignInInput {
   email: string;
@@ -29,10 +30,7 @@ const SignIn = () => {
         `${process.env.NEXT_PUBLIC_BACKEND_URL}${authSignInUrl}`,
         { email, password },
         {
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
+          headers: getHeaders(),
         }
       );
       if (response.status === 200) {

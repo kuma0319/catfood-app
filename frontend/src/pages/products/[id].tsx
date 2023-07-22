@@ -14,7 +14,7 @@ import {
   foodDetailUrl,
   foodsIndexUrl,
 } from "@/urls";
-import { getAuthHeadersWithCookies } from "@/utils/authApi";
+import { getAuthHeadersWithCookies } from "@/utils/ApiHeaders";
 
 import { Food } from "../../types/foods";
 
@@ -112,9 +112,12 @@ const FoodShow = ({ food }: { food: Food }) => {
       // 認証成功(=ログイン済み)であった場合は、axios.deleteでお気に入り登録をリクエスト。
       if (authResponse.status === 200) {
         const registrationFavoriteResponse = await axios.delete(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}${favoriteFoodUrl}?food_id=${foodId}`,
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}${favoriteFoodUrl}`,
           {
             headers: getAuthHeadersWithCookies(cookies),
+            params: {
+              food_id: foodId,
+            },
           }
         );
         // お気に入りから削除出来たらstateを更新

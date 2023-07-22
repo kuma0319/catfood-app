@@ -5,7 +5,7 @@ import { useState } from "react";
 
 import { Review } from "@/types/reviews";
 import { reviewDetailUrl } from "@/urls";
-import { getAuthHeadersWithCookies } from "@/utils/authApi";
+import { getAuthHeadersWithCookies } from "@/utils/ApiHeaders";
 
 import Score from "../commons/Score";
 
