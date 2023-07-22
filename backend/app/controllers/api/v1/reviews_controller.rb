@@ -1,7 +1,7 @@
 class Api::V1::ReviewsController < ApplicationController
   # ※before_actionのauthenticate_api_v1_user!をset_reviewの前に持ってこないとset_reviewで500エラーが出るため注意※
   before_action :authenticate_api_v1_user!, only: [:index_user_reviews, :show, :create, :update, :destroy]
-  before_action :set_review, only: [ :update, :destroy]
+  before_action :set_review, only: [:update, :destroy]
 
   # 特定のキャットフードに紐づけられているレビューを全て返す
   def index

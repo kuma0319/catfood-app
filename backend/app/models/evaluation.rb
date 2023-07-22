@@ -15,15 +15,15 @@ class Evaluation < ApplicationRecord
   # paramsとしてfood_idを引数で受け取り、特定のフードにおける各評価項目についてmapでスコアを返す
   def self.average_scores(food_id)
     ReviewItem.all.map do |review_item|
-      average_score = review_item.evaluations.joins(:review).where(reviews: { food_id: food_id }).average(:score).to_f
+      average_score = review_item.evaluations.joins(:review).where(reviews: { food_id: }).average(:score).to_f
       # スコアが0の場合は実質的にレビューが存在しないため空配列を返したい
-      if average_score > 0
-        {
-          id: review_item.id,
-          name: review_item.name,
-          value: average_score
-        }
-      end
+      next unless average_score > 0
+
+      {
+        id: review_item.id,
+        name: review_item.name,
+        value: average_score
+      }
     end.compact # これ(.compact)を入れないと中身が全てnullの配列が返される
   end
 end

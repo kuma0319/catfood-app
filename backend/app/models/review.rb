@@ -14,5 +14,5 @@ class Review < ApplicationRecord
   validates :evaluations, presence: true
 
   validates :title, presence: true, length: { maximum: 100 }
-  validates :content, presence: true, length: { maximum: 10000 }
+  validates :content, presence: true, length: { maximum: 10_000 }
 end

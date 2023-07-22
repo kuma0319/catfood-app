@@ -14,7 +14,7 @@
 #       it { should have_many(:review_items).through(:evaluations) }
 #     end
 #   end
-  
+
 #   # バリデーションテスト
 #   describe "validations" do
 #     context "正しい情報でレビューを作成したとき" do
@@ -149,7 +149,7 @@ RSpec.describe Review, type: :model do
 
     context "titleが10000文字のとき" do
       before do
-        review.content = "a" * 10000
+        review.content = "a" * 10_000
       end
 
       it "バリエーションエラーとならないこと" do
@@ -159,7 +159,7 @@ RSpec.describe Review, type: :model do
 
     context "contentが10000文字を超えるとき" do
       before do
-        review.content = "a" * 10001
+        review.content = "a" * 10_001
       end
 
       it "バリエーションエラーとなること" do

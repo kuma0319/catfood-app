@@ -23,5 +23,5 @@ json.reviews do
   end
 end
 
-  # スコアの平均を返す
-  json.average_scores Evaluation.average_scores(params[:food_id])
+# スコアの平均を返す
+json.average_scores Evaluation.average_scores(params[:food_id])

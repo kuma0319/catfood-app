@@ -39,7 +39,7 @@ RSpec.describe "Api::V1::Reviews", type: :request do
     let(:user_keys) { ["id", "nickname", "avatar_url"] }
     let(:evaluation_keys) { ["id", "score", "review_item"] }
     let(:average_score_keys) { ["id", "name", "value"] }
-    
+
     context "正しい情報でリクエストしたとき" do
       before do
         get "/api/v1/reviews.json", params: { food_id: food.id }
@@ -221,26 +221,26 @@ RSpec.describe "Api::V1::Reviews", type: :request do
   ## createアクション
   describe "POST /create" do
     context "正しい情報でリクエストしたとき" do
-      let(:title) {"テストタイトル"}
-      let(:content) {"テストコンテンツ"}
-      let(:score) {1}
+      let(:title) { "テストタイトル" }
+      let(:content) { "テストコンテンツ" }
+      let(:score) { 1 }
 
       before do
         post "/api/v1/reviews",
-        params:
-        {
-          review: {
-            food_id: food.id,
-            title: title,
-            content: content,
-            evaluations_attributes: [
-              {
-                review_item_id: review_item.id,
-                score: score
-              }
-            ]
-          }
-        }, headers: @headers
+             params:
+             {
+               review: {
+                 food_id: food.id,
+                 title:,
+                 content:,
+                 evaluations_attributes: [
+                   {
+                     review_item_id: review_item.id,
+                     score:
+                   }
+                 ]
+               }
+             }, headers: @headers
       end
 
       it "ステータスコード201が返ってくること" do
@@ -283,10 +283,10 @@ RSpec.describe "Api::V1::Reviews", type: :request do
       review.evaluations << build(:evaluation, review_id: review.id, review_item_id: review_item.id)
       review.save!
     end
-  
+
     context "正しい情報でリクエストしたとき" do
       before do
-        patch "/api/v1/reviews/#{review.id}",params: {review: {title: "タイトル変更"}}, headers: @headers
+        patch "/api/v1/reviews/#{review.id}", params: { review: { title: "タイトル変更" } }, headers: @headers
       end
 
       it "ステータスコード200が返ってくること" do
@@ -326,7 +326,7 @@ RSpec.describe "Api::V1::Reviews", type: :request do
       review.evaluations << build(:evaluation, review_id: review.id, review_item_id: review_item.id)
       review.save!
     end
-  
+
     context "正しい情報でリクエストしたとき" do
       before do
         delete "/api/v1/reviews/#{review.id}", headers: @headers

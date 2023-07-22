@@ -15,7 +15,7 @@ RSpec.describe Evaluation, type: :model do
       it { should belong_to(:review_item) }
     end
   end
-  
+
   # バリデーションテスト
   describe "validations" do
     context "正しい情報で評価を作成したとき" do
@@ -30,22 +30,22 @@ RSpec.describe Evaluation, type: :model do
     end
 
     context "scoreが1~5の整数であるとき" do
-      valid_scores = [ 1, 2, 3, 4, 5]
-    
+      valid_scores = [1, 2, 3, 4, 5]
+
       valid_scores.each do |valid_score|
         it "バリエーションエラーとならないこと" do
-          review.evaluations << build(:evaluation, review: review, review_item: review_item, score: valid_score)
+          review.evaluations << build(:evaluation, review:, review_item:, score: valid_score)
           expect(review).to be_valid
         end
       end
     end
 
     context "scoreが1~5の整数以外であるとき" do
-      error_scores = [ 0, 6, -1, 0.1, 1.0 ]
-    
+      error_scores = [0, 6, -1, 0.1, 1.0]
+
       error_scores.each do |error_score|
         it "バリエーションエラーとなること" do
-          review.evaluations << build(:evaluation, review: review, review_item: review_item, score: error_score)
+          review.evaluations << build(:evaluation, review:, review_item:, score: error_score)
           expect(review).not_to be_valid
         end
       end
