@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_15_140729) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_23_135727) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,6 +48,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_15_140729) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["food_id"], name: "index_amounts_on_food_id"
+  end
+
+  create_table "answers", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.bigint "user_id", null: false
+    t.bigint "question_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_answers_on_question_id"
+    t.index ["user_id", "question_id"], name: "index_answers_on_user_id_and_question_id", unique: true
+    t.index ["user_id"], name: "index_answers_on_user_id"
   end
 
   create_table "brands", force: :cascade do |t|
@@ -126,6 +138,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_15_140729) do
     t.index ["name"], name: "index_production_areas_on_name", unique: true
   end
 
+  create_table "questions", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_questions_on_user_id"
+  end
+
   create_table "review_items", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -178,6 +199,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_15_140729) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "amounts", "foods"
+  add_foreign_key "answers", "questions"
+  add_foreign_key "answers", "users"
   add_foreign_key "evaluations", "review_items"
   add_foreign_key "evaluations", "reviews"
   add_foreign_key "favorites", "foods"
@@ -187,6 +210,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_15_140729) do
   add_foreign_key "foods", "production_areas"
   add_foreign_key "nutrient_contents", "foods"
   add_foreign_key "nutrient_contents", "nutrients"
+  add_foreign_key "questions", "users"
   add_foreign_key "reviews", "foods"
   add_foreign_key "reviews", "users"
 end
