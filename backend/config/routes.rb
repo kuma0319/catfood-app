@@ -17,6 +17,9 @@ Rails.application.routes.draw do
       resources :reviews
       get "user_reviews", to: "reviews#index_user_reviews"
 
+      resources :questions
+      resources :answers
+
       # devise_token_authのregistrationsコントローラはオーバーライド
       mount_devise_token_auth_for "User", at: "auth", controllers: {
         registrations: "api/v1/auth/registrations"
