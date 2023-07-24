@@ -4,23 +4,18 @@ class Api::V1::QuestionsController < ApplicationController
   before_action :set_question, only: [:update, :destroy]
 
   # ユーザーidを渡されるかどうかで返す値を変更
+  # 紐づいているuserデータも含める
   def index
     if params[:user_id].present?
-      @questions = Question.where(user_id: params[:user_id])
+      @questions = Question.includes(:user).where(user_id: params[:user_id])
     else
-      @questions = Question.all
+      @questions = Question.includes(:user).all
     end
-    render json: {
-      questions: @questions
-    }, status: :ok
   end
 
-  # 質問の個別ページで紐づけられている回答も返す
+  # 紐づいているuserデータと、全ての回答も返す
   def show
-    @question = Question.includes(:answers).find(params[:id])
-    render json: {
-      question: @question
-    }, status: :ok
+    @question = Question.includes(:answers, :user).find(params[:id])
   end
 
   def create
