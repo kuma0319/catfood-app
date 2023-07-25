@@ -32,7 +32,7 @@ export default function Home() {
           </Link>
           <Link
             className="flex h-40 w-40 items-center justify-center rounded-full bg-gradient-to-r from-blue-300 via-purple-300 to-indigo-300 text-2xl font-bold text-white hover:from-blue-400 hover:to-indigo-400"
-            href="#"
+            href="/forum"
           >
             相談所
           </Link>
