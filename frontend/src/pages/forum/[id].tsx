@@ -4,9 +4,6 @@ import axios from "axios";
 import moment from "moment";
 import { GetServerSideProps } from "next";
 import Image from "next/image";
-import { useRouter } from "next/router";
-import { parseCookies } from "nookies";
-import { useState } from "react";
 
 import RootLayout from "@/components/commons/Layout";
 import AnswerModal from "@/components/forum/AnswerModal";
@@ -15,7 +12,6 @@ import { questionDetailUrl } from "@/urls";
 
 interface Answers {
   id: number;
-  title: string;
   content: string;
   created_at: string;
   updated_at: string;
@@ -65,20 +61,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 const QuestionDetail = (props: QuestionDetail) => {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const router = useRouter();
-  const cookies = parseCookies();
-
-  const handleAnswer = () => {
-    if (cookies["access-token"]) {
-      setModalIsOpen(true);
-    } else {
-      router.push({
-        pathname: "/auth/sign_in",
-      });
-    }
-  };
-
   return (
     <RootLayout>
       <div className="px-4 py-6 sm:py-8 lg:py-12">
@@ -114,7 +96,7 @@ const QuestionDetail = (props: QuestionDetail) => {
           </div>
         </div>
         <div className="flex justify-center p-4">
-          <AnswerModal />
+          <AnswerModal questionId={props.id} />
         </div>
         <div className="mt-10 gap-4 rounded p-4 shadow-md">
           <h1 className="mb-4 text-xl font-bold">{`回答 ${props.answers.length}件`}</h1>
@@ -142,9 +124,6 @@ const QuestionDetail = (props: QuestionDetail) => {
                         {answer.user.nickname}
                       </span>
                     </div>
-                    <span className="block text-sm font-medium text-gray-500 dark:text-gray-400">
-                      {answer.title}
-                    </span>
                     <span className="block text-sm text-gray-500">
                       {moment(answer.updated_at)
                         .tz("Asia/Tokyo")
