@@ -16,6 +16,7 @@ export const favoriteFoodUrl = `/api/v1/favorites.json`;
 export const favoriteFoodIdsUrl = `/api/v1/favorite_food_ids`;
 
 // 商品レビュー関連
+export const reviewsUrl = `/api/v1/reviews`;
 export const productReviewsUrl = `/api/v1/reviews.json`;
 export const userReviewsUrl = `/api/v1/user_reviews.json`;
 export const reviewDetailUrl = (reviewId: string) => {
@@ -23,9 +24,15 @@ export const reviewDetailUrl = (reviewId: string) => {
 };
 
 // ご飯相談所関連
+export const questionsUrl = `/api/v1/questions`;
 export const questionIndexUrl = `/api/v1/questions.json`;
 export const questionDetailUrl = (questionId: string) => {
   return `/api/v1/questions/${questionId}.json`;
+};
+export const answersUrl = `/api/v1/answers`;
+export const answerIndexUrl = `/api/v1/answers.json`;
+export const answerDetailUrl = (answerId: string) => {
+  return `/api/v1/answers/${answerId}.json`;
 };
 
 // devise_token_auth用

@@ -1,5 +1,7 @@
 import axios from "axios";
 import { GetServerSideProps } from "next";
+import { useRouter } from "next/router";
+import { parseCookies } from "nookies";
 
 import RootLayout from "@/components/commons/Layout";
 import QuestionIndex from "@/components/forum/QuestionIndex";
@@ -39,12 +41,31 @@ export const getServerSideProps: GetServerSideProps = async () => {
 };
 
 const Forum = (props: { questions: Questions[] }) => {
-  console.log(props);
+  const router = useRouter();
+  const cookies = parseCookies();
+
+  const goToPostQuestionPage = () => {
+    if (cookies["access-token"]) {
+      router.push({
+        pathname: "/forum/question_form",
+        query: { question_flag: true },
+      });
+    } else {
+      router.push({
+        pathname: "/auth/sign_in",
+      });
+    }
+  };
 
   return (
     <RootLayout>
       <div className="flex justify-center p-4">
-        <button className="inline-flex items-center justify-center gap-2 rounded-md border bg-white px-4 py-3 align-middle text-base font-medium text-gray-700 shadow-sm transition-all hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 dark:hover:bg-slate-800 dark:hover:text-white dark:focus:ring-offset-gray-800">
+        <button
+          className="inline-flex items-center justify-center gap-2 rounded-md border bg-white px-4 py-3 align-middle text-base font-medium text-gray-700 shadow-sm transition-all hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 dark:hover:bg-slate-800 dark:hover:text-white dark:focus:ring-offset-gray-800"
+          onClick={() => {
+            goToPostQuestionPage();
+          }}
+        >
           質問してみる
         </button>
       </div>

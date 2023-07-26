@@ -4,8 +4,12 @@ import axios from "axios";
 import moment from "moment";
 import { GetServerSideProps } from "next";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import { parseCookies } from "nookies";
+import { useState } from "react";
 
 import RootLayout from "@/components/commons/Layout";
+import AnswerModal from "@/components/forum/AnswerModal";
 import { MinimumUserInfo } from "@/types/user";
 import { questionDetailUrl } from "@/urls";
 
@@ -61,6 +65,20 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 const QuestionDetail = (props: QuestionDetail) => {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const router = useRouter();
+  const cookies = parseCookies();
+
+  const handleAnswer = () => {
+    if (cookies["access-token"]) {
+      setModalIsOpen(true);
+    } else {
+      router.push({
+        pathname: "/auth/sign_in",
+      });
+    }
+  };
+
   return (
     <RootLayout>
       <div className="px-4 py-6 sm:py-8 lg:py-12">
@@ -95,7 +113,9 @@ const QuestionDetail = (props: QuestionDetail) => {
             <p className="mt-3 text-gray-600">{props.content}</p>
           </div>
         </div>
-
+        <div className="flex justify-center p-4">
+          <AnswerModal />
+        </div>
         <div className="mt-10 gap-4 rounded p-4 shadow-md">
           <h1 className="mb-4 text-xl font-bold">{`回答 ${props.answers.length}件`}</h1>
           <div className="mx-auto max-w-screen-xl p-4 md:p-8">
