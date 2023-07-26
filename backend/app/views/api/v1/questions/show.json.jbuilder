@@ -9,7 +9,7 @@ end
 
 # @questionに紐づいているanswers(全回答)とその回答が保有しているuserデータを含める
 json.answers @question.answers do |answer|
-  json.extract! answer, :id, :title, :content, :created_at, :updated_at
+  json.extract! answer, :id, :content, :created_at, :updated_at
 
   json.user do
     json.extract! answer.user, :id, :nickname
