@@ -5,7 +5,7 @@ class Api::V1::AnswersController < ApplicationController
 
   # 特定のユーザーに紐づけられている回答を全て返す
   def index
-    answers = current_api_v1_user.answers
+    answers = current_api_v1_user.answers.order(created_at: :desc)
     render json: {
       answers:
     }, status: :ok
@@ -32,17 +32,18 @@ class Api::V1::AnswersController < ApplicationController
     end
   end
 
-  def update
-    if @answer.update(answer_params)
-      render json: {
-        answer: @answer
-      }, status: :ok
-    else
-      render json: {
-        errors: @answer.errors
-      }, status: :unprocessable_entity
-    end
-  end
+  ## 一旦updateは不使用とする。
+  # def update
+  #   if @answer.update(answer_params)
+  #     render json: {
+  #       answer: @answer
+  #     }, status: :ok
+  #   else
+  #     render json: {
+  #       errors: @answer.errors
+  #     }, status: :unprocessable_entity
+  #   end
+  # end
 
   def destroy
     if @answer.destroy

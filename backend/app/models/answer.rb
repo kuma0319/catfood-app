@@ -14,6 +14,6 @@ class Answer < ApplicationRecord
 
   # questionに紐づいているuser_idとanswerのuser_idが同一である場合にエラーとなる
   def cannot_answer_own_question
-    errors.add(:user_id, "自身の投稿した質問に回答は出来ません。") if question.user_id == user_id
+    errors.add(:user_id, "自身の投稿した質問に回答は出来ません。") if question.present? && question.user_id == user_id
   end
 end

@@ -1,15 +1,15 @@
 class Api::V1::QuestionsController < ApplicationController
   # ※before_actionのauthenticate_api_v1_user!をset_questionの前に持ってこないとset_questionで500エラーが出るため注意※
-  before_action :authenticate_api_v1_user!, only: [:index_user_question, :create, :update, :destroy]
+  before_action :authenticate_api_v1_user!, only: [:index_user_questions, :create, :update, :destroy]
   before_action :set_question, only: [:update, :destroy]
 
   # 紐づいているuserデータも含める
   def index
-    @questions = Question.includes(:user).all
+    @questions = Question.includes(:user).order(created_at: :desc)
   end
 
   def index_user_questions
-    questions = current_api_v1_user.questions
+    questions = current_api_v1_user.questions.order(created_at: :desc)
     render json: {
       questions:
     }, status: :ok
@@ -34,17 +34,18 @@ class Api::V1::QuestionsController < ApplicationController
     end
   end
 
-  def update
-    if @question.update(question_params)
-      render json: {
-        question: @question
-      }, status: :ok
-    else
-      render json: {
-        errors: @question.errors
-      }, status: :unprocessable_entity
-    end
-  end
+  ## 一旦updateは不使用とする。
+  # def update
+  #   if @question.update(question_params)
+  #     render json: {
+  #       question: @question
+  #     }, status: :ok
+  #   else
+  #     render json: {
+  #       errors: @question.errors
+  #     }, status: :unprocessable_entity
+  #   end
+  # end
 
   def destroy
     if @question.destroy

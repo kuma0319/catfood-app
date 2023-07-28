@@ -298,6 +298,17 @@ RSpec.describe "Api::V1::Reviews", type: :request do
       end
     end
 
+    context "ログイン中の他のユーザーがリクエストしたとき" do
+      before do
+        @other_headers = sign_in(other_user)
+        patch "/api/v1/reviews/#{review.id}", params: { review: { title: "タイトル変更" } }, headers: @other_headers
+      end
+
+      it "ステータスコード404が返ってくること" do
+        expect(response).to have_http_status(404)
+      end
+    end
+
     context "非ログイン状態のユーザーがリクエストしたとき" do
       before do
         patch "/api/v1/reviews/#{review.id}"
@@ -337,6 +348,17 @@ RSpec.describe "Api::V1::Reviews", type: :request do
 
       it "期待するレビューが削除されていること" do
         expect(response.parsed_body["review"]["id"]).to eq(review.id)
+      end
+    end
+
+    context "ログイン中の他のユーザーがリクエストしたとき" do
+      before do
+        @other_headers = sign_in(other_user)
+        delete "/api/v1/reviews/#{review.id}", headers: @other_headers
+      end
+
+      it "ステータスコード404が返ってくること" do
+        expect(response).to have_http_status(404)
       end
     end
 
