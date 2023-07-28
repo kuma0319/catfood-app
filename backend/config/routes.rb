@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       get "user_reviews", to: "reviews#index_user_reviews"
 
       resources :questions
+      get "user_questions", to: "questions#index_user_questions"
       resources :answers
 
       # devise_token_authのregistrationsコントローラはオーバーライド

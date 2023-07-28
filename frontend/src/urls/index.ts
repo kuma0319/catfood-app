@@ -29,10 +29,10 @@ export const questionIndexUrl = `/api/v1/questions.json`;
 export const questionDetailUrl = (questionId: string) => {
   return `/api/v1/questions/${questionId}.json`;
 };
+export const userQuestionsUrl = `/api/v1/user_questions`;
 export const answersUrl = `/api/v1/answers`;
-export const answerIndexUrl = `/api/v1/answers.json`;
 export const answerDetailUrl = (answerId: string) => {
-  return `/api/v1/answers/${answerId}.json`;
+  return `/api/v1/answers/${answerId}`;
 };
 
 // devise_token_auth用

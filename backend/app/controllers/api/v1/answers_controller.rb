@@ -5,16 +5,16 @@ class Api::V1::AnswersController < ApplicationController
 
   # 特定のユーザーに紐づけられている回答を全て返す
   def index
-    @answers = Answer.includes(:questions).where(user_id: current_api_v1_user.id)
+    answers = current_api_v1_user.answers
     render json: {
-      answers: @answers
+      answers:
     }, status: :ok
   end
 
   def show
-    @answer = current_api_v1_user.answers.includes(:questions).find(params[:id])
+    answer = current_api_v1_user.answers.find(params[:id])
     render json: {
-      answer: @answer
+      answer:
     }, status: :ok
   end
 

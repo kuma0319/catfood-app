@@ -1,16 +1,18 @@
 class Api::V1::QuestionsController < ApplicationController
   # ※before_actionのauthenticate_api_v1_user!をset_questionの前に持ってこないとset_questionで500エラーが出るため注意※
-  before_action :authenticate_api_v1_user!, only: [:create, :update, :destroy]
+  before_action :authenticate_api_v1_user!, only: [:index_user_question, :create, :update, :destroy]
   before_action :set_question, only: [:update, :destroy]
 
-  # ユーザーidを渡されるかどうかで返す値を変更
   # 紐づいているuserデータも含める
   def index
-    if params[:user_id].present?
-      @questions = Question.includes(:user).where(user_id: params[:user_id])
-    else
-      @questions = Question.includes(:user).all
-    end
+    @questions = Question.includes(:user).all
+  end
+
+  def index_user_questions
+    questions = current_api_v1_user.questions
+    render json: {
+      questions:
+    }, status: :ok
   end
 
   # 紐づいているuserデータと、全ての回答も返す

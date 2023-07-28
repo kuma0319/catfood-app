@@ -1,4 +1,7 @@
+import "moment-timezone";
+
 import axios from "axios";
+import moment from "moment";
 import { useRouter } from "next/router";
 import { parseCookies } from "nookies";
 import { useState } from "react";
@@ -12,9 +15,6 @@ import Score from "../commons/Score";
 const UserReviews = ({ userReviewProps }: { userReviewProps: Review[] }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
-  // 日付を修正するためのmoment及びmoment-timezoneを読み込み
-  const moment = require("moment");
-  require("moment-timezone");
 
   // レビュー更新用の関数
   const goToReviewEditPage = (reviewId: number) => {
