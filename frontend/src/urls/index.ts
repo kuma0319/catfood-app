@@ -29,9 +29,12 @@ export const questionIndexUrl = `/api/v1/questions.json`;
 export const questionDetailUrl = (questionId: string) => {
   return `/api/v1/questions/${questionId}.json`;
 };
+export const questionDeleteUrl = (questionId: string) => {
+  return `/api/v1/questions/${questionId}`;
+};
 export const userQuestionsUrl = `/api/v1/user_questions`;
 export const answersUrl = `/api/v1/answers`;
-export const answerDetailUrl = (answerId: string) => {
+export const answerDeleteUrl = (answerId: string) => {
   return `/api/v1/answers/${answerId}`;
 };
 

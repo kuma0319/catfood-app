@@ -34,13 +34,9 @@ const QuestionIndex = ({ props }: { props: { questions: Questions[] } }) => {
                   </span>
                 </div>
                 {/* hrefにquestion.idを渡して動的にルーティング */}
-                <Link
-                  href="/forum/[id]"
-                  as={`/forum/${question.id}`}
-                  className="block truncate text-sm font-medium text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-500"
-                >
+                <p className="block truncate text-sm font-medium text-gray-500 dark:text-gray-400 dark:hover:text-blue-500">
                   {question.title}
-                </Link>
+                </p>
                 <span className="block text-sm text-gray-500">
                   {moment(question.updated_at)
                     .tz("Asia/Tokyo")
@@ -48,9 +44,13 @@ const QuestionIndex = ({ props }: { props: { questions: Questions[] } }) => {
                 </span>
               </div>
 
-              <p className="mt-3 text-gray-600 line-clamp-2">
+              <Link
+                href="/forum/[id]"
+                as={`/forum/${question.id}`}
+                className="mt-3 text-gray-700 line-clamp-2 hover:text-blue-500 hover:underline"
+              >
                 {question.content}
-              </p>
+              </Link>
             </div>
           ))}
         </div>

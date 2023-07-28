@@ -33,7 +33,7 @@ export interface UserQuestionsProps {
     created_at: string;
     updated_at: string;
     user_id: number;
-  };
+  }[];
 }
 
 export interface UserAnswersProps {
@@ -44,15 +44,15 @@ export interface UserAnswersProps {
     question_id: number;
     updated_at: string;
     user_id: number;
-  };
+  }[];
 }
 
 export interface MyPageProps {
-  answerData: UserAnswersProps;
   foodData: FoodData;
-  questionData: UserQuestionsProps;
   reviewData: Review[];
+  userAnswersData: UserAnswersProps;
   userData: UserProps;
+  userQuestionsData: UserQuestionsProps;
 }
 
 // withAuthMyPageで引数として渡したエンドポイントへAPIリクエストを送り、propsを受け取る
@@ -65,7 +65,8 @@ export const getServerSideProps: GetServerSideProps = withAuthMyPage([
 ]);
 
 const MyPage = (props: MyPageProps) => {
-  console.log(props);
+  console.log(props.userQuestionsData);
+  console.log(props.userAnswersData);
 
   return (
     <RootLayout>
@@ -146,7 +147,10 @@ const MyPage = (props: MyPageProps) => {
           role="tabpanel"
           aria-labelledby="bar-with-underline-item-4"
         >
-          <UserQA />
+          <UserQA
+            userQuestionsProps={props.userQuestionsData}
+            userAnswersProps={props.userAnswersData}
+          />
         </div>
       </div>
     </RootLayout>
