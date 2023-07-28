@@ -56,7 +56,7 @@ RSpec.describe "Api::V1::Answers", type: :request do
 
     context "非ログイン状態のユーザーがリクエストしたとき" do
       before do
-        post "/api/v1/answers"
+        get "/api/v1/answers"
       end
 
       it "ステータスコード401が返ってくること" do
@@ -66,7 +66,7 @@ RSpec.describe "Api::V1::Answers", type: :request do
 
     context "誤ったトークン情報でリクエストしたとき" do
       before do
-        post "/api/v1/answers", headers: @error_headers
+        get "/api/v1/answers", headers: @error_headers
       end
 
       it "ステータスコード401が返ってくること" do
@@ -97,7 +97,7 @@ RSpec.describe "Api::V1::Answers", type: :request do
 
     context "非ログイン状態のユーザーがリクエストしたとき" do
       before do
-        post "/api/v1/answers"
+        get "/api/v1/answers"
       end
 
       it "ステータスコード401が返ってくること" do
@@ -107,7 +107,7 @@ RSpec.describe "Api::V1::Answers", type: :request do
 
     context "誤ったトークン情報でリクエストしたとき" do
       before do
-        post "/api/v1/answers", headers: @error_headers
+        get "/api/v1/answers", headers: @error_headers
       end
 
       it "ステータスコード401が返ってくること" do
