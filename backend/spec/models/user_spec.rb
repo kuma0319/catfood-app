@@ -4,6 +4,16 @@ include Rails.application.routes.url_helpers
 RSpec.describe User, type: :model do
   let(:user) { FactoryBot.create(:user) }
 
+  describe "association" do
+    context "アソシエーションが正しいこと" do
+      it { should have_many(:favorites) }
+      it { should have_many(:foods) }
+      it { should have_many(:reviews) }
+      it { should have_many(:questions) }
+      it { should have_many(:answers) }
+    end
+  end
+
   describe "validations" do
     context "正しい情報でユーザーを作成したとき" do
       it "バリエーションエラーとならないこと" do

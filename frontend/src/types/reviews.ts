@@ -1,3 +1,5 @@
+import { MinimumUserInfo } from "./user";
+
 interface AverageScore {
   id: number;
   name: string;
@@ -13,12 +15,6 @@ interface Evaluation {
   score: number;
 }
 
-interface User {
-  id: number;
-  avatar_url: string;
-  nickname: string;
-}
-
 export interface Review {
   id: number;
   title: string;
@@ -27,7 +23,7 @@ export interface Review {
   evaluations: Evaluation[];
   food_id: number;
   updated_at: string;
-  user: User;
+  user: MinimumUserInfo;
 }
 
 export interface ReviewData {

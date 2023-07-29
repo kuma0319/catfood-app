@@ -14,7 +14,7 @@ import {
   SCENT_PARAMS,
 } from "@/review_constant";
 import { ReviewInput } from "@/types/reviews";
-import { productReviewsUrl } from "@/urls";
+import { reviewsUrl } from "@/urls";
 import { getAuthHeadersWithCookies } from "@/utils/ApiHeaders";
 
 const ReviewForm = () => {
@@ -40,7 +40,7 @@ const ReviewForm = () => {
     setIsLoading(true);
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}${productReviewsUrl}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}${reviewsUrl}`,
         {
           title: data.title,
           content: data.content,

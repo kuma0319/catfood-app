@@ -21,13 +21,16 @@ const withAuthMyPage = (
           })
         )
       );
+      console.log(responses);
 
       // エラー無い場合はレスポンスのデータを返す
       return {
         props: {
           foodData: await responses[1].data,
           reviewData: await responses[2].data,
+          userAnswersData: await responses[4].data,
           userData: await responses[0].data,
+          userQuestionsData: await responses[3].data,
         },
       };
     } catch (error: any) {
