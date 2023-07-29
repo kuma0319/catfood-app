@@ -65,7 +65,7 @@ const UserQA = ({
   };
 
   return (
-    <div>
+    <div className="mx-auto max-w-screen-md bg-white px-4 md:px-8 ">
       {/* エラーの場合にエラーメッセージを表示する */}
       <div className="text-center text-lg text-red-600">{errorMessage}</div>
       <nav

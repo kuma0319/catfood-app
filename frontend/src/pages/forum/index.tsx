@@ -1,5 +1,6 @@
 import axios from "axios";
 import { GetServerSideProps } from "next";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { parseCookies } from "nookies";
 
@@ -59,59 +60,31 @@ const Forum = (props: { questions: Questions[] }) => {
 
   return (
     <RootLayout>
-      <div className="flex justify-center p-4">
-        <button
-          className="inline-flex items-center justify-center gap-2 rounded-md border bg-white px-4 py-3 align-middle text-base font-medium text-gray-700 shadow-sm transition-all hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 dark:hover:bg-slate-800 dark:hover:text-white dark:focus:ring-offset-gray-800"
-          onClick={() => {
-            goToPostQuestionPage();
-          }}
-        >
-          質問してみる
-        </button>
-      </div>
-      <nav
-        className="relative z-0 flex overflow-hidden rounded-xl border dark:border-gray-700"
-        aria-label="Tabs"
-        role="tablist"
-      >
-        <button
-          type="button"
-          className="active relative min-w-0 flex-1 overflow-hidden border-b-2 border-l bg-white p-4 text-center text-sm font-medium text-gray-500 first:border-l-0 hover:bg-gray-50 hover:text-gray-700 focus:z-10 hs-tab-active:border-b-blue-600 hs-tab-active:text-gray-900 dark:border-b-gray-700 dark:border-l-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-gray-400 dark:hs-tab-active:border-b-blue-600 dark:hs-tab-active:text-white"
-          id="bar-with-underline-item-1"
-          data-hs-tab="#bar-with-underline-1"
-          aria-controls="bar-with-underline-1"
-          role="tab"
-        >
-          回答受付中の質問
-        </button>
-        <button
-          type="button"
-          className="relative min-w-0 flex-1 overflow-hidden border-b-2 border-l bg-white p-4 text-center text-sm font-medium text-gray-500 first:border-l-0 hover:bg-gray-50 hover:text-gray-700 focus:z-10 hs-tab-active:border-b-blue-600 hs-tab-active:text-gray-900 dark:border-b-gray-700 dark:border-l-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-gray-400 dark:hs-tab-active:border-b-blue-600 dark:hs-tab-active:text-white"
-          id="bar-with-underline-item-2"
-          data-hs-tab="#bar-with-underline-2"
-          aria-controls="bar-with-underline-2"
-          role="tab"
-        >
-          解決済み
-        </button>
-      </nav>
-
-      <div className="mt-2">
-        <div
-          id="bar-with-underline-1"
-          role="tabpanel"
-          aria-labelledby="bar-with-underline-item-1"
-        >
-          <QuestionIndex props={props} />
+      <div className="relative mx-auto max-w-screen-md bg-white px-4 py-6 sm:py-8 md:px-8 lg:py-12">
+        <h2 className="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-8 lg:text-3xl xl:mb-12">
+          キャットフード相談所
+        </h2>
+        <Image
+          className="absolute right-0 top-0"
+          src="/cat-hatena.jpg"
+          alt="はてな猫"
+          width={180}
+          height={180}
+        />
+        <p className="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">
+          キャットフードに関する疑問や悩みを質問してみませんか？
+        </p>
+        <div className="flex justify-center p-4">
+          <button
+            className="inline-flex items-center justify-center gap-2 rounded-md border bg-white px-4 py-3 align-middle text-base font-medium text-gray-700 shadow-sm transition-all hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 dark:hover:bg-slate-800 dark:hover:text-white dark:focus:ring-offset-gray-800"
+            onClick={() => {
+              goToPostQuestionPage();
+            }}
+          >
+            質問してみる
+          </button>
         </div>
-        <div
-          id="bar-with-underline-2"
-          className="hidden"
-          role="tabpanel"
-          aria-labelledby="bar-with-underline-item-2"
-        >
-          タブ２
-        </div>
+        <QuestionIndex props={props} />
       </div>
     </RootLayout>
   );

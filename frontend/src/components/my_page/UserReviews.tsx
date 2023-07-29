@@ -49,7 +49,7 @@ const UserReviews = ({ userReviewProps }: { userReviewProps: Review[] }) => {
   };
 
   return (
-    <div className="py-6 sm:py-8 lg:py-12">
+    <div className="mx-auto max-w-screen-md bg-white px-4 py-6 sm:py-8 md:px-8 lg:py-12">
       {/* エラーの場合にエラーメッセージを表示する */}
       <div className="text-center text-lg text-red-600">{errorMessage}</div>
       <div className="mx-auto max-w-screen-xl px-4 md:px-8">
