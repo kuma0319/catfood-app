@@ -16,6 +16,8 @@ class User < ApplicationRecord
   has_many :foods, through: :favorites
 
   has_many :reviews
+  has_many :questions
+  has_many :answers
 
   # avatarのURLを返すメソッド
   def avatar_url

@@ -1,4 +1,7 @@
+import "moment-timezone";
+
 import axios from "axios";
+import moment from "moment";
 import { useRouter } from "next/router";
 import { parseCookies } from "nookies";
 import { useState } from "react";
@@ -12,9 +15,6 @@ import Score from "../commons/Score";
 const UserReviews = ({ userReviewProps }: { userReviewProps: Review[] }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
-  // 日付を修正するためのmoment及びmoment-timezoneを読み込み
-  const moment = require("moment");
-  require("moment-timezone");
 
   // レビュー更新用の関数
   const goToReviewEditPage = (reviewId: number) => {
@@ -49,7 +49,9 @@ const UserReviews = ({ userReviewProps }: { userReviewProps: Review[] }) => {
   };
 
   return (
-    <div className="py-6 sm:py-8 lg:py-12">
+    <div className="mx-auto max-w-screen-md bg-white px-4 py-6 sm:py-8 md:px-8 lg:py-12">
+      {/* エラーの場合にエラーメッセージを表示する */}
+      <div className="text-center text-lg text-red-600">{errorMessage}</div>
       <div className="mx-auto max-w-screen-xl px-4 md:px-8">
         {userReviewProps.map((review) => (
           <div
@@ -57,8 +59,10 @@ const UserReviews = ({ userReviewProps }: { userReviewProps: Review[] }) => {
             key={review.id}
           >
             <div className="mb-4 flex items-start justify-between">
-              <div>
-                <span className="block text-sm font-bold">{review.title}</span>
+              <div className="w-3/5">
+                <span className="block truncate text-sm font-bold">
+                  {review.title}
+                </span>
                 <span className="block text-sm text-gray-500">
                   {/* momentモジュールを使用してタイムゾーンを東京指定で更新日時を装飾 */}
                   {moment(review.updated_at)
@@ -66,7 +70,7 @@ const UserReviews = ({ userReviewProps }: { userReviewProps: Review[] }) => {
                     .format("Y年M月D日にレビュー済み")}
                 </span>
               </div>
-              <div className="flex gap-2">
+              <div className="flex w-1/5 gap-2">
                 <button
                   className="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-blue-500 px-3 py-2 text-sm font-semibold text-white transition-all hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
                   onClick={() => goToReviewEditPage(review.id)}
@@ -97,7 +101,7 @@ const UserReviews = ({ userReviewProps }: { userReviewProps: Review[] }) => {
               </div>
             ))}
 
-            <p className="mt-3 text-gray-600">{review.content}</p>
+            <p className="mt-3 text-gray-600 line-clamp-3">{review.content}</p>
           </div>
         ))}
       </div>
