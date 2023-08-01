@@ -2,7 +2,7 @@ require "csv"
 
 CSV.foreach(ENV['FOOD_CSV_PATH'], headers: true) do |row|
   Food.create(
-    id: row[0],
+    # id: row[0],
     name: row[1],
     ingredients: row[2],
     brand_id: row[3],
