@@ -25,7 +25,7 @@ RSpec.describe Food, type: :model do
     context "nameカラムが存在し、一意性制約を満たし、50文字以下であること" do
       it { is_expected.to validate_presence_of :name }
       it { is_expected.to validate_uniqueness_of(:name).case_insensitive }
-      it { is_expected.to validate_length_of(:name).is_at_most(50) }
+      it { is_expected.to validate_length_of(:name).is_at_most(100) }
     end
 
     context "calorieカラムが数値であり0より大きいこと" do
