@@ -13,7 +13,7 @@ interface ItemTabList {
     name: string;
   };
   ingredients: string;
-  min_price: number;
+  median_price: number;
   nutrient_contents: Nutrient[];
   production_area: {
     id: number;
@@ -78,7 +78,7 @@ const ItemTab = ({ item }: ItemTab) => {
               .sort((a, b) => a.nutrient.id - b.nutrient.id)
               .map((nutrient_content, index) => (
                 <div key={index}>
-                  {nutrient_content.nutrient.name}：{nutrient_content.content}g
+                  {nutrient_content.nutrient.name}：{nutrient_content.content} %
                 </div>
               ))}
           </div>
@@ -90,7 +90,6 @@ const ItemTab = ({ item }: ItemTab) => {
           aria-labelledby={`card-type-tab-item-2-${item.id}`}
         >
           <div className="text-gray-500 dark:text-gray-400">
-            <p>原材料</p>
             {item.ingredients}
           </div>
         </div>
@@ -104,16 +103,16 @@ const ItemTab = ({ item }: ItemTab) => {
             <p>ブランド：{item.brand.name}</p>
             <p>タイプ：{item.food_type.name}</p>
             <p>産地：{item.production_area.name}</p>
-            <p>カロリー：{item.calorie}</p>
+            <p>カロリー：{item.calorie} kcal/100g</p>
             <div>
               <p>内容量</p>
               {item.amounts.map((amount, index) => (
                 <div key={index}>
-                  <p>内容量：{amount.amount}kg</p>
+                  <p>{amount.amount}kg</p>
                 </div>
               ))}
             </div>
-            <p>楽天市場最安値：{item.min_price}～</p>
+            <p>楽天市場平均価格：{item.median_price} 円</p>
           </div>
         </div>
       </div>

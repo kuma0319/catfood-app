@@ -28,8 +28,8 @@ export interface Food {
     name: string;
   };
   ingredients: string;
+  median_price: number;
   medium_image_url: string;
-  min_price: number;
   nutrient_contents: Nutrient[];
   production_area: {
     id: number;
