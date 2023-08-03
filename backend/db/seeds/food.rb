@@ -6,6 +6,12 @@ CSV.foreach(ENV['FOOD_CSV_PATH'], headers: true) do |row|
   production_area = ProductionArea.find_by(name: row['production_area_name'])
   food_type = FoodType.find_by(name: row['food_type_name'])
 
+  # データが存在しない場合のエラーハンドリング
+  unless brand && production_area && food_type
+    puts "以下のデータが不明: #{row.inspect}"
+    next
+  end
+
   Food.create(
     name: row['name'],
     ingredients: row['ingredients'],
