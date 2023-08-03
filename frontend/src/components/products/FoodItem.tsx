@@ -28,13 +28,18 @@ const FoodItem = ({ food, handleWatchList }: FoodProps) => {
       </div>
       <div className="col-span-1 row-span-2 flex items-center justify-center">
         <Link href="/products/[id]" as={`/products/${food.id}`}>
-          <Image
-            src={food.medium_image_url}
-            width={128}
-            height={128}
-            alt="商品画像"
-            unoptimized //※※本番環境では使用しない※※
-          />
+          {food.medium_image_url ? (
+            <Image
+              src={food.medium_image_url}
+              width={128}
+              height={128}
+              alt="商品画像"
+              unoptimized //※※本番環境では使用しない※※
+            />
+          ) : (
+            // 代替コンテンツ、例えばデフォルトの画像などをここで提供できます
+            <div>No Image</div>
+          )}
         </Link>
       </div>
       <div className="col-span-3 row-span-2">
