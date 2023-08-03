@@ -10,7 +10,7 @@ if Rails.env.development?
   require "./db/seeds/development/food.rb"
   require "./db/seeds/development/amount.rb"
   require "./db/seeds/development/nutrient_content.rb"
-elsif ails.env.production?
+elsif Rails.env.production?
   require "./db/seeds/production/nutrient.rb"
   require "./db/seeds/production/brand.rb"
   require "./db/seeds/production/production_area.rb"
