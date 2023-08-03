@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_26_154154) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_01_201700) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -107,6 +107,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_26_154154) do
     t.string "rakuten_name"
     t.string "medium_image_url"
     t.integer "min_price"
+    t.string "target_age"
+    t.string "rakuten_item_code"
+    t.integer "max_price"
+    t.integer "median_price"
+    t.datetime "add_date"
     t.index ["brand_id"], name: "index_foods_on_brand_id"
     t.index ["food_type_id"], name: "index_foods_on_food_type_id"
     t.index ["name"], name: "index_foods_on_name", unique: true
