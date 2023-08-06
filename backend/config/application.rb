@@ -29,5 +29,8 @@ module App
 
     # タイムゾーンの変更
     config.time_zone = 'Asia/Tokyo'
+
+    # lib配下をautoload_pathsに追加
+    config.paths.add 'lib', eager_load: true
   end
 end
