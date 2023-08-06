@@ -1,6 +1,12 @@
 require "csv"
+require_relative '../../config/environment'
+require 's3_downloader'
 
-CSV.foreach(ENV['BRAND_CSV_PATH'], headers: true) do |row|
+bucket_name = Rails.application.credentials.aws.s3['bucket']
+object_key = ENV['BRAND_CSV_KEY']
+csv_data = S3Downloader.run_download(bucket_name, object_key)
+
+CSV.parse(csv_data, headers: true) do |row|
   # csvのnameカラムからcreate
   Brand.create(
     name: row['name']
