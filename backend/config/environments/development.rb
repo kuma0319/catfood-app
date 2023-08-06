@@ -72,19 +72,18 @@ Rails.application.configure do
   #[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked host: backendエラーの対処
   config.hosts << 'backend'
 
-  # Gmail用の追加設定
+  # メール用の設定
   config.action_mailer.default_options = { from: ENV['EMAIL_ADDRESS'] }
   config.action_mailer.default_url_options = { host: 'localhost:3010' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: 'smtp.gmail.com',
+    address: 'mail41.onamae.ne.jp',
     port: 587,
-    domain: 'gmail.com',
+    domain: 'onamae.ne.jp',
     user_name: ENV['EMAIL_ADDRESS'],
     password: ENV['EMAIL_PASSWORD'],
-    authentication: 'plain',
+    authentication: :login,
     enable_starttls_auto: true,
-    # GmailのSMTPサーバーとの接続時に使用するSSL証明書対策(※開発のみ※)
-    openssl_verify_mode: 'none'
+    openssl_verify_mode: 'none' # SSL証明スキップ。※開発環境のみ※
   }
 end
