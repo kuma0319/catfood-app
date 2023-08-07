@@ -90,6 +90,11 @@ Rails.application.configure do
   # Renderからのリクエストを認証
   config.hosts << "cat-food-app.onrender.com"
 
+  #URLのデフォのホスト名の設定(Mailerのメール内URL生成などで機能する)
+  Rails.application.routes.default_url_options = {
+    host: 'cat-food-app.onrender.com'
+  }
+
   # メール用の設定
   config.action_mailer.default_options = { from: ENV['EMAIL_ADDRESS'] }
   config.action_mailer.default_url_options = { host: 'www.nekomanmafood.com', protocol: 'https' }
