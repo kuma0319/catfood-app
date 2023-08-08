@@ -21,6 +21,10 @@ class Api::V1::Auth::ConfirmationsController < DeviseTokenAuth::ConfirmationsCon
         redirect_to_link = DeviseTokenAuth::Url.generate(redirect_url, redirect_header_options)
       end
 
+      # redirect_to_linkが期待しているものか確認するためのコードを追加
+      logger.info "redirect_to_link: #{redirect_to_link}"
+
+
       # allow_other_host: trueを追加することで、外部URLへのリダイレクトを許容する
       redirect_to(redirect_to_link, allow_other_host: true)
     else
