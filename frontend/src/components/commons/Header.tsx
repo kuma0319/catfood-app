@@ -17,7 +17,7 @@ const Header = () => {
       {!mounted ? (
         // コンポーネントが未マウント状態の時はヘッダーの表示なし(∵ハイドレーションエラー回避のため)
         <></>
-      ) : cookies["access-token"] ? (
+      ) : cookies["uid"] && cookies["client"] && cookies["access-token"] ? (
         // コンポーネントがマウントされ、更に特定のcookieが存在するなら「ログイン状態」扱い
         <HeaderOnSignIn />
       ) : (
