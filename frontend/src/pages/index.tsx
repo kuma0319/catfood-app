@@ -2,11 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 
 import RootLayout from "@/components/commons/Layout";
+import { kiwi_maru } from "@/utils/font";
 
 export default function Home() {
   return (
     <RootLayout>
-      <div className="flex flex-col items-center justify-center">
+      <div
+        className={`flex flex-col items-center justify-center ${kiwi_maru.className}`}
+      >
         <div className="relative my-10 flex max-w-screen-md items-center justify-center">
           <Image
             src="/eat-catfood.jpg"

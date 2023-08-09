@@ -1,6 +1,8 @@
 import { parseCookies } from "nookies";
 import { useEffect, useState } from "react";
 
+import { kiwi_maru } from "@/utils/font";
+
 import HeaderOnSignIn from "./HeaderOnSignIn";
 import HeaderOnSignOut from "./HeaderOnSignOut";
 
@@ -13,7 +15,7 @@ const Header = () => {
   }, []);
 
   return (
-    <>
+    <div className={kiwi_maru.className}>
       {!mounted ? (
         // コンポーネントが未マウント状態の時はヘッダーの表示なし(∵ハイドレーションエラー回避のため)
         <></>
@@ -24,7 +26,7 @@ const Header = () => {
         // コンポーネントがマウントされたが特定のcookieが存在しないなら「ログアウト状態」扱い
         <HeaderOnSignOut />
       )}
-    </>
+    </div>
   );
 };
 
