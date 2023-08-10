@@ -222,3 +222,73 @@ export const MULTI_OPTION_PARAMS = [
   { name: "brand_id", items: BRAND, label: "ブランド" },
   { name: "production_area_id", items: PRODUCTION_AREA, label: "産地" },
 ];
+
+export const SEARCH_BRAND_PARAMS = [
+  { name: "brand_id", items: BRAND, label: "ブランド" },
+];
+
+export const SEARCH_PRODUCTION_AREA_PARAMS = [
+  { name: "production_area_id", items: PRODUCTION_AREA, label: "産地" },
+];
+
+export const SEARCH_CONTENT_PARAMS = [
+  {
+    label: "タンパク質",
+    max_name: "max_protein_content",
+    min_name: "min_protein_content",
+    range: NUTRIENT_CONTENT_RANGE,
+    unit: "%",
+  },
+  {
+    label: "脂質",
+    max_name: "max_fat_content",
+    min_name: "min_fat_content",
+    range: NUTRIENT_CONTENT_RANGE,
+    unit: "%",
+  },
+  {
+    label: "粗繊維",
+    max_name: "max_fibre_content",
+    min_name: "min_fibre_content",
+    range: NUTRIENT_CONTENT_RANGE,
+    unit: "%",
+  },
+  {
+    label: "灰分",
+    max_name: "max_ash_content",
+    min_name: "min_ash_content",
+    range: NUTRIENT_CONTENT_RANGE,
+    unit: "%",
+  },
+  {
+    label: "水分",
+    max_name: "max_moisture_content",
+    min_name: "min_moisture_content",
+    range: NUTRIENT_CONTENT_RANGE,
+    unit: "%",
+  },
+  {
+    label: "カロリー",
+    max_name: "max_calorie",
+    min_name: "min_calorie",
+    range: CALORIE_RANGE,
+    unit: "kcal/100g",
+  },
+];
+
+export const SEARCH_AMOUNT_PARAMS = [
+  {
+    label: "金額",
+    max_name: "max_price",
+    min_name: "min_price",
+    range: PRICE_RANGE,
+    unit: "円",
+  },
+  {
+    label: "内容量",
+    max_name: "max_amount",
+    min_name: "min_amount",
+    range: AMOUNT_RANGE,
+    unit: "kg",
+  },
+];

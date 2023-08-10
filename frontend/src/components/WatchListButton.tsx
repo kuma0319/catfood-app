@@ -38,9 +38,9 @@ const WatchListButton = ({
   }, [watch]);
 
   const falseWatchButtonClass =
-    "inline-flex items-center justify-center gap-2 rounded-md border-2 border-gray-400 px-4 py-2 text-sm font-semibold text-blue-500 transition-all hover:border-blue-500 hover:bg-blue-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:border-gray-700 dark:hover:border-blue-500";
+    "inline-flex items-center justify-center gap-2 rounded-md border-2 border-emerald-400 bg-white px-4 py-[.688rem] text-sm font-medium text-black hover:bg-emerald-300 hover:text-white";
   const trueWatchButtonClass =
-    "inline-flex items-center justify-center gap-2 rounded-md border-2 border-gray-400 px-4 py-2 text-sm font-semibold text-white transition-all hover: border-blue-500 bg-blue-500 hover:bg-white hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:border-gray-700 dark:hover:border-blue-500";
+    "inline-flex items-center justify-center gap-2 rounded-md border-2 border-emerald-400 bg-emerald-400 px-4 py-[.688rem] text-sm font-medium text-white hover:bg-emerald-500";
   const falseWatchButtonName = "ウォッチリストに追加";
   return (
     <div>

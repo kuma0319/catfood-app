@@ -66,7 +66,7 @@ const ItemTab = ({ item }: ItemTab) => {
       {/* Tab end */}
 
       {/* Contents start */}
-      <div className="mt-3">
+      <div className="mt-3 text-sm">
         <div
           id={`card-type-tab-1-${item.id}`}
           role="tabpanel"
