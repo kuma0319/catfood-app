@@ -20,14 +20,11 @@ const RangeOption = ({
 }: rangeOption) => {
   return (
     <div className="my-3">
-      <label
-        htmlFor={label}
-        className="mb-2 block text-sm font-medium dark:text-white"
-      >
+      <label htmlFor={label} className="mb-2 block font-medium dark:text-white">
         {label}
       </label>
-      <div className="my-3 flex items-center justify-between">
-        <div className="flex items-center justify-between">
+      <div className="my-3 flex items-center">
+        <div className="flex items-center">
           <select
             id={label}
             className="block h-10 w-24 rounded-md border-gray-200 px-4 py-3 pr-9 text-xs focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400"

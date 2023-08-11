@@ -122,29 +122,15 @@ export const AMOUNT_RANGE = [0.5, 1.0, 2.0, 3.0, 4.0, 5.0, 10.0];
 //成分含有量
 export const NUTRIENT_CONTENT_RANGE = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50];
 
-//範囲検索用のパラメータ定数
-export const RANGE_OPTION_PARAMS = [
-  {
-    label: "カロリー",
-    max_name: "max_calorie",
-    min_name: "min_calorie",
-    range: CALORIE_RANGE,
-    unit: "kcal/100g",
-  },
-  {
-    label: "金額",
-    max_name: "max_price",
-    min_name: "min_price",
-    range: PRICE_RANGE,
-    unit: "円",
-  },
-  {
-    label: "内容量",
-    max_name: "max_amount",
-    min_name: "min_amount",
-    range: AMOUNT_RANGE,
-    unit: "kg",
-  },
+export const SEARCH_BRAND_PARAMS = [
+  { name: "brand_id", items: BRAND, label: "ブランド" },
+];
+
+export const SEARCH_PRODUCTION_AREA_PARAMS = [
+  { name: "production_area_id", items: PRODUCTION_AREA, label: "産地" },
+];
+
+export const SEARCH_CONTENT_PARAMS = [
   {
     label: "タンパク質",
     max_name: "max_protein_content",
@@ -179,6 +165,30 @@ export const RANGE_OPTION_PARAMS = [
     min_name: "min_moisture_content",
     range: NUTRIENT_CONTENT_RANGE,
     unit: "%",
+  },
+  {
+    label: "カロリー",
+    max_name: "max_calorie",
+    min_name: "min_calorie",
+    range: CALORIE_RANGE,
+    unit: "kcal/100g",
+  },
+];
+
+export const SEARCH_AMOUNT_PARAMS = [
+  {
+    label: "金額",
+    max_name: "max_price",
+    min_name: "min_price",
+    range: PRICE_RANGE,
+    unit: "円",
+  },
+  {
+    label: "内容量",
+    max_name: "max_amount",
+    min_name: "min_amount",
+    range: AMOUNT_RANGE,
+    unit: "kg",
   },
 ];
 
@@ -215,10 +225,4 @@ export const FOOD_SEARCH_INPUT_PARAMS: Array<{
     label: 'このキーワードを「原材料」に"含めない"',
     placeholder: "原材料1 原材料2...",
   },
-];
-
-//複数一致検索用のパラメータ定数
-export const MULTI_OPTION_PARAMS = [
-  { name: "brand_id", items: BRAND, label: "ブランド" },
-  { name: "production_area_id", items: PRODUCTION_AREA, label: "産地" },
 ];

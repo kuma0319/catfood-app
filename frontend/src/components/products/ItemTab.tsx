@@ -66,7 +66,7 @@ const ItemTab = ({ item }: ItemTab) => {
       {/* Tab end */}
 
       {/* Contents start */}
-      <div className="mt-3">
+      <div className="mt-3 text-sm">
         <div
           id={`card-type-tab-1-${item.id}`}
           role="tabpanel"
@@ -78,7 +78,8 @@ const ItemTab = ({ item }: ItemTab) => {
               .sort((a, b) => a.nutrient.id - b.nutrient.id)
               .map((nutrient_content, index) => (
                 <div key={index}>
-                  {nutrient_content.nutrient.name}：{nutrient_content.content} %
+                  {nutrient_content.nutrient.name}：
+                  {nutrient_content.content.toFixed(1)} %
                 </div>
               ))}
           </div>

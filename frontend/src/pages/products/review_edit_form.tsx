@@ -327,7 +327,7 @@ const ReviewEditForm = (props: Review) => {
                   type="submit"
                   className="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-blue-500 px-4 py-3 font-semibold text-white transition-all hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
                 >
-                  レビューを投稿する
+                  編集したレビューを投稿する
                 </button>
               </div>
             </form>

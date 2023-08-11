@@ -12,21 +12,8 @@ export interface FoodProps {
 
 const FoodItem = ({ food, handleWatchList }: FoodProps) => {
   return (
-    <div className="grid grid-cols-4 gap-4 rounded border border-gray-300 p-4 shadow-md">
-      <h1 className="col-span-2 self-start text-left text-xl font-semibold">
-        {food.name}
-      </h1>
-      {/* ウォッチリストボタンが不要なコンポーネントには非表示 */}
-      <div className="col-span-2 flex items-center justify-end gap-4">
-        {handleWatchList ? (
-          <WatchListButton
-            id={food.id}
-            handleWatchList={handleWatchList}
-            trueWatchButtonName="追加済み"
-          />
-        ) : null}
-      </div>
-      <div className="col-span-1 row-span-2 flex items-center justify-center">
+    <div className="grid grid-cols-6 grid-rows-5 gap-2 rounded border border-gray-300 p-4 shadow-md">
+      <div className="col-span-2 row-span-2 flex items-center justify-center">
         <Link href="/products/[id]" as={`/products/${food.id}`}>
           {food.medium_image_url ? (
             <Image
@@ -34,15 +21,27 @@ const FoodItem = ({ food, handleWatchList }: FoodProps) => {
               width={128}
               height={128}
               alt="商品画像"
-              unoptimized //※※本番環境では使用しない※※
+              unoptimized
             />
           ) : (
-            // 代替コンテンツ、例えばデフォルトの画像などをここで提供できます
             <div>No Image</div>
           )}
         </Link>
       </div>
-      <div className="col-span-3 row-span-2">
+      {/* ウォッチリストボタンが不要なコンポーネントには非表示 */}
+      <div className="col-span-4 col-start-3 flex items-center justify-end">
+        {handleWatchList ? (
+          <WatchListButton
+            id={food.id}
+            handleWatchList={handleWatchList}
+            trueWatchButtonName="ウォッチリスト追加済み"
+          />
+        ) : null}
+      </div>
+      <h1 className="col-span-4 col-start-3 row-start-2 self-start text-left text-sm font-semibold">
+        {food.name}
+      </h1>
+      <div className="col-span-6 row-span-3 row-start-3">
         <ItemTab item={food} />
       </div>
     </div>
