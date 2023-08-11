@@ -21,35 +21,35 @@ const WatchListTable = ({ foodData, handleWatchList }: WatchListTableProps) => {
                   <th
                     rowSpan={2}
                     scope="col"
-                    className="whitespace-nowrap border px-4 py-1 text-center text-lg font-medium text-gray-500"
+                    className="whitespace-nowrap border px-4 py-1 text-center text-base font-medium text-gray-500"
                   >
                     イメージ
                   </th>
                   <th
                     rowSpan={2}
                     scope="col"
-                    className="w-40 whitespace-normal border px-4 py-1 text-center text-lg font-medium text-gray-500"
+                    className="w-40 whitespace-normal border px-4 py-1 text-center text-base font-medium text-gray-500"
                   >
                     フード名
                   </th>
                   <th
                     colSpan={5}
                     scope="col"
-                    className="whitespace-nowrap px-4 py-1 text-center text-lg font-medium text-gray-500"
+                    className="whitespace-nowrap px-4 py-1 text-center text-base font-medium text-gray-500"
                   >
                     成分量 (%)
                   </th>
                   <th
                     rowSpan={2}
                     scope="col"
-                    className="whitespace-nowrap border px-4 py-1 text-center text-lg font-medium text-gray-500"
+                    className="whitespace-nowrap border px-4 py-1 text-center text-base font-medium text-gray-500"
                   >
                     第1主原料
                   </th>
                   <th
                     rowSpan={2}
                     scope="col"
-                    className="whitespace-nowrap border px-4 py-1 text-center text-lg font-medium text-gray-500"
+                    className="whitespace-nowrap border px-4 py-1 text-center text-base font-medium text-gray-500"
                   >
                     カロリー
                     <br />
@@ -58,53 +58,53 @@ const WatchListTable = ({ foodData, handleWatchList }: WatchListTableProps) => {
                   <th
                     rowSpan={2}
                     scope="col"
-                    className="whitespace-nowrap border px-4 py-1 text-center text-lg font-medium text-gray-500"
+                    className="whitespace-nowrap border px-4 py-1 text-center text-base font-medium text-gray-500"
                   >
                     金額
                   </th>
                   <th
                     rowSpan={2}
                     scope="col"
-                    className="whitespace-nowrap border px-4 py-1 text-center text-lg font-medium text-gray-500"
+                    className="whitespace-nowrap border px-4 py-1 text-center text-base font-medium text-gray-500"
                   >
                     ブランド
                   </th>
                   <th
                     rowSpan={2}
                     scope="col"
-                    className="whitespace-nowrap border px-4 py-1 text-center text-lg font-medium text-gray-500"
+                    className="whitespace-nowrap border px-4 py-1 text-center text-base font-medium text-gray-500"
                   >
-                    産地
+                    原産国
                   </th>
                 </tr>
                 <tr>
                   <th
                     scope="col"
-                    className="whitespace-nowrap border px-4 py-1 text-center text-lg font-medium text-gray-500"
+                    className="whitespace-nowrap border px-4 py-1 text-center text-base font-medium text-gray-500"
                   >
                     タンパク質
                   </th>
                   <th
                     scope="col"
-                    className="whitespace-nowrap border px-4 py-1 text-center text-lg font-medium text-gray-500"
+                    className="whitespace-nowrap border px-4 py-1 text-center text-base font-medium text-gray-500"
                   >
                     脂質
                   </th>
                   <th
                     scope="col"
-                    className="whitespace-nowrap border px-4 py-1 text-center text-lg font-medium text-gray-500"
+                    className="whitespace-nowrap border px-4 py-1 text-center text-base font-medium text-gray-500"
                   >
                     粗繊維
                   </th>
                   <th
                     scope="col"
-                    className="whitespace-nowrap border px-4 py-1 text-center text-lg font-medium text-gray-500"
+                    className="whitespace-nowrap border px-4 py-1 text-center text-base font-medium text-gray-500"
                   >
                     灰分
                   </th>
                   <th
                     scope="col"
-                    className="whitespace-nowrap border px-4 py-1 text-center text-lg font-medium text-gray-500"
+                    className="whitespace-nowrap border px-4 py-1 text-center text-base font-medium text-gray-500"
                   >
                     水分量
                   </th>
@@ -116,7 +116,7 @@ const WatchListTable = ({ foodData, handleWatchList }: WatchListTableProps) => {
                     key={food.id}
                     className="hover:bg-gray-100 dark:hover:bg-gray-700"
                   >
-                    <td className="whitespace-nowrap px-6 py-4 text-lg font-medium text-gray-800 dark:text-gray-200">
+                    <td className="whitespace-nowrap px-6 py-4 text-base font-medium text-gray-800 dark:text-gray-200">
                       <Link href="/products/[id]" as={`/products/${food.id}`}>
                         <Image
                           src={food.medium_image_url}
@@ -127,7 +127,7 @@ const WatchListTable = ({ foodData, handleWatchList }: WatchListTableProps) => {
                         />
                       </Link>
                     </td>
-                    <td className="whitespace-nowrap px-6 py-4 text-lg text-gray-800 dark:text-gray-200">
+                    <td className="whitespace-nowrap px-6 py-4 text-base text-gray-800 dark:text-gray-200">
                       {food.name}
                     </td>
                     {food.nutrient_contents
@@ -136,27 +136,27 @@ const WatchListTable = ({ foodData, handleWatchList }: WatchListTableProps) => {
                       .map((nutrient_content) => (
                         <td
                           key={nutrient_content.nutrient.id}
-                          className="whitespace-nowrap px-6 py-4 text-lg text-gray-800 dark:text-gray-200"
+                          className="whitespace-nowrap px-6 py-4 text-base text-gray-800 dark:text-gray-200"
                         >
-                          {nutrient_content.content}
+                          {nutrient_content.content.toFixed(1)}
                         </td>
                       ))}
-                    <td className="whitespace-nowrap px-6 py-4 text-lg text-gray-800 dark:text-gray-200">
+                    <td className="whitespace-nowrap px-6 py-4 text-base text-gray-800 dark:text-gray-200">
                       {food.ingredients.split("、", 1)[0]}
                     </td>
-                    <td className="whitespace-nowrap px-6 py-4 text-lg text-gray-800 dark:text-gray-200">
+                    <td className="whitespace-nowrap px-6 py-4 text-base text-gray-800 dark:text-gray-200">
                       {food.calorie}
                     </td>
-                    <td className="whitespace-nowrap px-6 py-4 text-lg text-gray-800 dark:text-gray-200">
-                      金額
+                    <td className="whitespace-nowrap px-6 py-4 text-base text-gray-800 dark:text-gray-200">
+                      {food.median_price}
                     </td>
-                    <td className="whitespace-nowrap px-6 py-4 text-lg text-gray-800 dark:text-gray-200">
+                    <td className="whitespace-nowrap px-6 py-4 text-base text-gray-800 dark:text-gray-200">
                       {food.brand.name}
                     </td>
-                    <td className="whitespace-nowrap px-6 py-4 text-lg text-gray-800 dark:text-gray-200">
+                    <td className="whitespace-nowrap px-6 py-4 text-base text-gray-800 dark:text-gray-200">
                       {food.production_area.name}
                     </td>
-                    <td className="whitespace-nowrap px-6 py-4 text-right text-lg font-medium">
+                    <td className="whitespace-nowrap px-6 py-4 text-right text-base font-medium">
                       <WatchListButton
                         id={food.id}
                         handleWatchList={handleWatchList}

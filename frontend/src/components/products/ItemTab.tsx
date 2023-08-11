@@ -78,7 +78,8 @@ const ItemTab = ({ item }: ItemTab) => {
               .sort((a, b) => a.nutrient.id - b.nutrient.id)
               .map((nutrient_content, index) => (
                 <div key={index}>
-                  {nutrient_content.nutrient.name}：{nutrient_content.content} %
+                  {nutrient_content.nutrient.name}：
+                  {nutrient_content.content.toFixed(1)} %
                 </div>
               ))}
           </div>
