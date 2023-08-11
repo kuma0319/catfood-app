@@ -26,7 +26,7 @@ const QuestionIndex = ({ props }: { props: { questions: Questions[] } }) => {
                     src={
                       question.user.avatar_url
                         ? question.user.avatar_url
-                        : "/kkrn_icon_user_1.svg"
+                        : "/cat_default_avatar_5416936.png"
                     }
                     alt="アバター"
                     width={100}

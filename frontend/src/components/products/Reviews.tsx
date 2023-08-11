@@ -114,7 +114,7 @@ const Reviews = ({ foodId }: { foodId: number }) => {
                       src={
                         review.user.avatar_url
                           ? review.user.avatar_url
-                          : "/kkrn_icon_user_1.svg"
+                          : "/cat_default_avatar_5416936.png"
                       }
                       alt="アバター"
                       width={100}

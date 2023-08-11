@@ -72,7 +72,7 @@ const QuestionDetail = (props: QuestionDetail) => {
                 src={
                   props.user.avatar_url
                     ? props.user.avatar_url
-                    : "/kkrn_icon_user_1.svg"
+                    : "/cat_default_avatar_5416936.png"
                 }
                 alt="アバター"
                 width={100}
@@ -114,7 +114,7 @@ const QuestionDetail = (props: QuestionDetail) => {
                         src={
                           answer.user.avatar_url
                             ? answer.user.avatar_url
-                            : "/kkrn_icon_user_1.svg"
+                            : "/cat_default_avatar_5416936.png"
                         }
                         alt="アバター"
                         width={100}
