@@ -46,15 +46,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       const props = await response.data;
       return { props };
     } catch (error: any) {
-      // Rails側で401エラーが発生した場合はリダイレクト
-      if (error.response.status === 401) {
-        return {
-          redirect: {
-            destination: "/auth/sign_in",
-            permanent: false,
-          },
-        };
-      }
       throw error;
     }
   }
@@ -64,7 +55,7 @@ const QuestionDetail = (props: QuestionDetail) => {
   return (
     <RootLayout>
       <div className="px-4 py-6 sm:py-8 lg:py-12">
-        <div className="gap-4 rounded p-4 shadow-md">
+        <div className="gap-4 rounded border border-gray-300 p-4 shadow-md">
           <div className="mx-auto max-w-screen-xl p-4 md:p-8">
             <div className="mb-2 flex items-center space-x-4">
               <Image

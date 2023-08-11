@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import FoodSearchInput from "@/components/search_form/FoodSearchInput";
 import MultipleOption from "@/components/search_form/MultipleOption";
 import RangeOption from "@/components/search_form/RangeOption";
@@ -23,7 +25,18 @@ const FoodSearch = () => {
   } = useFoodSearch();
 
   return (
-    <div className="rounded border border-gray-300 p-4 shadow-md">
+    <div className="relative mx-auto max-w-md rounded border border-gray-300 bg-sky-100 p-6">
+      <h2 className="mb-4 text-center text-xl font-bold text-gray-800 md:mb-8 md:text-2xl">
+        キャットフード一覧
+      </h2>
+      <Image
+        className=" absolute right-2 top-0 sm:right-10 sm:top-1 "
+        src="/cat-search.png"
+        alt="検索猫"
+        width={70}
+        height={70}
+        unoptimized={true} // これが無いと透過するため
+      />
       <div className="hs-accordion-group text-sm">
         <div className="hs-accordion" id="hs-basic-with-arrow-heading-one">
           <button

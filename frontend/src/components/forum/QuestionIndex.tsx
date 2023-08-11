@@ -10,7 +10,7 @@ const QuestionIndex = ({ props }: { props: { questions: Questions[] } }) => {
   return (
     <div className="py-6 sm:py-8 lg:py-12">
       <div className="mx-auto max-w-screen-xl px-4 md:px-8">
-        <p className="text-left text-xl font-medium text-gray-500">
+        <p className="text-left text-base font-medium text-gray-500">
           質問件数: {props.questions.length}件
         </p>
         <div className="divide-y">
