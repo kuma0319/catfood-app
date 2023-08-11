@@ -40,7 +40,7 @@ const HeaderOnSignOut = () => {
               className="flex-none text-xl font-semibold dark:text-white"
               aria-label="Brand"
             >
-              CatFood App
+              ねこまんま
             </Link>
             <div className="sm:hidden">
               <button

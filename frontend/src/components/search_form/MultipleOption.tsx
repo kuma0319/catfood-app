@@ -10,12 +10,6 @@ interface matchOption {
 const MultipleOption = ({ name, handleChange, items, label }: matchOption) => {
   return (
     <div className="my-3 border-2">
-      <label
-        htmlFor={label}
-        className="my-1 block text-sm font-medium dark:text-white"
-      >
-        {label}
-      </label>
       <div className="gap-x-2 py-2">
         {items.map((item) => {
           return (
@@ -31,7 +25,7 @@ const MultipleOption = ({ name, handleChange, items, label }: matchOption) => {
               />
               <label
                 htmlFor={item.name}
-                className="ml-3 text-sm text-gray-500 dark:text-gray-400"
+                className="ml-3 text-gray-500 dark:text-gray-400"
               >
                 {item.name}
               </label>

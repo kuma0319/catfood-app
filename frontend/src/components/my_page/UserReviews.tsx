@@ -70,15 +70,15 @@ const UserReviews = ({ userReviewProps }: { userReviewProps: Review[] }) => {
                     .format("Y年M月D日にレビュー済み")}
                 </span>
               </div>
-              <div className="flex w-1/5 gap-2">
+              <div className="flex w-2/5 justify-end gap-2">
                 <button
-                  className="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-blue-500 px-3 py-2 text-sm font-semibold text-white transition-all hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                  className="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-blue-500 px-3 py-2 text-sm font-semibold text-white transition-all hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
                   onClick={() => goToReviewEditPage(review.id)}
                 >
                   編集
                 </button>
                 <button
-                  className="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-red-500 px-3 py-2 text-sm font-semibold text-white transition-all hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                  className="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-red-500 px-3 py-2 text-sm font-semibold text-white transition-all hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
                   onClick={() => {
                     if (
                       window.confirm("このレビューを削除してもよろしいですか？")
@@ -93,11 +93,11 @@ const UserReviews = ({ userReviewProps }: { userReviewProps: Review[] }) => {
             </div>
 
             {review.evaluations.map((evaluation, index) => (
-              <div className="flex items-center gap-3" key={index}>
+              <div className="flex items-center gap-10" key={index}>
                 <span className="w-20 whitespace-nowrap text-left text-sm text-gray-600">
                   {evaluation.review_item.name}
                 </span>
-                <Score score={Math.round(evaluation.score)} size={6} />
+                <Score score={Math.round(evaluation.score)} size={5} />
               </div>
             ))}
 

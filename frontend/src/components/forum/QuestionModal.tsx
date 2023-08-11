@@ -5,20 +5,21 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import Spinners from "@/components/commons/Spinners";
-import { answersUrl } from "@/urls";
+import { questionsUrl } from "@/urls";
 import { getAuthHeadersWithCookies } from "@/utils/ApiHeaders";
 
-interface AnswerInput {
+interface QuestionInput {
+  title: string;
   content: string;
 }
 
-const AnswerModal = ({ questionId }: { questionId: number }) => {
+const QuestionModal = () => {
   // React Hook Formライブラリを使用
   const {
     formState: { errors },
     handleSubmit,
     register,
-  } = useForm<AnswerInput>({
+  } = useForm<QuestionInput>({
     criteriaMode: "all",
   });
   const [isLoading, setIsLoading] = useState(false);
@@ -27,7 +28,7 @@ const AnswerModal = ({ questionId }: { questionId: number }) => {
   const router = useRouter();
   const cookies = parseCookies();
 
-  const handleAnswer = async () => {
+  const handleQuestion = async () => {
     if (cookies["access-token"]) {
       setIsModalOpen(true);
     } else {
@@ -38,15 +39,15 @@ const AnswerModal = ({ questionId }: { questionId: number }) => {
     }
   };
 
-  const onPostAnswer = async (data: AnswerInput) => {
+  const onPostQuestion = async (data: QuestionInput) => {
     // submit時にローディングをセット
     setIsLoading(true);
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}${answersUrl}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}${questionsUrl}`,
         {
+          title: data.title,
           content: data.content,
-          question_id: questionId,
         },
         {
           headers: getAuthHeadersWithCookies(cookies),
@@ -74,12 +75,12 @@ const AnswerModal = ({ questionId }: { questionId: number }) => {
           type="button"
           className="inline-flex items-center justify-center gap-2 rounded-md border bg-white px-4 py-3 align-middle text-base font-medium text-gray-700 shadow-sm transition-all hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 dark:hover:bg-slate-800 dark:hover:text-white dark:focus:ring-offset-gray-800"
           data-hs-overlay="#hs-notifications"
-          onClick={handleAnswer}
+          onClick={handleQuestion}
         >
-          この質問に回答する
+          質問してみる
         </button>
       </div>
-
+      {/* stateのisModalOpenがtrueになった場合のみモーダルを表示 */}
       {isModalOpen && (
         <div
           id="hs-notifications"
@@ -118,24 +119,55 @@ const AnswerModal = ({ questionId }: { questionId: number }) => {
                   </div>
                   <div className="text-center">
                     <h2 className="text-xl font-bold text-gray-800 dark:text-white sm:text-3xl">
-                      質問へ回答する
+                      質問を投稿
                     </h2>
                   </div>
 
-                  <form onSubmit={handleSubmit(onPostAnswer)}>
-                    <div className="my-4 gap-2 py-5">
+                  <form onSubmit={handleSubmit(onPostQuestion)}>
+                    <div className="my-4 gap-2 border-gray-400 py-5">
+                      <label
+                        htmlFor="hs-feedback-post-comment-name-1"
+                        className="mb-3 block text-lg font-bold dark:text-white lg:text-xl"
+                      >
+                        質問のタイトル
+                      </label>
+                      <input
+                        type="text"
+                        id="hs-feedback-post-comment-name-1"
+                        className="block w-full rounded-md border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 sm:p-4"
+                        placeholder="質問の内容を端的に説明して下さい。"
+                        {...register("title", {
+                          maxLength: {
+                            message: "100文字以下で記載してください。",
+                            value: 100,
+                          },
+                          required: {
+                            message: "入力が必須の項目です",
+                            value: true,
+                          },
+                        })}
+                      />
+                      {/* エラーが存在する場合にメッセージを下段に表示 */}
+                      {errors.title && (
+                        <div className="mt-2 text-xs text-red-600">
+                          {String(errors.title.message)}
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="my-4 gap-2 border-y border-gray-400 py-5">
                       <label
                         htmlFor="hs-feedback-post-comment-textarea-1"
                         className="mb-3 block text-lg font-bold dark:text-white lg:text-xl"
                       >
-                        回答内容
+                        質問内容
                       </label>
                       <div className="mt-1">
                         <textarea
                           id="hs-feedback-post-comment-textarea-1"
-                          rows={10}
+                          rows={3}
                           className="block w-full rounded-md border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 sm:p-4"
-                          placeholder="1～10000文字で入力して下さい。"
+                          placeholder="質問の本文を記載して下さい。"
                           {...register("content", {
                             maxLength: {
                               message: "10000文字以下で記載してください。",
@@ -161,7 +193,7 @@ const AnswerModal = ({ questionId }: { questionId: number }) => {
                         type="submit"
                         className="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-blue-500 px-4 py-3 font-semibold text-white transition-all hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
                       >
-                        回答を投稿する
+                        質問を投稿する
                       </button>
                     </div>
                   </form>
@@ -175,4 +207,4 @@ const AnswerModal = ({ questionId }: { questionId: number }) => {
   );
 };
 
-export default AnswerModal;
+export default QuestionModal;
