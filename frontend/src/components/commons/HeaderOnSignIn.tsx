@@ -60,9 +60,9 @@ const HeaderOnSignIn = () => {
 
   return (
     <div className="relative">
-      <header className="z-50 flex w-full flex-wrap border-b border-gray-200 bg-white py-3 text-sm dark:border-gray-700 dark:bg-gray-800 sm:flex-nowrap sm:justify-start sm:py-0">
+      <header className="z-50 flex w-full flex-wrap border-b border-gray-200 bg-white py-3 text-sm dark:border-gray-700 dark:bg-gray-800 md:flex-nowrap md:justify-start md:py-0">
         <nav
-          className="relative mx-auto w-full max-w-7xl px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8"
+          className="relative mx-auto w-full max-w-7xl px-4 md:flex md:items-center md:justify-between md:px-6 lg:px-8"
           aria-label="Global"
         >
           <div className="flex items-center justify-between">
@@ -73,7 +73,7 @@ const HeaderOnSignIn = () => {
             >
               ねこまんま
             </Link>
-            <div className="sm:hidden">
+            <div className="md:hidden">
               <button
                 type="button"
                 className="hs-collapse-toggle inline-flex items-center justify-center gap-2 rounded-md border bg-white p-2 align-middle text-sm font-medium text-gray-700 shadow-sm transition-all hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 dark:hover:bg-slate-800 dark:hover:text-white dark:focus:ring-offset-gray-800"
@@ -107,44 +107,42 @@ const HeaderOnSignIn = () => {
           </div>
           <div
             id="navbar-collapse-with-animation"
-            className="hs-collapse hidden grow basis-full overflow-hidden transition-all duration-300 sm:block"
+            className="hs-collapse hidden grow basis-full overflow-hidden transition-all duration-300 md:block"
           >
-            <div className="mt-5 flex flex-col gap-x-0 gap-y-4 sm:mt-0 sm:flex-row sm:items-center sm:gap-x-7 sm:gap-y-0 sm:pl-7">
+            <div className="mt-5 flex flex-col gap-x-0 gap-y-4 md:mt-0 md:flex-row md:items-center md:gap-x-7 md:gap-y-0 md:pl-7">
               <Link
                 href="/"
-                className="font-medium text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 sm:py-6"
+                className="font-medium text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 md:py-6"
                 aria-current="page"
               >
                 ホーム
               </Link>
               <Link
                 href="/products"
-                className="font-medium text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 sm:py-6"
+                className="font-medium text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 md:py-6"
               >
                 フード一覧
               </Link>
               <Link
                 href="/forum"
-                className="font-medium text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 sm:py-6"
+                className="font-medium text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 md:py-6"
               >
                 相談所
               </Link>
               <Link
-                href="/#"
-                className="font-medium text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 sm:py-6"
+                href="/guide"
+                className="font-medium text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 md:py-6"
               >
                 使い方
-                <br />
-                (製作中)
               </Link>
               <Link
                 href="/watch_list"
-                className="font-medium text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 sm:py-6"
+                className="font-medium text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 md:py-6"
               >
                 ウォッチリスト
               </Link>
 
-              <div className="items-center gap-x-2 sm:ml-auto md:flex">
+              <div className="items-center gap-x-2 md:ml-auto md:flex">
                 {/* ログイン状態の場合はマイページ用のリンクを配置 */}
                 <Link
                   className="flex items-center py-2 font-medium text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500"
