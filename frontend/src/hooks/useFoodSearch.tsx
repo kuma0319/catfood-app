@@ -5,32 +5,35 @@ import { ChangeEvent, useEffect, useState } from "react";
 
 import { FoodSearchParams } from "../types/foods";
 
-const useFoodSearch = () => {
+// 引数に初期値を受け取るようにすることで、SSG側からもパラメータを引き継げるようにする
+const useFoodSearch = (initialSearchParams?: FoodSearchParams) => {
   //Railsに渡すパラメータ用のstate管理
-  const [selectParams, setSelectParams] = useState<FoodSearchParams>({
-    brand_id: [],
-    food_name: [],
-    ingredients: [],
-    max_amount: "",
-    max_ash_content: "",
-    max_calorie: "",
-    max_fat_content: "",
-    max_fibre_content: "",
-    max_moisture_content: "",
-    max_price: "",
-    max_protein_content: "",
-    min_amount: "",
-    min_ash_content: "",
-    min_calorie: "",
-    min_fat_content: "",
-    min_fibre_content: "",
-    min_moisture_content: "",
-    min_price: "",
-    min_protein_content: "",
-    not_food_name: [],
-    not_ingredients: [],
-    production_area_id: [],
-  });
+  const [selectParams, setSelectParams] = useState<FoodSearchParams>(
+    initialSearchParams || {
+      brand_id: [],
+      food_name: [],
+      ingredients: [],
+      max_amount: "",
+      max_ash_content: "",
+      max_calorie: "",
+      max_fat_content: "",
+      max_fibre_content: "",
+      max_moisture_content: "",
+      max_price: "",
+      max_protein_content: "",
+      min_amount: "",
+      min_ash_content: "",
+      min_calorie: "",
+      min_fat_content: "",
+      min_fibre_content: "",
+      min_moisture_content: "",
+      min_price: "",
+      min_protein_content: "",
+      not_food_name: [],
+      not_ingredients: [],
+      production_area_id: [],
+    }
+  );
 
   //キーワード入力用にキーワードとターゲットの名前管理
   const [keyWords, setKeyWords] = useState({
@@ -89,6 +92,29 @@ const useFoodSearch = () => {
       [event.target.name]: event.target.value,
     });
   };
+
+  // キーワード初期化用の副作用(ページ遷移しても検索ボックスの状態を保持する用)
+  useEffect(() => {
+    // URLのクエリパラメータからkeyWordsを初期化
+    if (router.isReady) {
+      setKeyWords({
+        // クエリパラメータがある場合にその値で初期化する
+        // キーワードのパラメータは文字列 or 文字列の配列のため、配列の場合はスペース区切りで文字列化
+        food_name: Array.isArray(router.query.food_name)
+          ? router.query.food_name.join(" ")
+          : router.query.food_name || "",
+        ingredients: Array.isArray(router.query.ingredients)
+          ? router.query.ingredients.join(" ")
+          : router.query.ingredients || "",
+        not_food_name: Array.isArray(router.query.not_food_name)
+          ? router.query.not_food_name.join(" ")
+          : router.query.not_food_name || "",
+        not_ingredients: Array.isArray(router.query.not_ingredients)
+          ? router.query.not_ingredients.join(" ")
+          : router.query.not_ingredients || "",
+      });
+    }
+  }, [router]);
 
   //検索ボタン押下時のイベント
   const handleClick = () => {

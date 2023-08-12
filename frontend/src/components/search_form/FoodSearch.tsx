@@ -11,8 +11,13 @@ import {
   SEARCH_CONTENT_PARAMS,
   SEARCH_PRODUCTION_AREA_PARAMS,
 } from "@/search_constant";
+import { FoodSearchParams } from "@/types/foods";
 
-const FoodSearch = () => {
+const FoodSearch = ({
+  initialSearchParams,
+}: {
+  initialSearchParams?: FoodSearchParams;
+}) => {
   const {
     handleCheckboxChange,
     handleClick,
@@ -22,7 +27,7 @@ const FoodSearch = () => {
     router,
     searchButtonPressed,
     selectParams,
-  } = useFoodSearch();
+  } = useFoodSearch(initialSearchParams);
 
   return (
     <div className="relative mx-auto max-w-md rounded border border-gray-300 bg-sky-100 p-6">
@@ -88,6 +93,12 @@ const FoodSearch = () => {
                   label={param.label}
                   items={param.items}
                   handleChange={handleCheckboxChange}
+                  // 初期値がundefinedとなると子コンポーネント側で読み取りエラーとなるため、undefinedの場合は空配列を渡す
+                  searchParamIds={
+                    selectParams.brand_id === undefined
+                      ? []
+                      : selectParams.brand_id
+                  }
                 />
               ))}
             </div>
@@ -144,6 +155,12 @@ const FoodSearch = () => {
                   label={param.label}
                   items={param.items}
                   handleChange={handleCheckboxChange}
+                  searchParamIds={
+                    // 初期値がundefinedとなると子コンポーネント側で読み取りエラーとなるため、undefinedの場合は空配列を渡す
+                    selectParams.production_area_id === undefined
+                      ? []
+                      : selectParams.production_area_id
+                  }
                 />
               ))}
             </div>
@@ -202,6 +219,10 @@ const FoodSearch = () => {
                   range={param.range}
                   unit={param.unit}
                   handleChange={handleSelectChange}
+                  // selectParamsの値からparam.min_name, param.max_nameをキーにして値を取得
+                  // (例) たんぱく質であればSEARCH_CONTENT_PARAMSのmin_nameがそのままselectParamsのmin_protein_contentとして利用されているため
+                  min_value={(selectParams as any)[param.min_name]}
+                  max_value={(selectParams as any)[param.max_name]}
                 />
               ))}
             </div>
@@ -260,6 +281,9 @@ const FoodSearch = () => {
                   range={param.range}
                   unit={param.unit}
                   handleChange={handleSelectChange}
+                  // selectParamsの値からparam.min_name, param.max_nameをキーにして値を取得
+                  min_value={(selectParams as any)[param.min_name]}
+                  max_value={(selectParams as any)[param.max_name]}
                 />
               ))}
             </div>
@@ -320,6 +344,9 @@ const FoodSearch = () => {
                 />
               ))}
             </div>
+            <p className="mt-2 text-sm text-red-500">
+              ※ スペース区切りで複数キーワードを指定可能です。
+            </p>
           </div>
         </div>
       </div>

@@ -1,12 +1,18 @@
 import { useContext, useEffect, useState } from "react";
 
 import { WatchListContext } from "@/context/WatchListContext";
-import { FoodData } from "@/types/foods";
+import { FoodData, FoodSearchParams } from "@/types/foods";
 
 import FoodSearch from "../search_form/FoodSearch";
 import FoodItem from "./FoodItem";
 
-const FoodIndex = ({ data }: { data: FoodData }) => {
+type FoodIndexProps = {
+  data: FoodData;
+  // SSG表示のproductsページから検索した際に検索パラメータを受け取る
+  initialSearchParams?: FoodSearchParams;
+};
+
+const FoodIndex = ({ data, initialSearchParams }: FoodIndexProps) => {
   const context = useContext(WatchListContext);
   //マウントされたかどうかの状態管理
   const [mounted, setMounted] = useState(false);
@@ -27,7 +33,9 @@ const FoodIndex = ({ data }: { data: FoodData }) => {
 
   return (
     <div className="mx-auto max-w-screen-md">
-      <div className="px-4 py-6">{mounted && <FoodSearch />}</div>
+      <div className="px-4 py-6">
+        {mounted && <FoodSearch initialSearchParams={initialSearchParams} />}
+      </div>
       <p className="mx-4 text-base md:text-lg">{`ヒット件数：${data.length} 件`}</p>
       <div className="px-4 py-6">
         {data.map((food) => (
