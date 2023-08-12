@@ -41,7 +41,7 @@ export default function Home() {
           </Link>
           <Link
             className="flex h-28 w-28 items-center justify-center rounded-full bg-emerald-300 bg-gradient-to-r text-lg font-bold text-white shadow-lg hover:bg-emerald-400 active:scale-90 sm:h-36 sm:w-36 md:h-44 md:w-44 lg:h-52 lg:w-52 lg:text-2xl"
-            href="#"
+            href="/guide"
           >
             使い方を見る
           </Link>

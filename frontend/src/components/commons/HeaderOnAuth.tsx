@@ -11,10 +11,10 @@ const HeaderOnAuth = () => {
           <div className="flex items-center justify-between">
             <Link
               href="/"
-              className="text-xl font-semibold dark:text-white sm:py-6"
+              className="flex-none text-xl font-semibold dark:text-white"
               aria-label="Brand"
             >
-              CatFood App
+              ねこまんま
             </Link>
           </div>
         </nav>
