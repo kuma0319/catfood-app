@@ -44,13 +44,17 @@ const HeaderOnSignIn = () => {
         }
       );
       if (response.status === 200) {
-        // ログアウト成功時に該当するクッキーを削除しリダイレクト
-        destroyCookie(null, "uid", cookies["uid"]);
-        destroyCookie(null, "client", cookies["client"]);
-        destroyCookie(null, "access-token", cookies["access-token"]);
-        router.push({
-          pathname: "/",
-          query: { flashMessage: "ログアウトしました" },
+        // Promisesを利用して、非同期でクッキー削除を待ってからリダイレクト
+        // ∵こうしておかないと、クッキーが削除されないままリダイレクトされることがある。
+        Promise.all([
+          destroyCookie(null, "uid", cookies["uid"]),
+          destroyCookie(null, "client", cookies["client"]),
+          destroyCookie(null, "access-token", cookies["access-token"]),
+        ]).then(() => {
+          router.push({
+            pathname: "/",
+            query: { flashMessage: "ログアウトしました" },
+          });
         });
       }
     } catch (error: any) {

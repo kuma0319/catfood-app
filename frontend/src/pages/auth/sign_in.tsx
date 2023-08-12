@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useRouter } from "next/router";
-import { setCookie } from "nookies";
+import { destroyCookie, setCookie } from "nookies";
 import { useState } from "react";
 
 import SignInForm from "@/components/authentication/SignInForm";
@@ -23,6 +23,7 @@ const SignIn = () => {
   const onSignIn = async (data: SignInInput) => {
     const email = data.email;
     const password = data.password;
+
     // submit時にローディングをセット
     setIsLoading(true);
     try {
@@ -34,34 +35,50 @@ const SignIn = () => {
         }
       );
       if (response.status === 200) {
+        // 既存のクッキーが存在する場合は削除
+        destroyCookie(null, "uid");
+        destroyCookie(null, "client");
+        destroyCookie(null, "access-token");
+
         // Remember me機能が有効な場合
         // 認証成功時にクッキーへトークンを保存しホームページへリダイレクト、期限設定
         if (rememberMe) {
           // Remember me機能としてクッキーの有効期限を1週間に設定
           const expiryDate = new Date();
           expiryDate.setDate(expiryDate.getDate() + 7);
-
-          setCookie(null, "uid", response.headers["uid"], {
-            expires: expiryDate,
-          });
-          setCookie(null, "client", response.headers["client"], {
-            expires: expiryDate,
-          });
-          setCookie(null, "access-token", response.headers["access-token"], {
-            expires: expiryDate,
+          // Promisesを利用して、非同期でクッキーセットを待ってからリダイレクト
+          // ∵こうしておかないと、クッキーがセットされないままリダイレクトされることがある。
+          Promise.all([
+            setCookie(null, "uid", response.headers["uid"], {
+              expires: expiryDate,
+            }),
+            setCookie(null, "client", response.headers["client"], {
+              expires: expiryDate,
+            }),
+            setCookie(null, "access-token", response.headers["access-token"], {
+              expires: expiryDate,
+            }),
+          ]).then(() => {
+            router.push({
+              pathname: "/",
+              query: { flashMessage: "ログインしました" },
+            });
           });
           setRememberMe(false);
         } else {
           // Remember me機能が無効な場合
           // 認証成功時にクッキーへトークンを保存しホームページへリダイレクト
-          setCookie(null, "uid", response.headers["uid"]);
-          setCookie(null, "client", response.headers["client"]);
-          setCookie(null, "access-token", response.headers["access-token"]);
+          Promise.all([
+            setCookie(null, "uid", response.headers["uid"]),
+            setCookie(null, "client", response.headers["client"]),
+            setCookie(null, "access-token", response.headers["access-token"]),
+          ]).then(() => {
+            router.push({
+              pathname: "/",
+              query: { flashMessage: "ログインしました" },
+            });
+          });
         }
-        await router.push({
-          pathname: "/",
-          query: { flashMessage: "ログインしました" },
-        });
         setIsLoading(false);
       }
     } catch (error: any) {

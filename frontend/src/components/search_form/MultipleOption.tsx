@@ -1,13 +1,18 @@
 import { ChangeEvent } from "react";
 
-interface matchOption {
+const MultipleOption = ({
+  name,
+  handleChange,
+  items,
+  label,
+  searchParamIds,
+}: {
   name: string;
   handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
   items: { id: number; name: string }[];
   label: string;
-}
-
-const MultipleOption = ({ name, handleChange, items, label }: matchOption) => {
+  searchParamIds: string[];
+}) => {
   return (
     <div className="my-3 border-2">
       <div className="gap-x-2 py-2">
@@ -22,6 +27,8 @@ const MultipleOption = ({ name, handleChange, items, label }: matchOption) => {
                 name={name}
                 value={item.id}
                 onChange={handleChange}
+                // searchParamIdで渡された値があるかどうかでchecked属性を定義
+                checked={searchParamIds.includes(item.id.toString())}
               />
               <label
                 htmlFor={item.name}
