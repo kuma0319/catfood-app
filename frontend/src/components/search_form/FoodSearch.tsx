@@ -54,8 +54,8 @@ const FoodSearch = () => {
               <path
                 d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
+                strokeWidth="2"
+                strokeLinecap="round"
               />
             </svg>
             <svg
@@ -69,8 +69,8 @@ const FoodSearch = () => {
               <path
                 d="M2 11L8.16086 5.31305C8.35239 5.13625 8.64761 5.13625 8.83914 5.31305L15 11"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
+                strokeWidth="2"
+                strokeLinecap="round"
               />
             </svg>
             ブランドで絞り込む
@@ -80,7 +80,7 @@ const FoodSearch = () => {
             className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
             aria-labelledby="hs-basic-with-arrow-heading-one"
           >
-            <p className="text-gray-800 dark:text-gray-200">
+            <div className="text-gray-800 dark:text-gray-200">
               {SEARCH_BRAND_PARAMS.map((param, index) => (
                 <MultipleOption
                   key={index}
@@ -90,7 +90,7 @@ const FoodSearch = () => {
                   handleChange={handleCheckboxChange}
                 />
               ))}
-            </p>
+            </div>
           </div>
         </div>
 
@@ -110,8 +110,8 @@ const FoodSearch = () => {
               <path
                 d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
+                strokeWidth="2"
+                strokeLinecap="round"
               />
             </svg>
             <svg
@@ -125,8 +125,8 @@ const FoodSearch = () => {
               <path
                 d="M2 11L8.16086 5.31305C8.35239 5.13625 8.64761 5.13625 8.83914 5.31305L15 11"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
+                strokeWidth="2"
+                strokeLinecap="round"
               />
             </svg>
             原産国で絞り込む
@@ -136,7 +136,7 @@ const FoodSearch = () => {
             className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
             aria-labelledby="hs-basic-with-arrow-heading-two"
           >
-            <p className="text-gray-800 dark:text-gray-200">
+            <div className="text-gray-800 dark:text-gray-200">
               {SEARCH_PRODUCTION_AREA_PARAMS.map((param, index) => (
                 <MultipleOption
                   key={index}
@@ -146,7 +146,7 @@ const FoodSearch = () => {
                   handleChange={handleCheckboxChange}
                 />
               ))}
-            </p>
+            </div>
           </div>
         </div>
 
@@ -166,8 +166,8 @@ const FoodSearch = () => {
               <path
                 d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
+                strokeWidth="2"
+                strokeLinecap="round"
               />
             </svg>
             <svg
@@ -181,8 +181,8 @@ const FoodSearch = () => {
               <path
                 d="M2 11L8.16086 5.31305C8.35239 5.13625 8.64761 5.13625 8.83914 5.31305L15 11"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
+                strokeWidth="2"
+                strokeLinecap="round"
               />
             </svg>
             成分量、カロリーで絞り込む
@@ -192,7 +192,7 @@ const FoodSearch = () => {
             className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
             aria-labelledby="hs-basic-with-arrow-heading-three"
           >
-            <p className="text-gray-800 dark:text-gray-200">
+            <div className="text-gray-800 dark:text-gray-200">
               {SEARCH_CONTENT_PARAMS.map((param, index) => (
                 <RangeOption
                   key={index}
@@ -204,7 +204,7 @@ const FoodSearch = () => {
                   handleChange={handleSelectChange}
                 />
               ))}
-            </p>
+            </div>
           </div>
         </div>
 
@@ -224,8 +224,8 @@ const FoodSearch = () => {
               <path
                 d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
+                strokeWidth="2"
+                strokeLinecap="round"
               />
             </svg>
             <svg
@@ -239,8 +239,8 @@ const FoodSearch = () => {
               <path
                 d="M2 11L8.16086 5.31305C8.35239 5.13625 8.64761 5.13625 8.83914 5.31305L15 11"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
+                strokeWidth="2"
+                strokeLinecap="round"
               />
             </svg>
             内容量、金額で絞り込む
@@ -250,7 +250,7 @@ const FoodSearch = () => {
             className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
             aria-labelledby="hs-basic-with-arrow-heading-four"
           >
-            <p className="text-gray-800 dark:text-gray-200">
+            <div className="text-gray-800 dark:text-gray-200">
               {SEARCH_AMOUNT_PARAMS.map((param, index) => (
                 <RangeOption
                   key={index}
@@ -262,7 +262,7 @@ const FoodSearch = () => {
                   handleChange={handleSelectChange}
                 />
               ))}
-            </p>
+            </div>
           </div>
         </div>
 
@@ -282,8 +282,8 @@ const FoodSearch = () => {
               <path
                 d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
+                strokeWidth="2"
+                strokeLinecap="round"
               />
             </svg>
             <svg
@@ -297,8 +297,8 @@ const FoodSearch = () => {
               <path
                 d="M2 11L8.16086 5.31305C8.35239 5.13625 8.64761 5.13625 8.83914 5.31305L15 11"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
+                strokeWidth="2"
+                strokeLinecap="round"
               />
             </svg>
             キーワードで絞り込む
@@ -308,7 +308,7 @@ const FoodSearch = () => {
             className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
             aria-labelledby="hs-basic-with-arrow-heading-five"
           >
-            <p className="text-gray-800 dark:text-gray-200">
+            <div className="text-gray-800 dark:text-gray-200">
               {FOOD_SEARCH_INPUT_PARAMS.map((param, index) => (
                 <FoodSearchInput
                   key={index}
@@ -319,7 +319,7 @@ const FoodSearch = () => {
                   value={keyWords[param.name]}
                 />
               ))}
-            </p>
+            </div>
           </div>
         </div>
       </div>

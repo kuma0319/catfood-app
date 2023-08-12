@@ -28,6 +28,7 @@ const FoodIndex = ({ data }: { data: FoodData }) => {
   return (
     <div className="mx-auto max-w-screen-md">
       <div className="px-4 py-6">{mounted && <FoodSearch />}</div>
+      <p className="mx-4 text-base md:text-lg">{`ヒット件数：${data.length} 件`}</p>
       <div className="px-4 py-6">
         {data.map((food) => (
           <FoodItem

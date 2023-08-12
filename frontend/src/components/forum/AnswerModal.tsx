@@ -28,7 +28,8 @@ const AnswerModal = ({ questionId }: { questionId: number }) => {
   const cookies = parseCookies();
 
   const handleAnswer = async () => {
-    if (cookies["access-token"]) {
+    // トークンがあればログイン状態としてモーダル表示
+    if (cookies["uid"] && cookies["client"] && cookies["access-token"]) {
       setIsModalOpen(true);
     } else {
       await router.push({

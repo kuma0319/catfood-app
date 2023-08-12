@@ -1,31 +1,30 @@
-import { Amounts, Nutrient } from "../../types/foods";
+import Link from "next/link";
 
-interface ItemTabList {
-  id: number;
-  amounts: Amounts[];
-  brand: {
-    id: number;
-    name: string;
-  };
-  calorie: number;
-  food_type: {
-    id: number;
-    name: string;
-  };
-  ingredients: string;
-  median_price: number;
-  nutrient_contents: Nutrient[];
-  production_area: {
-    id: number;
-    name: string;
-  };
-}
+import { Food } from "../../types/foods";
 
-interface ItemTab {
-  item: ItemTabList;
-}
+const ItemTab = ({ item }: { item: Food }) => {
+  // 楽天検索リンクを設置するための関数、keywordを元に検索URLを設置
+  const RakutenSearchLink = ({ keyword }: { keyword: string }) => {
+    // ジャンルを「猫用品」で固定するためにtagIdを付ける
+    const tagId = 507524;
+    // URIエンコードして楽天市場の検索URLを生成
+    const rakutenSearchURL = `https://search.rakuten.co.jp/search/mall/${encodeURIComponent(
+      keyword
+    )}/${tagId}/`;
 
-const ItemTab = ({ item }: ItemTab) => {
+    return (
+      // ※target="_blank"には念のためrel="noopener noreferrer"を付ける※
+      <Link
+        className="ml-4 rounded-md border border-gray-700 bg-red-500 p-1 text-xs font-normal text-white"
+        href={rakutenSearchURL}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        楽天市場で検索
+      </Link>
+    );
+  };
+
   return (
     <>
       {/* Tab start */}
@@ -59,6 +58,16 @@ const ItemTab = ({ item }: ItemTab) => {
             aria-controls={`card-type-tab-3-${item.id}`}
             role="tab"
           >
+            ケア
+          </button>
+          <button
+            type="button"
+            className="-mb-px inline-flex items-center gap-2 rounded-t-lg border bg-gray-50 px-4 py-3 text-center text-sm font-medium text-gray-500 hover:text-gray-700 hs-tab-active:border-b-transparent hs-tab-active:bg-white hs-tab-active:text-blue-600 dark:border-gray-700 dark:bg-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hs-tab-active:border-b-gray-800 dark:hs-tab-active:bg-gray-800 dark:hs-tab-active:text-white"
+            id={`card-type-tab-item-4-${item.id}`}
+            data-hs-tab={`#card-type-tab-4-${item.id}`}
+            aria-controls={`card-type-tab-4-${item.id}`}
+            role="tab"
+          >
             その他
           </button>
         </nav>
@@ -82,6 +91,7 @@ const ItemTab = ({ item }: ItemTab) => {
                   {nutrient_content.content.toFixed(1)} %
                 </div>
               ))}
+            <p>カロリー：{item.calorie} kcal/100g</p>
           </div>
         </div>
         <div
@@ -100,20 +110,39 @@ const ItemTab = ({ item }: ItemTab) => {
           role="tabpanel"
           aria-labelledby={`card-type-tab-item-3-${item.id}`}
         >
+          <div className="text-gray-500 dark:text-gray-400">ケア内容</div>
+        </div>
+        <div
+          id={`card-type-tab-4-${item.id}`}
+          className="hidden"
+          role="tabpanel"
+          aria-labelledby={`card-type-tab-item-4-${item.id}`}
+        >
           <div className="text-gray-500 dark:text-gray-400">
-            <p>ブランド：{item.brand.name}</p>
             <p>タイプ：{item.food_type.name}</p>
+            <p>ブランド：{item.brand.name}</p>
             <p>産地：{item.production_area.name}</p>
-            <p>カロリー：{item.calorie} kcal/100g</p>
             <div>
-              <p>内容量</p>
-              {item.amounts.map((amount, index) => (
-                <div key={index}>
-                  <p>{amount.amount}kg</p>
-                </div>
-              ))}
+              {/* 内容量は1kg未満の場合はg表記で小さい順からソートする */}
+              <p>
+                内容量：
+                {item.amounts
+                  .sort((a, b) => a.amount - b.amount)
+                  .map((amount) => {
+                    if (amount.amount < 1) {
+                      return amount.amount * 1000 + "g";
+                    }
+                    return amount.amount + "kg";
+                  })
+                  .join("、")}
+              </p>
             </div>
-            <p>楽天市場平均価格：{item.median_price} 円</p>
+
+            <div className="flex items-center">
+              <p>楽天市場平均価格：{item.median_price} 円</p>
+              {/* rakuten_name(楽天市場検索用に修正したname)をkeywordに検索窓設置 */}
+              <RakutenSearchLink keyword={item.rakuten_name} />
+            </div>
           </div>
         </div>
       </div>
