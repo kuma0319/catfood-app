@@ -122,7 +122,7 @@ const HeaderOnSignIn = () => {
                 ホーム
               </Link>
               <Link
-                href="/products"
+                href="/products/pages/1"
                 className="font-medium text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 md:py-6"
               >
                 フード一覧
