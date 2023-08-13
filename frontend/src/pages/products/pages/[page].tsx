@@ -4,9 +4,8 @@ import { GetStaticPaths, GetStaticProps } from "next";
 
 import RootLayout from "@/components/commons/Layout";
 import FoodIndex from "@/components/products/FoodIndex";
+import { FoodData } from "@/types/foods";
 import { foodsIndexUrl } from "@/urls";
-
-import { FoodData } from "../../types/foods";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   // 1page目のindexページにリクエスト（paginationのtotal_pages取得用）
@@ -34,20 +33,26 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
   // パラメータで渡ってきたparams.pageをページネーションに使用
   const page = context.params?.page;
-  const response = await axios.get(
-    `${process.env.BACKEND_URL}${foodsIndexUrl}`,
-    {
-      params: {
-        page: page,
-      },
-    }
-  );
+  if (page === undefined) {
+    return {
+      notFound: true,
+    };
+  } else {
+    const response = await axios.get(
+      `${process.env.BACKEND_URL}${foodsIndexUrl}`,
+      {
+        params: {
+          page: page,
+        },
+      }
+    );
 
-  return {
-    props: {
-      data: response.data,
-    },
-  };
+    return {
+      props: {
+        data: response.data,
+      },
+    };
+  }
 };
 
 const Index = ({ data }: { data: FoodData }) => {

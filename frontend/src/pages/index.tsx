@@ -29,7 +29,7 @@ export default function Home() {
         <div className=" flex w-full max-w-lg justify-between space-y-2 px-2 md:max-w-screen-md md:px-6">
           <Link
             className="flex h-28 w-28 items-center justify-center rounded-full bg-sky-300 bg-gradient-to-r text-lg font-bold text-white shadow-lg hover:bg-sky-400 active:scale-90 sm:h-36 sm:w-36 md:h-44 md:w-44 lg:h-52 lg:w-52 lg:text-2xl"
-            href="/products"
+            href="/products/pages/1"
           >
             ご飯を探す
           </Link>

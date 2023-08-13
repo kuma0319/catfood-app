@@ -39,7 +39,18 @@ export interface Food {
 }
 
 //商品の配列(index)用
-export type FoodData = Food[];
+export interface FoodData {
+  foods_data: Food[];
+  pagination: {
+    current_page: number;
+    limit_value: number;
+    next_page: number;
+    offset_value: number;
+    prev_page: number;
+    total_count: number;
+    total_pages: number;
+  };
+}
 
 //商品検索用のparams
 export interface FoodSearchParams {

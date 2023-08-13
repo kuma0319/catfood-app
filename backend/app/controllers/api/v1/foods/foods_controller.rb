@@ -4,7 +4,13 @@ class Api::V1::Foods::FoodsController < ApplicationController
   def index
     @foods = Food.includes(:brand, :production_area, :food_type, { nutrient_contents: :nutrient }, :amounts)
       .order("brands.name", "foods.name")
-      .all
+      .page(params[:page]).per(30) # 1ページあたり30件でページネーション
+  end
+
+  # 商品詳細ページの事前ビルド用に全フードのidのみを返す
+  def index_ids
+    foods = Food.select(:id)
+    render json: foods
   end
 
   def show

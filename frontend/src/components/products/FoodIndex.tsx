@@ -36,9 +36,9 @@ const FoodIndex = ({ data, initialSearchParams }: FoodIndexProps) => {
       <div className="px-4 py-6">
         {mounted && <FoodSearch initialSearchParams={initialSearchParams} />}
       </div>
-      <p className="mx-4 text-base md:text-lg">{`ヒット件数：${data.length} 件`}</p>
+      <p className="mx-4 text-base md:text-lg">{`ヒット件数：${data.pagination.total_count} 件`}</p>
       <div className="px-4 py-6">
-        {data.map((food) => (
+        {data.foods_data.map((food) => (
           <FoodItem
             key={food.id}
             food={food}
