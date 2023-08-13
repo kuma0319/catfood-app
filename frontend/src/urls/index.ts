@@ -3,6 +3,7 @@ export const foodsIndexUrl = `/api/v1/foods/foods.json`;
 export const foodDetailUrl = (foodId: number): string => {
   return `/api/v1/foods/foods/${foodId}.json`;
 };
+export const foodsIndexIdsUrl = `/api/v1/foods/index_ids`;
 export const foodSearchUrl = `/api/v1/foods/search.json`;
 
 // ウォッチリスト関連

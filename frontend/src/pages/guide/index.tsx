@@ -53,7 +53,7 @@ const GuidePage = () => {
                   </h3>
                   <p className="mt-1 text-gray-500">
                     <Link
-                      href="/products"
+                      href="/products/pages/1"
                       className="font-semibold text-orange-400"
                     >
                       キャットフード一覧ページ

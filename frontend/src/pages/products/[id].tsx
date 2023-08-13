@@ -12,30 +12,31 @@ import {
   favoriteFoodIdsUrl,
   favoriteFoodUrl,
   foodDetailUrl,
-  foodsIndexUrl,
+  foodsIndexIdsUrl,
 } from "@/urls";
 import { getAuthHeadersWithCookies } from "@/utils/ApiHeaders";
 
 import { Food } from "../../types/foods";
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  //商品一覧のデータを取得
-  // 環境に応じてリクエスト先を変えられるように、環境変数からリクエストパスを読み込み
-  const res = await axios.get(`${process.env.BACKEND_URL}${foodsIndexUrl}`);
-  const data = res.data;
+  // Rails側の全商品のidの配列を返すエンドポイントへリクエスト
+  const response = await axios.get(
+    `${process.env.BACKEND_URL}${foodsIndexIdsUrl}`
+  );
+  const data = response.data;
 
-  //一覧データからidを配列として取り出す
-  const paths = data.map((food: Food) => {
-    return { params: { id: `${food.id}` } };
+  // レスポンスからidに応じたパスを生成
+  const paths = data.map((item: { id: number }) => {
+    return { params: { id: `${item.id}` } };
   });
 
   //paths（事前ビルド用のパス）、fallback(指定パス以外のアクセス時の挙動)を指定
-  return { fallback: "blocking", paths: paths };
+  return { fallback: false, paths: paths };
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  //params: ParsedUrlQuery | undefinedの分岐
-  const id = params ? Number(params.id) : undefined;
+export const getStaticProps: GetStaticProps = async (context) => {
+  // パラメータで渡ってきたparams.idをページネーションに使用
+  const id = Number(context.params?.id);
 
   if (id === undefined) {
     return {
@@ -43,7 +44,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     };
   } else {
     //params.idからデータフェッチ
-    // 環境に応じてリクエスト先を変えられるように、環境変数からリクエストパスを読み込み
     const response = await axios.get(
       `${process.env.BACKEND_URL}${foodDetailUrl(id)}`
     );
