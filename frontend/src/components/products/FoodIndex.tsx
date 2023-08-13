@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 
 import { WatchListContext } from "@/context/WatchListContext";
 import { FoodData, FoodSearchParams } from "@/types/foods";
@@ -14,12 +14,6 @@ type FoodIndexProps = {
 
 const FoodIndex = ({ data, initialSearchParams }: FoodIndexProps) => {
   const context = useContext(WatchListContext);
-  //マウントされたかどうかの状態管理
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   // WatchListContextはundefinedを戻り値として含むため、それの対策
   if (context === undefined) {
@@ -34,7 +28,7 @@ const FoodIndex = ({ data, initialSearchParams }: FoodIndexProps) => {
   return (
     <div className="mx-auto max-w-screen-md">
       <div className="px-4 py-6">
-        {mounted && <FoodSearch initialSearchParams={initialSearchParams} />}
+        <FoodSearch initialSearchParams={initialSearchParams} />
       </div>
       <p className="mx-4 text-base md:text-lg">{`ヒット件数：${data.pagination.total_count} 件`}</p>
       <div className="px-4 py-6">

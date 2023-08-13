@@ -54,13 +54,19 @@ const useFoodSearch = (initialSearchParams?: FoodSearchParams) => {
     const target: keyof FoodSearchParams = event.target
       .name as keyof FoodSearchParams;
 
+    // 配列で無い場合のエラー対策で全て配列化したcurrentValueとしておく
+    // ここでは型アサーションによって、const currentValue: string | (string | string[])[]となることを防ぐ
+    const currentValue = Array.isArray(selectParams[target])
+      ? (selectParams[target] as string[])
+      : ([selectParams[target]] as string[]);
+
     //ブランドと産地のみの場合に処理実行
     if (target === "brand_id" || target === "production_area_id") {
       //チェックが入ると元の配列に格納
       if (event.target.checked) {
         setSelectParams({
           ...selectParams,
-          [target]: [...selectParams[target], event.target.value],
+          [target]: [...currentValue, event.target.value],
         });
       }
       // チェックが外れると元の配列から削除
@@ -68,9 +74,7 @@ const useFoodSearch = (initialSearchParams?: FoodSearchParams) => {
         setSelectParams({
           ...selectParams,
           [target]: [
-            ...selectParams[target].filter(
-              (item) => item !== event.target.value
-            ),
+            ...currentValue.filter((item) => item !== event.target.value),
           ],
         });
       }
@@ -136,18 +140,13 @@ const useFoodSearch = (initialSearchParams?: FoodSearchParams) => {
         ...(selectParams as unknown as ParsedUrlQueryInput),
         page: 1, // pagination用にpageのparamsを追加(初期ページとして1)
       };
-      // hrefのasオプション用のパス
-      const asPath = `/products/search_results?page=${query.page}`;
 
-      router.push(
-        {
-          pathname: "/products/search_results",
-          // "query"のTSの型定義だと型Paramsが弾かれる。（∵配列は受け入れない）
-          // ※実際にはrails側の動作はparamsとして配列を許容するため、型アサーションで型を上書き。
-          query: query,
-        },
-        asPath
-      );
+      router.push({
+        pathname: "/products/search_results",
+        // "query"のTSの型定義だと型Paramsが弾かれる。（∵配列は受け入れない）
+        // ※実際にはrails側の動作はparamsとして配列を許容するため、型アサーションで型を上書き。
+        query: query,
+      });
     }
     //ボタン押下後は、状態を再びfalseに戻しておく
     setSearchButtonPressed(false);

@@ -54,7 +54,7 @@ const GuidePage = () => {
                   <p className="mt-1 text-gray-500">
                     <Link
                       href="/products/pages/1"
-                      className="font-semibold text-orange-400"
+                      className="font-semibold text-orange-400 underline"
                     >
                       キャットフード一覧ページ
                     </Link>
@@ -88,7 +88,7 @@ const GuidePage = () => {
                     追加したキャットフードは
                     <Link
                       href="/watch_list"
-                      className="font-semibold text-orange-400"
+                      className="font-semibold text-orange-400 underline"
                     >
                       ウォッチリストページ
                     </Link>
@@ -139,7 +139,7 @@ const GuidePage = () => {
                     登録したキャットフードは
                     <Link
                       href="/my_page"
-                      className="font-semibold text-orange-400"
+                      className="font-semibold text-orange-400 underline"
                     >
                       マイページ
                     </Link>
@@ -161,7 +161,7 @@ const GuidePage = () => {
                     キャットフードについて気になることは
                     <Link
                       href="/forum"
-                      className="font-semibold text-orange-400"
+                      className="font-semibold text-orange-400 underline"
                     >
                       キャットフード相談所
                     </Link>
