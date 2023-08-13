@@ -51,12 +51,10 @@ const SignUp = () => {
   };
 
   return (
-    <div className="h-screen bg-gray-100 dark:bg-slate-900">
-      <AuthLayout>
-        {isLoading && <Spinners />}
-        <SignUpForm onSignUp={onSignUp} errorMessage={errorMessage} />;
-      </AuthLayout>
-    </div>
+    <AuthLayout>
+      {isLoading && <Spinners />}
+      <SignUpForm onSignUp={onSignUp} errorMessage={errorMessage} />;
+    </AuthLayout>
   );
 };
 
