@@ -116,7 +116,7 @@ const useFoodSearch = (initialSearchParams?: FoodSearchParams) => {
     }
   }, [router]);
 
-  //検索ボタン押下時のイベント
+  // 検索ボタン押下時のイベント
   const handleClick = () => {
     setSelectParams({
       ...selectParams,
@@ -129,14 +129,25 @@ const useFoodSearch = (initialSearchParams?: FoodSearchParams) => {
     setSearchButtonPressed(true);
   };
 
+  // 検索ボタン押下時の副作用
   useEffect(() => {
     if (searchButtonPressed) {
-      router.push({
-        pathname: "/products/search_results",
-        // "query"のTSの型定義だと型Paramsが弾かれる。（∵配列は受け入れない）
-        // ※実際にはrails側の動作はparamsとして配列を許容するため、型アサーションで型を上書き。
-        query: selectParams as unknown as ParsedUrlQueryInput,
-      });
+      const query = {
+        ...(selectParams as unknown as ParsedUrlQueryInput),
+        page: 1, // pagination用にpageのparamsを追加(初期ページとして1)
+      };
+      // hrefのasオプション用のパス
+      const asPath = `/products/search_results?page=${query.page}`;
+
+      router.push(
+        {
+          pathname: "/products/search_results",
+          // "query"のTSの型定義だと型Paramsが弾かれる。（∵配列は受け入れない）
+          // ※実際にはrails側の動作はparamsとして配列を許容するため、型アサーションで型を上書き。
+          query: query,
+        },
+        asPath
+      );
     }
     //ボタン押下後は、状態を再びfalseに戻しておく
     setSearchButtonPressed(false);

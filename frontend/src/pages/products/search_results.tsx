@@ -5,15 +5,20 @@ import { useRouter } from "next/router";
 
 import RootLayout from "@/components/commons/Layout";
 import FoodIndex from "@/components/products/FoodIndex";
+import SearchResultPagination from "@/components/products/SearchResultPagination";
 import { foodSearchUrl } from "@/urls";
 
 import { FoodData, FoodSearchParams } from "../../types/foods";
 
 export const getServerSideProps: GetServerSideProps = async (router) => {
+  const page = router.query.page || 1;
   const response = await axios.get(
     `${process.env.BACKEND_URL}${foodSearchUrl}`,
     {
-      params: router.query,
+      params: {
+        ...router.query,
+        page: page, // ページ番号をリクエストに追加
+      },
     }
   );
 
@@ -32,6 +37,7 @@ const SearchResults = ({ data }: { data: FoodData }) => {
   return (
     <RootLayout>
       <FoodIndex data={data} initialSearchParams={initialSearchParams} />
+      <SearchResultPagination pagination={data.pagination} />
     </RootLayout>
   );
 };

@@ -73,7 +73,7 @@ class Api::V1::Foods::FoodsController < ApplicationController
       .by_not_food_name(params[:not_food_name])
       .by_ingredients(params[:ingredients])
       .by_not_ingredients(params[:not_ingredients])
-      .all
+      .page(params[:page]).per(30) # 1ページあたり30件でページネーション
   end
 
   private
