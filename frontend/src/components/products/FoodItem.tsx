@@ -22,7 +22,7 @@ const FoodItem = ({ food, handleWatchList }: FoodProps) => {
               height={128}
               alt="商品画像"
               unoptimized={
-                process.env.NEXT_PUBLIC_IMAGE_OPTIMIZATION === "true"
+                process.env.NEXT_PUBLIC_IMAGE_UNOPTIMIZATION === "true"
               } // 開発環境はtrueとする
             />
           ) : (
