@@ -58,16 +58,6 @@ const ItemTab = ({ item }: { item: Food }) => {
             aria-controls={`card-type-tab-3-${item.id}`}
             role="tab"
           >
-            ケア
-          </button>
-          <button
-            type="button"
-            className="-mb-px inline-flex items-center gap-2 rounded-t-lg border bg-gray-50 px-4 py-3 text-center text-sm font-medium text-gray-500 hover:text-gray-700 hs-tab-active:border-b-transparent hs-tab-active:bg-white hs-tab-active:text-blue-600 dark:border-gray-700 dark:bg-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hs-tab-active:border-b-gray-800 dark:hs-tab-active:bg-gray-800 dark:hs-tab-active:text-white"
-            id={`card-type-tab-item-4-${item.id}`}
-            data-hs-tab={`#card-type-tab-4-${item.id}`}
-            aria-controls={`card-type-tab-4-${item.id}`}
-            role="tab"
-          >
             その他
           </button>
         </nav>
@@ -110,18 +100,11 @@ const ItemTab = ({ item }: { item: Food }) => {
           role="tabpanel"
           aria-labelledby={`card-type-tab-item-3-${item.id}`}
         >
-          <div className="text-gray-500 dark:text-gray-400">ケア内容</div>
-        </div>
-        <div
-          id={`card-type-tab-4-${item.id}`}
-          className="hidden"
-          role="tabpanel"
-          aria-labelledby={`card-type-tab-item-4-${item.id}`}
-        >
           <div className="text-gray-500 dark:text-gray-400">
             <p>タイプ：{item.food_type.name}</p>
             <p>ブランド：{item.brand.name}</p>
             <p>産地：{item.production_area.name}</p>
+            <p>ステージ：{item.target_age}</p>
             <div>
               {/* 内容量は1kg未満の場合はg表記で小さい順からソートする */}
               <p>

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const HeaderOnAuth = () => {
@@ -9,12 +10,13 @@ const HeaderOnAuth = () => {
           aria-label="Global"
         >
           <div className="flex items-center justify-between">
-            <Link
-              href="/"
-              className="flex-none text-xl font-semibold dark:text-white"
-              aria-label="Brand"
-            >
-              ねこまんま
+            <Link href="/" aria-label="Brand">
+              <Image
+                src="/cat-banner.png"
+                alt="バナー"
+                width={240}
+                height={80}
+              />
             </Link>
           </div>
         </nav>

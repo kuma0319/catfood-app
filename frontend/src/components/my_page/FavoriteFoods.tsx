@@ -8,7 +8,7 @@ const FavoriteFoods = ({
 }) => {
   return (
     <div className="mb-4 rounded border p-4 shadow-md">
-      {favoriteFoodProps.map((food) => (
+      {favoriteFoodProps.foods_data.map((food) => (
         <FoodItem key={food.id} food={food} />
       ))}
     </div>

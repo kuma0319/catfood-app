@@ -10,7 +10,7 @@ export default function AuthLayout({
   return (
     <div className={`container mx-auto ${kiwi_maru.className}`}>
       <HeaderOnAuth />
-      <main className="h-screen bg-gray-100 dark:bg-slate-900">{children}</main>
+      <main className="h-screen">{children}</main>
     </div>
   );
 }

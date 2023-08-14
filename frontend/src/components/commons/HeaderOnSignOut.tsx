@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -35,12 +36,13 @@ const HeaderOnSignOut = () => {
           aria-label="Global"
         >
           <div className="flex items-center justify-between">
-            <Link
-              href="/"
-              className="flex-none text-xl font-semibold dark:text-white"
-              aria-label="Brand"
-            >
-              ねこまんま
+            <Link href="/" aria-label="Brand">
+              <Image
+                src="/cat-banner.png"
+                alt="バナー"
+                width={240}
+                height={80}
+              />
             </Link>
             <div className="md:hidden">
               <button

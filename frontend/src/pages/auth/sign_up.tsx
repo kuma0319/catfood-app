@@ -10,6 +10,7 @@ import { getHeaders } from "@/utils/ApiHeaders";
 
 interface SignUpInput {
   email: string;
+  nickname: string;
   password: string;
 }
 
@@ -19,6 +20,7 @@ const SignUp = () => {
   const router = useRouter();
 
   const onSignUp = async (data: SignUpInput) => {
+    const nickname = data.nickname;
     const email = data.email;
     const password = data.password;
 
@@ -29,6 +31,7 @@ const SignUp = () => {
         `${process.env.NEXT_PUBLIC_BACKEND_URL}${authUrl}`,
         {
           email: email,
+          nickname: nickname,
           password: password,
         },
         {
@@ -51,12 +54,10 @@ const SignUp = () => {
   };
 
   return (
-    <div className="h-screen bg-gray-100 dark:bg-slate-900">
-      <AuthLayout>
-        {isLoading && <Spinners />}
-        <SignUpForm onSignUp={onSignUp} errorMessage={errorMessage} />;
-      </AuthLayout>
-    </div>
+    <AuthLayout>
+      {isLoading && <Spinners />}
+      <SignUpForm onSignUp={onSignUp} errorMessage={errorMessage} />;
+    </AuthLayout>
   );
 };
 

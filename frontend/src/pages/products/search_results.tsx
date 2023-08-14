@@ -8,7 +8,7 @@ import FoodIndex from "@/components/products/FoodIndex";
 import SearchResultPagination from "@/components/products/SearchResultPagination";
 import { foodSearchUrl } from "@/urls";
 
-import { FoodData, FoodSearchParams } from "../../types/foods";
+import { FoodIndexData, FoodSearchParams } from "../../types/foods";
 
 export const getServerSideProps: GetServerSideProps = async (router) => {
   const page = router.query.page || 1;
@@ -29,7 +29,7 @@ export const getServerSideProps: GetServerSideProps = async (router) => {
   };
 };
 
-const SearchResults = ({ data }: { data: FoodData }) => {
+const SearchResults = ({ data }: { data: FoodIndexData }) => {
   // indexページから受け取ったパラメータをsearchParamsにセット(検索ボックスの初期値設定用)
   const router = useRouter();
   const initialSearchParams = router.query as unknown as FoodSearchParams;

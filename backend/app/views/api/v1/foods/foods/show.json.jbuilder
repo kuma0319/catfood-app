@@ -1,5 +1,5 @@
 # 他のモデルと紐づいていない要素を一括で指定
-json.extract! @food, :id, :name, :calorie, :ingredients, :rakuten_name, :medium_image_url, :median_price
+json.extract! @food, :id, :name, :ingredients, :calorie, :target_age, :rakuten_name, :rakuten_item_code, :medium_image_url, :min_price, :max_price, :median_price, :add_date
 
 # belongs_toで関連付けられているモデル(brand,production_area,food_type)の要素を指定
 json.brand do
