@@ -5,7 +5,7 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import RootLayout from "@/components/commons/Layout";
 import FoodIndex from "@/components/products/FoodIndex";
 import IndexPagination from "@/components/products/IndexPagination";
-import { FoodData } from "@/types/foods";
+import { FoodIndexData } from "@/types/foods";
 import { foodsIndexUrl } from "@/urls";
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -56,7 +56,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   }
 };
 
-const Index = ({ data }: { data: FoodData }) => {
+const Index = ({ data }: { data: FoodIndexData }) => {
   return (
     <RootLayout>
       <FoodIndex data={data} />

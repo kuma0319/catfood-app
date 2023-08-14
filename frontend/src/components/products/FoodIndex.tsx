@@ -1,13 +1,13 @@
 import { useContext } from "react";
 
 import { WatchListContext } from "@/context/WatchListContext";
-import { FoodData, FoodSearchParams } from "@/types/foods";
+import { FoodIndexData, FoodSearchParams } from "@/types/foods";
 
 import FoodSearch from "../search_form/FoodSearch";
 import FoodItem from "./FoodItem";
 
 type FoodIndexProps = {
-  data: FoodData;
+  data: FoodIndexData;
   // SSG表示のproductsページから検索した際に検索パラメータを受け取る
   initialSearchParams?: FoodSearchParams;
 };

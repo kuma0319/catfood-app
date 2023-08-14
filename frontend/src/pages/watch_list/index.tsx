@@ -19,7 +19,7 @@ const WatchList = () => {
   const { handleWatchList, setWatchListFoodId, watchListFoodId } = context;
 
   // APIから取得したデータを保存するステート
-  const [foodData, setFoodData] = useState<FoodData>([]);
+  const [foodData, setFoodData] = useState<FoodData>({ foods_data: [] });
 
   useEffect(() => {
     console.log(localStorage.getItem("food_id"));
