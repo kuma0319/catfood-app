@@ -148,7 +148,7 @@ const WatchListTable = ({ foodData, handleWatchList }: WatchListTableProps) => {
                             width={50}
                             height={50}
                             unoptimized={
-                              process.env.NEXT_PUBLIC_IMAGE_OPTIMIZATION ===
+                              process.env.NEXT_PUBLIC_IMAGE_UNOPTIMIZATION ===
                               "true"
                             } // 開発環境はtrueとする
                           />

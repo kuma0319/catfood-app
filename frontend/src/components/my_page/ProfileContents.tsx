@@ -61,7 +61,7 @@ const ProfileContents = ({
                   width={160}
                   height={160}
                   unoptimized={
-                    process.env.NEXT_PUBLIC_IMAGE_OPTIMIZATION === "true"
+                    process.env.NEXT_PUBLIC_IMAGE_UNOPTIMIZATION === "true"
                   } // 開発環境はtrueとする
                 />
                 {isEditingAvatar ? (
