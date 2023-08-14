@@ -17,6 +17,7 @@ export interface Amounts {
 export interface Food {
   id: number;
   name: string;
+  add_date: string;
   amounts: Amounts[];
   brand: {
     id: number;
@@ -28,14 +29,18 @@ export interface Food {
     name: string;
   };
   ingredients: string;
+  max_price: number;
   median_price: number;
   medium_image_url: string;
+  min_price: number;
   nutrient_contents: Nutrient[];
   production_area: {
     id: number;
     name: string;
   };
+  rakuten_item_code: string;
   rakuten_name: string;
+  target_age: string;
 }
 
 export interface Pagination {
@@ -50,6 +55,10 @@ export interface Pagination {
 
 // 商品ページ一覧用
 export interface FoodData {
+  foods_data: Food[];
+}
+
+export interface FoodIndexData {
   foods_data: Food[];
   pagination: Pagination;
 }

@@ -11,8 +11,12 @@ const MultipleOption = ({
   handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
   items: { id: number; name: string }[];
   label: string;
-  searchParamIds: string[];
+  searchParamIds: string | string[];
 }) => {
+  // searchParamIdsが1つの場合、ただの文字列として渡ってくるためあらかじめstring[]となるよう設計
+  const convertedSearchParamIds =
+    typeof searchParamIds === "string" ? [searchParamIds] : searchParamIds;
+
   return (
     <div className="my-3 border-2">
       <div className="gap-x-2 py-2">
@@ -28,7 +32,7 @@ const MultipleOption = ({
                 value={item.id}
                 onChange={handleChange}
                 // searchParamIdで渡された値があるかどうかでchecked属性を定義
-                checked={searchParamIds.includes(item.id.toString())}
+                checked={convertedSearchParamIds.includes(item.id.toString())}
               />
               <label
                 htmlFor={item.name}

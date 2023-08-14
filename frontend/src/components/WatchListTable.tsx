@@ -77,7 +77,14 @@ const WatchListTable = ({ foodData, handleWatchList }: WatchListTableProps) => {
                       scope="col"
                       className="whitespace-nowrap border px-4 py-1 text-center text-sm font-medium text-gray-500"
                     >
-                      金額
+                      ステージ
+                    </th>
+                    <th
+                      rowSpan={2}
+                      scope="col"
+                      className="whitespace-nowrap border px-4 py-1 text-center text-sm font-medium text-gray-500"
+                    >
+                      楽天平均価格
                     </th>
                     <th
                       rowSpan={2}
@@ -128,7 +135,7 @@ const WatchListTable = ({ foodData, handleWatchList }: WatchListTableProps) => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                  {foodData.map((food) => (
+                  {foodData.foods_data.map((food) => (
                     <tr
                       key={food.id}
                       className="hover:bg-gray-100 dark:hover:bg-gray-700"
@@ -165,7 +172,10 @@ const WatchListTable = ({ foodData, handleWatchList }: WatchListTableProps) => {
                         {food.calorie}
                       </td>
                       <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-gray-200">
-                        {food.median_price}
+                        {food.target_age}
+                      </td>
+                      <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-gray-200">
+                        {food.median_price} 円
                       </td>
                       <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-gray-200">
                         {food.brand.name}

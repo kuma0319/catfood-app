@@ -26,7 +26,7 @@ const SearchResultPagination = ({ pagination }: { pagination: Pagination }) => {
             }`}
             // ここでパスとqueryを渡す
             href={{ pathname: "/products/search_results", query: query }}
-            as={`/products/search_results?page=${page}`}
+            // as={`/products/search_results?page=${page}`} // asオプションは付けておくとアドレスが非常に長くなることの対策となるがページ再読み込みに弱い
             aria-current={page === pagination.current_page ? "page" : undefined}
           >
             {page}
