@@ -147,7 +147,10 @@ const WatchListTable = ({ foodData, handleWatchList }: WatchListTableProps) => {
                             alt={food.name}
                             width={50}
                             height={50}
-                            unoptimized //※※本番環境では使用しない※※
+                            unoptimized={
+                              process.env.NEXT_PUBLIC_IMAGE_OPTIMIZATION ===
+                              "true"
+                            } // 開発環境はtrueとする
                           />
                         </Link>
                       </td>

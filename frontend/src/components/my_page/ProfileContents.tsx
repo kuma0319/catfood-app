@@ -60,6 +60,9 @@ const ProfileContents = ({
                   alt="Image Description"
                   width={160}
                   height={160}
+                  unoptimized={
+                    process.env.NEXT_PUBLIC_IMAGE_OPTIMIZATION === "true"
+                  } // 開発環境はtrueとする
                 />
                 {isEditingAvatar ? (
                   <div>
