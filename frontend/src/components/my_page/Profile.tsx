@@ -30,8 +30,14 @@ const Profile = ({ profileProps }: { profileProps: UserProps }) => {
       const response = await axios.patch(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}${authUrl}`,
         formData,
+        // ここではutils/getAuthHeadersWithCookiesを使用しない(content_typeがapplication/jsonとなるため)
         {
-          headers: getAuthHeadersWithCookies(cookies),
+          headers: {
+            Accept: "application/json",
+            "access-token": cookies["access-token"],
+            client: cookies["client"],
+            uid: cookies["uid"],
+          },
         }
       );
       // 更新成功時はページリロード

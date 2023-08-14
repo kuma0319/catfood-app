@@ -48,15 +48,19 @@ const SignIn = () => {
           expiryDate.setDate(expiryDate.getDate() + 7);
           // Promisesを利用して、非同期でクッキーセットを待ってからリダイレクト
           // ∵こうしておかないと、クッキーがセットされないままリダイレクトされることがある。
+          // path: "/"を指定しておくことで、path: "/auth"(カレントディレクトリ)に保存される問題を回避
           Promise.all([
             setCookie(null, "uid", response.headers["uid"], {
               expires: expiryDate,
+              path: "/",
             }),
             setCookie(null, "client", response.headers["client"], {
               expires: expiryDate,
+              path: "/",
             }),
             setCookie(null, "access-token", response.headers["access-token"], {
               expires: expiryDate,
+              path: "/",
             }),
           ]).then(() => {
             router.push({
@@ -69,9 +73,13 @@ const SignIn = () => {
           // Remember me機能が無効な場合
           // 認証成功時にクッキーへトークンを保存しホームページへリダイレクト
           Promise.all([
-            setCookie(null, "uid", response.headers["uid"]),
-            setCookie(null, "client", response.headers["client"]),
-            setCookie(null, "access-token", response.headers["access-token"]),
+            setCookie(null, "uid", response.headers["uid"], { path: "/" }),
+            setCookie(null, "client", response.headers["client"], {
+              path: "/",
+            }),
+            setCookie(null, "access-token", response.headers["access-token"], {
+              path: "/",
+            }),
           ]).then(() => {
             router.push({
               pathname: "/",
