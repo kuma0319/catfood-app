@@ -21,7 +21,9 @@ const FoodItem = ({ food, handleWatchList }: FoodProps) => {
               width={128}
               height={128}
               alt="商品画像"
-              unoptimized
+              unoptimized={
+                process.env.NEXT_PUBLIC_IMAGE_OPTIMIZATION === "true"
+              } // 開発環境はtrueとする
             />
           ) : (
             <div>No Image</div>
