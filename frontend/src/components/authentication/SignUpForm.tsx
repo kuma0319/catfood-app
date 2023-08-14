@@ -41,8 +41,45 @@ const SignUpForm = ({ errorMessage, onSignUp }: SignUpProps) => {
 
             <div className="mt-5">
               <form onSubmit={handleSubmit(onSignUp)}>
-                {/* メールアドレス用フォーム */}
+                {/* ニックネーム用フォーム */}
                 <div className="grid gap-y-4">
+                  <div>
+                    <label
+                      htmlFor="nickname"
+                      className="mb-2 block text-sm dark:text-white"
+                    >
+                      ニックネーム
+                    </label>
+                    <div className="relative">
+                      <input
+                        type="text"
+                        id="nickname"
+                        className={`block w-full rounded-md px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 ${
+                          errors.nickname
+                            ? "border-red-500" //エラー発生時は枠線を赤くハイライト
+                            : "border-gray-200"
+                        }`}
+                        {...register("nickname", {
+                          maxLength: {
+                            message: "50文字以下で入力して下さい",
+                            value: 50,
+                          },
+                          required: {
+                            message: "入力が必須の項目です",
+                            value: true,
+                          },
+                        })}
+                      />
+                      {/* エラーが存在する場合にメッセージを下段に表示 */}
+                      {errors.nickname && (
+                        <div className="mt-2 text-xs text-red-600">
+                          {String(errors.nickname.message)}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* メールアドレス用フォーム */}
                   <div>
                     <label
                       htmlFor="email"
