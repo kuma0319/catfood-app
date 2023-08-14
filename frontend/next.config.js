@@ -4,16 +4,8 @@ const nextConfig = {
 };
 
 module.exports = {
-  //外部から画像取得用
+  //外部から画像取得用(環境変数でドメイン指定)
   images: {
-    // remotePatterns: [
-    //   {
-    //     hostname: "localhost",
-    //     pathname: "/rails/active_storage/**",
-    //     port: "3010",
-    //     protocol: "http",
-    //   },
-    // ],
-    domains: ["localhost"],
+    domains: [process.env.NEXT_PUBLIC_IMAGE_DOMAINS],
   },
 };
