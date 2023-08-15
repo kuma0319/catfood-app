@@ -1,7 +1,7 @@
 const NoamalToast = ({ message }: { message: string }) => {
   return (
     <div
-      className="max-w-xs rounded-md border bg-white shadow-lg dark:border-gray-700 dark:bg-gray-800"
+      className="max-w-xs rounded-md border bg-white shadow-lg  "
       role="alert"
     >
       <div className="flex p-4">
@@ -18,7 +18,7 @@ const NoamalToast = ({ message }: { message: string }) => {
           </svg>
         </div>
         <div className="ml-3">
-          <p className="text-sm text-gray-700 dark:text-gray-400">{message}</p>
+          <p className="text-sm text-gray-700 ">{message}</p>
         </div>
       </div>
     </div>

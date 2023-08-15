@@ -20,7 +20,7 @@ const FoodItem = ({ food, handleWatchList }: FoodProps) => {
               src={food.medium_image_url}
               width={128}
               height={128}
-              alt="商品画像"
+              alt={food.name}
               unoptimized={
                 process.env.NEXT_PUBLIC_IMAGE_UNOPTIMIZATION === "true"
               } // 開発環境はtrueとする

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -18,20 +19,25 @@ const ConfirmSuccess = () => {
 
   // confirm_request_flagがあればコンポーネントを表示
   return confirm_request_flag === "true" ? (
-    <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8 lg:py-16">
-      <div className="mx-auto max-w-xl text-center">
-        <div className="mb-5">
-          <h2 className="text-2xl font-bold dark:text-white md:text-3xl md:leading-tight">
-            認証用のメールを送信しました。ご確認下さい。
-          </h2>
-        </div>
-        <Link
-          href="/"
-          className="font-medium text-blue-600 decoration-2 hover:underline"
-        >
-          ホームへ移動する場合はこちら
-        </Link>
+    <div className="m-10 mx-auto max-w-screen-md text-center">
+      <Image
+        src="/cat-greet2.png"
+        alt="微笑んでおじぎをする猫"
+        width={150}
+        height={150}
+        className="mx-auto my-10"
+      />
+      <div className="mb-5">
+        <h2 className="text-2xl font-bold">
+          認証用のメールを送信しました。ご確認下さい。
+        </h2>
       </div>
+      <Link
+        href="/"
+        className="font-medium text-blue-600 decoration-2 hover:underline"
+      >
+        ホームへ移動する場合はこちら
+      </Link>
     </div>
   ) : null;
 };

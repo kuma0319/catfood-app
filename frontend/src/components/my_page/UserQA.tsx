@@ -69,13 +69,13 @@ const UserQA = ({
       {/* エラーの場合にエラーメッセージを表示する */}
       <div className="text-center text-lg text-red-600">{errorMessage}</div>
       <nav
-        className="relative z-0 flex overflow-hidden rounded-xl border dark:border-gray-700"
+        className="relative z-0 flex overflow-hidden rounded-xl border "
         aria-label="Tabs"
         role="tablist"
       >
         <button
           type="button"
-          className="active relative min-w-0 flex-1 overflow-hidden border-b-2 border-l bg-white p-4 text-center text-sm font-medium text-gray-500 first:border-l-0 hover:bg-gray-50 hover:text-gray-700 focus:z-10 hs-tab-active:border-b-blue-600 hs-tab-active:text-gray-900 dark:border-b-gray-700 dark:border-l-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-gray-400 dark:hs-tab-active:border-b-blue-600 dark:hs-tab-active:text-white"
+          className="active -white relative min-w-0 flex-1 overflow-hidden border-b-2 border-l bg-white p-4 text-center text-sm font-medium text-gray-500 first:border-l-0 hover:bg-gray-50 hover:text-gray-700 focus:z-10 hs-tab-active:border-b-blue-600       hs-tab-active:text-gray-900"
           id="bar-with-underline-item-5"
           data-hs-tab="#bar-with-underline-5"
           aria-controls="bar-with-underline-5"
@@ -85,7 +85,7 @@ const UserQA = ({
         </button>
         <button
           type="button"
-          className="relative min-w-0 flex-1 overflow-hidden border-b-2 border-l bg-white p-4 text-center text-sm font-medium text-gray-500 first:border-l-0 hover:bg-gray-50 hover:text-gray-700 focus:z-10 hs-tab-active:border-b-blue-600 hs-tab-active:text-gray-900 dark:border-b-gray-700 dark:border-l-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-gray-400 dark:hs-tab-active:border-b-blue-600 dark:hs-tab-active:text-white"
+          className="-white relative min-w-0 flex-1 overflow-hidden border-b-2 border-l bg-white p-4 text-center text-sm font-medium text-gray-500 first:border-l-0 hover:bg-gray-50 hover:text-gray-700 focus:z-10 hs-tab-active:border-b-blue-600       hs-tab-active:text-gray-900"
           id="bar-with-underline-item-6"
           data-hs-tab="#bar-with-underline-6"
           aria-controls="bar-with-underline-6"
@@ -123,7 +123,7 @@ const UserQA = ({
                     </div>
                     <div className="flex w-1/6 gap-2">
                       <button
-                        className="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-red-500 px-3 py-2 text-sm font-semibold text-white transition-all hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                        className="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-red-500 px-3 py-2 text-sm font-semibold text-white transition-all hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 "
                         onClick={() => {
                           if (
                             window.confirm(
@@ -177,7 +177,7 @@ const UserQA = ({
                     </div>
                     <div className="flex w-1/6 gap-2">
                       <button
-                        className="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-red-500 px-3 py-2 text-sm font-semibold text-white transition-all hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                        className="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-red-500 px-3 py-2 text-sm font-semibold text-white transition-all hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 "
                         onClick={() => {
                           if (
                             window.confirm(

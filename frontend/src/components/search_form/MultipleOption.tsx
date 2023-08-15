@@ -26,7 +26,7 @@ const MultipleOption = ({
               {/* nameとvalueでrails側に渡すparamsを管理 */}
               <input
                 type="checkbox"
-                className="mt-0.5 shrink-0 rounded border-gray-200 text-blue-600 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:checked:border-blue-500 dark:checked:bg-blue-500 dark:focus:ring-offset-gray-800"
+                className="mt-0.5 shrink-0 rounded border-gray-200 text-blue-600 focus:ring-blue-500     "
                 id={item.name}
                 name={name}
                 value={item.id}
@@ -34,10 +34,7 @@ const MultipleOption = ({
                 // searchParamIdで渡された値があるかどうかでchecked属性を定義
                 checked={convertedSearchParamIds.includes(item.id.toString())}
               />
-              <label
-                htmlFor={item.name}
-                className="ml-3 text-gray-500 dark:text-gray-400"
-              >
+              <label htmlFor={item.name} className="ml-3 text-gray-500 ">
                 {item.name}
               </label>
             </div>

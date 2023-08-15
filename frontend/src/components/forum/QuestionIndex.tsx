@@ -22,13 +22,13 @@ const QuestionIndex = ({ props }: { props: { questions: Questions[] } }) => {
               <div className="flex flex-col">
                 <div className="mb-2 flex items-center space-x-4">
                   <Image
-                    className="inline-block h-11 w-11 rounded-full ring-2 ring-white dark:ring-gray-800"
+                    className="inline-block h-11 w-11 rounded-full ring-2 ring-white "
                     src={
                       question.user.avatar_url
                         ? question.user.avatar_url
                         : "/cat_default_avatar_5416936.png"
                     }
-                    alt="アバター"
+                    alt="デフォルトの猫アバター"
                     width={100}
                     height={100}
                   />
@@ -37,7 +37,7 @@ const QuestionIndex = ({ props }: { props: { questions: Questions[] } }) => {
                   </span>
                 </div>
                 {/* hrefにquestion.idを渡して動的にルーティング */}
-                <p className="block truncate text-sm font-medium text-gray-500 dark:text-gray-400 dark:hover:text-blue-500">
+                <p className="block truncate text-sm font-medium text-gray-500  ">
                   {question.title}
                 </p>
                 <span className="block text-sm text-gray-500">

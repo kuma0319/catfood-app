@@ -110,13 +110,13 @@ const Reviews = ({ foodId }: { foodId: number }) => {
                 <div className="flex flex-col">
                   <div className="mb-2 flex items-center space-x-4">
                     <Image
-                      className="inline-block h-16 w-16 rounded-full ring-2 ring-white dark:ring-gray-800"
+                      className="inline-block h-16 w-16 rounded-full ring-2 ring-white "
                       src={
                         review.user.avatar_url
                           ? review.user.avatar_url
                           : "/cat_default_avatar_5416936.png"
                       }
-                      alt="アバター"
+                      alt="ユーザーアバター"
                       width={100}
                       height={100}
                     />
