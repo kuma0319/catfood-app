@@ -138,20 +138,20 @@ const ReviewEditForm = (props: Review) => {
         <div className="text-center text-lg text-red-600">{errorMessage}</div>
         <div className="mx-auto max-w-2xl">
           <div className="text-center">
-            <h2 className="text-xl font-bold text-gray-800 dark:text-white sm:text-3xl">
+            <h2 className="text-xl font-bold text-gray-800  sm:text-3xl">
               レビューを編集
             </h2>
           </div>
 
-          <div className="relative z-10 mt-5 rounded-xl border bg-white p-4 dark:border-gray-700 dark:bg-gray-800 sm:mt-10 md:p-10">
+          <div className="relative z-10 mt-5 rounded-xl border bg-white p-4   sm:mt-10 md:p-10">
             <form onSubmit={handleSubmit(onEditReview)}>
               <div className="my-4 gap-2 border-y border-gray-400 py-5">
-                <h2 className="mb-3 text-lg font-bold dark:text-white lg:text-xl">
+                <h2 className="mb-3 text-lg font-bold  lg:text-xl">
                   項目別評価
                 </h2>
                 {/* 評価項目：フードの香り */}
                 <div className="mb-3">
-                  <h3 className="mb-3 block text-base dark:text-white lg:text-xl">
+                  <h3 className="mb-3 block text-base  lg:text-xl">
                     {SCENT_PARAMS.name}
                   </h3>
                   {/* React Hook FormのControllerコンポーネントを使用 */}
@@ -178,7 +178,7 @@ const ReviewEditForm = (props: Review) => {
                 </div>
                 {/* 評価項目：食い付きの良さ */}
                 <div className="mb-3">
-                  <h3 className="mb-3 block text-base dark:text-white lg:text-xl">
+                  <h3 className="mb-3 block text-base  lg:text-xl">
                     {EATING_PARAMS.name}
                   </h3>
                   <Controller
@@ -205,7 +205,7 @@ const ReviewEditForm = (props: Review) => {
                 </div>
                 {/* 評価項目：体調の変化 */}
                 <div className="mb-3">
-                  <h3 className="mb-3 block text-base dark:text-white lg:text-xl">
+                  <h3 className="mb-3 block text-base  lg:text-xl">
                     {HEALTH_PARAMS.name}
                   </h3>
                   <Controller
@@ -232,7 +232,7 @@ const ReviewEditForm = (props: Review) => {
                 </div>
                 {/* 評価項目：毛並みの変化 */}
                 <div className="mb-3">
-                  <h3 className="mb-3 block text-base dark:text-white lg:text-xl">
+                  <h3 className="mb-3 block text-base  lg:text-xl">
                     {FUR_PARAMS.name}
                   </h3>
                   <Controller
@@ -261,14 +261,14 @@ const ReviewEditForm = (props: Review) => {
               <div className="my-4 gap-2 border-gray-400 py-5">
                 <label
                   htmlFor="hs-feedback-post-comment-name-1"
-                  className="mb-3 block text-lg font-bold dark:text-white lg:text-xl"
+                  className="mb-3 block text-lg font-bold  lg:text-xl"
                 >
                   レビュータイトル
                 </label>
                 <input
                   type="text"
                   id="hs-feedback-post-comment-name-1"
-                  className="block w-full rounded-md border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 sm:p-4"
+                  className="block w-full rounded-md border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500    sm:p-4"
                   placeholder="レビューの伝えたいポイントを記載して下さい。"
                   {...register("title", {
                     maxLength: {
@@ -292,7 +292,7 @@ const ReviewEditForm = (props: Review) => {
               <div className="my-4 gap-2 border-y border-gray-400 py-5">
                 <label
                   htmlFor="hs-feedback-post-comment-textarea-1"
-                  className="mb-3 block text-lg font-bold dark:text-white lg:text-xl"
+                  className="mb-3 block text-lg font-bold  lg:text-xl"
                 >
                   レビュー内容
                 </label>
@@ -300,7 +300,7 @@ const ReviewEditForm = (props: Review) => {
                   <textarea
                     id="hs-feedback-post-comment-textarea-1"
                     rows={3}
-                    className="block w-full rounded-md border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 sm:p-4"
+                    className="block w-full rounded-md border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500    sm:p-4"
                     placeholder="レビューの本文を記載して下さい。"
                     {...register("content", {
                       maxLength: {
@@ -325,7 +325,7 @@ const ReviewEditForm = (props: Review) => {
               <div className="mt-6 grid">
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-blue-500 px-4 py-3 font-semibold text-white transition-all hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                  className="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-blue-500 px-4 py-3 font-semibold text-white transition-all hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 "
                 >
                   編集したレビューを投稿する
                 </button>

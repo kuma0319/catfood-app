@@ -22,13 +22,13 @@ const SignUpForm = ({ errorMessage, onSignUp }: SignUpProps) => {
       <div className="mx-auto w-full max-w-md p-6">
         {/* 登録エラーの場合にエラーメッセージを表示する */}
         <div className="text-center text-lg text-red-600">{errorMessage}</div>
-        <div className="mt-7 rounded-xl border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800">
+        <div className="mt-7 rounded-xl border border-gray-200 bg-white shadow-sm  ">
           <div className="p-4 sm:p-7">
             <div className="text-center">
-              <h1 className="block text-2xl font-bold text-gray-800 dark:text-white">
+              <h1 className="block text-2xl font-bold text-gray-800 ">
                 新規登録
               </h1>
-              <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+              <p className="mt-2 text-sm text-gray-600 ">
                 既にアカウントをお持ちですか？
                 <Link
                   className="font-medium text-blue-600 decoration-2 hover:underline"
@@ -44,17 +44,14 @@ const SignUpForm = ({ errorMessage, onSignUp }: SignUpProps) => {
                 {/* ニックネーム用フォーム */}
                 <div className="grid gap-y-4">
                   <div>
-                    <label
-                      htmlFor="nickname"
-                      className="mb-2 block text-sm dark:text-white"
-                    >
+                    <label htmlFor="nickname" className="mb-2 block text-sm ">
                       ニックネーム
                     </label>
                     <div className="relative">
                       <input
                         type="text"
                         id="nickname"
-                        className={`block w-full rounded-md px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 ${
+                        className={`block w-full rounded-md px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500    ${
                           errors.nickname
                             ? "border-red-500" //エラー発生時は枠線を赤くハイライト
                             : "border-gray-200"
@@ -81,17 +78,14 @@ const SignUpForm = ({ errorMessage, onSignUp }: SignUpProps) => {
 
                   {/* メールアドレス用フォーム */}
                   <div>
-                    <label
-                      htmlFor="email"
-                      className="mb-2 block text-sm dark:text-white"
-                    >
+                    <label htmlFor="email" className="mb-2 block text-sm ">
                       Eメールアドレス
                     </label>
                     <div className="relative">
                       <input
                         type="email"
                         id="email"
-                        className={`block w-full rounded-md px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 ${
+                        className={`block w-full rounded-md px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500    ${
                           errors.email
                             ? "border-red-500" //エラー発生時は枠線を赤くハイライト
                             : "border-gray-200"
@@ -119,17 +113,14 @@ const SignUpForm = ({ errorMessage, onSignUp }: SignUpProps) => {
 
                   {/* パスワード用フォーム */}
                   <div>
-                    <label
-                      htmlFor="password"
-                      className="mb-2 block text-sm dark:text-white"
-                    >
+                    <label htmlFor="password" className="mb-2 block text-sm ">
                       パスワード
                     </label>
                     <div className="relative">
                       <input
                         type="password"
                         id="password"
-                        className={`block w-full rounded-md px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 ${
+                        className={`block w-full rounded-md px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500    ${
                           errors.password
                             ? "border-red-500" //エラー発生時は枠線を赤くハイライト
                             : "border-gray-200"
@@ -158,7 +149,7 @@ const SignUpForm = ({ errorMessage, onSignUp }: SignUpProps) => {
                   <div>
                     <label
                       htmlFor="passwordConfirmation"
-                      className="mb-2 block text-sm dark:text-white"
+                      className="mb-2 block text-sm "
                     >
                       パスワード(確認用)
                     </label>
@@ -166,7 +157,7 @@ const SignUpForm = ({ errorMessage, onSignUp }: SignUpProps) => {
                       <input
                         type="password"
                         id="passwordConfirmation"
-                        className="block w-full rounded-md border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
+                        className="block w-full rounded-md border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500   "
                         aria-describedby="password-error"
                         {...register("passwordConfirmation", {
                           required: {
@@ -188,7 +179,7 @@ const SignUpForm = ({ errorMessage, onSignUp }: SignUpProps) => {
 
                   <button
                     type="submit"
-                    className="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-blue-500 px-4 py-3 text-sm font-semibold text-white transition-all hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                    className="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-blue-500 px-4 py-3 text-sm font-semibold text-white transition-all hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 "
                   >
                     登録
                   </button>

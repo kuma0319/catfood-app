@@ -18,17 +18,17 @@ const ResetPasswordForm = ({ errorMessage, onResetPassword }: SignUpProps) => {
 
   return (
     <div className="h-full">
-      <div className="flex h-full items-center bg-gray-100 py-16 dark:bg-slate-900">
+      <div className="flex h-full items-center bg-gray-100 py-16 ">
         <div className="mx-auto w-full max-w-md p-6">
           {/* 登録エラーの場合にエラーメッセージを表示する */}
           <div className="text-center text-lg text-red-600">{errorMessage}</div>
-          <div className="mt-7 rounded-xl border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800">
+          <div className="mt-7 rounded-xl border border-gray-200 bg-white shadow-sm  ">
             <div className="p-4 sm:p-7">
               <div className="text-center">
-                <h1 className="block text-2xl font-bold text-gray-800 dark:text-white">
+                <h1 className="block text-2xl font-bold text-gray-800 ">
                   パスワードリセットフォーム
                 </h1>
-                <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                <p className="mt-2 text-sm text-gray-600 ">
                   新しいパスワードを入力してください。
                 </p>
               </div>
@@ -38,17 +38,14 @@ const ResetPasswordForm = ({ errorMessage, onResetPassword }: SignUpProps) => {
                   <div className="grid gap-y-4">
                     {/* パスワード用フォーム */}
                     <div>
-                      <label
-                        htmlFor="password"
-                        className="mb-2 block text-sm dark:text-white"
-                      >
+                      <label htmlFor="password" className="mb-2 block text-sm ">
                         パスワード
                       </label>
                       <div className="relative">
                         <input
                           type="password"
                           id="password"
-                          className={`block w-full rounded-md px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 ${
+                          className={`block w-full rounded-md px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500    ${
                             errors.password
                               ? "border-red-500" //エラー発生時は枠線を赤くハイライト
                               : "border-gray-200"
@@ -77,7 +74,7 @@ const ResetPasswordForm = ({ errorMessage, onResetPassword }: SignUpProps) => {
                     <div>
                       <label
                         htmlFor="passwordConfirmation"
-                        className="mb-2 block text-sm dark:text-white"
+                        className="mb-2 block text-sm "
                       >
                         パスワード(確認用)
                       </label>
@@ -85,7 +82,7 @@ const ResetPasswordForm = ({ errorMessage, onResetPassword }: SignUpProps) => {
                         <input
                           type="password"
                           id="passwordConfirmation"
-                          className={`block w-full rounded-md px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 ${
+                          className={`block w-full rounded-md px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500    ${
                             errors.passwordConfirmation
                               ? "border-red-500" //エラー発生時は枠線を赤くハイライト
                               : "border-gray-200"
@@ -111,7 +108,7 @@ const ResetPasswordForm = ({ errorMessage, onResetPassword }: SignUpProps) => {
 
                     <button
                       type="submit"
-                      className="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-blue-500 px-4 py-3 text-sm font-semibold text-white transition-all hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                      className="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-blue-500 px-4 py-3 text-sm font-semibold text-white transition-all hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 "
                     >
                       パスワードリセット
                     </button>

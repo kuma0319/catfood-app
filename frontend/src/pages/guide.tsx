@@ -48,7 +48,7 @@ const GuidePage = () => {
               <div className="flex">
                 <PhMagnifyingGlassBold className="mt-2 h-6 w-6 shrink-0 fill-gray-400" />
                 <div className="ml-5 text-base sm:ml-8">
-                  <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 sm:text-lg">
+                  <h3 className="text-lg font-semibold text-gray-800  sm:text-lg">
                     キャットフードの探し方
                   </h3>
                   <p className="mt-1 text-gray-500">
@@ -74,7 +74,7 @@ const GuidePage = () => {
               <div className="flex">
                 <MdiScaleUnbalanced className="mt-2 h-6 w-6 shrink-0 fill-blue-400" />
                 <div className="ml-5 text-base sm:ml-8">
-                  <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 sm:text-lg">
+                  <h3 className="text-lg font-semibold text-gray-800  sm:text-lg">
                     気になったキャットフードを比較する
                   </h3>
                   <p className="mt-1 text-gray-500">
@@ -100,7 +100,7 @@ const GuidePage = () => {
               <div className="flex">
                 <IconParkSolidGoodTwo className="mt-2 h-6 w-6 shrink-0 fill-purple-400" />
                 <div className="ml-5 text-base sm:ml-8">
-                  <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 sm:text-lg">
+                  <h3 className="text-lg font-semibold text-gray-800  sm:text-lg">
                     キャットフードにレビューを付ける
                   </h3>
                   <p className="mt-1 text-gray-500">
@@ -125,7 +125,7 @@ const GuidePage = () => {
               <div className="flex">
                 <PhHeartFill className="mt-2 h-6 w-6 shrink-0 fill-red-400" />
                 <div className="ml-5 text-base sm:ml-8">
-                  <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 sm:text-lg">
+                  <h3 className="text-lg font-semibold text-gray-800  sm:text-lg">
                     キャットフードをお気に入り登録する
                   </h3>
                   <p className="mt-1 text-gray-500">
@@ -154,7 +154,7 @@ const GuidePage = () => {
               <div className="flex">
                 <MaterialSymbolsForumOutline className="mt-2 h-6 w-6 shrink-0 fill-green-400" />
                 <div className="ml-5 text-base sm:ml-8">
-                  <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 sm:text-lg">
+                  <h3 className="text-lg font-semibold text-gray-800  sm:text-lg">
                     キャットフードについて相談する
                   </h3>
                   <p className="mt-1 text-gray-500">
