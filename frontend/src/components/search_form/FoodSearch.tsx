@@ -37,7 +37,7 @@ const FoodSearch = ({
       <Image
         className=" absolute right-2 top-0 sm:right-10 sm:top-1 "
         src="/cat-search.png"
-        alt="検索猫"
+        alt="虫メガネを持って調べる猫"
         width={70}
         height={70}
         unoptimized={true} // これが無いと透過するため

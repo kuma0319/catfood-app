@@ -65,7 +65,7 @@ const QuestionDetail = (props: QuestionDetail) => {
                     ? props.user.avatar_url
                     : "/cat_default_avatar_5416936.png"
                 }
-                alt="アバター"
+                alt="ユーザーアバター"
                 width={100}
                 height={100}
               />
@@ -107,7 +107,7 @@ const QuestionDetail = (props: QuestionDetail) => {
                             ? answer.user.avatar_url
                             : "/cat_default_avatar_5416936.png"
                         }
-                        alt="アバター"
+                        alt="ユーザーアバター"
                         width={100}
                         height={100}
                       />

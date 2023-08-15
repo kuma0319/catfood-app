@@ -116,7 +116,7 @@ const Reviews = ({ foodId }: { foodId: number }) => {
                           ? review.user.avatar_url
                           : "/cat_default_avatar_5416936.png"
                       }
-                      alt="アバター"
+                      alt="ユーザーアバター"
                       width={100}
                       height={100}
                     />

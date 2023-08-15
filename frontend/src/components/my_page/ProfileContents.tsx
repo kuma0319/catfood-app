@@ -55,7 +55,7 @@ const ProfileContents = ({
                       ? profileProps.user.avatar_url
                       : "/cat_default_avatar_5416936.png"
                   }
-                  alt="Image Description"
+                  alt="ユーザーアバター"
                   width={160}
                   height={160}
                   unoptimized={

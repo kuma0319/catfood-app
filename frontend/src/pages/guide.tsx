@@ -23,7 +23,7 @@ const GuidePage = () => {
               <Image
                 className=" absolute right-2 top-0 sm:right-10 sm:top-1 md:right-14 md:top-1"
                 src="/cat-dish.png"
-                alt="食事猫"
+                alt="スプーンとフォークを持って喜ぶ猫"
                 width={70}
                 height={70}
                 unoptimized={true} // これが無いと透過するため

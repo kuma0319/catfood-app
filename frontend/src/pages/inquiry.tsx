@@ -20,7 +20,7 @@ const Inquiry = () => {
         <Image
           className="mx-auto mt-6"
           src="/cat-thanks.png"
-          alt="食事猫"
+          alt="ありがとうを伝える猫"
           width={150}
           height={150}
           unoptimized={true} // これが無いと透過するため

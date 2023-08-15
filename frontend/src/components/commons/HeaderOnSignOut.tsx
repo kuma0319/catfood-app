@@ -39,7 +39,7 @@ const HeaderOnSignOut = () => {
             <Link href="/" aria-label="Brand">
               <Image
                 src="/cat-banner.png"
-                alt="バナー"
+                alt="サイトバナー"
                 width={240}
                 height={80}
               />

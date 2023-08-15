@@ -28,7 +28,7 @@ const QuestionIndex = ({ props }: { props: { questions: Questions[] } }) => {
                         ? question.user.avatar_url
                         : "/cat_default_avatar_5416936.png"
                     }
-                    alt="アバター"
+                    alt="デフォルトの猫アバター"
                     width={100}
                     height={100}
                   />

@@ -18,7 +18,7 @@ const About = () => {
               <Image
                 className="rounded-md"
                 src="/cat-hatena.png"
-                alt="ポイント猫"
+                alt="はてなマークをたくさん浮かべる猫"
                 width={100}
                 height={100}
               />
@@ -56,7 +56,7 @@ const About = () => {
               <Image
                 className="rounded-md"
                 src="/cat-point.png"
-                alt="ポイント猫"
+                alt="チェックポーズの猫"
                 width={100}
                 height={100}
               />
