@@ -1,8 +1,10 @@
 import { Head, Html, Main, NextScript } from "next/document";
 
+import { kiwi_maru } from "@/utils/font";
+
 export default function Document() {
   return (
-    <Html lang="ja">
+    <Html lang="ja" className={kiwi_maru.className}>
       <Head>
         <link
           rel="apple-touch-icon"

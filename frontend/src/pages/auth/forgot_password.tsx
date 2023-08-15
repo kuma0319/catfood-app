@@ -43,7 +43,7 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="h-screen bg-gray-100 dark:bg-slate-900">
+    <div className="h-screen bg-gray-100 ">
       <AuthLayout>
         {isLoading && <Spinners />}
         <ForgotPasswordForm

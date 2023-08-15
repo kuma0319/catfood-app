@@ -73,7 +73,7 @@ const AnswerModal = ({ questionId }: { questionId: number }) => {
       <div className="text-center">
         <button
           type="button"
-          className="inline-flex items-center justify-center gap-2 rounded-md border bg-white px-4 py-3 align-middle text-base font-medium text-gray-700 shadow-sm transition-all hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 dark:hover:bg-slate-800 dark:hover:text-white dark:focus:ring-offset-gray-800"
+          className="inline-flex items-center justify-center gap-2 rounded-md border bg-white px-4 py-3 align-middle text-base font-medium text-gray-700 shadow-sm transition-all hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white      "
           data-hs-overlay="#hs-notifications"
           onClick={handleAnswer}
         >
@@ -87,12 +87,12 @@ const AnswerModal = ({ questionId }: { questionId: number }) => {
           className="hs-overlay fixed left-0 top-0 z-[60] hidden h-full w-full overflow-y-auto overflow-x-hidden"
         >
           <div className="m-3 mt-0 opacity-0 transition-all ease-out hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 sm:mx-auto sm:w-full sm:max-w-lg">
-            <div className="relative flex flex-col overflow-hidden rounded-xl border bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800">
+            <div className="relative flex flex-col overflow-hidden rounded-xl border bg-white shadow-sm  ">
               {isLoading && <Spinners />}
               <div className="absolute right-2 top-2">
                 <button
                   type="button"
-                  className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-sm text-gray-500 transition-all hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-gray-700 dark:focus:ring-offset-gray-800"
+                  className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-sm text-gray-500 transition-all hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-white  "
                   data-hs-overlay="#hs-notifications"
                 >
                   <span className="sr-only">閉じる</span>
@@ -118,7 +118,7 @@ const AnswerModal = ({ questionId }: { questionId: number }) => {
                     {errorMessage}
                   </div>
                   <div className="text-center">
-                    <h2 className="text-xl font-bold text-gray-800 dark:text-white sm:text-3xl">
+                    <h2 className="text-xl font-bold text-gray-800  sm:text-3xl">
                       質問へ回答する
                     </h2>
                   </div>
@@ -127,7 +127,7 @@ const AnswerModal = ({ questionId }: { questionId: number }) => {
                     <div className="my-4 gap-2 py-5">
                       <label
                         htmlFor="hs-feedback-post-comment-textarea-1"
-                        className="mb-3 block text-lg font-bold dark:text-white lg:text-xl"
+                        className="mb-3 block text-lg font-bold  lg:text-xl"
                       >
                         回答内容
                       </label>
@@ -135,7 +135,7 @@ const AnswerModal = ({ questionId }: { questionId: number }) => {
                         <textarea
                           id="hs-feedback-post-comment-textarea-1"
                           rows={10}
-                          className="block w-full rounded-md border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 sm:p-4"
+                          className="block w-full rounded-md border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500    sm:p-4"
                           placeholder="1～10000文字で入力して下さい。"
                           {...register("content", {
                             maxLength: {
@@ -160,7 +160,7 @@ const AnswerModal = ({ questionId }: { questionId: number }) => {
                     <div className="mt-6 grid">
                       <button
                         type="submit"
-                        className="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-blue-500 px-4 py-3 font-semibold text-white transition-all hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                        className="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-blue-500 px-4 py-3 font-semibold text-white transition-all hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 "
                       >
                         回答を投稿する
                       </button>

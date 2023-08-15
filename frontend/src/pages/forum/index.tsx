@@ -43,7 +43,7 @@ const Forum = (props: { questions: Questions[] }) => {
           <Image
             className=" absolute right-2 top-0 sm:right-10 sm:top-1 md:right-20 md:top-2 lg:right-20 lg:top-3"
             src="/cat-hatena.png"
-            alt="はてな猫"
+            alt="はてなマークをたくさん浮かべる猫"
             width={70}
             height={70}
             unoptimized={true} // これが無いと透過するため

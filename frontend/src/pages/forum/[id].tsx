@@ -59,13 +59,13 @@ const QuestionDetail = (props: QuestionDetail) => {
           <div className="mx-auto max-w-screen-xl p-4 md:p-8">
             <div className="mb-2 flex items-center space-x-4">
               <Image
-                className="inline-block h-11 w-11 rounded-full ring-2 ring-white dark:ring-gray-800"
+                className="inline-block h-11 w-11 rounded-full ring-2 ring-white "
                 src={
                   props.user.avatar_url
                     ? props.user.avatar_url
                     : "/cat_default_avatar_5416936.png"
                 }
-                alt="アバター"
+                alt="ユーザーアバター"
                 width={100}
                 height={100}
               />
@@ -74,7 +74,7 @@ const QuestionDetail = (props: QuestionDetail) => {
               </span>
             </div>
             {/* hrefにprops.idを渡して動的にルーティング */}
-            <span className="block text-sm font-medium text-gray-500 dark:text-gray-400">
+            <span className="block text-sm font-medium text-gray-500 ">
               {props.title}
             </span>
             <span className="block text-sm text-gray-500">
@@ -101,13 +101,13 @@ const QuestionDetail = (props: QuestionDetail) => {
                   <div className="flex flex-col">
                     <div className="mb-2 flex items-center space-x-4">
                       <Image
-                        className="inline-block h-11 w-11 rounded-full ring-2 ring-white dark:ring-gray-800"
+                        className="inline-block h-11 w-11 rounded-full ring-2 ring-white "
                         src={
                           answer.user.avatar_url
                             ? answer.user.avatar_url
                             : "/cat_default_avatar_5416936.png"
                         }
-                        alt="アバター"
+                        alt="ユーザーアバター"
                         width={100}
                         height={100}
                       />

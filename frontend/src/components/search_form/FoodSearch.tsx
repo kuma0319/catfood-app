@@ -37,7 +37,7 @@ const FoodSearch = ({
       <Image
         className=" absolute right-2 top-0 sm:right-10 sm:top-1 "
         src="/cat-search.png"
-        alt="検索猫"
+        alt="虫メガネを持って調べる猫"
         width={70}
         height={70}
         unoptimized={true} // これが無いと透過するため
@@ -45,11 +45,11 @@ const FoodSearch = ({
       <div className="hs-accordion-group text-sm">
         <div className="hs-accordion" id="hs-basic-with-arrow-heading-one">
           <button
-            className="hs-accordion-toggle group inline-flex w-full items-center gap-x-3 py-3 text-left font-semibold text-gray-800 transition hover:text-gray-500 hs-accordion-active:text-blue-600 dark:text-gray-200 dark:hover:text-gray-400 dark:hs-accordion-active:text-blue-500"
+            className="hs-accordion-toggle group inline-flex w-full items-center gap-x-3 py-3 text-left font-semibold text-gray-800 transition hover:text-gray-500 hs-accordion-active:text-blue-600   "
             aria-controls="hs-basic-with-arrow-collapse-one"
           >
             <svg
-              className="block h-3 w-3 text-gray-600 group-hover:text-gray-500 hs-accordion-active:hidden hs-accordion-active:text-blue-600 hs-accordion-active:group-hover:text-blue-600 dark:text-gray-400"
+              className="block h-3 w-3 text-gray-600 group-hover:text-gray-500 hs-accordion-active:hidden hs-accordion-active:text-blue-600 hs-accordion-active:group-hover:text-blue-600 "
               width="16"
               height="16"
               viewBox="0 0 16 16"
@@ -64,7 +64,7 @@ const FoodSearch = ({
               />
             </svg>
             <svg
-              className="hidden h-3 w-3 text-gray-600 group-hover:text-gray-500 hs-accordion-active:block hs-accordion-active:text-blue-600 hs-accordion-active:group-hover:text-blue-600 dark:text-gray-400"
+              className="hidden h-3 w-3 text-gray-600 group-hover:text-gray-500 hs-accordion-active:block hs-accordion-active:text-blue-600 hs-accordion-active:group-hover:text-blue-600 "
               width="16"
               height="16"
               viewBox="0 0 16 16"
@@ -85,7 +85,7 @@ const FoodSearch = ({
             className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
             aria-labelledby="hs-basic-with-arrow-heading-one"
           >
-            <div className="text-gray-800 dark:text-gray-200">
+            <div className="text-gray-800 ">
               {SEARCH_BRAND_PARAMS.map((param, index) => (
                 <MultipleOption
                   key={index}
@@ -107,11 +107,11 @@ const FoodSearch = ({
 
         <div className="hs-accordion" id="hs-basic-with-arrow-heading-two">
           <button
-            className="hs-accordion-toggle group inline-flex w-full items-center gap-x-3 py-3 text-left font-semibold text-gray-800 transition hover:text-gray-500 hs-accordion-active:text-blue-600 dark:text-gray-200 dark:hover:text-gray-400 dark:hs-accordion-active:text-blue-500"
+            className="hs-accordion-toggle group inline-flex w-full items-center gap-x-3 py-3 text-left font-semibold text-gray-800 transition hover:text-gray-500 hs-accordion-active:text-blue-600   "
             aria-controls="hs-basic-with-arrow-collapse-two"
           >
             <svg
-              className="block h-3 w-3 text-gray-600 group-hover:text-gray-500 hs-accordion-active:hidden hs-accordion-active:text-blue-600 hs-accordion-active:group-hover:text-blue-600 dark:text-gray-400"
+              className="block h-3 w-3 text-gray-600 group-hover:text-gray-500 hs-accordion-active:hidden hs-accordion-active:text-blue-600 hs-accordion-active:group-hover:text-blue-600 "
               width="16"
               height="16"
               viewBox="0 0 16 16"
@@ -126,7 +126,7 @@ const FoodSearch = ({
               />
             </svg>
             <svg
-              className="hidden h-3 w-3 text-gray-600 group-hover:text-gray-500 hs-accordion-active:block hs-accordion-active:text-blue-600 hs-accordion-active:group-hover:text-blue-600 dark:text-gray-400"
+              className="hidden h-3 w-3 text-gray-600 group-hover:text-gray-500 hs-accordion-active:block hs-accordion-active:text-blue-600 hs-accordion-active:group-hover:text-blue-600 "
               width="16"
               height="16"
               viewBox="0 0 16 16"
@@ -147,7 +147,7 @@ const FoodSearch = ({
             className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
             aria-labelledby="hs-basic-with-arrow-heading-two"
           >
-            <div className="text-gray-800 dark:text-gray-200">
+            <div className="text-gray-800 ">
               {SEARCH_PRODUCTION_AREA_PARAMS.map((param, index) => (
                 <MultipleOption
                   key={index}
@@ -169,11 +169,11 @@ const FoodSearch = ({
 
         <div className="hs-accordion" id="hs-basic-with-arrow-heading-three">
           <button
-            className="hs-accordion-toggle group inline-flex w-full items-center gap-x-3 py-3 text-left font-semibold text-gray-800 transition hover:text-gray-500 hs-accordion-active:text-blue-600 dark:text-gray-200 dark:hover:text-gray-400 dark:hs-accordion-active:text-blue-500"
+            className="hs-accordion-toggle group inline-flex w-full items-center gap-x-3 py-3 text-left font-semibold text-gray-800 transition hover:text-gray-500 hs-accordion-active:text-blue-600   "
             aria-controls="hs-basic-with-arrow-collapse-three"
           >
             <svg
-              className="block h-3 w-3 text-gray-600 group-hover:text-gray-500 hs-accordion-active:hidden hs-accordion-active:text-blue-600 hs-accordion-active:group-hover:text-blue-600 dark:text-gray-400"
+              className="block h-3 w-3 text-gray-600 group-hover:text-gray-500 hs-accordion-active:hidden hs-accordion-active:text-blue-600 hs-accordion-active:group-hover:text-blue-600 "
               width="16"
               height="16"
               viewBox="0 0 16 16"
@@ -188,7 +188,7 @@ const FoodSearch = ({
               />
             </svg>
             <svg
-              className="hidden h-3 w-3 text-gray-600 group-hover:text-gray-500 hs-accordion-active:block hs-accordion-active:text-blue-600 hs-accordion-active:group-hover:text-blue-600 dark:text-gray-400"
+              className="hidden h-3 w-3 text-gray-600 group-hover:text-gray-500 hs-accordion-active:block hs-accordion-active:text-blue-600 hs-accordion-active:group-hover:text-blue-600 "
               width="16"
               height="16"
               viewBox="0 0 16 16"
@@ -209,7 +209,7 @@ const FoodSearch = ({
             className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
             aria-labelledby="hs-basic-with-arrow-heading-three"
           >
-            <div className="text-gray-800 dark:text-gray-200">
+            <div className="text-gray-800 ">
               {SEARCH_CONTENT_PARAMS.map((param, index) => (
                 <RangeOption
                   key={index}
@@ -231,11 +231,11 @@ const FoodSearch = ({
 
         <div className="hs-accordion" id="hs-basic-with-arrow-heading-four">
           <button
-            className="hs-accordion-toggle group inline-flex w-full items-center gap-x-3 py-3 text-left font-semibold text-gray-800 transition hover:text-gray-500 hs-accordion-active:text-blue-600 dark:text-gray-200 dark:hover:text-gray-400 dark:hs-accordion-active:text-blue-500"
+            className="hs-accordion-toggle group inline-flex w-full items-center gap-x-3 py-3 text-left font-semibold text-gray-800 transition hover:text-gray-500 hs-accordion-active:text-blue-600   "
             aria-controls="hs-basic-with-arrow-collapse-four"
           >
             <svg
-              className="block h-3 w-3 text-gray-600 group-hover:text-gray-500 hs-accordion-active:hidden hs-accordion-active:text-blue-600 hs-accordion-active:group-hover:text-blue-600 dark:text-gray-400"
+              className="block h-3 w-3 text-gray-600 group-hover:text-gray-500 hs-accordion-active:hidden hs-accordion-active:text-blue-600 hs-accordion-active:group-hover:text-blue-600 "
               width="16"
               height="16"
               viewBox="0 0 16 16"
@@ -250,7 +250,7 @@ const FoodSearch = ({
               />
             </svg>
             <svg
-              className="hidden h-3 w-3 text-gray-600 group-hover:text-gray-500 hs-accordion-active:block hs-accordion-active:text-blue-600 hs-accordion-active:group-hover:text-blue-600 dark:text-gray-400"
+              className="hidden h-3 w-3 text-gray-600 group-hover:text-gray-500 hs-accordion-active:block hs-accordion-active:text-blue-600 hs-accordion-active:group-hover:text-blue-600 "
               width="16"
               height="16"
               viewBox="0 0 16 16"
@@ -271,7 +271,7 @@ const FoodSearch = ({
             className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
             aria-labelledby="hs-basic-with-arrow-heading-four"
           >
-            <div className="text-gray-800 dark:text-gray-200">
+            <div className="text-gray-800 ">
               {SEARCH_AMOUNT_PARAMS.map((param, index) => (
                 <RangeOption
                   key={index}
@@ -292,11 +292,11 @@ const FoodSearch = ({
 
         <div className="hs-accordion" id="hs-basic-with-arrow-heading-five">
           <button
-            className="hs-accordion-toggle group inline-flex w-full items-center gap-x-3 py-3 text-left font-semibold text-gray-800 transition hover:text-gray-500 hs-accordion-active:text-blue-600 dark:text-gray-200 dark:hover:text-gray-400 dark:hs-accordion-active:text-blue-500"
+            className="hs-accordion-toggle group inline-flex w-full items-center gap-x-3 py-3 text-left font-semibold text-gray-800 transition hover:text-gray-500 hs-accordion-active:text-blue-600   "
             aria-controls="hs-basic-with-arrow-collapse-five"
           >
             <svg
-              className="block h-3 w-3 text-gray-600 group-hover:text-gray-500 hs-accordion-active:hidden hs-accordion-active:text-blue-600 hs-accordion-active:group-hover:text-blue-600 dark:text-gray-400"
+              className="block h-3 w-3 text-gray-600 group-hover:text-gray-500 hs-accordion-active:hidden hs-accordion-active:text-blue-600 hs-accordion-active:group-hover:text-blue-600 "
               width="16"
               height="16"
               viewBox="0 0 16 16"
@@ -311,7 +311,7 @@ const FoodSearch = ({
               />
             </svg>
             <svg
-              className="hidden h-3 w-3 text-gray-600 group-hover:text-gray-500 hs-accordion-active:block hs-accordion-active:text-blue-600 hs-accordion-active:group-hover:text-blue-600 dark:text-gray-400"
+              className="hidden h-3 w-3 text-gray-600 group-hover:text-gray-500 hs-accordion-active:block hs-accordion-active:text-blue-600 hs-accordion-active:group-hover:text-blue-600 "
               width="16"
               height="16"
               viewBox="0 0 16 16"
@@ -332,7 +332,7 @@ const FoodSearch = ({
             className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
             aria-labelledby="hs-basic-with-arrow-heading-five"
           >
-            <div className="text-gray-800 dark:text-gray-200">
+            <div className="text-gray-800 ">
               {FOOD_SEARCH_INPUT_PARAMS.map((param, index) => (
                 <FoodSearchInput
                   key={index}

@@ -73,7 +73,7 @@ const ResetPassword = () => {
 
   // リセットパスワードとトークンがあればフォームを表示
   return token && reset_password === "true" ? (
-    <div className="h-screen bg-gray-100 dark:bg-slate-900">
+    <div className="h-screen bg-gray-100 ">
       {isLoading && <Spinners />}
       <ResetPasswordForm
         onResetPassword={onResetPassword}

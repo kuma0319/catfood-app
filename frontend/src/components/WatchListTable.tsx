@@ -19,7 +19,7 @@ const WatchListTable = ({ foodData, handleWatchList }: WatchListTableProps) => {
         <Image
           className=" absolute right-2 top-0 sm:right-10 sm:top-1 md:right-20 md:top-2 lg:right-20 lg:top-3"
           src="/cat-watch.png"
-          alt="はてな猫"
+          alt="マルとバツの札で悩む猫"
           width={70}
           height={70}
           unoptimized={true} // これが無いと透過するため
@@ -32,8 +32,8 @@ const WatchListTable = ({ foodData, handleWatchList }: WatchListTableProps) => {
         <div className="-m-1.5 overflow-auto">
           <div className="inline-block min-w-full p-1.5 align-middle">
             <div className="overflow-hidden">
-              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                <thead className="bg-gray-50 dark:bg-gray-700">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50">
                   <tr>
                     <th
                       rowSpan={2}
@@ -134,13 +134,10 @@ const WatchListTable = ({ foodData, handleWatchList }: WatchListTableProps) => {
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                <tbody className="divide-y divide-gray-200">
                   {foodData.foods_data.map((food) => (
-                    <tr
-                      key={food.id}
-                      className="hover:bg-gray-100 dark:hover:bg-gray-700"
-                    >
-                      <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-800 dark:text-gray-200">
+                    <tr key={food.id} className="hover:bg-gray-100">
+                      <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-800">
                         <Link href="/products/[id]" as={`/products/${food.id}`}>
                           <Image
                             src={food.medium_image_url}
@@ -154,7 +151,7 @@ const WatchListTable = ({ foodData, handleWatchList }: WatchListTableProps) => {
                           />
                         </Link>
                       </td>
-                      <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-gray-200">
+                      <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-800">
                         {food.name}
                       </td>
                       {food.nutrient_contents
@@ -163,27 +160,27 @@ const WatchListTable = ({ foodData, handleWatchList }: WatchListTableProps) => {
                         .map((nutrient_content) => (
                           <td
                             key={nutrient_content.nutrient.id}
-                            className="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-gray-200"
+                            className="whitespace-nowrap px-6 py-4 text-sm text-gray-800"
                           >
                             {nutrient_content.content.toFixed(1)}
                           </td>
                         ))}
-                      <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-gray-200">
+                      <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-800">
                         {food.ingredients.split("、", 1)[0]}
                       </td>
-                      <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-gray-200">
+                      <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-800">
                         {food.calorie}
                       </td>
-                      <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-gray-200">
+                      <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-800">
                         {food.target_age}
                       </td>
-                      <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-gray-200">
+                      <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-800">
                         {food.median_price} 円
                       </td>
-                      <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-gray-200">
+                      <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-800">
                         {food.brand.name}
                       </td>
-                      <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-gray-200">
+                      <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-800">
                         {food.production_area.name}
                       </td>
                       <td className="whitespace-nowrap px-6 py-4 text-right text-sm font-medium">

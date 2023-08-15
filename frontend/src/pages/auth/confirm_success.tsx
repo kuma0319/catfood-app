@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -30,20 +31,25 @@ const ConfirmSuccess = () => {
 
   // confirm_success_flagがあればコンポーネントを表示
   return confirm_success_flag === "true" ? (
-    <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8 lg:py-16">
-      <div className="mx-auto max-w-xl text-center">
-        <div className="mb-5">
-          <h2 className="text-2xl font-bold dark:text-white md:text-3xl md:leading-tight">
-            {`登録完了しました。数秒後にホームへ移動します。`}
-          </h2>
-        </div>
-        <Link
-          href="/"
-          className="font-medium text-blue-600 decoration-2 hover:underline"
-        >
-          自動でリダイレクトしない場合はこちら
-        </Link>
+    <div className="m-10 mx-auto max-w-screen-md text-center">
+      <Image
+        src="/cat-happy.png"
+        alt="キラキラ両手を上げて喜ぶ猫"
+        width={150}
+        height={150}
+        className="mx-auto my-10"
+      />
+      <div className="mb-5">
+        <h2 className="text-xl font-bold">
+          {`登録完了しました。数秒後にホームへ移動します。`}
+        </h2>
       </div>
+      <Link
+        href="/"
+        className="text-lg font-medium text-blue-600 decoration-2 hover:underline"
+      >
+        自動でリダイレクトしない場合はこちら
+      </Link>
     </div>
   ) : null;
 };
