@@ -2,6 +2,7 @@
 import axios from "axios";
 import { GetStaticPaths, GetStaticProps } from "next";
 
+import CommonMeta from "@/components/commons/CommonMeta";
 import RootLayout from "@/components/commons/Layout";
 import FoodIndex from "@/components/products/FoodIndex";
 import IndexPagination from "@/components/products/IndexPagination";
@@ -51,17 +52,35 @@ export const getStaticProps: GetStaticProps = async (context) => {
     return {
       props: {
         data: response.data,
+        page: page,
       },
     };
   }
 };
 
-const Index = ({ data }: { data: FoodIndexData }) => {
+const Index = ({
+  data,
+  page,
+}: {
+  data: FoodIndexData;
+  page: string | string[] | undefined;
+}) => {
+  const meta_title = "ねこまんま | キャットフード一覧";
+  const meta_description =
+    "ねこまんまのキャットフード一覧ページです。成分量やキーワードなど、様々な条件で絞り込み検索が可能です。";
+  const meta_url = `https://www.nekomanmafood.com/products/pages/${page}`;
   return (
-    <RootLayout>
-      <FoodIndex data={data} />
-      <IndexPagination pagination={data.pagination} />
-    </RootLayout>
+    <>
+      <CommonMeta
+        title={meta_title}
+        description={meta_description}
+        url={meta_url}
+      />
+      <RootLayout>
+        <FoodIndex data={data} />
+        <IndexPagination pagination={data.pagination} />
+      </RootLayout>
+    </>
   );
 };
 

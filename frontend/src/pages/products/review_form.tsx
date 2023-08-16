@@ -4,6 +4,7 @@ import { parseCookies } from "nookies";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
+import CommonMeta from "@/components/commons/CommonMeta";
 import RootLayout from "@/components/commons/Layout";
 import Spinners from "@/components/commons/Spinners";
 import StarRating from "@/components/products/StarRating";
@@ -93,212 +94,218 @@ const ReviewForm = () => {
     }
   }, [router]);
 
+  const meta_title = `ねこまんま | レビュー投稿`;
+  const meta_description = "キャットフードのレビュー投稿ページです。";
+
   return (
-    <RootLayout>
-      {isLoading && <Spinners />}
-      <div className="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
-        {/* エラーの場合にエラーメッセージを表示する */}
-        <div className="text-center text-lg text-red-600">{errorMessage}</div>
-        <div className="mx-auto max-w-2xl">
-          <div className="text-center">
-            <h2 className="text-xl font-bold text-gray-800  sm:text-3xl">
-              レビューを投稿
-            </h2>
-          </div>
+    <>
+      <CommonMeta title={meta_title} description={meta_description} />
+      <RootLayout>
+        {isLoading && <Spinners />}
+        <div className="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+          {/* エラーの場合にエラーメッセージを表示する */}
+          <div className="text-center text-lg text-red-600">{errorMessage}</div>
+          <div className="mx-auto max-w-2xl">
+            <div className="text-center">
+              <h2 className="text-xl font-bold text-gray-800  sm:text-3xl">
+                レビューを投稿
+              </h2>
+            </div>
 
-          <div className="relative z-10 mt-5 rounded-xl border bg-white p-4   sm:mt-10 md:p-10">
-            <form onSubmit={handleSubmit(onReview)}>
-              <div className="my-4 gap-2 border-y border-gray-400 py-5">
-                <h2 className="mb-3 text-lg font-bold  lg:text-xl">
-                  項目別評価
-                </h2>
-                {/* 評価項目：フードの香り */}
-                <div className="mb-3">
-                  <h3 className="mb-3 block text-base  lg:text-xl">
-                    {SCENT_PARAMS.name}
-                  </h3>
-                  {/* React Hook FormのControllerコンポーネントを使用 */}
-                  <Controller
-                    control={control}
-                    name="rateOfScent"
-                    rules={{
-                      min: { message: "評価が必須です", value: 1 },
-                      required: "評価が必須です",
-                    }}
-                    defaultValue={0}
-                    render={({ field }) => (
-                      <StarRating
-                        rating={field.value}
-                        setRating={field.onChange}
-                      />
+            <div className="relative z-10 mt-5 rounded-xl border bg-white p-4   sm:mt-10 md:p-10">
+              <form onSubmit={handleSubmit(onReview)}>
+                <div className="my-4 gap-2 border-y border-gray-400 py-5">
+                  <h2 className="mb-3 text-lg font-bold  lg:text-xl">
+                    項目別評価
+                  </h2>
+                  {/* 評価項目：フードの香り */}
+                  <div className="mb-3">
+                    <h3 className="mb-3 block text-base  lg:text-xl">
+                      {SCENT_PARAMS.name}
+                    </h3>
+                    {/* React Hook FormのControllerコンポーネントを使用 */}
+                    <Controller
+                      control={control}
+                      name="rateOfScent"
+                      rules={{
+                        min: { message: "評価が必須です", value: 1 },
+                        required: "評価が必須です",
+                      }}
+                      defaultValue={0}
+                      render={({ field }) => (
+                        <StarRating
+                          rating={field.value}
+                          setRating={field.onChange}
+                        />
+                      )}
+                    />
+                    {/* エラーが存在する場合にメッセージを下段に表示 */}
+                    {errors.rateOfScent && (
+                      <div className="mt-2 text-xs text-red-600">
+                        {String(errors.rateOfScent.message)}
+                      </div>
                     )}
-                  />
-                  {/* エラーが存在する場合にメッセージを下段に表示 */}
-                  {errors.rateOfScent && (
-                    <div className="mt-2 text-xs text-red-600">
-                      {String(errors.rateOfScent.message)}
-                    </div>
-                  )}
-                </div>
-                {/* 評価項目：食い付きの良さ */}
-                <div className="mb-3">
-                  <h3 className="mb-3 block text-base  lg:text-xl">
-                    {EATING_PARAMS.name}
-                  </h3>
-                  <Controller
-                    control={control}
-                    name="rateOfEating"
-                    rules={{
-                      min: { message: "評価が必須です", value: 1 },
-                      required: "評価が必須です",
-                    }}
-                    defaultValue={0}
-                    render={({ field }) => (
-                      <StarRating
-                        rating={field.value}
-                        setRating={field.onChange}
-                      />
-                    )}
-                  />
-                  {/* エラーが存在する場合にメッセージを下段に表示 */}
-                  {errors.rateOfEating && (
-                    <div className="mt-2 text-xs text-red-600">
-                      {String(errors.rateOfEating.message)}
-                    </div>
-                  )}
-                </div>
-                {/* 評価項目：体調の変化 */}
-                <div className="mb-3">
-                  <h3 className="mb-3 block text-base  lg:text-xl">
-                    {HEALTH_PARAMS.name}
-                  </h3>
-                  <Controller
-                    control={control}
-                    name="rateOfHealth"
-                    rules={{
-                      min: { message: "評価が必須です", value: 1 },
-                      required: "評価が必須です",
-                    }}
-                    defaultValue={0}
-                    render={({ field }) => (
-                      <StarRating
-                        rating={field.value}
-                        setRating={field.onChange}
-                      />
-                    )}
-                  />
-                  {/* エラーが存在する場合にメッセージを下段に表示 */}
-                  {errors.rateOfHealth && (
-                    <div className="mt-2 text-xs text-red-600">
-                      {String(errors.rateOfHealth.message)}
-                    </div>
-                  )}
-                </div>
-                {/* 評価項目：毛並みの変化 */}
-                <div className="mb-3">
-                  <h3 className="mb-3 block text-base  lg:text-xl">
-                    {FUR_PARAMS.name}
-                  </h3>
-                  <Controller
-                    control={control}
-                    name="rateOfFur"
-                    rules={{
-                      min: { message: "評価が必須です", value: 1 },
-                      required: "評価が必須です",
-                    }}
-                    defaultValue={0}
-                    render={({ field }) => (
-                      <StarRating
-                        rating={field.value}
-                        setRating={field.onChange}
-                      />
-                    )}
-                  />
-                  {/* エラーが存在する場合にメッセージを下段に表示 */}
-                  {errors.rateOfFur && (
-                    <div className="mt-2 text-xs text-red-600">
-                      {String(errors.rateOfFur.message)}
-                    </div>
-                  )}
-                </div>
-              </div>
-              <div className="my-4 gap-2 border-gray-400 py-5">
-                <label
-                  htmlFor="hs-feedback-post-comment-name-1"
-                  className="mb-3 block text-lg font-bold  lg:text-xl"
-                >
-                  レビュータイトル
-                </label>
-                <input
-                  type="text"
-                  id="hs-feedback-post-comment-name-1"
-                  className="block w-full rounded-md border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500    sm:p-4"
-                  placeholder="レビューの伝えたいポイントを記載して下さい。"
-                  {...register("title", {
-                    maxLength: {
-                      message: "100文字以下で記載してください。",
-                      value: 100,
-                    },
-                    required: {
-                      message: "入力が必須の項目です",
-                      value: true,
-                    },
-                  })}
-                />
-                {/* エラーが存在する場合にメッセージを下段に表示 */}
-                {errors.title && (
-                  <div className="mt-2 text-xs text-red-600">
-                    {String(errors.title.message)}
                   </div>
-                )}
-              </div>
-
-              <div className="my-4 gap-2 border-y border-gray-400 py-5">
-                <label
-                  htmlFor="hs-feedback-post-comment-textarea-1"
-                  className="mb-3 block text-lg font-bold  lg:text-xl"
-                >
-                  レビュー内容
-                </label>
-                <div className="mt-1">
-                  <textarea
-                    id="hs-feedback-post-comment-textarea-1"
-                    rows={3}
+                  {/* 評価項目：食い付きの良さ */}
+                  <div className="mb-3">
+                    <h3 className="mb-3 block text-base  lg:text-xl">
+                      {EATING_PARAMS.name}
+                    </h3>
+                    <Controller
+                      control={control}
+                      name="rateOfEating"
+                      rules={{
+                        min: { message: "評価が必須です", value: 1 },
+                        required: "評価が必須です",
+                      }}
+                      defaultValue={0}
+                      render={({ field }) => (
+                        <StarRating
+                          rating={field.value}
+                          setRating={field.onChange}
+                        />
+                      )}
+                    />
+                    {/* エラーが存在する場合にメッセージを下段に表示 */}
+                    {errors.rateOfEating && (
+                      <div className="mt-2 text-xs text-red-600">
+                        {String(errors.rateOfEating.message)}
+                      </div>
+                    )}
+                  </div>
+                  {/* 評価項目：体調の変化 */}
+                  <div className="mb-3">
+                    <h3 className="mb-3 block text-base  lg:text-xl">
+                      {HEALTH_PARAMS.name}
+                    </h3>
+                    <Controller
+                      control={control}
+                      name="rateOfHealth"
+                      rules={{
+                        min: { message: "評価が必須です", value: 1 },
+                        required: "評価が必須です",
+                      }}
+                      defaultValue={0}
+                      render={({ field }) => (
+                        <StarRating
+                          rating={field.value}
+                          setRating={field.onChange}
+                        />
+                      )}
+                    />
+                    {/* エラーが存在する場合にメッセージを下段に表示 */}
+                    {errors.rateOfHealth && (
+                      <div className="mt-2 text-xs text-red-600">
+                        {String(errors.rateOfHealth.message)}
+                      </div>
+                    )}
+                  </div>
+                  {/* 評価項目：毛並みの変化 */}
+                  <div className="mb-3">
+                    <h3 className="mb-3 block text-base  lg:text-xl">
+                      {FUR_PARAMS.name}
+                    </h3>
+                    <Controller
+                      control={control}
+                      name="rateOfFur"
+                      rules={{
+                        min: { message: "評価が必須です", value: 1 },
+                        required: "評価が必須です",
+                      }}
+                      defaultValue={0}
+                      render={({ field }) => (
+                        <StarRating
+                          rating={field.value}
+                          setRating={field.onChange}
+                        />
+                      )}
+                    />
+                    {/* エラーが存在する場合にメッセージを下段に表示 */}
+                    {errors.rateOfFur && (
+                      <div className="mt-2 text-xs text-red-600">
+                        {String(errors.rateOfFur.message)}
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <div className="my-4 gap-2 border-gray-400 py-5">
+                  <label
+                    htmlFor="hs-feedback-post-comment-name-1"
+                    className="mb-3 block text-lg font-bold  lg:text-xl"
+                  >
+                    レビュータイトル
+                  </label>
+                  <input
+                    type="text"
+                    id="hs-feedback-post-comment-name-1"
                     className="block w-full rounded-md border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500    sm:p-4"
-                    placeholder="レビューの本文を記載して下さい。"
-                    {...register("content", {
+                    placeholder="レビューの伝えたいポイントを記載して下さい。"
+                    {...register("title", {
                       maxLength: {
-                        message: "10000文字以下で記載してください。",
-                        value: 10000,
+                        message: "100文字以下で記載してください。",
+                        value: 100,
                       },
                       required: {
                         message: "入力が必須の項目です",
                         value: true,
                       },
                     })}
-                  ></textarea>
+                  />
                   {/* エラーが存在する場合にメッセージを下段に表示 */}
-                  {errors.content && (
+                  {errors.title && (
                     <div className="mt-2 text-xs text-red-600">
-                      {String(errors.content.message)}
+                      {String(errors.title.message)}
                     </div>
                   )}
                 </div>
-              </div>
 
-              <div className="mt-6 grid">
-                <button
-                  type="submit"
-                  className="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-blue-500 px-4 py-3 font-semibold text-white transition-all hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 "
-                >
-                  レビューを投稿する
-                </button>
-              </div>
-            </form>
+                <div className="my-4 gap-2 border-y border-gray-400 py-5">
+                  <label
+                    htmlFor="hs-feedback-post-comment-textarea-1"
+                    className="mb-3 block text-lg font-bold  lg:text-xl"
+                  >
+                    レビュー内容
+                  </label>
+                  <div className="mt-1">
+                    <textarea
+                      id="hs-feedback-post-comment-textarea-1"
+                      rows={3}
+                      className="block w-full rounded-md border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500    sm:p-4"
+                      placeholder="レビューの本文を記載して下さい。"
+                      {...register("content", {
+                        maxLength: {
+                          message: "10000文字以下で記載してください。",
+                          value: 10000,
+                        },
+                        required: {
+                          message: "入力が必須の項目です",
+                          value: true,
+                        },
+                      })}
+                    ></textarea>
+                    {/* エラーが存在する場合にメッセージを下段に表示 */}
+                    {errors.content && (
+                      <div className="mt-2 text-xs text-red-600">
+                        {String(errors.content.message)}
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                <div className="mt-6 grid">
+                  <button
+                    type="submit"
+                    className="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-blue-500 px-4 py-3 font-semibold text-white transition-all hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 "
+                  >
+                    レビューを投稿する
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
-    </RootLayout>
+      </RootLayout>
+    </>
   );
 };
 
