@@ -1,5 +1,6 @@
 import { GetServerSideProps } from "next";
 
+import CommonMeta from "@/components/commons/CommonMeta";
 import RootLayout from "@/components/commons/Layout";
 import FavoriteFoods from "@/components/my_page/FavoriteFoods";
 import Profile from "@/components/my_page/Profile";
@@ -68,92 +69,103 @@ const MyPage = (props: MyPageProps) => {
   console.log(props.userQuestionsData);
   console.log(props.userAnswersData);
 
+  const meta_title = "ねこまんま | マイページ";
+  const meta_description =
+    "ねこまんまのマイページです。プロフィールの編集やお気に入りフードの確認が出来ます。";
+  const meta_url = "https://www.nekomanmafood.com/my_page";
   return (
-    <RootLayout>
-      <nav
-        className="relative z-0 flex overflow-hidden rounded-xl border "
-        aria-label="Tabs"
-        role="tablist"
-      >
-        <button
-          type="button"
-          className="active -white relative min-w-0 flex-1 overflow-hidden border-b-2 border-l bg-white p-4 text-center text-sm font-medium text-gray-500 first:border-l-0 hover:bg-gray-50 hover:text-gray-700 focus:z-10 hs-tab-active:border-b-blue-600       hs-tab-active:text-gray-900"
-          id="bar-with-underline-item-1"
-          data-hs-tab="#bar-with-underline-1"
-          aria-controls="bar-with-underline-1"
-          role="tab"
+    <>
+      <CommonMeta
+        title={meta_title}
+        description={meta_description}
+        url={meta_url}
+      />
+      <RootLayout>
+        <nav
+          className="relative z-0 flex overflow-hidden rounded-xl border "
+          aria-label="Tabs"
+          role="tablist"
         >
-          プロフィール
-        </button>
-        <button
-          type="button"
-          className="-white relative min-w-0 flex-1 overflow-hidden border-b-2 border-l bg-white p-4 text-center text-sm font-medium text-gray-500 first:border-l-0 hover:bg-gray-50 hover:text-gray-700 focus:z-10 hs-tab-active:border-b-blue-600       hs-tab-active:text-gray-900"
-          id="bar-with-underline-item-2"
-          data-hs-tab="#bar-with-underline-2"
-          aria-controls="bar-with-underline-2"
-          role="tab"
-        >
-          お気に入りリスト
-        </button>
-        <button
-          type="button"
-          className="-white relative min-w-0 flex-1 overflow-hidden border-b-2 border-l bg-white p-4 text-center text-sm font-medium text-gray-500 first:border-l-0 hover:bg-gray-50 hover:text-gray-700 focus:z-10 hs-tab-active:border-b-blue-600       hs-tab-active:text-gray-900"
-          id="bar-with-underline-item-3"
-          data-hs-tab="#bar-with-underline-3"
-          aria-controls="bar-with-underline-3"
-          role="tab"
-        >
-          マイレビュー
-        </button>
-        <button
-          type="button"
-          className="-white relative min-w-0 flex-1 overflow-hidden border-b-2 border-l bg-white p-4 text-center text-sm font-medium text-gray-500 first:border-l-0 hover:bg-gray-50 hover:text-gray-700 focus:z-10 hs-tab-active:border-b-blue-600       hs-tab-active:text-gray-900"
-          id="bar-with-underline-item-4"
-          data-hs-tab="#bar-with-underline-4"
-          aria-controls="bar-with-underline-4"
-          role="tab"
-        >
-          マイQ&A
-        </button>
-      </nav>
+          <button
+            type="button"
+            className="active -white relative min-w-0 flex-1 overflow-hidden border-b-2 border-l bg-white p-4 text-center text-sm font-medium text-gray-500 first:border-l-0 hover:bg-gray-50 hover:text-gray-700 focus:z-10 hs-tab-active:border-b-blue-600       hs-tab-active:text-gray-900"
+            id="bar-with-underline-item-1"
+            data-hs-tab="#bar-with-underline-1"
+            aria-controls="bar-with-underline-1"
+            role="tab"
+          >
+            プロフィール
+          </button>
+          <button
+            type="button"
+            className="-white relative min-w-0 flex-1 overflow-hidden border-b-2 border-l bg-white p-4 text-center text-sm font-medium text-gray-500 first:border-l-0 hover:bg-gray-50 hover:text-gray-700 focus:z-10 hs-tab-active:border-b-blue-600       hs-tab-active:text-gray-900"
+            id="bar-with-underline-item-2"
+            data-hs-tab="#bar-with-underline-2"
+            aria-controls="bar-with-underline-2"
+            role="tab"
+          >
+            お気に入りリスト
+          </button>
+          <button
+            type="button"
+            className="-white relative min-w-0 flex-1 overflow-hidden border-b-2 border-l bg-white p-4 text-center text-sm font-medium text-gray-500 first:border-l-0 hover:bg-gray-50 hover:text-gray-700 focus:z-10 hs-tab-active:border-b-blue-600       hs-tab-active:text-gray-900"
+            id="bar-with-underline-item-3"
+            data-hs-tab="#bar-with-underline-3"
+            aria-controls="bar-with-underline-3"
+            role="tab"
+          >
+            マイレビュー
+          </button>
+          <button
+            type="button"
+            className="-white relative min-w-0 flex-1 overflow-hidden border-b-2 border-l bg-white p-4 text-center text-sm font-medium text-gray-500 first:border-l-0 hover:bg-gray-50 hover:text-gray-700 focus:z-10 hs-tab-active:border-b-blue-600       hs-tab-active:text-gray-900"
+            id="bar-with-underline-item-4"
+            data-hs-tab="#bar-with-underline-4"
+            aria-controls="bar-with-underline-4"
+            role="tab"
+          >
+            マイQ&A
+          </button>
+        </nav>
 
-      <div className="mt-4">
-        <div
-          id="bar-with-underline-1"
-          role="tabpanel"
-          aria-labelledby="bar-with-underline-item-1"
-        >
-          <Profile profileProps={props.userData} />
+        <div className="mt-4">
+          <div
+            id="bar-with-underline-1"
+            role="tabpanel"
+            aria-labelledby="bar-with-underline-item-1"
+          >
+            <Profile profileProps={props.userData} />
+          </div>
+          <div
+            id="bar-with-underline-2"
+            className="hidden"
+            role="tabpanel"
+            aria-labelledby="bar-with-underline-item-2"
+          >
+            <FavoriteFoods favoriteFoodProps={props.foodData} />
+          </div>
+          <div
+            id="bar-with-underline-3"
+            className="hidden"
+            role="tabpanel"
+            aria-labelledby="bar-with-underline-item-3"
+          >
+            <UserReviews userReviewProps={props.reviewData} />
+          </div>
+          <div
+            id="bar-with-underline-4"
+            className="hidden"
+            role="tabpanel"
+            aria-labelledby="bar-with-underline-item-4"
+          >
+            <UserQA
+              userQuestionsProps={props.userQuestionsData}
+              userAnswersProps={props.userAnswersData}
+            />
+          </div>
         </div>
-        <div
-          id="bar-with-underline-2"
-          className="hidden"
-          role="tabpanel"
-          aria-labelledby="bar-with-underline-item-2"
-        >
-          <FavoriteFoods favoriteFoodProps={props.foodData} />
-        </div>
-        <div
-          id="bar-with-underline-3"
-          className="hidden"
-          role="tabpanel"
-          aria-labelledby="bar-with-underline-item-3"
-        >
-          <UserReviews userReviewProps={props.reviewData} />
-        </div>
-        <div
-          id="bar-with-underline-4"
-          className="hidden"
-          role="tabpanel"
-          aria-labelledby="bar-with-underline-item-4"
-        >
-          <UserQA
-            userQuestionsProps={props.userQuestionsData}
-            userAnswersProps={props.userAnswersData}
-          />
-        </div>
-      </div>
-    </RootLayout>
+      </RootLayout>
+    </>
   );
 };
 

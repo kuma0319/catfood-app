@@ -7,8 +7,8 @@ object_key = ENV['PRODUCTIONAREA_CSV_KEY']
 csv_data = S3Downloader.run_download(bucket_name, object_key)
 
 CSV.parse(csv_data, headers: true) do |row|
-  # csvのnameカラムからcreate
-  ProductionArea.create(
+  # find_or_create_by(一致するレコードが無ければ新規作成、※保存も実行)で新規登録
+  ProductionArea.find_or_create_by(
     name: row['name']
   )
 end

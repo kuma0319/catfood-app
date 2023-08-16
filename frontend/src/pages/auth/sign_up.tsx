@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import SignUpForm from "@/components/authentication/SignUpForm";
 import AuthLayout from "@/components/commons/AuthLayout";
+import CommonMeta from "@/components/commons/CommonMeta";
 import Spinners from "@/components/commons/Spinners";
 import { authUrl } from "@/urls";
 import { getHeaders } from "@/utils/ApiHeaders";
@@ -53,11 +54,22 @@ const SignUp = () => {
     }
   };
 
+  const meta_title = "ねこまんま | 新規登録";
+  const meta_description =
+    "ねこまんまの新規登録ページです。まだ会員登録が未登録の方はこちらから新規登録出来ます。";
+  const meta_url = "https://www.nekomanmafood.com/auth/sign_up";
   return (
-    <AuthLayout>
-      {isLoading && <Spinners />}
-      <SignUpForm onSignUp={onSignUp} errorMessage={errorMessage} />;
-    </AuthLayout>
+    <>
+      <CommonMeta
+        title={meta_title}
+        description={meta_description}
+        url={meta_url}
+      />
+      <AuthLayout>
+        {isLoading && <Spinners />}
+        <SignUpForm onSignUp={onSignUp} errorMessage={errorMessage} />;
+      </AuthLayout>
+    </>
   );
 };
 
