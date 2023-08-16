@@ -177,6 +177,39 @@ const SignUpForm = ({ errorMessage, onSignUp }: SignUpProps) => {
                     </div>
                   </div>
 
+                  {/* 同意するチェックボックス */}
+                  <div className="mt-4 flex items-center text-sm">
+                    <input
+                      type="checkbox"
+                      className="h-3 w-3"
+                      id="agreement"
+                      {...register("agreement", {
+                        required: "同意が必須です",
+                      })}
+                    />
+                    <label htmlFor="agreement" className="ml-2 text-gray-600">
+                      <Link
+                        href="/terms"
+                        className="text-blue-600 decoration-2 hover:underline"
+                      >
+                        利用規約
+                      </Link>
+                      と
+                      <Link
+                        href="/privacy_policy"
+                        className="text-blue-600 decoration-2 hover:underline"
+                      >
+                        プライバシーポリシー
+                      </Link>
+                      に同意する
+                    </label>
+                  </div>
+                  {errors.agreement && (
+                    <div className="text-xs text-red-600">
+                      {String(errors.agreement.message)}
+                    </div>
+                  )}
+
                   <button
                     type="submit"
                     className="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-blue-500 px-4 py-3 text-sm font-semibold text-white transition-all hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 "

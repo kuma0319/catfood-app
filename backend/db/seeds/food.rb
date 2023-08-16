@@ -18,8 +18,10 @@ CSV.parse(csv_data, headers: true) do |row|
     next
   end
 
-  Food.create(
-    name: row['name'],
+  # find_or_initialize_by(一致するレコードが無ければ新規作成、※createじゃないから保存はしない)でnameカラムに一致するレコードを見つける
+  food = Food.find_or_initialize_by(name: row['name'])
+  # updateで各カラムを更新
+  food.update(
     ingredients: row['ingredients'],
     brand_id: brand.id,
     production_area_id: production_area.id,

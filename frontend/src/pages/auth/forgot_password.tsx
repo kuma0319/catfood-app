@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import ForgotPasswordForm from "@/components/authentication/ForgotPasswordForm";
 import AuthLayout from "@/components/commons/AuthLayout";
+import CommonMeta from "@/components/commons/CommonMeta";
 import Spinners from "@/components/commons/Spinners";
 import { authPasswordUrl } from "@/urls";
 import { getHeaders } from "@/utils/ApiHeaders";
@@ -42,16 +43,22 @@ const ForgotPassword = () => {
     }
   };
 
+  const meta_title = "ねこまんま | パスワードリセット";
+  const meta_description = "ねこまんまのパスワードリセットページです。";
+
   return (
-    <div className="h-screen bg-gray-100 ">
-      <AuthLayout>
-        {isLoading && <Spinners />}
-        <ForgotPasswordForm
-          onForgotPassword={onForgotPassword}
-          errorMessage={errorMessage}
-        />
-      </AuthLayout>
-    </div>
+    <>
+      <CommonMeta title={meta_title} description={meta_description} />
+      <div className="h-screen bg-gray-100 ">
+        <AuthLayout>
+          {isLoading && <Spinners />}
+          <ForgotPasswordForm
+            onForgotPassword={onForgotPassword}
+            errorMessage={errorMessage}
+          />
+        </AuthLayout>
+      </div>
+    </>
   );
 };
 

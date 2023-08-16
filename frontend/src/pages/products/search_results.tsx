@@ -3,6 +3,7 @@ import axios from "axios";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 
+import CommonMeta from "@/components/commons/CommonMeta";
 import RootLayout from "@/components/commons/Layout";
 import FoodIndex from "@/components/products/FoodIndex";
 import SearchResultPagination from "@/components/products/SearchResultPagination";
@@ -34,11 +35,22 @@ const SearchResults = ({ data }: { data: FoodIndexData }) => {
   const router = useRouter();
   const initialSearchParams = router.query as unknown as FoodSearchParams;
 
+  const meta_title = `ねこまんま | キャットフード絞り込み検索結果`;
+  const meta_description = "キャットフードの絞り込み検索結果ページです。";
+  const meta_url = `https://www.nekomanmafood.com/products/search_results`;
+
   return (
-    <RootLayout>
-      <FoodIndex data={data} initialSearchParams={initialSearchParams} />
-      <SearchResultPagination pagination={data.pagination} />
-    </RootLayout>
+    <>
+      <CommonMeta
+        title={meta_title}
+        description={meta_description}
+        url={meta_url}
+      />
+      <RootLayout>
+        <FoodIndex data={data} initialSearchParams={initialSearchParams} />
+        <SearchResultPagination pagination={data.pagination} />
+      </RootLayout>
+    </>
   );
 };
 

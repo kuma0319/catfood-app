@@ -5,6 +5,7 @@ import { useState } from "react";
 
 import SignInForm from "@/components/authentication/SignInForm";
 import AuthLayout from "@/components/commons/AuthLayout";
+import CommonMeta from "@/components/commons/CommonMeta";
 import Spinners from "@/components/commons/Spinners";
 import { authSignInUrl } from "@/urls";
 import { getHeaders } from "@/utils/ApiHeaders";
@@ -97,16 +98,27 @@ const SignIn = () => {
     }
   };
 
+  const meta_title = "ねこまんま | ログイン";
+  const meta_description =
+    "ねこまんまのログインページです。登録済みの方はこちらからログイン出来ます。";
+  const meta_url = "https://www.nekomanmafood.com/auth/sign_in";
   return (
-    <AuthLayout>
-      {isLoading && <Spinners />}
-      <SignInForm
-        onSignIn={onSignIn}
-        errorMessage={errorMessage}
-        rememberMe={rememberMe}
-        setRememberMe={setRememberMe}
+    <>
+      <CommonMeta
+        title={meta_title}
+        description={meta_description}
+        url={meta_url}
       />
-    </AuthLayout>
+      <AuthLayout>
+        {isLoading && <Spinners />}
+        <SignInForm
+          onSignIn={onSignIn}
+          errorMessage={errorMessage}
+          rememberMe={rememberMe}
+          setRememberMe={setRememberMe}
+        />
+      </AuthLayout>
+    </>
   );
 };
 
