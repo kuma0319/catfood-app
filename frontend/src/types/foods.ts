@@ -40,7 +40,10 @@ export interface Food {
   };
   rakuten_item_code: string;
   rakuten_name: string;
-  target_age: string;
+  target_age: {
+    id: number;
+    name: string;
+  };
 }
 
 export interface Pagination {
@@ -71,6 +74,7 @@ export interface FoodSearchParams {
   max_amount: string;
   max_ash_content: string;
   max_calorie: string;
+  max_carbohydrates_content: string;
   max_fat_content: string;
   max_fibre_content: string;
   max_moisture_content: string;
@@ -79,6 +83,7 @@ export interface FoodSearchParams {
   min_amount: string;
   min_ash_content: string;
   min_calorie: string;
+  min_carbohydrates_content: string;
   min_fat_content: string;
   min_fibre_content: string;
   min_moisture_content: string;
@@ -87,4 +92,5 @@ export interface FoodSearchParams {
   not_food_name: string[];
   not_ingredients: string[];
   production_area_id: string[];
+  target_age_id: string[];
 }

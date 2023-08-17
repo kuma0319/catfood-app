@@ -102,7 +102,7 @@ const ItemTab = ({ item }: { item: Food }) => {
             <p>タイプ：{item.food_type.name}</p>
             <p>ブランド：{item.brand.name}</p>
             <p>産地：{item.production_area.name}</p>
-            <p>ステージ：{item.target_age}</p>
+            <p>ステージ：{item.target_age.name}</p>
             <div>
               {/* 内容量は1kg未満の場合はg表記で小さい順からソートする */}
               <p>

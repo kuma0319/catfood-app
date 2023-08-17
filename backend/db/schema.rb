@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_17_120641) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_17_141905) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -108,15 +108,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_17_120641) do
     t.string "rakuten_name"
     t.string "medium_image_url"
     t.integer "min_price"
-    t.string "target_age"
     t.string "rakuten_item_code"
     t.integer "max_price"
     t.integer "median_price"
     t.datetime "add_date"
+    t.bigint "target_age_id"
     t.index ["brand_id"], name: "index_foods_on_brand_id"
     t.index ["food_type_id"], name: "index_foods_on_food_type_id"
     t.index ["name"], name: "index_foods_on_name", unique: true
     t.index ["production_area_id"], name: "index_foods_on_production_area_id"
+    t.index ["target_age_id"], name: "index_foods_on_target_age_id"
   end
 
   create_table "nutrient_contents", force: :cascade do |t|
@@ -172,6 +173,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_17_120641) do
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
+  create_table "target_ages", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
@@ -215,6 +222,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_17_120641) do
   add_foreign_key "foods", "brands"
   add_foreign_key "foods", "food_types"
   add_foreign_key "foods", "production_areas"
+  add_foreign_key "foods", "target_ages"
   add_foreign_key "nutrient_contents", "foods"
   add_foreign_key "nutrient_contents", "nutrients"
   add_foreign_key "questions", "users"
