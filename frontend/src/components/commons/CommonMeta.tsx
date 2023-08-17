@@ -12,7 +12,7 @@ export default function CommonMeta({
   return (
     <Head>
       <title>{title}</title>
-      <meta property="description" content={description} />
+      <meta name="description" content={description} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       {url && <meta property="og:url" content={url} />}

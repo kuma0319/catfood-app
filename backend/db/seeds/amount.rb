@@ -16,9 +16,9 @@ CSV.parse(csv_data, headers: true) do |row|
     next
   end
 
-  # find_or_initialize_by(一致するレコードが無ければ新規作成、※createじゃないから保存はしない)でnameカラムに一致するレコードを見つける
-  amount = Amount.find_or_initialize_by(food_id: food.id)
-  amount.update(
+  # find_or_create_by(一致するレコードが無ければ新規作成、※保存も実行)で新規登録
+  Amount.find_or_create_by(
+    food_id: food.id,
     amount: row['amount']
   )
 end
