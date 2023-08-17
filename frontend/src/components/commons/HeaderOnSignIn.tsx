@@ -65,7 +65,7 @@ const HeaderOnSignIn = () => {
 
   return (
     <div className="relative">
-      <header className="z-50 flex w-full flex-wrap border-b border-gray-200 bg-white py-3 text-sm   md:flex-nowrap md:justify-start md:py-0">
+      <header className="z-50 flex w-full flex-wrap border-b border-gray-200 bg-white py-2 text-sm   md:flex-nowrap md:justify-start md:py-0">
         <nav
           className="relative mx-auto w-full max-w-7xl px-4 md:flex md:items-center md:justify-between md:px-6 lg:px-8"
           aria-label="Global"
@@ -75,8 +75,8 @@ const HeaderOnSignIn = () => {
               <Image
                 src="/cat-banner.png"
                 alt="サイトバナー"
-                width={240}
-                height={80}
+                width={192}
+                height={64}
               />
             </Link>
             <div className="md:hidden">

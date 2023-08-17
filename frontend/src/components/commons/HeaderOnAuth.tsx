@@ -4,7 +4,7 @@ import Link from "next/link";
 const HeaderOnAuth = () => {
   return (
     <div className="relative">
-      <header className="flex w-full border-b border-gray-200 bg-white py-3 text-sm   sm:justify-start sm:py-0">
+      <header className="flex w-full border-b border-gray-200 bg-white py-2 text-sm   sm:justify-start sm:py-0">
         <nav
           className="relative mx-auto w-full max-w-7xl px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8"
           aria-label="Global"
@@ -14,8 +14,8 @@ const HeaderOnAuth = () => {
               <Image
                 src="/cat-banner.png"
                 alt="サイトバナー"
-                width={240}
-                height={80}
+                width={192}
+                height={64}
               />
             </Link>
           </div>
