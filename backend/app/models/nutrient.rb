@@ -4,9 +4,10 @@ class Nutrient < ApplicationRecord
   validates :name, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 30 }
 
   # 各栄養素のID管理
-  PROTEIN_ID = 1
-  FAT_ID = 2
-  FIBRE_ID = 3
-  ASH_ID = 4
-  MOISTURE_ID = 5
+  PROTEIN_ID = 1 # タンパク質
+  FAT_ID = 2 # 脂質
+  FIBRE_ID = 3 # 粗繊維
+  ASH_ID = 4 # 灰分
+  MOISTURE_ID = 5 # 水分
+  CARBOHYDRATES = 6 # 糖質
 end

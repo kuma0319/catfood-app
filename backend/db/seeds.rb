@@ -14,6 +14,9 @@ end
 if ENV['SEEDS_FOOD_TYPE'] == 'true'
   require "./db/seeds/food_type.rb"
 end
+if ENV['SEEDS_TARGET_AGE'] == 'true'
+  require "./db/seeds/target_age.rb"
+end
 if ENV['SEEDS_FOOD'] == 'true'
   require "./db/seeds/food.rb"
 end
