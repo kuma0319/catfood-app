@@ -99,6 +99,15 @@ export const PRODUCTION_AREA = [
   { id: 14, name: "フランス" },
 ];
 
+//年齢
+export const TARGET_AGE = [
+  { id: 1, name: "子猫" },
+  { id: 2, name: "成猫" },
+  { id: 3, name: "シニア" },
+  { id: 4, name: "全年齢" },
+  { id: 5, name: "未指定も含める" },
+];
+
 //成分
 export const NUTRIENT = [
   { id: 1, name: "タンパク質" },
@@ -106,6 +115,7 @@ export const NUTRIENT = [
   { id: 3, name: "粗繊維" },
   { id: 4, name: "灰分" },
   { id: 5, name: "水分" },
+  { id: 6, name: "糖質" },
 ];
 
 //カロリー
@@ -128,6 +138,10 @@ export const SEARCH_BRAND_PARAMS = [
 
 export const SEARCH_PRODUCTION_AREA_PARAMS = [
   { name: "production_area_id", items: PRODUCTION_AREA, label: "産地" },
+];
+
+export const SEARCH_TARGET_AGE_PARAMS = [
+  { name: "target_age_id", items: TARGET_AGE, label: "ステージ" },
 ];
 
 export const SEARCH_CONTENT_PARAMS = [
@@ -163,6 +177,13 @@ export const SEARCH_CONTENT_PARAMS = [
     label: "水分",
     max_name: "max_moisture_content",
     min_name: "min_moisture_content",
+    range: NUTRIENT_CONTENT_RANGE,
+    unit: "%",
+  },
+  {
+    label: "糖質(概算値)",
+    max_name: "max_carbohydrates_content",
+    min_name: "min_carbohydrates_content",
     range: NUTRIENT_CONTENT_RANGE,
     unit: "%",
   },

@@ -11,9 +11,10 @@ CSV.parse(csv_data, headers: true) do |row|
   brand = Brand.find_by(name: row['brand_name'])
   production_area = ProductionArea.find_by(name: row['production_area_name'])
   food_type = FoodType.find_by(name: row['food_type_name'])
+  target_age = TargetAge.find_by(name: row['target_age_name'])
 
   # データが存在しない場合のエラーハンドリング
-  unless brand && production_area && food_type
+  unless brand && production_area && food_type && target_age
     puts "以下のデータが不明: #{row.inspect}"
     next
   end
@@ -26,8 +27,8 @@ CSV.parse(csv_data, headers: true) do |row|
     brand_id: brand.id,
     production_area_id: production_area.id,
     food_type_id: food_type.id,
+    target_age_id: target_age.id,
     calorie: row['calorie'],
-    target_age:row['target_age'],
     rakuten_name: row['rakuten_name'],
     rakuten_item_code: row['rakuten_item_code'],
     medium_image_url: row['medium_image_url'],

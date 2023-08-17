@@ -5,6 +5,7 @@ class Food < ApplicationRecord
   belongs_to :brand
   belongs_to :production_area
   belongs_to :food_type
+  belongs_to :target_age
   has_many :nutrient_contents, dependent: :destroy
   has_many :nutrients, through: :nutrient_contents
   has_many :amounts, dependent: :destroy
@@ -18,7 +19,7 @@ class Food < ApplicationRecord
   validates :calorie, numericality: { greater_than: 0 }
 
   # #フード検索用のscope一覧
-  # 一致検索（ブランド、産地、フードタイプ）
+  # 一致検索（ブランド、産地、フードタイプ、年齢）
   scope :by_brand, lambda { |brand_id|
     where(brand_id:) if brand_id.present?
   }
@@ -29,6 +30,10 @@ class Food < ApplicationRecord
 
   scope :by_production_area, lambda { |production_area_id|
     where(production_area_id:) if production_area_id.present?
+  }
+
+  scope :by_target_age, lambda { |target_age_id|
+    where(target_age_id:) if target_age_id.present?
   }
 
   # 範囲検索（カロリー、内容量、料金）

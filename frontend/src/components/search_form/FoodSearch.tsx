@@ -10,6 +10,7 @@ import {
   SEARCH_BRAND_PARAMS,
   SEARCH_CONTENT_PARAMS,
   SEARCH_PRODUCTION_AREA_PARAMS,
+  SEARCH_TARGET_AGE_PARAMS,
 } from "@/search_constant";
 import { FoodSearchParams } from "@/types/foods";
 
@@ -167,6 +168,68 @@ const FoodSearch = ({
           </div>
         </div>
 
+        <div className="hs-accordion" id="hs-basic-with-arrow-heading-six">
+          <button
+            className="hs-accordion-toggle group inline-flex w-full items-center gap-x-3 py-3 text-left font-semibold text-gray-800 transition hover:text-gray-500 hs-accordion-active:text-blue-600   "
+            aria-controls="hs-basic-with-arrow-collapse-six"
+          >
+            <svg
+              className="block h-3 w-3 text-gray-600 group-hover:text-gray-500 hs-accordion-active:hidden hs-accordion-active:text-blue-600 hs-accordion-active:group-hover:text-blue-600 "
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+            </svg>
+            <svg
+              className="hidden h-3 w-3 text-gray-600 group-hover:text-gray-500 hs-accordion-active:block hs-accordion-active:text-blue-600 hs-accordion-active:group-hover:text-blue-600 "
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M2 11L8.16086 5.31305C8.35239 5.13625 8.64761 5.13625 8.83914 5.31305L15 11"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+            </svg>
+            ステージで絞り込む
+          </button>
+          <div
+            id="hs-basic-with-arrow-collapse-six"
+            className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
+            aria-labelledby="hs-basic-with-arrow-heading-six"
+          >
+            <div className="text-gray-800 ">
+              {SEARCH_TARGET_AGE_PARAMS.map((param, index) => (
+                <MultipleOption
+                  key={index}
+                  name={param.name}
+                  label={param.label}
+                  items={param.items}
+                  handleChange={handleCheckboxChange}
+                  searchParamIds={
+                    // 初期値がundefinedとなると子コンポーネント側で読み取りエラーとなるため、undefinedの場合は空配列を渡す
+                    selectParams.target_age_id === undefined
+                      ? []
+                      : selectParams.target_age_id
+                  }
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+
         <div className="hs-accordion" id="hs-basic-with-arrow-heading-three">
           <button
             className="hs-accordion-toggle group inline-flex w-full items-center gap-x-3 py-3 text-left font-semibold text-gray-800 transition hover:text-gray-500 hs-accordion-active:text-blue-600   "
@@ -226,6 +289,10 @@ const FoodSearch = ({
                 />
               ))}
             </div>
+            <p className="mt-2 text-xs text-red-500">
+              糖質の計算式は、100 - (タンパク質+脂質+粗繊維+灰分+水分)
+              としています。
+            </p>
           </div>
         </div>
 
@@ -344,8 +411,8 @@ const FoodSearch = ({
                 />
               ))}
             </div>
-            <p className="mt-2 text-sm text-red-500">
-              ※ スペース区切りで複数キーワードを指定可能です。
+            <p className="mt-2 text-xs text-red-500">
+              スペース区切りで複数キーワードを指定可能です。
             </p>
           </div>
         </div>
