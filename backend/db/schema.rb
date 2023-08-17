@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_14_041152) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_17_120641) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -47,6 +47,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_14_041152) do
     t.bigint "food_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["food_id", "amount"], name: "index_amounts_on_food_id_and_amount", unique: true
     t.index ["food_id"], name: "index_amounts_on_food_id"
   end
 
@@ -124,6 +125,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_14_041152) do
     t.bigint "nutrient_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["food_id", "nutrient_id"], name: "index_nutrient_contents_on_food_id_and_nutrient_id", unique: true
     t.index ["food_id"], name: "index_nutrient_contents_on_food_id"
     t.index ["nutrient_id"], name: "index_nutrient_contents_on_nutrient_id"
   end

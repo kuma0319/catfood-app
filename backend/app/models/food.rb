@@ -17,11 +17,6 @@ class Food < ApplicationRecord
   validates :name, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 100 }
   validates :calorie, numericality: { greater_than: 0 }
 
-  # # imageのURLを返すメソッド
-  # def image_urls
-  #   images.attached? ? images.map { |image| url_for(image) } : []
-  # end
-
   # #フード検索用のscope一覧
   # 一致検索（ブランド、産地、フードタイプ）
   scope :by_brand, lambda { |brand_id|
