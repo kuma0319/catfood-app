@@ -70,7 +70,7 @@ class Api::V1::Foods::FoodsController < ApplicationController
       .by_nutrient_content(Nutrient::FIBRE_ID, params[:min_fibre_content], params[:max_fibre_content])
       .by_nutrient_content(Nutrient::ASH_ID, params[:min_ash_content], params[:max_ash_content])
       .by_nutrient_content(Nutrient::MOISTURE_ID, params[:min_moisture_content], params[:max_moisture_content])
-      .by_carbohydrates_content(Nutrient::CARBOHYDRATES_ID, params[:min_carbohydrates_content], params[:max_carbohydrates_content])
+      .by_nutrient_content(Nutrient::CARBOHYDRATES_ID, params[:min_carbohydrates_content], params[:max_carbohydrates_content])
       .by_food_name(params[:food_name])
       .by_not_food_name(params[:not_food_name])
       .by_ingredients(params[:ingredients])

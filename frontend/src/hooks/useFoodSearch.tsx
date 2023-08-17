@@ -16,6 +16,7 @@ const useFoodSearch = (initialSearchParams?: FoodSearchParams) => {
       max_amount: "",
       max_ash_content: "",
       max_calorie: "",
+      max_carbohydrates_content: "",
       max_fat_content: "",
       max_fibre_content: "",
       max_moisture_content: "",
@@ -24,6 +25,7 @@ const useFoodSearch = (initialSearchParams?: FoodSearchParams) => {
       min_amount: "",
       min_ash_content: "",
       min_calorie: "",
+      min_carbohydrates_content: "",
       min_fat_content: "",
       min_fibre_content: "",
       min_moisture_content: "",
@@ -32,6 +34,7 @@ const useFoodSearch = (initialSearchParams?: FoodSearchParams) => {
       not_food_name: [],
       not_ingredients: [],
       production_area_id: [],
+      target_age_id: [],
     }
   );
 
@@ -60,8 +63,12 @@ const useFoodSearch = (initialSearchParams?: FoodSearchParams) => {
       ? (selectParams[target] as string[])
       : ([selectParams[target]] as string[]);
 
-    //ブランドと産地のみの場合に処理実行
-    if (target === "brand_id" || target === "production_area_id") {
+    //ブランド、産地、年齢のみの場合に処理実行
+    if (
+      target === "brand_id" ||
+      target === "production_area_id" ||
+      target === "target_age_id"
+    ) {
       //チェックが入ると元の配列に格納
       if (event.target.checked) {
         setSelectParams({
@@ -136,8 +143,22 @@ const useFoodSearch = (initialSearchParams?: FoodSearchParams) => {
   // 検索ボタン押下時の副作用
   useEffect(() => {
     if (searchButtonPressed) {
+      // 空文字を除去したselectParamsを生成する(クエリパラメータに不要なものを含めない)
+      const filteredParams = Object.fromEntries(
+        // (3) フィルターしたキーと値の配列をオブジェクトに再変換
+        Object.entries(selectParams).filter(([key, value]) => {
+          // (1) オブジェクトをキーと値の配列に変換
+          if (Array.isArray(value)) {
+            // (2) 空文字の配列と空文字の文字列をfillterで除外
+            return value.some((item) => item !== "");
+          } else {
+            return value !== "";
+          }
+        })
+      );
+
       const query = {
-        ...(selectParams as unknown as ParsedUrlQueryInput),
+        ...(filteredParams as unknown as ParsedUrlQueryInput),
         page: 1, // pagination用にpageのparamsを追加(初期ページとして1)
       };
 

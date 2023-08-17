@@ -50,7 +50,7 @@ const WatchListTable = ({ foodData, handleWatchList }: WatchListTableProps) => {
                       フード名
                     </th>
                     <th
-                      colSpan={5}
+                      colSpan={6}
                       scope="col"
                       className="whitespace-nowrap px-4 py-1 text-center text-sm font-medium text-gray-500"
                     >
@@ -132,6 +132,12 @@ const WatchListTable = ({ foodData, handleWatchList }: WatchListTableProps) => {
                     >
                       水分量
                     </th>
+                    <th
+                      scope="col"
+                      className="whitespace-nowrap border px-4 py-1 text-center text-sm font-medium text-gray-500"
+                    >
+                      糖質量
+                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
@@ -172,7 +178,7 @@ const WatchListTable = ({ foodData, handleWatchList }: WatchListTableProps) => {
                         {food.calorie}
                       </td>
                       <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-800">
-                        {food.target_age}
+                        {food.target_age.name}
                       </td>
                       <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-800">
                         {food.median_price} 円

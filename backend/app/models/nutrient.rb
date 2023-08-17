@@ -9,5 +9,5 @@ class Nutrient < ApplicationRecord
   FIBRE_ID = 3 # 粗繊維
   ASH_ID = 4 # 灰分
   MOISTURE_ID = 5 # 水分
-  CARBOHYDRATES = 6 # 糖質
+  CARBOHYDRATES_ID = 6 # 糖質
 end
