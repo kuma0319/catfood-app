@@ -5,6 +5,7 @@ FactoryBot.define do
     association :brand
     association :production_area
     association :food_type
+    association :target_age
     calorie { rand(200..500) }
     sequence(:rakuten_name) { |n| "楽天テスト#{n}" }
     min_price { rand(100..1000) }
