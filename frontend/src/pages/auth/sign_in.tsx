@@ -7,7 +7,7 @@ import SignInForm from "@/components/authentication/SignInForm";
 import AuthLayout from "@/components/commons/AuthLayout";
 import CommonMeta from "@/components/commons/CommonMeta";
 import Spinners from "@/components/commons/Spinners";
-import { authSignInUrl } from "@/urls";
+import { authGuestSignInUrl, authSignInUrl } from "@/urls";
 import { getHeaders } from "@/utils/ApiHeaders";
 
 export interface SignInInput {
@@ -98,6 +98,43 @@ const SignIn = () => {
     }
   };
 
+  const onGuestSignIn = async () => {
+    setIsLoading(true);
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}${authGuestSignInUrl}`
+      );
+      if (response.status === 200) {
+        // 既存のクッキーが存在する場合は削除
+        destroyCookie(null, "uid");
+        destroyCookie(null, "client");
+        destroyCookie(null, "access-token");
+
+        // 認証成功時にクッキーへトークンを保存しホームページへリダイレクト
+        Promise.all([
+          setCookie(null, "uid", response.headers["uid"], { path: "/" }),
+          setCookie(null, "client", response.headers["client"], {
+            path: "/",
+          }),
+          setCookie(null, "access-token", response.headers["access-token"], {
+            path: "/",
+          }),
+        ]).then(() => {
+          router.push({
+            pathname: "/",
+            query: { flashMessage: "ゲストログインしました" },
+          });
+        });
+        setIsLoading(false);
+      }
+    } catch (error: any) {
+      // エラー発生時はエラーメッセージをセット
+      setErrorMessage(error.response.data.errors);
+      console.log(error.response);
+      setIsLoading(false);
+    }
+  };
+
   const meta_title = "ねこまんま | ログイン";
   const meta_description =
     "ねこまんまのログインページです。登録済みの方はこちらからログイン出来ます。";
@@ -116,6 +153,7 @@ const SignIn = () => {
           errorMessage={errorMessage}
           rememberMe={rememberMe}
           setRememberMe={setRememberMe}
+          onGuestSignIn={onGuestSignIn}
         />
       </AuthLayout>
     </>

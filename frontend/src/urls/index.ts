@@ -45,3 +45,4 @@ export const authValidateTokenUrl = `/api/v1/auth/validate_token`;
 export const authPasswordUrl = `/api/v1/auth/password`;
 export const authSignInUrl = `/api/v1/auth/sign_in`;
 export const authSignOutUrl = `/api/v1/auth/sign_out`;
+export const authGuestSignInUrl = `/api/v1/auth/guest_sign_in`;

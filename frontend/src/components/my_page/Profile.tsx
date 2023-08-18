@@ -12,9 +12,9 @@ import ProfileContents from "./ProfileContents";
 
 const Profile = ({ profileProps }: { profileProps: UserProps }) => {
   const [errorMessage, setErrorMessage] = useState("");
-  const [flashMessage, setFlashMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [avatar, setAvatar] = useState<File | null>(null);
+  const guestUid = "guest@example.com";
 
   const onProfileEdit = async (data: { nickname: string }) => {
     const nickname = data.nickname;
@@ -24,56 +24,66 @@ const Profile = ({ profileProps }: { profileProps: UserProps }) => {
     if (nickname) formData.append("nickname", nickname);
     if (avatar) formData.append("avatar", avatar);
 
-    // submit時にローディングをセット
-    setIsLoading(true);
-    try {
-      const response = await axios.patch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}${authUrl}`,
-        formData,
-        // ここではutils/getAuthHeadersWithCookiesを使用しない(content_typeがapplication/jsonとなるため)
-        {
-          headers: {
-            Accept: "application/json",
-            "access-token": cookies["access-token"],
-            client: cookies["client"],
-            uid: cookies["uid"],
-          },
+    // ゲストユーザーの編集禁止
+    if (cookies["uid"] === guestUid) {
+      setErrorMessage("ゲストユーザーはこの機能は利用出来ません。");
+    } else {
+      // submit時にローディングをセット
+      setIsLoading(true);
+      try {
+        const response = await axios.patch(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}${authUrl}`,
+          formData,
+          // ここではutils/getAuthHeadersWithCookiesを使用しない(content_typeがapplication/jsonとなるため)
+          {
+            headers: {
+              Accept: "application/json",
+              "access-token": cookies["access-token"],
+              client: cookies["client"],
+              uid: cookies["uid"],
+            },
+          }
+        );
+        // 更新成功時はページリロード
+        if (response.status === 200) {
+          window.location.reload();
         }
-      );
-      // 更新成功時はページリロード
-      if (response.status === 200) {
-        window.location.reload();
+      } catch (error: any) {
+        // エラー発生時はエラーメッセージをセット
+        setErrorMessage(error.response.data.error);
+        console.log(error.response);
+        setIsLoading(false);
       }
-    } catch (error: any) {
-      // エラー発生時はエラーメッセージをセット
-      setErrorMessage(error.response.data.error);
-      console.log(error.response);
-      setIsLoading(false);
     }
   };
 
   const handleDeleteAccount = async () => {
     const cookies = parseCookies();
 
-    try {
-      const response = await axios.delete(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}${authUrl}`,
-        {
-          headers: getAuthHeadersWithCookies(cookies),
+    // ゲストユーザーのアカウント削除防止
+    if (cookies["uid"] === guestUid) {
+      setErrorMessage("ゲストユーザーはこの機能は利用出来ません。");
+    } else {
+      try {
+        const response = await axios.delete(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}${authUrl}`,
+          {
+            headers: getAuthHeadersWithCookies(cookies),
+          }
+        );
+        if (response.status === 200) {
+          // アカウント削除成功時に該当するクッキーを削除しリダイレクト
+          destroyCookie(null, "uid", cookies["uid"]);
+          destroyCookie(null, "client", cookies["client"]);
+          destroyCookie(null, "access-token", cookies["access-token"]);
+          router.push({
+            pathname: "/",
+            query: { flashMessage: "アカウントを削除しました" },
+          });
         }
-      );
-      if (response.status === 200) {
-        // アカウント削除成功時に該当するクッキーを削除しリダイレクト
-        destroyCookie(null, "uid", cookies["uid"]);
-        destroyCookie(null, "client", cookies["client"]);
-        destroyCookie(null, "access-token", cookies["access-token"]);
-        router.push({
-          pathname: "/",
-          query: { flashMessage: "アカウントを削除しました" },
-        });
+      } catch (error: any) {
+        setErrorMessage(error.response);
       }
-    } catch (error: any) {
-      setFlashMessage(error.response);
     }
   };
 
@@ -86,6 +96,7 @@ const Profile = ({ profileProps }: { profileProps: UserProps }) => {
         onProfileEdit={onProfileEdit}
         profileProps={profileProps}
         setAvatar={setAvatar}
+        setErrorMessage={setErrorMessage}
       />
     </div>
   );
