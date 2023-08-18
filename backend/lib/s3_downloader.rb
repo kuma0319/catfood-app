@@ -4,7 +4,7 @@
 ## S3からオブジェクトをダウンロードするモジュール。参照元：https://docs.aws.amazon.com/ja_jp/sdk-for-ruby/v3/developer-guide/s3-example-get-bucket-item.html
 module S3Downloader
   require 'aws-sdk-s3'
-  
+
   # Downloads an object from an Amazon Simple Storage Service (Amazon S3) bucket.
   #
   # @param s3_client [Aws::S3::Client] An initialized S3 client.
@@ -38,9 +38,9 @@ module S3Downloader
     secret_access_key = Rails.application.credentials.aws['secret_access_key']
     region = Rails.application.credentials.aws.s3['region']
     s3_client = Aws::S3::Client.new(
-      access_key_id: access_key_id,
-      secret_access_key: secret_access_key,
-      region: region
+      access_key_id:,
+      secret_access_key:,
+      region:
     )
 
     # 設定したs3_clientを元にdownload処理を実行し、csv_dataに格納

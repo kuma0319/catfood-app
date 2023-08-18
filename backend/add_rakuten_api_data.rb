@@ -22,9 +22,9 @@ CSV.open("#{base_csv}_add.csv", 'w') do |add_csv|
         genreId: '507524' # 「猫用品」というジャンルで固定
       )
       # ヒットした商品の中で、reviewCount(レビュー件数)が最も多いもののデータを取得
-      popular_item = items.sort_by {|item| item["reviewCount"] }.last
-      
-      prices = items.map {|item| item["itemPrice"] }
+      popular_item = items.sort_by { |item| item["reviewCount"] }.last
+
+      prices = items.map { |item| item["itemPrice"] }
 
       # 商品価格の中央値を算出するメソッド
       def median_price(prices)
@@ -32,7 +32,7 @@ CSV.open("#{base_csv}_add.csv", 'w') do |add_csv|
         midpoint = sorted_prices.length / 2
 
         if sorted_prices.length.even?
-          sorted_prices[midpoint-1, 2].sum / 2
+          sorted_prices[midpoint - 1, 2].sum / 2
         else
           sorted_prices[midpoint]
         end
@@ -62,8 +62,8 @@ CSV.open("#{base_csv}_add.csv", 'w') do |add_csv|
         row[6] = popular_item['tagIds'] # 商品タグID
         row[7] = popular_item['reviewCount'] # レビュー件数
         row[8] = popular_item['reviewAverage'] # レビュー評価
-        row[9] = items.sort_by {|item| item["itemPrice"] }.first["itemPrice"] # 全商品の中から最安値の価格
-        row[10] = items.sort_by {|item| item["itemPrice"] }.last["itemPrice"] # 全商品の中から最高値の価格
+        row[9] = items.sort_by { |item| item["itemPrice"] }.first["itemPrice"] # 全商品の中から最安値の価格
+        row[10] = items.sort_by { |item| item["itemPrice"] }.last["itemPrice"] # 全商品の中から最高値の価格
         row[11] = median_price(prices) # 商品価格の中央値
         row[12] = fetch_time # APIデータの取得時間
       end

@@ -23,12 +23,10 @@ class Api::V1::Auth::ConfirmationsController < DeviseTokenAuth::ConfirmationsCon
 
       # allow_other_host: trueを追加することで、外部URLへのリダイレクトを許容する
       redirect_to(redirect_to_link, allow_other_host: true)
+    elsif redirect_url
+      redirect_to DeviseTokenAuth::Url.generate(redirect_url, account_confirmation_success: false), allow_other_host: true
     else
-      if redirect_url
-        redirect_to DeviseTokenAuth::Url.generate(redirect_url, account_confirmation_success: false), allow_other_host: true
-      else
-        raise ActionController::RoutingError, 'Not Found'
-      end
+      raise ActionController::RoutingError, 'Not Found'
     end
   end
 end

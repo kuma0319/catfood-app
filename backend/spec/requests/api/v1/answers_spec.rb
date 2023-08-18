@@ -24,8 +24,8 @@ RSpec.describe "Api::V1::Answers", type: :request do
 
   ## indexアクション
   describe "GET /index" do
-    let!(:answer_1) { create(:answer, user: user, question: question_1, created_at: 1.day.ago) }
-    let!(:answer_2) { create(:answer, user: user, question: question_2, created_at: 2.day.ago) }
+    let!(:answer_1) { create(:answer, user:, question: question_1, created_at: 1.day.ago) }
+    let!(:answer_2) { create(:answer, user:, question: question_2, created_at: 2.days.ago) }
     let!(:answer_3) { create(:answer, user: other_user, question: question_2, created_at: 1.day.after) }
 
     context "正しい情報でリクエストしたとき" do
@@ -42,7 +42,7 @@ RSpec.describe "Api::V1::Answers", type: :request do
       end
 
       it "配列の並び順が投稿日時の降順であること" do
-        expect(response.parsed_body["answers"].map {|answer| answer["id"]}).to eq([answer_1.id, answer_2.id])
+        expect(response.parsed_body["answers"].map { |answer| answer["id"] }).to eq([answer_1.id, answer_2.id])
       end
 
       it "期待されるデータが含まれていること" do
@@ -77,7 +77,7 @@ RSpec.describe "Api::V1::Answers", type: :request do
 
   ## showアクション
   describe "GET /show" do
-    let!(:answer) { create(:answer, user: user, question: question_1) }
+    let!(:answer) { create(:answer, user:, question: question_1) }
 
     context "正しい情報でリクエストしたとき" do
       before do
@@ -125,10 +125,10 @@ RSpec.describe "Api::V1::Answers", type: :request do
         post "/api/v1/answers",
              params:
              {
-              answer: {
-                content: content,
-                question_id: question_1.id
-              }
+               answer: {
+                 content:,
+                 question_id: question_1.id
+               }
              }, headers: @headers
       end
 
@@ -165,7 +165,7 @@ RSpec.describe "Api::V1::Answers", type: :request do
 
   ## destroyアクション
   describe "DELETE /destroy" do
-    let!(:answer) { create(:answer, user: user, question: question_1) }
+    let!(:answer) { create(:answer, user:, question: question_1) }
 
     context "正しい情報でリクエストしたとき" do
       before do
@@ -212,5 +212,4 @@ RSpec.describe "Api::V1::Answers", type: :request do
       end
     end
   end
-
 end
