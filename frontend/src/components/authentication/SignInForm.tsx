@@ -4,19 +4,19 @@ import { useForm } from "react-hook-form";
 
 import { SignInInput } from "@/pages/auth/sign_in";
 
-interface SignInProps {
-  errorMessage: string;
-  onSignIn: (data: SignInInput) => Promise<void>;
-  rememberMe: boolean;
-  setRememberMe: Dispatch<SetStateAction<boolean>>;
-}
-
 const SignInForm = ({
   errorMessage,
+  onGuestSignIn,
   onSignIn,
   rememberMe,
   setRememberMe,
-}: SignInProps) => {
+}: {
+  errorMessage: string;
+  onGuestSignIn: () => Promise<void>;
+  onSignIn: (data: SignInInput) => Promise<void>;
+  rememberMe: boolean;
+  setRememberMe: Dispatch<SetStateAction<boolean>>;
+}) => {
   // React Hook Formライブラリを使用
   const {
     formState: { errors },
@@ -27,7 +27,7 @@ const SignInForm = ({
   });
 
   return (
-    <div className="flex h-full items-center bg-gray-100">
+    <div className="h-full items-center bg-gray-100">
       <div className="mx-auto w-full max-w-md p-6">
         {/* 登録エラーの場合にエラーメッセージを表示する */}
         <div className="text-center text-lg text-red-600">{errorMessage}</div>
@@ -152,6 +152,11 @@ const SignInForm = ({
                 </div>
               </form>
             </div>
+          </div>
+          <div className="m-6 flex justify-center rounded-md border border-transparent bg-emerald-500 px-4 py-3 text-sm font-semibold text-white transition-all hover:bg-emerald-600">
+            <button type="button" onClick={onGuestSignIn}>
+              ゲストユーザーでお試しログイン
+            </button>
           </div>
         </div>
       </div>

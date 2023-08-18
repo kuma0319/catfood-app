@@ -19,7 +19,7 @@ const SignUpForm = ({
   });
 
   return (
-    <div className="flex h-full items-center bg-gray-100">
+    <div className="h-full items-center bg-gray-100">
       <div className="mx-auto w-full max-w-md p-6">
         {/* 登録エラーの場合にエラーメッセージを表示する */}
         <div className="text-center text-lg text-red-600">{errorMessage}</div>
