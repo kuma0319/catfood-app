@@ -23,11 +23,11 @@ RSpec.describe "Api::V1::Foods::WatchLists", type: :request do
       end
 
       it "指定したidに対応するフード情報のみが表示され、配列の長さが一致すること" do
-        expect(JSON.parse(response.body).length).to eq(5)
+        expect(response.parsed_body['foods_data'].length).to eq(5)
       end
 
       it "期待されるデータが含まれていること" do
-        JSON.parse(response.body).each do |food|
+        response.parsed_body['foods_data'].each do |food|
           keys.each do |key|
             expect(food).to have_key(key)
           end
@@ -35,11 +35,11 @@ RSpec.describe "Api::V1::Foods::WatchLists", type: :request do
       end
 
       it "表示されたフード情報の並び順がブランド名の昇順+名前の昇順であること" do
-        expect(JSON.parse(response.body).first["id"]).to eq(food2.id)
-        expect(JSON.parse(response.body).second["id"]).to eq(food3.id)
-        expect(JSON.parse(response.body).third["id"]).to eq(food1.id)
-        expect(JSON.parse(response.body).fourth["id"]).to eq(food5.id)
-        expect(JSON.parse(response.body).last["id"]).to eq(food4.id)
+        expect(response.parsed_body['foods_data'].first["id"]).to eq(food2.id)
+        expect(response.parsed_body['foods_data'].second["id"]).to eq(food3.id)
+        expect(response.parsed_body['foods_data'].third["id"]).to eq(food1.id)
+        expect(response.parsed_body['foods_data'].fourth["id"]).to eq(food5.id)
+        expect(response.parsed_body['foods_data'].last["id"]).to eq(food4.id)
       end
     end
     context "params[:ids]を指定しなかった時" do
@@ -49,7 +49,7 @@ RSpec.describe "Api::V1::Foods::WatchLists", type: :request do
       end
 
       it "フード情報が表示されず、空配列であること" do
-        expect(JSON.parse(response.body)).to be_empty
+        expect(response.parsed_body['foods_data']).to be_empty
       end
     end
   end

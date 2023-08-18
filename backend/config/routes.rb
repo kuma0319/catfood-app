@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   namespace "api" do
     namespace "v1" do
       namespace "foods" do
-        resources :foods
+        resources :foods, only: [:index, :show]
         get 'index_ids', to: 'foods#index_ids'
         get "search", to: "foods#search"
         get "watch_lists", to: "watch_lists#index"

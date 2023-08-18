@@ -18,43 +18,6 @@ class Api::V1::Foods::FoodsController < ApplicationController
       .find(params[:id])
   end
 
-  def create
-    food = Food.new(food_params)
-    if food.save
-      render json: {
-        food:
-      }, status: :created
-    else
-      render json: {
-        errors: food.errors
-      }, status: :unprocessable_entity
-    end
-  end
-
-  def update
-    if @food.update(food_params)
-      render json: {
-        food: @food
-      }, status: :ok
-    else
-      render json: {
-        errors: @food.errors
-      }, status: :unprocessable_entity
-    end
-  end
-
-  def destroy
-    if @food.destroy
-      render json: {
-        food: @food
-      }, status: :ok
-    else
-      render json: {
-        errors: @food.errors
-      }, status: :unprocessable_entity
-    end
-  end
-
   def search
     @foods = Food.includes(:brand, :production_area, :food_type, { nutrient_contents: :nutrient }, :amounts)
       .order("brands.name", "foods.name")
