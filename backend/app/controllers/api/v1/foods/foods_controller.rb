@@ -18,43 +18,6 @@ class Api::V1::Foods::FoodsController < ApplicationController
       .find(params[:id])
   end
 
-  def create
-    food = Food.new(food_params)
-    if food.save
-      render json: {
-        food:
-      }, status: :created
-    else
-      render json: {
-        errors: food.errors
-      }, status: :unprocessable_entity
-    end
-  end
-
-  def update
-    if @food.update(food_params)
-      render json: {
-        food: @food
-      }, status: :ok
-    else
-      render json: {
-        errors: @food.errors
-      }, status: :unprocessable_entity
-    end
-  end
-
-  def destroy
-    if @food.destroy
-      render json: {
-        food: @food
-      }, status: :ok
-    else
-      render json: {
-        errors: @food.errors
-      }, status: :unprocessable_entity
-    end
-  end
-
   def search
     @foods = Food.includes(:brand, :production_area, :food_type, { nutrient_contents: :nutrient }, :amounts)
       .order("brands.name", "foods.name")
@@ -65,7 +28,7 @@ class Api::V1::Foods::FoodsController < ApplicationController
       .by_calorie(params[:min_calorie], params[:max_calorie])
       .by_amount(params[:min_amount], params[:max_amount])
       .by_price(params[:min_price], params[:max_price])
-      .by_nutrient_content(Nutrient::PROTEIN_ID, params[:min_protein_content], params[:max_protein_content])  # Nutrientモデルの定数から各idを指定
+      .by_nutrient_content(Nutrient::PROTEIN_ID, params[:min_protein_content], params[:max_protein_content]) # Nutrientモデルの定数から各idを指定
       .by_nutrient_content(Nutrient::FAT_ID, params[:min_fat_content], params[:max_fat_content])
       .by_nutrient_content(Nutrient::FIBRE_ID, params[:min_fibre_content], params[:max_fibre_content])
       .by_nutrient_content(Nutrient::ASH_ID, params[:min_ash_content], params[:max_ash_content])

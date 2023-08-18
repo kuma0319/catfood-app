@@ -38,7 +38,7 @@ RSpec.describe "Api::V1::Favorites", type: :request do
       end
 
       it "期待されるデータが含まれていること" do
-        response.parsed_body.each do |food|
+        response.parsed_body['foods_data'].each do |food|
           keys.each do |key|
             expect(food).to have_key(key)
           end

@@ -36,15 +36,19 @@ const Footer = () => {
 
           <div className="flex gap-4">
             <Link
-              href={process.env.X_URL ? process.env.X_URL : "#"}
+              href={process.env.NEXT_PUBLIC_X_URL as string}
               aria-label="X(旧Twitter)アカウントへのリンク"
+              target="_blank"
+              rel="noopener noreferrer" // ※target="_blank"には念のためrel="noopener noreferrer"を付ける※
             >
               <Fa6BrandsSquareXTwitter className="fill-gray-400 hover:fill-gray-500 active:fill-gray-600" />
             </Link>
 
             <Link
-              href={process.env.GITHUB_URL ? process.env.GITHUB_URL : "#"}
+              href={process.env.NEXT_PUBLIC_GITHUB_URL as string}
               aria-label="GitHubリポジトリへのリンク"
+              target="_blank"
+              rel="noopener noreferrer" // ※target="_blank"には念のためrel="noopener noreferrer"を付ける※
             >
               <IonLogoGithub className="fill-gray-400 hover:fill-gray-500 active:fill-gray-600" />
             </Link>

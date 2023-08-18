@@ -25,10 +25,10 @@ RSpec.describe "Api::V1::Questions", type: :request do
 
   ## indexアクション
   describe "GET /index" do
-    let!(:question_1) { create(:question, user: user, created_at: 1.day.ago) }
-    let!(:question_2) { create(:question, user: user, created_at: 2.day.ago) }
+    let!(:question_1) { create(:question, user:, created_at: 1.day.ago) }
+    let!(:question_2) { create(:question, user:, created_at: 2.days.ago) }
     let!(:question_3) { create(:question, user: other_user, created_at: 1.day.after) }
-    let!(:question_4) { create(:question, user: other_user, created_at: 2.day.after) }
+    let!(:question_4) { create(:question, user: other_user, created_at: 2.days.after) }
 
     context "正しい情報でリクエストしたとき" do
       before do
@@ -44,7 +44,7 @@ RSpec.describe "Api::V1::Questions", type: :request do
       end
 
       it "配列の並び順が投稿日時の降順であること" do
-        expect(response.parsed_body["questions"].map {|question| question["id"]}).to eq([question_4.id, question_3.id, question_1.id, question_2.id])
+        expect(response.parsed_body["questions"].map { |question| question["id"] }).to eq([question_4.id, question_3.id, question_1.id, question_2.id])
       end
 
       it "紐づいているuserデータも含め、期待されるデータが含まれていること" do
@@ -63,10 +63,10 @@ RSpec.describe "Api::V1::Questions", type: :request do
 
   ## index_user_questionsアクション
   describe "GET /index_user_questions" do
-    let!(:question_1) { create(:question, user: user, created_at: 1.day.ago) }
-    let!(:question_2) { create(:question, user: user, created_at: 2.day.ago) }
+    let!(:question_1) { create(:question, user:, created_at: 1.day.ago) }
+    let!(:question_2) { create(:question, user:, created_at: 2.days.ago) }
     let!(:question_3) { create(:question, user: other_user, created_at: 1.day.after) }
-    let!(:question_4) { create(:question, user: other_user, created_at: 2.day.after) }
+    let!(:question_4) { create(:question, user: other_user, created_at: 2.days.after) }
 
     context "正しい情報でリクエストしたとき" do
       before do
@@ -82,7 +82,7 @@ RSpec.describe "Api::V1::Questions", type: :request do
       end
 
       it "配列の並び順が投稿日時の降順であること" do
-        expect(response.parsed_body["questions"].map {|question| question["id"]}).to eq([question_1.id, question_2.id])
+        expect(response.parsed_body["questions"].map { |question| question["id"] }).to eq([question_1.id, question_2.id])
       end
 
       it "期待されるデータが含まれていること" do
@@ -117,8 +117,8 @@ RSpec.describe "Api::V1::Questions", type: :request do
 
   ## showアクション
   describe "GET /show" do
-    let!(:question) { create(:question, user: user) }
-    let!(:answer) { create(:answer, user: other_user, question: question) }
+    let!(:question) { create(:question, user:) }
+    let!(:answer) { create(:answer, user: other_user, question:) }
 
     context "正しい情報でリクエストしたとき" do
       before do
@@ -128,7 +128,7 @@ RSpec.describe "Api::V1::Questions", type: :request do
       it "ステータスコード200が返ってくること" do
         expect(response).to have_http_status(200)
       end
-      
+
       it "紐づいているanswerのデータとuserデータも含め、期待されるデータが含まれていること" do
         show_keys.each do |key|
           expect(response.parsed_body).to have_key(key)
@@ -157,10 +157,10 @@ RSpec.describe "Api::V1::Questions", type: :request do
         post "/api/v1/questions",
              params:
              {
-              question: {
-                title: title,
-                content: content
-              }
+               question: {
+                 title:,
+                 content:
+               }
              }, headers: @headers
       end
 
@@ -198,7 +198,7 @@ RSpec.describe "Api::V1::Questions", type: :request do
 
   ## destroyアクション
   describe "DELETE /destroy" do
-    let!(:question) { create(:question, user: user) }
+    let!(:question) { create(:question, user:) }
 
     context "正しい情報でリクエストしたとき" do
       before do

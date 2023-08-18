@@ -83,6 +83,22 @@ RSpec.describe Food, type: :model do
       end
     end
 
+    describe "#by_target_age" do
+      let!(:target_age1) { create(:target_age, name: "テスト年齢1") }
+      let!(:target_age2) { create(:target_age, name: "テスト年齢2") }
+      let!(:target_age3) { create(:target_age, name: "テスト年齢3") }
+      let!(:food1) { create(:food, target_age: target_age1) }
+      let!(:food2) { create(:food, target_age: target_age1) }
+      let!(:food3) { create(:food, target_age: target_age2) }
+      let!(:food4) { create(:food, target_age: target_age3) }
+      context "年齢id、もしくは年齢idの配列で指定した時" do
+        it "指定の年齢idに対応する年齢を含むフードを返すこと" do
+          expect(Food.by_target_age(target_age1.id)).to match_array([food1, food2])
+          expect(Food.by_target_age([target_age2.id, target_age3.id])).to match_array([food3, food4])
+        end
+      end
+    end
+
     describe "#by_calorie" do
       let!(:food1) { create(:food, calorie: 200) }
       let!(:food2) { create(:food, calorie: 250) }

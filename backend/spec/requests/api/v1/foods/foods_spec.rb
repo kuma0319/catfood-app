@@ -22,11 +22,11 @@ RSpec.describe "Api::V1::Foods::Foods", type: :request do
     end
 
     it "全てのフード情報が表示され、配列の長さが一致すること" do
-      expect(JSON.parse(response.body).length).to eq(5)
+      expect(response.parsed_body['foods_data'].length).to eq(5)
     end
 
     it "期待されるデータが含まれていること" do
-      JSON.parse(response.body).each do |food|
+      response.parsed_body['foods_data'].each do |food|
         keys.each do |key|
           expect(food).to have_key(key)
         end
@@ -34,11 +34,11 @@ RSpec.describe "Api::V1::Foods::Foods", type: :request do
     end
 
     it "表示されたフード情報の並び順がブランド名の昇順+名前の昇順であること" do
-      expect(JSON.parse(response.body).first["id"]).to eq(food2.id)
-      expect(JSON.parse(response.body).second["id"]).to eq(food3.id)
-      expect(JSON.parse(response.body).third["id"]).to eq(food1.id)
-      expect(JSON.parse(response.body).fourth["id"]).to eq(food5.id)
-      expect(JSON.parse(response.body).last["id"]).to eq(food4.id)
+      expect(response.parsed_body['foods_data'].first["id"]).to eq(food2.id)
+      expect(response.parsed_body['foods_data'].second["id"]).to eq(food3.id)
+      expect(response.parsed_body['foods_data'].third["id"]).to eq(food1.id)
+      expect(response.parsed_body['foods_data'].fourth["id"]).to eq(food5.id)
+      expect(response.parsed_body['foods_data'].last["id"]).to eq(food4.id)
     end
   end
 
@@ -52,12 +52,12 @@ RSpec.describe "Api::V1::Foods::Foods", type: :request do
       end
 
       it "JSONデータの中身のidが一致していること" do
-        expect(JSON.parse(response.body)["id"]).to eq(food1.id)
+        expect(response.parsed_body["id"]).to eq(food1.id)
       end
 
       it "期待されるデータが含まれていること" do
         keys.each do |key|
-          expect(JSON.parse(response.body)).to have_key(key)
+          expect(response.parsed_body).to have_key(key)
         end
       end
     end
@@ -82,16 +82,16 @@ RSpec.describe "Api::V1::Foods::Foods", type: :request do
       end
 
       it "ブランド1に所属するフード情報のみが表示され、配列の長さが一致すること" do
-        expect(JSON.parse(response.body).length).to eq(2)
+        expect(response.parsed_body['foods_data'].length).to eq(2)
       end
 
       it "表示されたフード情報の並び順がブランド名の昇順+名前の昇順であること" do
-        expect(JSON.parse(response.body).first["id"]).to eq(food2.id)
-        expect(JSON.parse(response.body).last["id"]).to eq(food3.id)
+        expect(response.parsed_body['foods_data'].first["id"]).to eq(food2.id)
+        expect(response.parsed_body['foods_data'].last["id"]).to eq(food3.id)
       end
 
       it "期待されるデータが含まれていること" do
-        JSON.parse(response.body).each do |food|
+        response.parsed_body['foods_data'].each do |food|
           keys.each do |key|
             expect(food).to have_key(key)
           end
@@ -106,19 +106,19 @@ RSpec.describe "Api::V1::Foods::Foods", type: :request do
       end
 
       it "全てのフード情報が表示され、配列の長さが一致すること" do
-        expect(JSON.parse(response.body).length).to eq(5)
+        expect(response.parsed_body['foods_data'].length).to eq(5)
       end
 
       it "表示されたフード情報の並び順がブランド名の昇順+名前の昇順であること" do
-        expect(JSON.parse(response.body).first["id"]).to eq(food2.id)
-        expect(JSON.parse(response.body).second["id"]).to eq(food3.id)
-        expect(JSON.parse(response.body).third["id"]).to eq(food1.id)
-        expect(JSON.parse(response.body).fourth["id"]).to eq(food5.id)
-        expect(JSON.parse(response.body).last["id"]).to eq(food4.id)
+        expect(response.parsed_body['foods_data'].first["id"]).to eq(food2.id)
+        expect(response.parsed_body['foods_data'].second["id"]).to eq(food3.id)
+        expect(response.parsed_body['foods_data'].third["id"]).to eq(food1.id)
+        expect(response.parsed_body['foods_data'].fourth["id"]).to eq(food5.id)
+        expect(response.parsed_body['foods_data'].last["id"]).to eq(food4.id)
       end
 
       it "期待されるデータが含まれていること" do
-        JSON.parse(response.body).each do |food|
+        response.parsed_body['foods_data'].each do |food|
           keys.each do |key|
             expect(food).to have_key(key)
           end

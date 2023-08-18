@@ -1,11 +1,12 @@
 import { useForm } from "react-hook-form";
 
-interface SignUpProps {
+const ResetPasswordForm = ({
+  errorMessage,
+  onResetPassword,
+}: {
   errorMessage: string;
   onResetPassword: (data: any) => Promise<void>;
-}
-
-const ResetPasswordForm = ({ errorMessage, onResetPassword }: SignUpProps) => {
+}) => {
   // React Hook Formライブラリを使用
   const {
     formState: { errors },
