@@ -11,13 +11,13 @@ class User < ApplicationRecord
   include DeviseTokenAuth::Concerns::User
 
   # ActiveStorage用(imageとするとエラーが発生するためavatarとしておく)
-  has_one_attached :avatar
+  has_one_attached :avatar, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :foods, through: :favorites
 
-  has_many :reviews
-  has_many :questions
-  has_many :answers
+  has_many :reviews, dependent: :destroy
+  has_many :questions, dependent: :destroy
+  has_many :answers, dependent: :destroy
 
   # ニックネームに追加のバリデーション
   validates :nickname, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 50 }

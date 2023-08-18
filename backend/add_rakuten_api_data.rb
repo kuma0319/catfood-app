@@ -51,7 +51,7 @@ CSV.open("#{base_csv}_add.csv", 'w') do |add_csv|
         row[9] = "Not Found"
         row[10] = "Not Found"
         row[11] = "Not Found"
-        row[12] = fetch_time
+        row[12] = "Not Found"
       else
         # 必要な追加情報だけ取得
         row[1] = items.count # 検索結果の商品数
