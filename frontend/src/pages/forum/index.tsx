@@ -61,6 +61,8 @@ const Forum = (props: { questions: Questions[] }) => {
             />
             <p className="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">
               キャットフードに関する疑問や悩みを質問してみませんか？
+              <br />
+              ユーザー同士で相互に質問・回答が出来ます。
             </p>
           </div>
           <div className="flex justify-center p-4">
