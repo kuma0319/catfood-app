@@ -11,10 +11,9 @@ RSpec.describe Question, type: :model do
   end
 
   describe "validations" do
-    let(:question) { create(:question, user: user) }
+    let(:question) { create(:question, user:) }
 
     context "正しい情報で質問を作成したとき" do
-
       it "バリエーションエラーとならないこと" do
         expect(question).to be_valid
       end

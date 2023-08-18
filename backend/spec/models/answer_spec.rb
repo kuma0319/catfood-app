@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Answer, type: :model do
   let(:user) { create(:user) }
   let(:other_user) { create(:user) }
-  let(:question) { create(:question, user: user) }
+  let(:question) { create(:question, user:) }
 
   describe "association" do
     context "アソシエーションが正しいこと" do
@@ -13,9 +13,8 @@ RSpec.describe Answer, type: :model do
   end
 
   describe "validations" do
-    let!(:answer) { create(:answer, user: other_user, question: question) }
+    let!(:answer) { create(:answer, user: other_user, question:) }
     context "正しい情報で回答を作成したとき" do
-
       it "バリエーションエラーとならないこと" do
         expect(answer).to be_valid
       end
@@ -52,7 +51,7 @@ RSpec.describe Answer, type: :model do
     end
 
     context "1つの質問に同一のユーザーが回答したとき" do
-      let(:duplicated_answer) { build(:answer, user: other_user, question: question) }
+      let(:duplicated_answer) { build(:answer, user: other_user, question:) }
 
       it "バリエーションエラーとなること" do
         expect(duplicated_answer).not_to be_valid
@@ -61,7 +60,7 @@ RSpec.describe Answer, type: :model do
 
     # カスタムバリデーションcannot_answer_own_questionのテスト
     context "自身の質問に自身で回答したとき" do
-      let(:answer_own_question) { build(:answer, user: user, question: question) }
+      let(:answer_own_question) { build(:answer, user:, question:) }
 
       it "バリエーションエラーとなり、設定したエラーメッセージが表示されること" do
         expect(answer_own_question).not_to be_valid

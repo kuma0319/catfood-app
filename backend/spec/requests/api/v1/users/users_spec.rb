@@ -20,7 +20,6 @@ RSpec.describe "Api::V1::Users::Users", type: :request do
 
   ## indexアクション
   describe "GET /index" do
-
     context "正しい情報でリクエストしたとき" do
       before do
         get "/api/v1/users/users", headers: @headers

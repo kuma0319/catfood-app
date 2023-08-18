@@ -27,7 +27,7 @@ RSpec.describe 'Api::V1::Auth', type: :request do
     context '正しい情報でサインアップしたとき' do
       before do
         # サインアップのパラメータとしてconfirm_success_urlを与えておく
-        post '/api/v1/auth', params: { registration: { nickname: nickname,email: email_address, password: "password" }, confirm_success_url: }, headers: { Accept: "application/json" }
+        post '/api/v1/auth', params: { registration: { nickname:, email: email_address, password: "password" }, confirm_success_url: }, headers: { Accept: "application/json" }
       end
 
       it 'HTTPステータスが200であること' do

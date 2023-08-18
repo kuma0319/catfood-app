@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 
-interface SignUpProps {
+const SignUpForm = ({
+  errorMessage,
+  onSignUp,
+}: {
   errorMessage: string;
   onSignUp: (event: any) => Promise<void>;
-}
-
-const SignUpForm = ({ errorMessage, onSignUp }: SignUpProps) => {
+}) => {
   // React Hook Formライブラリを使用
   const {
     formState: { errors },

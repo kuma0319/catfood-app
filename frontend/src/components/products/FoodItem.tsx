@@ -2,15 +2,16 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Food } from "../../types/foods";
-import WatchListButton from "../WatchListButton";
+import WatchListButton from "../watch_list/WatchListButton";
 import ItemTab from "./ItemTab";
 
-export interface FoodProps {
+const FoodItem = ({
+  food,
+  handleWatchList,
+}: {
   food: Food;
   handleWatchList?: (id: number, isWatched: boolean) => void;
-}
-
-const FoodItem = ({ food, handleWatchList }: FoodProps) => {
+}) => {
   return (
     <div className="grid grid-cols-6 grid-rows-5 gap-2 rounded border border-gray-300 p-4 shadow-md">
       <div className="col-span-2 row-span-2 flex items-center justify-center">

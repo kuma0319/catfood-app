@@ -66,9 +66,9 @@ DeviseTokenAuth.setup do |config|
   config.send_confirmation_email = true
 
   # メール認証用のフロントエンド側のURL
-  if Rails.env.production?
-    config.default_confirm_success_url = "https://www.nekomanmafood.com/auth/confirm_success?confirm_success_flag=true"
-  else
-    config.default_confirm_success_url = "http://localhost:3000/auth/confirm_success?confirm_success_flag=true"
-  end
+  config.default_confirm_success_url = if Rails.env.production?
+                                         "https://www.nekomanmafood.com/auth/confirm_success?confirm_success_flag=true"
+                                       else
+                                         "http://localhost:3000/auth/confirm_success?confirm_success_flag=true"
+                                       end
 end

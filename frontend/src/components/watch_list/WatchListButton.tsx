@@ -1,16 +1,14 @@
 import { useEffect, useState } from "react";
 
-interface WatchListProps {
-  id: number;
-  handleWatchList: (id: number, isWatched: boolean) => void;
-  trueWatchButtonName: string;
-}
-
 const WatchListButton = ({
   id,
   handleWatchList,
   trueWatchButtonName,
-}: WatchListProps) => {
+}: {
+  id: number;
+  handleWatchList: (id: number, isWatched: boolean) => void;
+  trueWatchButtonName: string;
+}) => {
   //各商品のウォッチリスト用のボタンの状態管理
   const [watch, setWatch] = useState(false);
   //マウントされたかどうかの状態ingify管理

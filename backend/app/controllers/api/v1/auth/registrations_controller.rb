@@ -10,7 +10,7 @@ class Api::V1::Auth::RegistrationsController < DeviseTokenAuth::RegistrationsCon
 
   # devise_token_authの許可パラメータのオーバーライド
   def sign_up_params
-    params.require(:registration).permit(:nickname,:email, :password)
+    params.require(:registration).permit(:nickname, :email, :password)
   end
 
   def account_update_params
