@@ -2,7 +2,7 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 
 import RootLayout from "@/components/commons/Layout";
-import WatchListTable from "@/components/WatchListTable";
+import WatchListTable from "@/components/watch_list/WatchListTable";
 import { WatchListContext } from "@/context/WatchListContext";
 import { FoodData } from "@/types/foods";
 import { watchListUrl } from "@/urls";
