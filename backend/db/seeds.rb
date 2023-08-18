@@ -26,3 +26,18 @@ end
 if ENV['SEEDS_NUTRIENT_CONTENT'] == 'true'
   require "./db/seeds/nutrient_content.rb"
 end
+if ENV['SEEDS_USER'] == 'true'
+  require "./db/seeds/user.rb"
+end
+if ENV['SEEDS_QUESTION'] == 'true'
+  require "./db/seeds/question.rb"
+end
+if ENV['SEEDS_ANSWER'] == 'true'
+  require "./db/seeds/answer.rb"
+end
+if ENV['SEEDS_REVIEW_ITEM'] == 'true'
+  require "./db/seeds/review_item.rb"
+end
+if ENV['SEEDS_REVIEW'] == 'true'
+  require "./db/seeds/review.rb"
+end
