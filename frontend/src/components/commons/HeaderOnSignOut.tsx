@@ -42,6 +42,7 @@ const HeaderOnSignOut = () => {
                 alt="サイトバナー"
                 width={192}
                 height={64}
+                loading="eager" // 遅延読み込みをしない
               />
             </Link>
             <div className="md:hidden">

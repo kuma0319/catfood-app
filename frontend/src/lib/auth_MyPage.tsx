@@ -1,6 +1,6 @@
 import axios from "axios";
 import { GetServerSideProps } from "next";
-import nookies from "nookies";
+import nookies, { destroyCookie } from "nookies";
 
 import { getAuthHeadersWithCookies } from "@/utils/ApiHeaders";
 
@@ -34,8 +34,12 @@ const withAuthMyPage = (
         },
       };
     } catch (error: any) {
-      // Rails側で401エラーが発生した場合はリダイレクト
+      // Rails側で401エラーが発生した場合はリダイレクト、更にクッキー未削除エラーに対応
       if (error.response.status === 401) {
+        destroyCookie(null, "uid");
+        destroyCookie(null, "client");
+        destroyCookie(null, "access-token");
+
         return {
           redirect: {
             destination: "/auth/sign_in",

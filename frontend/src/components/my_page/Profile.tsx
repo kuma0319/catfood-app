@@ -73,9 +73,9 @@ const Profile = ({ profileProps }: { profileProps: UserProps }) => {
         );
         if (response.status === 200) {
           // アカウント削除成功時に該当するクッキーを削除しリダイレクト
-          destroyCookie(null, "uid", cookies["uid"]);
-          destroyCookie(null, "client", cookies["client"]);
-          destroyCookie(null, "access-token", cookies["access-token"]);
+          destroyCookie(null, "uid");
+          destroyCookie(null, "client");
+          destroyCookie(null, "access-token");
           router.push({
             pathname: "/",
             query: { flashMessage: "アカウントを削除しました" },

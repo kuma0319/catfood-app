@@ -48,9 +48,9 @@ const HeaderOnSignIn = () => {
         // Promisesを利用して、非同期でクッキー削除を待ってからリダイレクト
         // ∵こうしておかないと、クッキーが削除されないままリダイレクトされることがある。
         Promise.all([
-          destroyCookie(null, "uid", cookies["uid"]),
-          destroyCookie(null, "client", cookies["client"]),
-          destroyCookie(null, "access-token", cookies["access-token"]),
+          destroyCookie(null, "uid"),
+          destroyCookie(null, "client"),
+          destroyCookie(null, "access-token"),
         ]).then(() => {
           router.push({
             pathname: "/",
@@ -77,6 +77,7 @@ const HeaderOnSignIn = () => {
                 alt="サイトバナー"
                 width={192}
                 height={64}
+                loading="eager" // 遅延読み込みをしない
               />
             </Link>
             <div className="md:hidden">

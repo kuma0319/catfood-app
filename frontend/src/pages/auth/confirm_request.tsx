@@ -19,13 +19,14 @@ const ConfirmSuccess = () => {
 
   // confirm_request_flagがあればコンポーネントを表示
   return confirm_request_flag === "true" ? (
-    <div className="m-10 mx-auto max-w-screen-md text-center">
+    <div className="m-10 mx-auto max-w-screen-md p-4 text-center">
       <Image
         src="/cat-greet2.png"
         alt="微笑んでおじぎをする猫"
         width={150}
         height={150}
         className="mx-auto my-10"
+        loading="eager" // 遅延読み込みをしない
       />
       <div className="mb-5">
         <h2 className="text-2xl font-bold">
@@ -38,6 +39,9 @@ const ConfirmSuccess = () => {
       >
         ホームへ移動する場合はこちら
       </Link>
+      <p className="mt-6 text-sm font-bold text-red-500">
+        ※メールが届かない場合は、「迷惑メール」に振り分けられていないかご確認下さい。
+      </p>
     </div>
   ) : null;
 };

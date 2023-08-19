@@ -31,13 +31,14 @@ const ConfirmSuccess = () => {
 
   // confirm_success_flagがあればコンポーネントを表示
   return confirm_success_flag === "true" ? (
-    <div className="m-10 mx-auto max-w-screen-md text-center">
+    <div className="m-10 mx-auto max-w-screen-md p-4 text-center">
       <Image
         src="/cat-happy.png"
         alt="キラキラ両手を上げて喜ぶ猫"
         width={150}
         height={150}
         className="mx-auto my-10"
+        loading="eager" // 遅延読み込みをしない
       />
       <div className="mb-5">
         <h2 className="text-xl font-bold">

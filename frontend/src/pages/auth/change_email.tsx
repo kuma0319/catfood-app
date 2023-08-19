@@ -41,9 +41,9 @@ const ChangeEmail = () => {
       // 更新成功時はページリロード
       if (response.status === 200) {
         // メール認証を促すページへpushし、クッキーは削除しログアウト状態にしておく
-        destroyCookie(null, "uid", cookies["uid"]);
-        destroyCookie(null, "client", cookies["client"]);
-        destroyCookie(null, "access-token", cookies["access-token"]);
+        destroyCookie(null, "uid");
+        destroyCookie(null, "client");
+        destroyCookie(null, "access-token");
         setIsLoading(false);
         router.push({
           pathname: "/auth/confirm_request",

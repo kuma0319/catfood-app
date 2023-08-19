@@ -26,8 +26,8 @@ export default function Home() {
             <Image
               src="/eat-catfood.jpg"
               alt="食事する猫"
-              width={700}
-              height={500}
+              width={600}
+              height={400}
               loading="eager" // 遅延読み込みをしない
             />
             <div className="absolute right-2 top-2 bg-white bg-opacity-60 p-3 text-right">

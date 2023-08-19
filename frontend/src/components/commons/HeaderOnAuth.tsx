@@ -16,6 +16,7 @@ const HeaderOnAuth = () => {
                 alt="サイトバナー"
                 width={192}
                 height={64}
+                loading="eager" // 遅延読み込みをしない
               />
             </Link>
           </div>

@@ -181,7 +181,7 @@ export const SEARCH_CONTENT_PARAMS = [
     unit: "%",
   },
   {
-    label: "糖質(概算値)",
+    label: "糖質(※)",
     max_name: "max_carbohydrates_content",
     min_name: "min_carbohydrates_content",
     range: NUTRIENT_CONTENT_RANGE,
