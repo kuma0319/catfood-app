@@ -16,7 +16,10 @@ export default function CommonMeta({
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       {url && <meta property="og:url" content={url} />}
-      <meta property="og:image" content={`${process.env.SITE_IMAGE_URL}`} />
+      <meta
+        property="og:image"
+        content={`${process.env.NEXT_PUBLIC_SITE_IMAGE_URL}`}
+      />
       <meta name="twitter:card" content="summary_large_image" />
     </Head>
   );
