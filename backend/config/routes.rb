@@ -22,11 +22,12 @@ Rails.application.routes.draw do
       get "user_questions", to: "questions#index_user_questions"
       resources :answers, only: [:index, :show, :create, :destroy]
 
-      # devise_token_authのregistrationsコントローラ、confirmationsコントローラ、sessionsコントローラはオーバーライド
+      # devise_token_authのコントローラをオーバーライド
       mount_devise_token_auth_for "User", at: "auth", controllers: {
         registrations: "api/v1/auth/registrations",
         confirmations: "api/v1/auth/confirmations",
-        sessions: "api/v1/auth/sessions"
+        sessions: "api/v1/auth/sessions",
+        passwords: "api/v1/auth/passwords",
       }
 
       # guest_sign_in用のルーティング
