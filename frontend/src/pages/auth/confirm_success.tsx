@@ -38,6 +38,7 @@ const ConfirmSuccess = () => {
         width={150}
         height={150}
         className="mx-auto my-10"
+        loading="eager" // 遅延読み込みをしない
       />
       <div className="mb-5">
         <h2 className="text-xl font-bold">

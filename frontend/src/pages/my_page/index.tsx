@@ -66,13 +66,11 @@ export const getServerSideProps: GetServerSideProps = withAuthMyPage([
 ]);
 
 const MyPage = (props: MyPageProps) => {
-  console.log(props.userQuestionsData);
-  console.log(props.userAnswersData);
-
   const meta_title = "ねこまんま | マイページ";
   const meta_description =
     "ねこまんまのマイページです。プロフィールの編集やお気に入りフードの確認が出来ます。";
   const meta_url = "https://www.nekomanmafood.com/my_page";
+
   return (
     <>
       <CommonMeta
