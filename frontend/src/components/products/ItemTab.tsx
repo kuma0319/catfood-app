@@ -83,6 +83,10 @@ const ItemTab = ({ item }: { item: Food }) => {
               ))}
             <p>カロリー：{item.calorie} kcal/100g</p>
           </div>
+          <p className="mt-2 text-xs text-gray-500">
+            ※ 糖質は、100 - (タンパク質+脂質+粗繊維+灰分+水分)
+            の計算式から算出した概算値です。
+          </p>
         </div>
         <div
           id={`card-type-tab-2-${item.id}`}

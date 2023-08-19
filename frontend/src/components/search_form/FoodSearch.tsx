@@ -289,9 +289,9 @@ const FoodSearch = ({
                 />
               ))}
             </div>
-            <p className="mt-2 text-xs text-red-500">
-              糖質の計算式は、100 - (タンパク質+脂質+粗繊維+灰分+水分)
-              としています。
+            <p className="mt-2 text-xs text-gray-500">
+              ※ 糖質は、100 - (タンパク質+脂質+粗繊維+灰分+水分)
+              の計算式から算出した概算値です。
             </p>
           </div>
         </div>
