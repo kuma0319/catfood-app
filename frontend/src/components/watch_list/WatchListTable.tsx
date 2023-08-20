@@ -130,13 +130,13 @@ const WatchListTable = ({ foodData, handleWatchList }: WatchListTableProps) => {
                       scope="col"
                       className="whitespace-nowrap border px-4 py-1 text-center text-sm font-medium text-gray-500"
                     >
-                      水分量
+                      水分
                     </th>
                     <th
                       scope="col"
                       className="whitespace-nowrap border px-4 py-1 text-center text-sm font-medium text-gray-500"
                     >
-                      糖質量
+                      糖質
                     </th>
                   </tr>
                 </thead>
